@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Model\Entity;
 
-use App\Domain\ValueObject\UserId;
+use App\Domain\Model\ValueObject\UserId;
 
 class User
 {

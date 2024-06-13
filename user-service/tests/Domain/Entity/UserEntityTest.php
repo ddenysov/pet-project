@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain\Entity;
 
-use App\Domain\Entity\User;
-use App\Domain\ValueObject\UserId;
+use App\Domain\Model\Entity\User;
+use App\Domain\Model\ValueObject\UserId;
 use PHPUnit\Framework\TestCase;
 
 final class UserEntityTest extends TestCase
