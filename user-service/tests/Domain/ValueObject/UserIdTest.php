@@ -2,7 +2,7 @@
 
 namespace App\Tests\Domain\ValueObject;
 
-use App\Domain\Model\ValueObject\UserId;
+use User\Domain\Model\ValueObject\UserId;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 

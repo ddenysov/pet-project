@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Domain\Model\Entity;
+namespace User\Domain\Model\Entity;
 
-use App\Domain\Model\ValueObject\UserId;
+use User\Domain\Model\ValueObject\UserId;
+use Attribute;
 
 class User
 {
@@ -18,5 +19,15 @@ class User
     public function getId(): UserId
     {
         return $this->id;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id->toString(),
+        ];
     }
 }

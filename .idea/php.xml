@@ -79,6 +79,9 @@
       <path value="$PROJECT_DIR$/user-service/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/user-service/vendor/symfony/polyfill-uuid" />
       <path value="$PROJECT_DIR$/user-service/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/user-service/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/user-service/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/inflector" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
@@ -87,7 +90,7 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/user-service/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/user-service/vendor/autoload.php" use_configuration_file="true" />
+      <PhpUnitSettings bootstrap_file_path="$PROJECT_DIR$/user-service/phpunit.xml" configuration_file_path="$PROJECT_DIR$/user-service/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/user-service/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
