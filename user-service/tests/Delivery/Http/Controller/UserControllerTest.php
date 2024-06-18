@@ -2,9 +2,9 @@
 
 namespace App\Tests\Delivery\Http\Controller;
 
-use App\Tests\Shared\ApiTest;
+use App\Tests\Shared\ApiTestCase;
 
-class UserControllerTest extends ApiTest
+class UserControllerTest extends ApiTestCase
 {
     public function testSomething(): void
     {

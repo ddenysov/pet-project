@@ -4,20 +4,30 @@ namespace User\Delivery\Http\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use User\Domain\Model\Entity\User;
-use User\Domain\Model\ValueObject\UserId;
-use User\Domain\Model\ValueObject\UserName;
+use User\Application\Handlers\Query\FindUserQuery;
+use User\Application\Ports\Output\Bus\QueryBus;
 
 class UserController
 {
+    public function __construct(public QueryBus $queryBus)
+    {
+    }
+
     #[Route('/')]
     public function index(): JsonResponse
     {
-        $user = new User(
-            id: UserId::generate(),
-            name: new UserName('TestUser'),
-        );
+        $user = $this->queryBus->execute(new FindUserQuery());
 
         return new JsonResponse($user->toArray());
     }
+}
+
+class MyMessageHandler
+{
+
+}
+
+class MyMessage
+{
+
 }

@@ -6,7 +6,7 @@ use App\Tests\Shared\Response\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Uid\Uuid;
 
-abstract class ApiTest extends WebTestCase
+abstract class ApiTestCase extends WebTestCase
 {
     /**
      * @param string $url

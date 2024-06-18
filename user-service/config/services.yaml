@@ -20,5 +20,13 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    User\Delivery\Http\Controller\UserController:
+        public: true
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    User\Application\Ports\Output\Bus\QueryBus:
+        class: User\Infrastructure\Adapter\Bus\Query\QueryBus
+
+    User\Application\Handlers\Query\FindUserQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', method: 'handle' }
