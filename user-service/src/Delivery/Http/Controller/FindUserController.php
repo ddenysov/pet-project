@@ -8,7 +8,7 @@ use User\Application\Handlers\Query\FindUserQuery;
 use User\Application\Ports\Output\Bus\QueryBus;
 use User\Delivery\Http\Response\UserResponse;
 
-class UserController
+class FindUserController
 {
     public function __construct(public QueryBus $queryBus)
     {
