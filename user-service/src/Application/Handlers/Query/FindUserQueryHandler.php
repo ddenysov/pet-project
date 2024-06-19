@@ -2,17 +2,16 @@
 
 namespace User\Application\Handlers\Query;
 
-use User\Domain\Model\Entity\User;
-use User\Domain\Model\ValueObject\UserId;
-use User\Domain\Model\ValueObject\UserName;
+use User\Application\Dto\UserDto;
+use User\Domain\Model\ValueObject\UUID;
 
 class FindUserQueryHandler
 {
-    public function handle(FindUserQuery $query)
+    public function handle(FindUserQuery $query): UserDto
     {
-        return new User(
-            id: UserId::generate(),
-            name: new UserName('TestUser'),
+        return new UserDto(
+            id: UUID::generate()->toString(),
+            name: 'lalala',
         );
     }
 }
