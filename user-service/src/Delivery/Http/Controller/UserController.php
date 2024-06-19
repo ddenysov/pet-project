@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use User\Application\Handlers\Query\FindUserQuery;
 use User\Application\Ports\Output\Bus\QueryBus;
+use User\Delivery\Http\Response\UserResponse;
 
 class UserController
 {
@@ -18,16 +19,6 @@ class UserController
     {
         $user = $this->queryBus->execute(new FindUserQuery());
 
-        return new JsonResponse($user->toArray());
+        return new UserResponse($user);
     }
-}
-
-class MyMessageHandler
-{
-
-}
-
-class MyMessage
-{
-
 }
