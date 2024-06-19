@@ -14,8 +14,13 @@ abstract class ApiTestCase extends WebTestCase
      */
     protected function get(string $url): void
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
+        if (!static::$booted) {
+            $client = static::createClient();
+        } else {
+            $client = static::$kernel->getContainer()->get('test.client');
+        }
+
+        $client->request('GET', $url);
     }
 
     /**
@@ -42,5 +47,15 @@ abstract class ApiTestCase extends WebTestCase
     protected function assertJsonResponsePathIsUUID(string $path): void
     {
         $this->assertTrue(Uuid::isValid($this->response()->jsonPath($path)));
+    }
+
+    /**
+     * @param string $path
+     * @param string $expected
+     * @return void
+     */
+    protected function assertJsonResponsePathEquals(string $path, string $expected): void
+    {
+        $this->assertEquals($expected, $this->response()->jsonPath($path));
     }
 }

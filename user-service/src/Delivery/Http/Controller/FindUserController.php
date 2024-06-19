@@ -14,10 +14,10 @@ class FindUserController
     {
     }
 
-    #[Route('/')]
-    public function index(): JsonResponse
+    #[Route('/{id}')]
+    public function index(string $id): JsonResponse
     {
-        $user = $this->queryBus->execute(new FindUserQuery(id: '0c0a1a41-3f25-4536-87f7-b6468c2901f7'));
+        $user = $this->queryBus->execute(new FindUserQuery(id: $id));
 
         return new UserResponse($user);
     }
