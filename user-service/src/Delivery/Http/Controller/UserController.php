@@ -17,7 +17,7 @@ class UserController
     #[Route('/')]
     public function index(): JsonResponse
     {
-        $user = $this->queryBus->execute(new FindUserQuery());
+        $user = $this->queryBus->execute(new FindUserQuery('123'));
 
         return new UserResponse($user);
     }
