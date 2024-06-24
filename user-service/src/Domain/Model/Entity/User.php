@@ -2,10 +2,13 @@
 
 namespace User\Domain\Model\Entity;
 
+use User\Domain\Model\Aggregate\Aggregate;
+use User\Domain\Model\Event\UserCreated;
 use User\Domain\Model\ValueObject\UserId;
 use User\Domain\Model\ValueObject\UserName;
+use User\Domain\Model\ValueObject\UUID;
 
-class User
+class User extends Aggregate
 {
     /**
      * @param UserId $id
@@ -16,7 +19,22 @@ class User
         private UserName $name,
     )
     {
+    }
 
+    /**
+     * @param UserName $name
+     * @return self
+     * @throws \Exception
+     */
+    public static function create(UserName $name): self
+    {
+        $instance = new self(
+            id: UserId::generate(),
+            name: $name,
+        );
+        $instance->record(new UserCreated());
+
+        return $instance;
     }
 
     public function getId(): UserId

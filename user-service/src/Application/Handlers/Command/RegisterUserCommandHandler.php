@@ -30,6 +30,7 @@ class RegisterUserCommandHandler
             name: new UserName($command->name),
         );
 
+        $events = $user->releaseEvents();
         $this->repository->save($user);
     }
 }
