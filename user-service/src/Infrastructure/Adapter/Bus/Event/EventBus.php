@@ -1,10 +1,9 @@
 <?php
 
-namespace User\Infrastructure\Adapter\Bus\Command;
+namespace User\Infrastructure\Adapter\Bus\Event;
 
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use User\Application\Handlers\Command\Command;
 use User\Domain\Model\Event\DomainEvent;
 
 class EventBus implements \User\Application\Ports\Output\Bus\EventBus
