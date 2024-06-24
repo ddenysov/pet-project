@@ -3,16 +3,40 @@
 namespace App\Tests\Shared;
 
 use App\Tests\Shared\Response\Response;
+use App\Tests\Shared\Utils\ArrayUtils;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Uid\Uuid;
 
 abstract class ApiTestCase extends WebTestCase
 {
+    use ArrayUtils;
+
     /**
      * @param string $url
      * @return void
      */
     protected function get(string $url): void
+    {
+        $this->request($url, 'GET');
+    }
+
+    /**
+     * @param string $url
+     * @param array $data
+     * @return void
+     */
+    protected function post(string $url, array $data = []): void
+    {
+        $this->request($url, 'POST', $data);
+    }
+
+    /**
+     * @param string $url
+     * @param string $method
+     * @param array $data
+     * @return void
+     */
+    protected function request(string $url, string $method, array $data = []): void
     {
         if (!static::$booted) {
             $client = static::createClient();
@@ -20,7 +44,7 @@ abstract class ApiTestCase extends WebTestCase
             $client = static::$kernel->getContainer()->get('test.client');
         }
 
-        $client->request('GET', $url);
+        $client->request($method, $url, $data);
     }
 
     /**

@@ -11,7 +11,7 @@ class UserRepository implements \User\Application\Ports\Output\Repository\UserRe
 {
     public function save(User $user): void
     {
-        // TODO: Implement save() method.
+        UsersDataset::$data[] = $user->toArray();
     }
 
     /**
@@ -19,7 +19,7 @@ class UserRepository implements \User\Application\Ports\Output\Repository\UserRe
      */
     public function find(UserId $id): ?User
     {
-        $users = UsersDataset::all();
+        $users = UsersDataset::$data;
 
         foreach ($users as $item) {
             if ($item['id'] == $id->toString()) {

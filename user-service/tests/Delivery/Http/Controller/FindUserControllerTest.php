@@ -8,7 +8,7 @@ class FindUserControllerTest extends ApiTestCase
 {
     public function testCase1(): void
     {
-        $this->get('/11f4d3ef-a15e-46e1-a1bf-e2c82e66c344');
+        $this->get('/user/11f4d3ef-a15e-46e1-a1bf-e2c82e66c344');
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonResponsePathExists('id');
@@ -20,7 +20,7 @@ class FindUserControllerTest extends ApiTestCase
 
     public function testCase2(): void
     {
-        $this->get('/0c0a1a41-3f25-4536-87f7-b6468c2901f7');
+        $this->get('/user/0c0a1a41-3f25-4536-87f7-b6468c2901f7');
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonResponsePathExists('id');

@@ -14,7 +14,7 @@ class FindUserController
     {
     }
 
-    #[Route('/{id}')]
+    #[Route('/user/{id}')]
     public function index(string $id): JsonResponse
     {
         $user = $this->queryBus->execute(new FindUserQuery(id: $id));

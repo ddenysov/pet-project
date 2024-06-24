@@ -3,6 +3,7 @@
 namespace User\Delivery\Http\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use User\Application\Handlers\Command\RegisterUserCommand;
 use User\Application\Ports\Output\Bus\CommandBus;
@@ -14,11 +15,11 @@ class RegisterUserController
     {
     }
 
-    #[Route('/')]
-    public function index(): JsonResponse
+    #[Route('/register', name: 'register', methods: ['POST'])]
+    public function index(Request $request): JsonResponse
     {
         $this->commandBus->execute(new RegisterUserCommand(
-            name: 'Some test user',
+            name: $request->get('name'),
         ));
 
         return new CreatedResponse();
