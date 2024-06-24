@@ -32,7 +32,9 @@ class User extends Aggregate
             id: UserId::generate(),
             name: $name,
         );
-        $instance->record(new UserCreated());
+        $instance->record(new UserCreated(
+            name: $instance->getName()
+        ));
 
         return $instance;
     }

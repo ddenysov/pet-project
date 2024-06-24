@@ -4,7 +4,7 @@ namespace User\Domain\Model\Event;
 
 use User\Domain\Model\ValueObject\UserName;
 
-readonly final class UserCreated implements DomainEvent
+readonly final class UserRegistered implements DomainEvent
 {
     /**
      * @param UserName $name
