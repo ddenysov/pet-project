@@ -17,6 +17,7 @@ class RegisterUserService
     {
         $user = User::create(name: $name);
         $user->record(new UserRegistered(
+            id: $user->getId(),
             name: $user->getName()
         ));
 

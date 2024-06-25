@@ -2,14 +2,10 @@
 
 namespace User\Domain\Model\Event;
 
+use User\Domain\Model\ValueObject\UserId;
 use User\Domain\Model\ValueObject\UserName;
 
-readonly final class UserCreated implements DomainEvent
+readonly final class UserCreated extends UserEvent
 {
-    /**
-     * @param UserName $name
-     */
-    public function __construct(private readonly UserName $name)
-    {
-    }
+
 }
