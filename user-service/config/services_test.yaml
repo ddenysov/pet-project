@@ -16,10 +16,10 @@ services:
     User\Domain\Services\RegisterUserService:
         public: true
 
-
     User\Application\Ports\Output\Repository\UserRepository:
-        class: User\Infrastructure\Adapter\Persistence\Doctrine\UserRepository
+        class: User\Infrastructure\Adapter\Persistence\Memory\UserRepository
 
     User\Infrastructure\Exception\Symfony\ExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+

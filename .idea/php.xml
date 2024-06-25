@@ -85,6 +85,20 @@
       <path value="$PROJECT_DIR$/user-service/vendor/psr/clock" />
       <path value="$PROJECT_DIR$/user-service/vendor/symfony/clock" />
       <path value="$PROJECT_DIR$/user-service/vendor/symfony/messenger" />
+      <path value="$PROJECT_DIR$/user-service/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/user-service/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/user-service/vendor/doctrine/migrations" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

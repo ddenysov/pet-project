@@ -15,7 +15,7 @@ class RegisterUserController
     {
     }
 
-    #[Route('/register', name: 'register', methods: ['POST'])]
+    #[Route('/register', name: 'register', methods: ['POST', 'GET'])]
     public function index(Request $request): JsonResponse
     {
         $this->commandBus->execute(new RegisterUserCommand(
