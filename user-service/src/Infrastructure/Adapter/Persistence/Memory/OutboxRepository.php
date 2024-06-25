@@ -11,8 +11,9 @@ class OutboxRepository implements \User\Application\Repository\OutboxRepository
     public function save(DomainEvent $event): void
     {
         OutboxDataset::$data[] = [
+            'name'    => $event->getName(),
             'payload' => $event->toArray(),
-            'status' => OutboxStatus::STARTED,
+            'status'  => OutboxStatus::STARTED,
         ];
     }
 }
