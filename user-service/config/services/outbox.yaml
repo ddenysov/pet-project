@@ -4,5 +4,5 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     User\Application\Repository\OutboxRepository:
-        class: User\Infrastructure\Adapter\Persistence\Memory\OutboxRepository
+        class: User\Infrastructure\Adapter\Persistence\Doctrine\OutboxRepository
         public: true

@@ -29,4 +29,9 @@ class UUID
     {
         return new static(\Symfony\Component\Uid\Uuid::v7()->toString());
     }
+
+    public function toUuid(): \Symfony\Component\Uid\Uuid
+    {
+        return $this->uuid;
+    }
 }
