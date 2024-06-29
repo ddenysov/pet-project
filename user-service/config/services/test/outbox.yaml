@@ -4,5 +4,8 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     User\Application\Outbox\OutboxRepository:
-        class: User\Infrastructure\Persistence\Doctrine\OutboxRepositorysdd
+        class: User\Infrastructure\Persistence\Memory\OutboxRepository
+        public: true
+
+    User\Infrastructure\Schedule\Symfony\Outbox\ProcessOutboxHandler:
         public: true

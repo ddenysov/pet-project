@@ -6,3 +6,6 @@ services:
     User\Application\Outbox\OutboxRepository:
         class: User\Infrastructure\Persistence\Doctrine\OutboxRepository
         public: true
+
+    User\Infrastructure\Schedule\Symfony\Outbox\ProcessOutboxHandler:
+        public: true

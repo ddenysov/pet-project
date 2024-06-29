@@ -1,25 +1,8 @@
 imports:
-    - { resource: services/ }
+    - { resource: services/test/index.yaml }
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
-    User\Delivery\Http\Controller\FindUserController:
-        public: true
-    User\Delivery\Http\Controller\RegisterUserController:
-        public: true
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    User\Domain\Services\RegisterUserService:
-        public: true
-
-    User\Application\Ports\Output\Repository\UserRepository:
-        class: User\Infrastructure\Persistence\Memory\UserRepository
-
-    User\Infrastructure\Exception\Symfony\ExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
+        autowire: true
+        autoconfigure: true
 

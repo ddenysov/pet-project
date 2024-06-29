@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+    User\Infrastructure\Exception\Symfony\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+    User\Infrastructure\Schedule\Symfony\ScheduleProvider:
+        public: true
