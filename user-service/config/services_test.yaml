@@ -17,7 +17,7 @@ services:
         public: true
 
     User\Application\Ports\Output\Repository\UserRepository:
-        class: User\Infrastructure\Adapter\Persistence\Memory\UserRepository
+        class: User\Infrastructure\Persistence\Memory\UserRepository
 
     User\Infrastructure\Exception\Symfony\ExceptionListener:
         tags:

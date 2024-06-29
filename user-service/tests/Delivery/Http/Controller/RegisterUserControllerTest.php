@@ -6,8 +6,8 @@ use App\Tests\Shared\ApiTestCase;
 use User\Domain\Model\Entity\User;
 use User\Domain\Model\ValueObject\UserId;
 use User\Domain\Model\ValueObject\UserName;
-use User\Infrastructure\Adapter\Persistence\Memory\Data\OutboxDataset;
-use User\Infrastructure\Adapter\Persistence\Memory\Data\UsersDataset;
+use User\Infrastructure\Persistence\Memory\Data\OutboxDataset;
+use User\Infrastructure\Persistence\Memory\Data\UsersDataset;
 
 class RegisterUserControllerTest extends ApiTestCase
 {

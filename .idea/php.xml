@@ -100,6 +100,8 @@
       <path value="$PROJECT_DIR$/user-service/vendor/doctrine/collections" />
       <path value="$PROJECT_DIR$/user-service/vendor/doctrine/migrations" />
       <path value="$PROJECT_DIR$/user-service/vendor/symfony/scheduler" />
+      <path value="$PROJECT_DIR$/user-service/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/user-service/vendor/dragonmantank/cron-expression" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

@@ -21,7 +21,7 @@ abstract class Aggregate
     }
 
     /**
-     * @return array
+     * @return DomainEvent[]
      */
     public function releaseEvents(): array
     {

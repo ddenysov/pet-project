@@ -2,8 +2,10 @@
 
 namespace User\Application\Handlers\Command;
 
+use User\Application\Outbox\Outbox;
+use User\Application\Outbox\OutboxRepository;
+use User\Application\Outbox\OutboxStatus;
 use User\Application\Ports\Output\Repository\UserRepository;
-use User\Application\Repository\OutboxRepository;
 use User\Domain\Model\ValueObject\UserName;
 use User\Domain\Services\RegisterUserService;
 
@@ -34,7 +36,13 @@ readonly class RegisterUserCommandHandler
 
         $events = $user->releaseEvents();
         foreach ($events as $event) {
-            $this->outboxRepository->save($event);
+            $this->outboxRepository->save(new Outbox(
+                id: $event->getEventId()->toUuid(),
+                name: $event->getName(),
+                payload: $event->toArray(),
+                status: OutboxStatus::STARTED,
+                createdAt: $event->getCreatedAt()->toDateTime()
+            ));
         }
         $this->repository->save($user);
     }
