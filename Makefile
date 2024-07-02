@@ -16,4 +16,4 @@ stop-user-service:
 
 start: start-gateway-service start-user-service
 
-stop: stop-gateway-service stop-user-service
+stop: stop-user-service stop-gateway-service

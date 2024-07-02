@@ -134,6 +134,12 @@
       <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/http-client-contracts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
@@ -142,6 +148,7 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/gateway-service/vendor/autoload.php" />
       <PhpUnitSettings bootstrap_file_path="$PROJECT_DIR$/user-service/phpunit.xml" configuration_file_path="$PROJECT_DIR$/user-service/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/user-service/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
     </phpunit_settings>
   </component>

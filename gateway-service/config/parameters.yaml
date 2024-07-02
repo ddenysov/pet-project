@@ -1,0 +1,2 @@
+parameters:
+  user_service: 'user-service:8000'

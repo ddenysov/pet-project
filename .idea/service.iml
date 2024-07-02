@@ -9,7 +9,10 @@
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/user-service/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/event-dispatcher" />
@@ -28,12 +31,16 @@
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/flex" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/framework-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/http-client-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/http-foundation" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/maker-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-intl-normalizer" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-php83" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/runtime" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/service-contracts" />

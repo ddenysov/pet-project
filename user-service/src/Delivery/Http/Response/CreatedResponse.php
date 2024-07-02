@@ -10,6 +10,8 @@ class CreatedResponse extends JsonResponse
 {
     public function __construct()
     {
-        parent::__construct([], Response::HTTP_CREATED);
+        parent::__construct([
+            'status' => Response::HTTP_CREATED
+        ], Response::HTTP_CREATED);
     }
 }

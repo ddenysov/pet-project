@@ -7,6 +7,9 @@ services:
       - ./:/var/www/html
     links:
       - database
+    networks:
+      - gateway-service_service-network
+
   ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
@@ -28,9 +31,15 @@ services:
       - "5432:5432"
     expose:
       - 5432
+    networks:
+      - gateway-service_service-network
 ###< doctrine/doctrine-bundle ###
 
 volumes:
   ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+
+networks:
+  gateway-service_service-network:
+    external: true
