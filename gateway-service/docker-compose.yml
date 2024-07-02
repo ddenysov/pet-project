@@ -1,0 +1,11 @@
+services:
+  gateway-service:
+    build:
+      context: .
+      dockerfile: ./etc/docker/Dockerfile
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000

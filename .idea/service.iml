@@ -6,7 +6,41 @@
       <sourceFolder url="file://$MODULE_DIR$/user-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/user-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway-service/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/cache-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/config" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/dependency-injection" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/dotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/error-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/flex" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/framework-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-intl-grapheme" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/polyfill-php83" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/runtime" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/var-exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/user-service/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />

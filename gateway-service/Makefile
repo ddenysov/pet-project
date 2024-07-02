@@ -1,4 +1,4 @@
-APP := user-service
+APP := gateway-service
 DC := docker-compose exec
 MYSQL := $(DC) -T mysql
 
@@ -9,7 +9,7 @@ ssh:
 	@$(DC) $(APP) bash
 
 start:
-	docker-compose up -d --remove-orphans
+	docker-compose up -d
 
 stop:
 	docker-compose down

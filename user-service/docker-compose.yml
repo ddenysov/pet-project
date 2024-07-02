@@ -5,10 +5,6 @@ services:
       dockerfile: ./etc/docker/Dockerfile
     volumes:
       - ./:/var/www/html
-    ports:
-      - "8000:8000"
-    expose:
-      - 8000
     links:
       - database
   ###> doctrine/doctrine-bundle ###
