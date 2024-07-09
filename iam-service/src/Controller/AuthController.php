@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace Iam\Controller;
 
 use Symfony\Component\Routing\Attribute\Route;
 use Firebase\JWT\JWT;
