@@ -23,7 +23,6 @@ final class StringTest extends TestCase
     }
 
     /**
-     * @throws InvalidUuidException
      */
     public function testCase3(): void
     {
