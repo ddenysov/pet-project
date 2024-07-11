@@ -2,11 +2,26 @@
 
 namespace Common\Domain\ValueObject;
 
+use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
+
 class StringValue extends ValueObject
 {
+    protected string $value;
 
-    public function __construct(private string $value)
+    /**
+     * @throws InvalidStringLengthException
+     */
+    public function __construct(string $value)
     {
+        if (strlen($value) > $this->getMaxLength()) {
+            throw new InvalidStringLengthException();
+        }
+
+        if (strlen($value) < $this->getMinLength()) {
+            throw new InvalidStringLengthException();
+        }
+
+        $this->value = $value;
     }
 
     public function toString(): string
@@ -14,8 +29,13 @@ class StringValue extends ValueObject
         return $this->value;
     }
 
-    protected function validate(): void
+    public function getMaxLength(): int
     {
+        return 255;
+    }
 
+    public function getMinLength(): int
+    {
+        return 0;
     }
 }
