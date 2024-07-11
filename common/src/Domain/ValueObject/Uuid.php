@@ -41,4 +41,12 @@ class Uuid extends ValueObject
     {
         return $this->uuid;
     }
+
+    /**
+     * @throws InvalidUuidException
+     */
+    public static function fromUuid(self $uuid)
+    {
+        return new static($uuid->toString());
+    }
 }
