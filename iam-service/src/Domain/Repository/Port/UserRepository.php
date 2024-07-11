@@ -1,9 +1,10 @@
 <?php
 
 namespace Iam\Domain\Repository\Port;
-use Common\Domain\Repository\Port\Repository;
+use Iam\Domain\Entity\User;
+use Iam\Domain\ValueObject\UserId;
 
-interface UserRepository extends Repository
+interface UserRepository
 {
-
+    public function find(UserId $id): User;
 }
