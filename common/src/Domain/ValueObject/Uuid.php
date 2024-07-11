@@ -16,9 +16,9 @@ class Uuid extends ValueObject
     /**
      * @return self
      */
-    public static function create(): self
+    public static function create(): static
     {
-        return new self(UuidAdapter::create());
+        return new static(UuidAdapter::create());
     }
 
     /**

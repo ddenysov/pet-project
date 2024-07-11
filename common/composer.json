@@ -3,7 +3,8 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Common\\": "src/"
+            "Common\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "authors": [

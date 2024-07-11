@@ -148,8 +148,8 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/gateway-service/vendor/autoload.php" />
-      <PhpUnitSettings bootstrap_file_path="$PROJECT_DIR$/user-service/phpunit.xml" configuration_file_path="$PROJECT_DIR$/user-service/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/user-service/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/gateway-service/vendor/autoload.php" phpunit_phar_path="" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/common/phpunit.xml" custom_loader_path="$PROJECT_DIR$/common/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
