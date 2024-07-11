@@ -17,6 +17,7 @@ final class EntityTest extends TestCase
             id: $id,
         );
 
+        $this->assertEquals($id->toString(), $stub->toArray()['id']);
         $this->assertEquals($id->toString(), $stub->getId()->toString());
         $this->assertTrue($stub->getId()->equals($id));
     }

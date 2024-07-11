@@ -12,11 +12,6 @@ class StubEntity extends Entity
 
     }
 
-    public function toArray(): array
-    {
-
-    }
-
     public function getId(): StubId
     {
         return $this->id;
