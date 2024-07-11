@@ -2,19 +2,32 @@
 
 namespace Common\Domain\ValueObject;
 
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Infrastructure\Uuid\Symfony\UuidAdapter;
 
 class Uuid extends ValueObject
 {
     /**
-     * @param string $uuid
+     * @var string
      */
-    public function __construct(private string $uuid)
+    private string $uuid;
+
+    /**
+     * @param string $uuid
+     * @throws InvalidUuidException
+     */
+    public function __construct(string $uuid)
     {
+        if (!UuidAdapter::isValid($uuid)) {
+            InvalidUuidException::invalidUuid($uuid);
+        }
+
+        $this->uuid = $uuid;
     }
 
     /**
      * @return self
+     * @throws InvalidUuidException
      */
     public static function create(): static
     {

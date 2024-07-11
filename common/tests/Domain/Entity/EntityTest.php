@@ -10,7 +10,7 @@ use Tests\Domain\Entity\Stub\StubString;
 
 final class EntityTest extends TestCase
 {
-    public function testGreetsWithName(): void
+    public function testCase1(): void
     {
         $id = StubId::create();
         $name = new StubString('test');

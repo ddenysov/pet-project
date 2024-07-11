@@ -10,4 +10,9 @@ class UuidAdapter
     {
         return Uuid::v4()->toString();
     }
+
+    public static function isValid(string $uuid): bool
+    {
+        return Uuid::isValid($uuid);
+    }
 }
