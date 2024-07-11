@@ -25,4 +25,13 @@ abstract class Entity implements Port\Primary\Entity
     {
         return [];
     }
+
+    /**
+     * @return static
+     * @throws \Common\Domain\ValueObject\Exception\InvalidUuidException
+     */
+    public static function create(): static
+    {
+        return new static(Uuid::create());
+    }
 }

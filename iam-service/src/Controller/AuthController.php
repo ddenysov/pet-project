@@ -2,6 +2,7 @@
 
 namespace Iam\Controller;
 
+use Common\Infrastructure\Hash\Symfony\PasswordHasherAdapter;
 use Symfony\Component\Routing\Attribute\Route;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -11,6 +12,10 @@ class AuthController
     #[Route('/auth', name: 'app_auth')]
     public function __invoke()
     {
+        $hasher = new PasswordHasherAdapter();
+        $hash = $hasher->hash('alalal');
+        dd('ok');
+
         $key = 'example_key';
         $payload = [
             'iss' => 'http://example.org',

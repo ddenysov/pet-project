@@ -17,6 +17,7 @@
         "phpunit/phpunit": "^11.2"
     },
     "require": {
-        "symfony/uid": "^7.1"
+        "symfony/uid": "^7.1",
+        "symfony/password-hasher": "^7.1"
     }
 }
