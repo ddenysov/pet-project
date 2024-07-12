@@ -2,6 +2,8 @@
 
 namespace User\Application\Handlers\Query;
 
+use Common\Application\Handlers\Query\Port\Query;
+
 class FindUserQuery implements Query
 {
     public string $id;

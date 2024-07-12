@@ -1,12 +1,13 @@
 <?php
 
-namespace User\Infrastructure\Bus\Command;
+namespace Common\Infrastructure\Bus\Event;
 
-use Common\Application\Handlers\Command\Port\Command;
+use Common\Application\Bus\Port\EventBus as EventBusPort;
+use Common\Domain\Event\Port\Event;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class CommandBus implements \User\Application\Ports\Output\Bus\CommandBus
+class EventBus implements EventBusPort
 {
     /**
      * @param MessageBusInterface $bus
@@ -16,13 +17,13 @@ class CommandBus implements \User\Application\Ports\Output\Bus\CommandBus
     }
 
     /**
-     * @param Command $command
+     * @param Event $event
      * @return void
      * @throws ExceptionInterface
      * @TODO Add exception handling
      */
-    public function execute(Command $command): void
+    public function execute(Event $event): void
     {
-        $this->bus->dispatch($command);
+        $this->bus->dispatch($event);
     }
 }

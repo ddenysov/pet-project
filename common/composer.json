@@ -18,6 +18,7 @@
     },
     "require": {
         "symfony/uid": "^7.1",
-        "symfony/password-hasher": "^7.1"
+        "symfony/password-hasher": "^7.1",
+        "symfony/messenger": "^7.1"
     }
 }

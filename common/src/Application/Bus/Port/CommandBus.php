@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Application\Ports\Output\Bus;
+namespace Common\Application\Bus\Port;
 
 use Common\Application\Handlers\Command\Port\Command;
 

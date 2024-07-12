@@ -1,15 +1,15 @@
 <?php
 
-namespace User\Infrastructure\Bus\Query;
+namespace Common\Infrastructure\Bus\Query;
 
+use Common\Application\Bus\Port\QueryBus as QueryBusPort;
 use Common\Application\Handlers\Query\Port\Query;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use User\Application\Dto\Dto;
 
-class QueryBus implements \User\Application\Ports\Output\Bus\QueryBus
+class QueryBus implements QueryBusPort
 {
     /**
      * @param MessageBusInterface $bus
@@ -24,7 +24,7 @@ class QueryBus implements \User\Application\Ports\Output\Bus\QueryBus
      * @throws ExceptionInterface
      * @throws \Exception
      */
-    public function execute(Query $query): Dto
+    public function execute(Query $query)
     {
         /**
          * @var Envelope $response

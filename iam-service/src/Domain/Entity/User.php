@@ -2,13 +2,13 @@
 
 namespace Iam\Domain\Entity;
 
-use Common\Domain\Entity\Entity;
+use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 use Iam\Domain\ValueObject\UserId;
 use Iam\Domain\ValueObject\UserPassword;
 
-final class User extends Entity
+final class User extends Aggregate
 {
     private UserPassword $password;
 

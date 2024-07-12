@@ -1,0 +1,8 @@
+imports:
+    - { resource: services/test/index.yaml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+

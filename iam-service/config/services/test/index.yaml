@@ -1,0 +1,8 @@
+imports:
+    - { resource: ../prod/app.yaml }
+    - { resource: ../prod/queries.yaml }
+    - { resource: ../prod/commands.yaml }
+    - { resource: ../prod/events.yaml }
+    - { resource: ../test/outbox.yaml }
+    - { resource: ../prod/controllers.yaml }
+    - { resource: ../test/user.yaml }

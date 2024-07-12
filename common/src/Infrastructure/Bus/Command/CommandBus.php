@@ -1,12 +1,13 @@
 <?php
 
-namespace User\Infrastructure\Bus\Command;
+namespace Common\Infrastructure\Bus\Command;
 
+use Common\Application\Bus\Port\CommandBus as CommandBusPort;
 use Common\Application\Handlers\Command\Port\Command;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class CommandBus implements \User\Application\Ports\Output\Bus\CommandBus
+class CommandBus implements CommandBusPort
 {
     /**
      * @param MessageBusInterface $bus

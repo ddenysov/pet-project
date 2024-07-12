@@ -1,0 +1,8 @@
+imports:
+    - { resource: ../prod/user.yaml }
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+
+    User\Application\Ports\Output\Repository\UserRepository:
+        class: User\Infrastructure\Persistence\Memory\UserRepository

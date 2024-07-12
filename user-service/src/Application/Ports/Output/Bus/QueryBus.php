@@ -2,8 +2,8 @@
 
 namespace User\Application\Ports\Output\Bus;
 
+use Common\Application\Handlers\Query\Port\Query;
 use User\Application\Dto\Dto;
-use User\Application\Handlers\Query\Query;
 
 interface QueryBus
 {
