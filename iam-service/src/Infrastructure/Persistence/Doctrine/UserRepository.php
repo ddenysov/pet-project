@@ -5,9 +5,10 @@ namespace Iam\Infrastructure\Persistence\Doctrine;
 use Common\Domain\Repository\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Iam\Domain\Entity\User;
+use Iam\Domain\Repository\Port\UserRepository as UserRepositoryPort;
 use Symfony\Component\Uid\Uuid;
 
-class UserRepository extends Repository implements \Iam\Domain\Repository\Port\UserRepository
+class UserRepository extends Repository implements UserRepositoryPort
 {
     /**
      * @param EntityManagerInterface $entityManager
@@ -20,19 +21,14 @@ class UserRepository extends Repository implements \Iam\Domain\Repository\Port\U
     /**
      * @param User $user
      * @return void
-     * @throws \Common\Domain\ValueObject\Exception\InvalidUuidException
      */
     public function save(User $user): void
     {
-        $entity = new UserEntity();
-        $entity->setId(Uuid::fromString($user->getId()->toString()));
-        $entity->setName($user->getName()->toString());
-        $this->entityManager->persist($entity);
+        $dUser = new Entity\User();
+        $dUser->setId(Uuid::fromString($user->getId()->toString()));
+        $dUser->setEmail($user->getEmail()->toString());
+        $dUser->setPassword($user->getPassword()->toString());
+        $this->entityManager->persist($dUser);
         $this->entityManager->flush();
-    }
-
-    public function find(UserId $id): ?User
-    {
-        // TODO: Implement find() method.
     }
 }

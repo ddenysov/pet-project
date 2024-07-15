@@ -5,16 +5,18 @@ namespace Iam\Domain\Entity;
 use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
+use Iam\Domain\ValueObject\UserEmail;
 use Iam\Domain\ValueObject\UserId;
 use Iam\Domain\ValueObject\UserPassword;
 
 final class User extends Aggregate
 {
-    private UserPassword $password;
-
-    public function __construct(Uuid $id, UserPassword $password)
+    public function __construct(
+        Uuid $id,
+        private UserEmail $email,
+        private UserPassword $password
+    )
     {
-        $this->password = $password;
         parent::__construct($id);
     }
 
@@ -42,5 +44,15 @@ final class User extends Aggregate
     public function setPassword(UserPassword $password): void
     {
         $this->password = $password;
+    }
+
+    public function getEmail(): UserEmail
+    {
+        return $this->email;
+    }
+
+    public function setEmail(UserEmail $email): void
+    {
+        $this->email = $email;
     }
 }

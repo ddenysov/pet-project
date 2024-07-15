@@ -2,6 +2,7 @@
 
 namespace Common\Domain\Entity;
 
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 
 abstract class Entity implements Port\Entity
@@ -27,11 +28,12 @@ abstract class Entity implements Port\Entity
     }
 
     /**
+     * @param mixed ...$args
      * @return static
-     * @throws \Common\Domain\ValueObject\Exception\InvalidUuidException
+     * @throws InvalidUuidException
      */
-    public static function create(): static
+    public static function create(...$args): static
     {
-        return new static(Uuid::create());
+        return new static(Uuid::create(), $args);
     }
 }
