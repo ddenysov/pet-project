@@ -21,7 +21,7 @@ class RegisterController
      * @param Request $request
      * @return void
      */
-    #[Route('/register', name: 'register', methods: ['POST', 'GET'])]
+    #[Route('/register', name: 'register', methods: ['POST', 'GET'], format: 'json')]
     public function index(
         #[MapQueryString] User $user
     )
