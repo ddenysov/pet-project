@@ -48,6 +48,7 @@ class ExceptionListener
         $response = new JsonResponse([
             'success' => false,
             'error'   => $exception->getMessage(),
+            'trace'   => $exception->getTrace(),
         ], $statusCode);
 
         $event->setResponse($response);

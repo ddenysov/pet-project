@@ -2,9 +2,10 @@
 
 namespace Iam\Delivery\Http\Request\Dto;
 
+use Common\Delivery\Http\Request\Dto\Dto;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class User
+class User extends Dto
 {
     public function __construct(
         #[Assert\NotBlank]

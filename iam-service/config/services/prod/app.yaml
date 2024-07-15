@@ -6,3 +6,7 @@ services:
             - { name: kernel.event_listener, event: kernel.exception }
     #User\Infrastructure\Schedule\Symfony\ScheduleProvider:
     #    public: true
+
+    # COMMAND HANDLER
+    Common\Application\Bus\Port\CommandBus:
+        class: Common\Infrastructure\Bus\Command\CommandBus

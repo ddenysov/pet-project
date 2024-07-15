@@ -1,7 +1,8 @@
 <?php
 
-namespace Common\Application\Handlers\Command\Port;
-interface Command
+namespace Common\Delivery\Http\Request\Dto\Port;
+
+interface Dto
 {
     /**
      * @return array

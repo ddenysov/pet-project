@@ -1,27 +1,23 @@
 <?php
 
-namespace Common\Application\Handlers\Command;
+namespace Common\Delivery\Http\Request\Dto;
 
 use ReflectionClass;
 
-abstract class Command implements Port\Command
+abstract class Dto implements Port\Dto
 {
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $ref = new ReflectionClass(get_class($this));
         $props = $ref->getProperties();
-
-        dd($props);
+        $result = [];
 
         foreach ($props as $prop) {
-
-            dd($prop);
             if ($prop->isPublic()) {
-                $propsArray[] = $dtoArray[$prop->getName()];
+                $result[$prop->getName()] = $prop->getValue($this);
             }
         }
+
+        return $result;
     }
 }

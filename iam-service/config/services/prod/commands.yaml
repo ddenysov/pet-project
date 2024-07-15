@@ -2,11 +2,8 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    # COMMAND HANDLER
-    Common\Application\Bus\Port\CommandBus:
-        class: Common\Infrastructure\Bus\Command\CommandBus
 
     # REGISTER USER COMMAND
-    #User\Application\Handlers\Command\RegisterUserCommandHandler:
-    #    tags:
-    #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default', method: 'handle' }
+    Iam\Application\Handlers\Command\RegisterCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', method: 'handle' }

@@ -4,6 +4,11 @@ namespace Iam\Application\Handlers\Command;
 
 readonly class RegisterCommandHandler
 {
+    public function __construct()
+    {
+
+    }
+
     /**
      * @throws \Exception
      */
