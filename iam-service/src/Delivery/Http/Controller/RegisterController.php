@@ -3,8 +3,10 @@
 namespace Iam\Delivery\Http\Controller;
 
 use Common\Application\Bus\Port\CommandBus;
+use Iam\Delivery\Http\Request\Dto\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 
 class RegisterController
 {
@@ -20,8 +22,10 @@ class RegisterController
      * @return void
      */
     #[Route('/register', name: 'register', methods: ['POST', 'GET'])]
-    public function index(Request $request)
+    public function index(
+        #[MapQueryString] User $user
+    )
     {
-        dd('ololo');
+        dd($user);
     }
 }
