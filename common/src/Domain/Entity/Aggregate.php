@@ -2,7 +2,7 @@
 
 namespace Common\Domain\Entity;
 
-abstract class Aggregate extends Entity
+abstract class Aggregate extends Entity implements Port\Aggregate
 {
 
 }

@@ -4,7 +4,7 @@ namespace Common\Domain\Entity;
 
 use Common\Domain\ValueObject\Uuid;
 
-abstract class Entity implements Port\Primary\Entity
+abstract class Entity implements Port\Entity
 {
     protected $id;
 
