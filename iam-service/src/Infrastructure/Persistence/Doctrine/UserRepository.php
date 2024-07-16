@@ -3,6 +3,7 @@
 namespace Iam\Infrastructure\Persistence\Doctrine;
 
 use Common\Domain\Repository\Repository;
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Doctrine\ORM\EntityManagerInterface;
 use Iam\Domain\Entity\User;
 use Iam\Domain\Repository\Port\UserRepository as UserRepositoryPort;
@@ -21,6 +22,7 @@ class UserRepository extends Repository implements UserRepositoryPort
     /**
      * @param User $user
      * @return void
+     * @throws InvalidUuidException
      */
     public function save(User $user): void
     {
