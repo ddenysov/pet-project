@@ -10,3 +10,6 @@ services:
     # COMMAND HANDLER
     Common\Application\Bus\Port\CommandBus:
         class: Common\Infrastructure\Bus\Command\CommandBus
+
+    Iam\Domain\:
+        resource: '../../../src/Domain/'
