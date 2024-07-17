@@ -13,8 +13,12 @@ class UserRepository extends Repository implements UserRepositoryPort
 {
     /**
      * @param EntityManagerInterface $entityManager
+     * @param CriteriaFactory $criteriaFactory
      */
-    public function __construct(private readonly EntityManagerInterface $entityManager)
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly CriteriaFactory $criteriaFactory
+    )
     {
 
     }

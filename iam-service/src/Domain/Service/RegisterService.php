@@ -35,7 +35,7 @@ class RegisterService
      */
     public function execute(string $email, string $password): EventCollection
     {
-        $existingUser = $this->userRepository->addCriteria()
+        $existingUser = $this->userRepository->addCriteria();
         $events = new EventCollection();
         $user = new User(
             id: UserId::create(),

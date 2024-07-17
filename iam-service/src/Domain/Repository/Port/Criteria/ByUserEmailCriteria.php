@@ -2,7 +2,7 @@
 
 namespace Iam\Domain\Repository\Port\Criteria;
 
-interface ByEmailCriteria
+interface ByUserEmailCriteria
 {
 
 }
