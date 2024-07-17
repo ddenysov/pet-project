@@ -6,12 +6,5 @@ use Iam\Domain\Repository\Port\Criteria\ByUserEmailCriteria as ByUserEmailCriter
 
 class ByUserEmailCriteria
 {
-    public function __construct(private readonly ByUserEmailCriteriaPort $criteriaAdapter)
-    {
-    }
 
-    public function apply()
-    {
-
-    }
 }

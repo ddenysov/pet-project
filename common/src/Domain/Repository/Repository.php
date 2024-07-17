@@ -12,4 +12,14 @@ abstract class Repository
     {
         $this->criteria[$criteria::class] = $criteria;
     }
+
+    /**
+     * @return $this
+     */
+    public function applyCriteria(): static
+    {
+        foreach ($this->criteria as $criteria) {
+            $criteria->apply($this);
+        }
+    }
 }

@@ -7,6 +7,7 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Iam\Domain\Entity\User;
 use Iam\Domain\Event\UserRegistered;
+use Iam\Domain\Repository\Criteria\ByUserEmailCriteria;
 use Iam\Domain\Repository\Port\Criteria\ByEmailCriteria;
 use Iam\Domain\Repository\Port\UserRepository;
 use Iam\Domain\ValueObject\UserEmail;
@@ -21,7 +22,6 @@ class RegisterService
      */
     public function __construct(
         private readonly UserRepository $userRepository,
-        private readonly ByEmailCriteria $byEmailCriteria,
     ) {
 
     }
@@ -35,7 +35,7 @@ class RegisterService
      */
     public function execute(string $email, string $password): EventCollection
     {
-        $existingUser = $this->userRepository->addCriteria();
+        $existingUser = $this->userRepository->addCriteria(new ByUserEmailCriteria($email));
         $events = new EventCollection();
         $user = new User(
             id: UserId::create(),

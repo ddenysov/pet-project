@@ -7,17 +7,18 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Doctrine\ORM\EntityManagerInterface;
 use Iam\Domain\Entity\User;
 use Iam\Domain\Repository\Port\UserRepository as UserRepositoryPort;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Uid\Uuid;
 
 class UserRepository extends Repository implements UserRepositoryPort
 {
     /**
      * @param EntityManagerInterface $entityManager
-     * @param CriteriaFactory $criteriaFactory
+     * @param ContainerInterface $container
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly CriteriaFactory $criteriaFactory
+        private readonly ContainerInterface $container
     )
     {
 
