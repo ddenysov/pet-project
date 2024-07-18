@@ -140,6 +140,21 @@
       <path value="$PROJECT_DIR$/gateway-service/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/http-client" />
       <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/gateway-service/vendor/doctrine/instantiator" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

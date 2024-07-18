@@ -9,8 +9,6 @@
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" packagePrefix="Common\" />
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="true" packagePrefix="Tests\" />
@@ -56,6 +54,21 @@
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/var-exporter" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/user-service/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/collections" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/doctrine-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/doctrine-migrations-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/migrations" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/orm" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/persistence" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/sql-formatter" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/doctrine-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/symfony/stopwatch" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

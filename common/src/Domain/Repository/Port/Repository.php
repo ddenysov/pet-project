@@ -2,11 +2,10 @@
 
 namespace Common\Domain\Repository\Port;
 
+use Common\Domain\Entity\Entity;
+use Common\Domain\ValueObject\ValueObject;
+
 interface Repository
 {
-    /**
-     * @param Criteria $criteria
-     * @return $this
-     */
-    public function addCriteria(Criteria $criteria): static;
+
 }
