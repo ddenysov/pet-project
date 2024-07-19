@@ -6,4 +6,4 @@ services:
     # REGISTER USER COMMAND
     Iam\Application\Handlers\Command\RegisterCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', method: 'handle' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Iam\Application\Handlers\Command\RegisterCommand' }

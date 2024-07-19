@@ -11,5 +11,8 @@ services:
     Common\Application\Bus\Port\CommandBus:
         class: Common\Infrastructure\Bus\Command\CommandBus
 
+    Common\Application\Handlers\Command\Port\TransactionManager:
+        class: Common\Infrastructure\Persistence\Doctrine\Transaction\TransactionManager
+
     Iam\Domain\:
         resource: '../../../src/Domain/'
