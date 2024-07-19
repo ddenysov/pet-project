@@ -3,7 +3,6 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    Symfony\Component\DependencyInjection\ContainerInterface:
     # REGISTER USER COMMAND
     Iam\Application\Handlers\Command\RegisterCommandHandler:
         tags:

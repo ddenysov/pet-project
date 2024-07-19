@@ -86,4 +86,13 @@ final class User extends Aggregate
     public function requestResetPassword(): void {
         $this->recordThat(new UserPasswordResetRequested($this));
     }
+
+    /**
+     * @param string $password
+     * @return bool
+     */
+    public function checkPassword(string $password): bool
+    {
+        return $this->password->check($password);
+    }
 }
