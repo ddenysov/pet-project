@@ -6,12 +6,10 @@ use Common\Application\Bus\Port\CommandBus;
 use Common\Delivery\Http\Request\Dto\DtoToCommandTransformer;
 use Iam\Application\Handlers\Command\RegisterCommand;
 use Iam\Delivery\Http\Request\Dto\User;
-
-use Iam\Domain\Repository\Port\UserRepository;
-
+use Iam\Domain\Repository\Port\ReadModel\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterController
 {

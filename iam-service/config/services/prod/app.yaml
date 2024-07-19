@@ -13,6 +13,12 @@ services:
 
     Common\Application\Handlers\Command\Port\TransactionManager:
         class: Common\Infrastructure\Persistence\Doctrine\Transaction\TransactionManager
+        public: true
 
     Iam\Domain\:
         resource: '../../../src/Domain/'
+
+    Common\Application\Container\Port\ServiceContainer:
+        class: Common\Infrastructure\Container\Symfony\ServiceContainer
+        arguments:
+            $container: '@service_container'

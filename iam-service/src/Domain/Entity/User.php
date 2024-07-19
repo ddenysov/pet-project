@@ -5,6 +5,8 @@ namespace Iam\Domain\Entity;
 use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
+use Iam\Domain\Event\UserPasswordResetRequested;
+use Iam\Domain\Event\UserRegistered;
 use Iam\Domain\ValueObject\UserEmail;
 use Iam\Domain\ValueObject\UserId;
 use Iam\Domain\ValueObject\UserPassword;
@@ -51,8 +53,37 @@ final class User extends Aggregate
         return $this->email;
     }
 
+    /**
+     * @param UserEmail $email
+     * @return void
+     */
     public function setEmail(UserEmail $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @throws InvalidUuidException
+     */
+    public static function register(
+        UserEmail $email,
+        UserPassword $password
+    ): User {
+        $user = new User(
+            id: UserId::create(),
+            email: $email,
+            password: $password
+        );
+
+        $user->recordThat(new UserRegistered($user));
+
+        return $user;
+    }
+
+    /**
+     * @return void
+     */
+    public function requestResetPassword(): void {
+        $this->recordThat(new UserPasswordResetRequested($this));
     }
 }

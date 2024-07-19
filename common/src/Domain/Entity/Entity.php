@@ -4,9 +4,13 @@ namespace Common\Domain\Entity;
 
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
+use User\Domain\Model\Event\DomainEvent;
 
 abstract class Entity implements Port\Entity
 {
+    /**
+     * @var Uuid
+     */
     protected $id;
 
     public function __construct(Uuid $id)

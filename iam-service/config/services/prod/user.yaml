@@ -2,5 +2,10 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
 
-    Iam\Domain\Repository\Port\UserRepository:
-        class: Iam\Infrastructure\Persistence\Doctrine\UserRepository
+    Iam\Domain\Repository\Port\ReadModel\UserRepository:
+        class: Iam\Infrastructure\Persistence\Doctrine\ReadModel\UserRepository
+        public: true
+
+    Iam\Domain\Repository\Port\WriteModel\UserRepository:
+        class: Iam\Infrastructure\Persistence\Doctrine\WriteModel\UserRepository
+        public: true
