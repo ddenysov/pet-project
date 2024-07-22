@@ -14,6 +14,11 @@ abstract class Aggregate extends Entity implements Port\Aggregate
     protected array $events = [];
 
     /**
+     * @var array
+     */
+    protected static array $subscribers = [];
+
+    /**
      * @return DomainEvent[]
      */
     public function releaseEvents(): array
@@ -30,6 +35,12 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     public function recordThat(Event $event): void
     {
+        $event->setId($this->id);
+        if (isset(static::$subscribers[$event::class])) {
+            foreach (static::$subscribers[$event::class] as $subscriberMethod) {
+                $this->$subscriberMethod($event);
+            }
+        }
         $this->events[] = $event;
     }
 }

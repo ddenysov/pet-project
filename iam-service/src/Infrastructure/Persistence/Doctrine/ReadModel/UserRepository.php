@@ -44,10 +44,14 @@ class UserRepository extends Repository implements UserRepositoryPort
             ->getQuery()
             ->getSingleResult();
 
-        return new User(
+
+
+        $user = new User(
             id: new UserId($dUser->getId()->toString()),
-            email: new UserEmail($dUser->getEmail()),
-            password: new UserPassword($dUser->getPassword()),
         );
+        $user->setEmail(new UserEmail($dUser->getEmail()));
+        $user->setPassword(new UserPassword($dUser->getPassword()));
+
+        return $user;
     }
 }

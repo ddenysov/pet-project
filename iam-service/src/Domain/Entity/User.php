@@ -4,7 +4,7 @@ namespace Iam\Domain\Entity;
 
 use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Common\Domain\ValueObject\Uuid;
+use Common\Domain\ValueObject\PasswordValue;
 use Iam\Domain\Event\UserPasswordResetRequested;
 use Iam\Domain\Event\UserRegistered;
 use Iam\Domain\ValueObject\UserEmail;
@@ -13,14 +13,21 @@ use Iam\Domain\ValueObject\UserPassword;
 
 final class User extends Aggregate
 {
-    public function __construct(
-        Uuid $id,
-        private UserEmail $email,
-        private UserPassword $password
-    )
-    {
-        parent::__construct($id);
-    }
+    /**
+     * @var UserPassword
+     */
+    private UserPassword $password;
+
+    /**
+     * @var UserEmail
+     */
+    private UserEmail $email;
+
+    protected static array $subscribers = [
+        UserRegistered::class => [
+            'onUserRegistered',
+        ]
+    ];
 
     /**
      * @return UserId
@@ -69,13 +76,11 @@ final class User extends Aggregate
         UserEmail $email,
         UserPassword $password
     ): User {
-        $user = new User(
-            id: UserId::create(),
-            email: $email,
-            password: $password
-        );
-
-        $user->recordThat(new UserRegistered($user));
+        $user = self::create();
+        $user->recordThat(new UserRegistered(
+            $email,
+            $password,
+        ));
 
         return $user;
     }
@@ -94,5 +99,11 @@ final class User extends Aggregate
     public function checkPassword(string $password): bool
     {
         return $this->password->check($password);
+    }
+
+    protected function onUserRegistered(UserRegistered $event)
+    {
+        $this->setEmail($event->email);
+        $this->setPassword($event->password);
     }
 }
