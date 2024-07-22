@@ -89,7 +89,7 @@ final class User extends Aggregate
      * @return void
      */
     public function requestResetPassword(): void {
-        $this->recordThat(new UserPasswordResetRequested($this));
+        $this->recordThat(new UserPasswordResetRequested());
     }
 
     /**

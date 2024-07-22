@@ -5,7 +5,7 @@ namespace Common\Domain\ValueObject;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Infrastructure\Uuid\Symfony\UuidAdapter;
 
-class Uuid extends ValueObject
+class Uuid extends ValueObject implements Port\StringValue
 {
     /**
      * @var string

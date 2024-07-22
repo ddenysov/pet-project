@@ -54,15 +54,6 @@ abstract class CommandHandler
     }
 
     /**
-     * @param TransactionManager $transactionManager
-     * @return void
-     */
-    final public function setTransactionManager(TransactionManager $transactionManager): void
-    {
-        $this->transactionManager = $transactionManager;
-    }
-
-    /**
      * @return TransactionManager
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface

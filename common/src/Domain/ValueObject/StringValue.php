@@ -4,7 +4,7 @@ namespace Common\Domain\ValueObject;
 
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 
-class StringValue extends ValueObject
+class StringValue extends ValueObject implements Port\StringValue
 {
     protected string $value;
 
