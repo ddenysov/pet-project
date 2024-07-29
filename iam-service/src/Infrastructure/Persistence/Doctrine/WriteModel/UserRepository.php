@@ -14,15 +14,9 @@ class UserRepository extends Repository implements UserRepositoryPort
     /**
      * @param User $user
      * @return void
-     * @throws InvalidUuidException
      */
     public function save(User $user): void
     {
-        $dUser = new Entity\User();
-        $dUser->setId(Uuid::fromString($user->getId()->toString()));
-        $dUser->setEmail($user->getEmail()->toString());
-        $dUser->setPassword($user->getPassword()->toString());
-        $this->getEntityManager()->persist($dUser);
-        $this->getEntityManager()->flush();
+        $this->getEventStore()->append($user->releaseEvents());
     }
 }
