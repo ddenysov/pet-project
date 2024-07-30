@@ -9,13 +9,24 @@ interface Event
     /**
      * @return mixed
      */
-    public function getId();
+    public function getId(): Uuid;
 
     /**
      * @param Uuid $id
+     * @return void
+     */
+    public function setId(Uuid $id): void;
+
+    /**
      * @return mixed
      */
-    public function setId(Uuid $id);
+    public function getAggregateId(): Uuid;
+
+    /**
+     * @param Uuid $id
+     * @return void
+     */
+    public function setAggregateId(Uuid $id): void;
 
     /**
      * @return string

@@ -29,6 +29,12 @@ final class RegisterCommandHandler extends CommandHandler
     }
 
     /**
+     * Start Transaction
+     * Business logic
+     * Save Aggregate to Event Store
+     * Save event to outbox
+     * Commit
+     *
      * @param RegisterCommand $command
      * @throws InvalidStringLengthException
      * @throws InvalidUuidException
@@ -37,6 +43,7 @@ final class RegisterCommandHandler extends CommandHandler
     protected function handle(RegisterCommand $command): void
     {
         $emailRegistered = $this->readUserRepository->isEmailTaken(new UserEmail($command->email));
+
         if ($emailRegistered) {
             $user = $this->readUserRepository->findOneByEmail(new UserEmail($command->email));
             $user->requestResetPassword();
@@ -45,7 +52,6 @@ final class RegisterCommandHandler extends CommandHandler
                 email: new UserEmail($command->email),
                 password: new UserPassword($command->password)
             );
-            $this->writeUserRepository->save($user);
         }
 
         $this->publishAggregateEvents($user);

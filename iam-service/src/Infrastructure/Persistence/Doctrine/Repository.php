@@ -9,6 +9,7 @@ abstract class Repository
 {
     /**
      * @param EntityManagerInterface $entityManager
+     * @param EventStore $eventStore
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,

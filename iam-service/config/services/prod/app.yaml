@@ -22,3 +22,6 @@ services:
         class: Common\Infrastructure\Container\Symfony\ServiceContainer
         arguments:
             $container: '@service_container'
+
+    Common\Application\EventStore\Port\EventStore:
+        class: Common\Infrastructure\EventStore\Doctrine\EventStore
