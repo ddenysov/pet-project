@@ -25,3 +25,9 @@ services:
 
     Common\Application\EventStore\Port\EventStore:
         class: Common\Infrastructure\EventStore\Doctrine\EventStore
+
+    Common\Application\Outbox\Port\Outbox:
+        class: Common\Application\Outbox\Outbox
+
+    Common\Application\Outbox\Port\OutboxRepository:
+        class: Common\Infrastructure\Outbox\Doctrine\OutboxRepository

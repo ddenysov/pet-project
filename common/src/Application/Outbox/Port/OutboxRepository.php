@@ -12,7 +12,6 @@ interface OutboxRepository
      * @param Uuid $eventId
      * @param Uuid $aggregateId
      * @param array $payload
-     * @param OutboxStatus $status
      * @return void
      */
     public function save(
@@ -20,7 +19,6 @@ interface OutboxRepository
         Uuid $eventId,
         Uuid $aggregateId,
         array $payload,
-        OutboxStatus $status
     ): void;
 
     /**

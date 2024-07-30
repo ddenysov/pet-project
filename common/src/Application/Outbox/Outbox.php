@@ -9,7 +9,6 @@ use Common\Domain\Event\Port\Event;
 class Outbox implements Port\Outbox
 {
     public function __construct(
-        private readonly EventBus $eventBus,
         private readonly OutboxRepository $outboxRepository
     )
     {
@@ -22,7 +21,6 @@ class Outbox implements Port\Outbox
             eventId: $event->getId(),
             aggregateId: $event->getAggregateId(),
             payload: $event->toArray(),
-            status: OutboxStatus::STARTED,
         );
     }
 
