@@ -8,5 +8,5 @@ interface Outbox
 {
     public function save(Event $event): void;
 
-    public function publish(int $limit = null): void;
+    public function publish(int|null $limit = null): void;
 }

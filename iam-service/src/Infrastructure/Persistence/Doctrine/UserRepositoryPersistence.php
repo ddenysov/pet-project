@@ -21,6 +21,8 @@ class UserRepositoryPersistence extends Repository implements UserRepositoryPers
             $this->getOutbox()->save($event);
         }
 
+        $this->getOutbox()->publish();
+
     }
 
     public function find(UserId $id): User

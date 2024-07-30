@@ -25,5 +25,5 @@ interface OutboxRepository
      * @param int $limit
      * @return array
      */
-    public function getUnpublishedMessages(int $limit): array;
+    public function getUnpublishedMessages(int|null $limit = null): array;
 }

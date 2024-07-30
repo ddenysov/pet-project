@@ -51,8 +51,16 @@ class OutboxRepository implements OutboxRepositoryPort
             ->executeQuery();
     }
 
-    public function getUnpublishedMessages(int $limit): array
+    /**
+     * @throws Exception
+     */
+    public function getUnpublishedMessages(int|null $limit = null): array
     {
-        // TODO: Implement getUnpublishedMessages() method.
+        return $this->entityManager->getConnection()
+            ->createQueryBuilder()
+            ->select('*')
+            ->from('outbox')
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 }
