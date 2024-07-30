@@ -37,4 +37,5 @@ interface Event
      * @return array
      */
     public function toArray(): array;
+
 }

@@ -2,6 +2,7 @@
 
 namespace Common\Domain\Event;
 
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 use Common\Utils\Serialize\Trait\ObjectToArray;
 
@@ -14,6 +15,16 @@ abstract class Event implements Port\Event
      */
     protected Uuid $id;
 
+    protected Uuid $aggregateId;
+
+    /**
+     * @throws InvalidUuidException
+     */
+    public function __construct()
+    {
+        $this->id = Uuid::create();
+    }
+
     public function getId(): Uuid
     {
         return $this->id;
@@ -23,7 +34,7 @@ abstract class Event implements Port\Event
      * @param Uuid $id
      * @return void
      */
-    public function setId(Uuid $id)
+    public function setId(Uuid $id): void
     {
         $this->id = $id;
     }
@@ -42,5 +53,15 @@ abstract class Event implements Port\Event
     public function toArray(): array
     {
         return $this->propertiesToArray();
+    }
+
+    public function getAggregateId(): Uuid
+    {
+        return $this->aggregateId;
+    }
+
+    public function setAggregateId(Uuid $id): void
+    {
+        $this->aggregateId = $id;
     }
 }

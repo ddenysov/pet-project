@@ -7,7 +7,7 @@ use Common\Domain\Event\Port\EventCollection;
 
 interface Aggregate extends Entity
 {
-    public function releaseEvents(): EventCollection;
+    public function releaseEvents(): array;
 
     /**
      * @param Event $event

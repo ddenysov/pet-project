@@ -9,6 +9,7 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Iam\Domain\Entity\User;
 use Iam\Domain\Repository\Port\ReadModel\UserRepository as ReadUserRepository;
+use Iam\Domain\Repository\Port\UserRepositoryPersistence;
 use Iam\Domain\Repository\Port\WriteModel\UserRepository as WriteUserRepository;
 use Iam\Domain\ValueObject\UserEmail;
 use Iam\Domain\ValueObject\UserPassword;
@@ -18,12 +19,12 @@ final class RegisterCommandHandler extends CommandHandler
     /**
      * @param ServiceContainer $container
      * @param ReadUserRepository $readUserRepository
-     * @param WriteUserRepository $writeUserRepository
+     * @param UserRepositoryPersistence $userRepositoryPersistence
      */
     public function __construct(
         ServiceContainer           $container,
         private ReadUserRepository $readUserRepository,
-        private WriteUserRepository $writeUserRepository,
+        private UserRepositoryPersistence $userRepositoryPersistence,
     ) {
         parent::__construct($container);
     }
@@ -42,6 +43,7 @@ final class RegisterCommandHandler extends CommandHandler
     #[Transaction]
     protected function handle(RegisterCommand $command): void
     {
+        /**
         $emailRegistered = $this->readUserRepository->isEmailTaken(new UserEmail($command->email));
 
         if ($emailRegistered) {
@@ -53,7 +55,11 @@ final class RegisterCommandHandler extends CommandHandler
                 password: new UserPassword($command->password)
             );
         }
-
-        $this->publishAggregateEvents($user);
+        */
+        $user = User::register(
+            email: new UserEmail($command->email),
+            password: new UserPassword($command->password)
+        );
+        $this->userRepositoryPersistence->save($user);
     }
 }

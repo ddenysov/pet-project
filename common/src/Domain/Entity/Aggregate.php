@@ -4,8 +4,6 @@ namespace Common\Domain\Entity;
 
 
 use Common\Domain\Event\Port\Event;
-use Common\Domain\Event\Port\EventCollection;
-use User\Domain\Model\Event\DomainEvent;
 
 abstract class Aggregate extends Entity implements Port\Aggregate
 {
@@ -19,10 +17,7 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     protected static array $subscribers = [];
 
-    /**
-     * @return DomainEvent[]
-     */
-    public function releaseEvents(): EventCollection
+    public function releaseEvents(): array
     {
         $events = $this->events;
         $this->events = [];
@@ -36,11 +31,15 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     public function recordThat(Event $event): void
     {
-        $event->setId($this->id);
+        $event->setAggregateId($this->id);
         $this->apply($event);
         $this->events[] = $event;
     }
 
+    /**
+     * @param Event $event
+     * @return $this
+     */
     public function apply(Event $event): static
     {
         if (isset(static::$subscribers[$event::class])) {
@@ -48,5 +47,7 @@ abstract class Aggregate extends Entity implements Port\Aggregate
                 $this->$subscriberMethod($event);
             }
         }
+
+        return $this;
     }
 }

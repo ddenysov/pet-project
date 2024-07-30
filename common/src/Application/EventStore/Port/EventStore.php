@@ -2,13 +2,13 @@
 
 namespace Common\Application\EventStore\Port;
 
-use Common\Domain\Event\Port\EventCollection;
+use Common\Domain\Event\Event;
 
 interface EventStore
 {
     /**
-     * @param EventCollection $events
+     * @param Event $event
      * @return EventStore
      */
-    public function append(EventCollection $events): EventStore;
+    public function append(Event $event): EventStore;
 }

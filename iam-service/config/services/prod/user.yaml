@@ -6,6 +6,6 @@ services:
         class: Iam\Infrastructure\Persistence\Doctrine\ReadModel\UserRepository
         public: true
 
-    Iam\Domain\Repository\Port\WriteModel\UserRepository:
-        class: Iam\Infrastructure\Persistence\Doctrine\WriteModel\UserRepository
+    Iam\Domain\Repository\Port\UserRepositoryPersistence:
+        class: Iam\Infrastructure\Persistence\Doctrine\UserRepositoryPersistence
         public: true

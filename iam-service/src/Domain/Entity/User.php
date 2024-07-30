@@ -4,7 +4,6 @@ namespace Iam\Domain\Entity;
 
 use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Common\Domain\ValueObject\PasswordValue;
 use Iam\Domain\Event\UserPasswordResetRequested;
 use Iam\Domain\Event\UserRegistered;
 use Iam\Domain\ValueObject\UserEmail;

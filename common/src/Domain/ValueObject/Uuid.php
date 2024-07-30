@@ -49,4 +49,12 @@ class Uuid extends ValueObject implements Port\StringValue
     {
         return new static($uuid->toString());
     }
+
+    /**
+     * @throws InvalidUuidException
+     */
+    public function toUuid(): self
+    {
+        return new self($this->uuid);
+    }
 }
