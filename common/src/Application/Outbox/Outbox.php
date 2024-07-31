@@ -2,6 +2,7 @@
 
 namespace Common\Application\Outbox;
 
+use Common\Application\EventPublisher\Port\EventPublisher;
 use Common\Application\Outbox\Port\OutboxRepository;
 use Common\Domain\Event\Port\Event;
 use Common\Infrastructure\Bus\Event\EventBus;
@@ -10,7 +11,7 @@ class Outbox implements Port\Outbox
 {
     public function __construct(
         private readonly OutboxRepository $outboxRepository,
-        private readonly EventBus $eventBus,
+        private readonly EventPublisher $eventPublisher
     )
     {
     }
@@ -30,7 +31,7 @@ class Outbox implements Port\Outbox
        $messages = $this->outboxRepository->getUnpublishedMessages($limit);
 
        foreach ($messages as $message) {
-           $this->eventBus->execute();
+           $this->eventPublisher->publish();
        }
     }
 
