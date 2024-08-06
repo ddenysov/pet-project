@@ -20,3 +20,6 @@ services:
     Iam\Delivery\Http\Controller\:
         resource: '../src/Delivery/Http/Controller/'
         tags: [ 'controller.service_arguments' ]
+
+    Iam\Delivery\Console\ConsumeEventsCommand:
+        tags: [ 'console.command' ]

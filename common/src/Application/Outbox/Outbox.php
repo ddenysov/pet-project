@@ -11,7 +11,7 @@ class Outbox implements Port\Outbox
 {
     public function __construct(
         private readonly OutboxRepository $outboxRepository,
-        private readonly EventPublisher $eventPublisher
+        //private readonly EventPublisher $eventPublisher
     )
     {
     }
