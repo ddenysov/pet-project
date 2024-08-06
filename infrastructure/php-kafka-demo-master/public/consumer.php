@@ -6,7 +6,7 @@ $consumer = new \RdKafka\Consumer($conf);
 
 $consumer->addBrokers("kafka:9092");
 
-$topic = $consumer->newTopic("test-topic");
+$topic = $consumer->newTopic("real-topic");
 
 $topic->consumeStart(0, RD_KAFKA_OFFSET_BEGINNING);
 

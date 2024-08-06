@@ -12,7 +12,7 @@ if ($producer->addBrokers("kafka:9092") < 1) {
     exit;
 }
 
-$topic = $producer->newTopic("test-topic");
+$topic = $producer->newTopic("real-topic");
 
 var_dump($topic);
 
