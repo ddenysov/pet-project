@@ -14,7 +14,7 @@ echo "consumer started" . PHP_EOL;
 while (true) {
     sleep(1);
     $msg = $topic->consume(0, 1000);
-    var_dump($msg);
+    //var_dump($msg);
     if (isset($msg->payload)) {
         echo $msg->payload . PHP_EOL;
     }
