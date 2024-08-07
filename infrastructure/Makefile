@@ -4,12 +4,14 @@ create-network:
 destroy-network:
 	docker network rm service_network
 
-start: create-network start-kafka
+start: start-kafka
 
-stop: stop-kafka destroy-network
+stop: stop-kafka
 
 start-kafka:
 	cd ./kafka && docker-compose up -d
 
 stop-kafka:
 	cd ./kafka && docker-compose down
+
+init: create-network

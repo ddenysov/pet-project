@@ -14,6 +14,8 @@ start:
 stop:
 	docker-compose down
 
+restart: stop start
+
 build:
 	docker-compose build $(APP)
 

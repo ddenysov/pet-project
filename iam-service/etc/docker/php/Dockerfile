@@ -12,6 +12,9 @@ RUN git config --global user.name "Dmytro Denysov"
 RUN apk add postgresql-dev
 RUN apk add openssl
 
+RUN apk add --no-cache supervisor
+RUN mkdir -p /var/log/supervisor
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.5.8 \
     && if [ "$DA_DEBUG" = "true" ]; then apk add --no-cache $PHPIZE_DEPS && pecl install xdebug-3.2.1 \
     && docker-php-ext-enable xdebug; fi
@@ -32,4 +35,4 @@ RUN apk add autoconf g++ librdkafka-dev make
 
 RUN pecl install rdkafka && docker-php-ext-enable rdkafka
 
-CMD ["symfony", "server:start"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

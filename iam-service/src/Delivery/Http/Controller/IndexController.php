@@ -31,7 +31,6 @@ class IndexController extends Controller
 
         $topic = $producer->newTopic("real-topic");
 
-        var_dump($topic);
 
         if (!$producer->getMetadata(false, $topic, 2000)) {
             echo "Failed to get metadata, is broker down?\n";
