@@ -2,6 +2,9 @@
 
 namespace Iam\Delivery\Console;
 
+use RdKafka\Conf;
+use RdKafka\Consumer;
+use RdKafka\Producer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,10 +19,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ConsumeEventsCommand extends Command
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    private Consumer $consumer;
+
 
     protected function configure(): void
     {
@@ -32,20 +33,27 @@ class ConsumeEventsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
-
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
-
-        if ($input->getOption('option1')) {
-            // ...
-        }
 
         $io->success('Worker started');
 
-        while (true) {
+        $conf = new Conf();
+        $conf->set('log_level', (string) LOG_DEBUG);
+        $consumer = new Consumer($conf);
 
+        $consumer->addBrokers("kafka:9092");
+
+        $topic = $consumer->newTopic("real-topic");
+
+        $topic->consumeStart(0, RD_KAFKA_OFFSET_BEGINNING);
+
+        echo "consumer started" . PHP_EOL;
+        while (true) {
+            sleep(1);
+            $msg = $topic->consume(0, 1000);
+            var_dump($msg);
+            if (isset($msg->payload)) {
+                echo $msg->payload . PHP_EOL;
+            }
         }
 
         return Command::SUCCESS;

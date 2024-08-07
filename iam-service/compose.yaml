@@ -7,10 +7,13 @@ services:
       dockerfile: ./etc/docker/php/Dockerfile
     volumes:
       - ./:/var/www/html
+      - ../common/:/var/www/common
     links:
       - database
     ports:
       - "8000:8000"
+    networks:
+      - service_network
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -33,9 +36,15 @@ services:
       - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/postgresql/data:rw
+    networks:
+      - service_network
 ###< doctrine/doctrine-bundle ###
 
 volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+
+networks:
+  service_network:
+    external: true

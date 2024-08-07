@@ -12,6 +12,10 @@ RUN git config --global user.name "Dmytro Denysov"
 RUN apk add postgresql-dev
 RUN apk add openssl
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.5.8 \
+    && if [ "$DA_DEBUG" = "true" ]; then apk add --no-cache $PHPIZE_DEPS && pecl install xdebug-3.2.1 \
+    && docker-php-ext-enable xdebug; fi
+
 # LIBS
 RUN docker-php-ext-install pgsql pdo pdo_pgsql
 
