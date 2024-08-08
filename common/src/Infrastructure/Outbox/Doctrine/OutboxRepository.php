@@ -52,6 +52,23 @@ class OutboxRepository implements OutboxRepositoryPort
     }
 
     /**
+     * @param Uuid $eventId
+     * @return void
+     * @throws Exception
+     */
+    public function complete(Uuid $eventId): void
+    {
+        $this->entityManager->getConnection()
+            ->createQueryBuilder()
+            ->update('outbox')
+            ->set('status', '?')
+            ->where('id = ?')
+            ->setParameter(0, OutboxStatus::COMPLETED->value)
+            ->setParameter(1, $eventId->toString()) // Предполагая, что $id - это идентификатор записи, которую нужно обновить
+            ->executeQuery();
+    }
+
+    /**
      * @throws Exception
      */
     public function getUnpublishedMessages(int|null $limit = null): array
@@ -60,6 +77,8 @@ class OutboxRepository implements OutboxRepositoryPort
             ->createQueryBuilder()
             ->select('*')
             ->from('outbox')
+            ->where('status = ?')
+            ->setParameter(0, OutboxStatus::STARTED->value)
             ->executeQuery()
             ->fetchAllAssociative();
     }

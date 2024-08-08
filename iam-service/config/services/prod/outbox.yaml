@@ -3,9 +3,5 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    User\Application\Outbox\OutboxRepository:
-        class: User\Infrastructure\Persistence\Doctrine\OutboxRepository
-        public: true
-
-    User\Infrastructure\Schedule\Symfony\Outbox\ProcessOutboxHandler:
+    Iam\Delivery\Schedule\Outbox\ProcessOutboxHandler:
         public: true

@@ -9,8 +9,6 @@ services:
       - ./:/var/www/html
       - ../common/:/var/www/common
       - ./etc/http/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
-    links:
-      - database
     ports:
       - "8000:8000"
     networks:

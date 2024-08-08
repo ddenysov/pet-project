@@ -21,6 +21,8 @@ interface OutboxRepository
         array $payload,
     ): void;
 
+    public function complete(Uuid $eventId): void;
+
     /**
      * @param int $limit
      * @return array

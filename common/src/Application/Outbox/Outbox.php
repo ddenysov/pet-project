@@ -2,16 +2,17 @@
 
 namespace Common\Application\Outbox;
 
+use Common\Application\EventPublisher\Event as PublishableEvent;
 use Common\Application\EventPublisher\Port\EventPublisher;
 use Common\Application\Outbox\Port\OutboxRepository;
 use Common\Domain\Event\Port\Event;
-use Common\Infrastructure\Bus\Event\EventBus;
+use Common\Domain\ValueObject\Uuid;
 
 class Outbox implements Port\Outbox
 {
     public function __construct(
         private readonly OutboxRepository $outboxRepository,
-        //private readonly EventPublisher $eventPublisher
+        private readonly EventPublisher $eventPublisher
     )
     {
     }
@@ -31,8 +32,18 @@ class Outbox implements Port\Outbox
        $messages = $this->outboxRepository->getUnpublishedMessages($limit);
 
        foreach ($messages as $message) {
-           $this->eventPublisher->publish();
+           $this->eventPublisher->publish(new PublishableEvent(
+               eventId: Uuid::fromString($message['id']),
+               aggregateId: Uuid::fromString($message['aggregate_id']),
+               eventName: $message['name'],
+               payload: json_decode($message['payload'], true),
+           ), function (PublishableEvent $event) {
+               $this->outboxRepository->complete($event->getEventId());
+               dump('ok');
+           }, function (PublishableEvent $event) {
+               dump('fail');
+           });
+           dump($message);
        }
     }
-
 }

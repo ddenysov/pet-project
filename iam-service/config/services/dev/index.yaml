@@ -3,5 +3,5 @@ imports:
     - { resource: ../prod/queries.yaml }
     - { resource: ../prod/commands.yaml }
     #- { resource: ../prod/events.yaml }
-    #- { resource: ../prod/outbox.yaml }
+    - { resource: ../prod/outbox.yaml }
     - { resource: ../prod/user.yaml }

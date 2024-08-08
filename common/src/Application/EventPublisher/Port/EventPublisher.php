@@ -2,7 +2,7 @@
 
 namespace Common\Application\EventPublisher\Port;
 
-use Common\Domain\Event\Event;
+use Common\Application\EventPublisher\Event;
 
 interface EventPublisher
 {

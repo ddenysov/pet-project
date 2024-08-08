@@ -18,11 +18,7 @@ class UserRepositoryPersistence extends Repository implements UserRepositoryPers
 
         foreach ($events as $event) {
             $this->getEventStore()->append($event);
-            $this->getOutbox()->save($event);
         }
-
-        $this->getOutbox()->publish();
-
     }
 
     public function find(UserId $id): User

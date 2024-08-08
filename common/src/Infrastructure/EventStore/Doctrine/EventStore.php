@@ -2,24 +2,26 @@
 
 namespace Common\Infrastructure\EventStore\Doctrine;
 
+use Common\Application\EventStore\EventStore as BaseEventStore;
 use Common\Application\EventStore\Port\EventStore as EventStorePort;
-use Common\Domain\Event\Port\Event;
-use Doctrine\DBAL\Exception;
+use Common\Application\Outbox\Port\Outbox;
 use Doctrine\ORM\EntityManagerInterface;
-use Throwable;
 
-class EventStore implements EventStorePort
+class EventStore extends BaseEventStore implements EventStorePort
 {
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param Outbox $outbox
+     */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly Outbox $outbox,
     )
     {
+        parent::__construct($this->outbox);
     }
 
-    /**
-     * @throws Throwable
-     */
-    public function append(Event $event): EventStorePort
+    protected function save(\Common\Domain\Event\Event $event)
     {
         $this->entityManager->getConnection()
             ->createQueryBuilder()
