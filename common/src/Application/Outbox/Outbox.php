@@ -7,12 +7,14 @@ use Common\Application\EventPublisher\Port\EventPublisher;
 use Common\Application\Outbox\Port\OutboxRepository;
 use Common\Domain\Event\Port\Event;
 use Common\Domain\ValueObject\Uuid;
+use Psr\Log\LoggerInterface;
 
 class Outbox implements Port\Outbox
 {
     public function __construct(
         private readonly OutboxRepository $outboxRepository,
-        private readonly EventPublisher $eventPublisher
+        private readonly EventPublisher $eventPublisher,
+        private LoggerInterface $logger
     )
     {
     }
@@ -32,6 +34,9 @@ class Outbox implements Port\Outbox
        $messages = $this->outboxRepository->getUnpublishedMessages($limit);
 
        foreach ($messages as $message) {
+           $this->logger->info('Publishing event', [
+               'id' => $message['id'],
+           ]);
            $this->eventPublisher->publish(new PublishableEvent(
                eventId: Uuid::fromString($message['id']),
                aggregateId: Uuid::fromString($message['aggregate_id']),
@@ -39,11 +44,15 @@ class Outbox implements Port\Outbox
                payload: json_decode($message['payload'], true),
            ), function (PublishableEvent $event) {
                $this->outboxRepository->complete($event->getEventId());
-               dump('ok');
+               $this->logger->info('Event published', [
+                   'id' => $event->getEventId()->toString(),
+               ]);
            }, function (PublishableEvent $event) {
-               dump('fail');
+               $this->outboxRepository->fail($event->getEventId());
+               $this->logger->error('Event publish failed', [
+                   'id' => $event->getEventId()->toString(),
+               ]);
            });
-           dump($message);
        }
     }
 }

@@ -13,20 +13,24 @@ use Iam\Domain\Repository\Port\UserRepositoryPersistence;
 use Iam\Domain\Repository\Port\WriteModel\UserRepository as WriteUserRepository;
 use Iam\Domain\ValueObject\UserEmail;
 use Iam\Domain\ValueObject\UserPassword;
+use Psr\Log\LoggerInterface;
 
 final class RegisterCommandHandler extends CommandHandler
 {
     /**
      * @param ServiceContainer $container
+     * @param LoggerInterface $logger
      * @param ReadUserRepository $readUserRepository
      * @param UserRepositoryPersistence $userRepositoryPersistence
      */
     public function __construct(
-        ServiceContainer           $container,
-        private ReadUserRepository $readUserRepository,
+        ServiceContainer                  $container,
+        LoggerInterface                   $logger,
+        private ReadUserRepository        $readUserRepository,
         private UserRepositoryPersistence $userRepositoryPersistence,
-    ) {
-        parent::__construct($container);
+    )
+    {
+        parent::__construct($container, $logger);
     }
 
     /**
@@ -44,18 +48,18 @@ final class RegisterCommandHandler extends CommandHandler
     protected function handle(RegisterCommand $command): void
     {
         /**
-        $emailRegistered = $this->readUserRepository->isEmailTaken(new UserEmail($command->email));
-
-        if ($emailRegistered) {
-            $user = $this->readUserRepository->findOneByEmail(new UserEmail($command->email));
-            $user->requestResetPassword();
-        } else {
-            $user = User::register(
-                email: new UserEmail($command->email),
-                password: new UserPassword($command->password)
-            );
-        }
-        */
+         * $emailRegistered = $this->readUserRepository->isEmailTaken(new UserEmail($command->email));
+         *
+         * if ($emailRegistered) {
+         * $user = $this->readUserRepository->findOneByEmail(new UserEmail($command->email));
+         * $user->requestResetPassword();
+         * } else {
+         * $user = User::register(
+         * email: new UserEmail($command->email),
+         * password: new UserPassword($command->password)
+         * );
+         * }
+         */
         $user = User::register(
             email: new UserEmail($command->email),
             password: new UserPassword($command->password)

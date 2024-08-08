@@ -6,6 +6,7 @@ use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\Handlers\Command\Attributes\Transaction;
 use Common\Application\Handlers\Command\Port\TransactionManager;
 use Common\Domain\Entity\Port\Aggregate;
+use Psr\Log\LoggerInterface;
 use ReflectionException;
 use ReflectionMethod;
 use Throwable;
@@ -17,6 +18,7 @@ abstract class CommandHandler
 
     public function __construct(
         private ServiceContainer $container,
+        private LoggerInterface $logger
     ) {
     }
 
@@ -30,6 +32,10 @@ abstract class CommandHandler
      */
     public function __invoke(...$args): void
     {
+        $this->getLogger()->info('Command received', [
+            'command' => get_class($args[0]),
+            'payload' => $args[0]->toArray()
+        ]);
         $methodName = 'handle';
 
         $reflectedMethod = new ReflectionMethod(static::class, $methodName);
@@ -51,6 +57,9 @@ abstract class CommandHandler
             $this->getTransactionManager()->commit();
         }
 
+        $this->getLogger()->info('Command processed', [
+            'command' => get_class($args[0]),
+        ]);
     }
 
     /**
@@ -74,5 +83,10 @@ abstract class CommandHandler
     public function publishAggregateEvents(Aggregate $aggregate)
     {
         $events = $aggregate->releaseEvents();
+    }
+
+    final protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
     }
 }
