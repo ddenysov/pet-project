@@ -2,6 +2,7 @@
 
 namespace Iam\Delivery\Console;
 
+use Psr\Log\LoggerInterface;
 use \RdKafka\Conf;
 use \RdKafka\Consumer;
 use \RdKafka\Producer;
@@ -19,7 +20,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ConsumeEventsCommand extends Command
 {
-    private Consumer $consumer;
+    public function __construct(private LoggerInterface $logger)
+    {
+        parent::__construct('ololo');
+    }
 
 
     protected function configure(): void
@@ -70,6 +74,11 @@ class ConsumeEventsCommand extends Command
             $message = $topic->consume(0, 120*10000);
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
+                    var_dump(json_decode($message->payload));
+                    $this->logger->info('Received an event', [
+                        'event' => json_decode($message->payload)->name,
+                        'id' => json_decode($message->payload)->payload->id,
+                    ]);
                     var_dump($message->payload);
                     break;
                 case RD_KAFKA_RESP_ERR__PARTITION_EOF:
