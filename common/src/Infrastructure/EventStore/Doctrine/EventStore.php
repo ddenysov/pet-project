@@ -15,7 +15,7 @@ class EventStore extends BaseEventStore implements EventStorePort
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly Outbox $outbox,
+        private readonly Outbox                 $outbox,
     )
     {
         parent::__construct($this->outbox);
@@ -27,15 +27,19 @@ class EventStore extends BaseEventStore implements EventStorePort
             ->createQueryBuilder()
             ->insert('event_store')
             ->values([
-                'id' => '?',
+                'id'           => '?',
+                'name'         => '?',
                 'aggregate_id' => '?',
                 'payload'      => '?',
                 'version'      => '?',
+                'created_at'   => '?',
             ])
             ->setParameter(0, $event->getId()->toString())
-            ->setParameter(1, $event->getAggregateId()->toString())
-            ->setParameter(2, json_encode($event->toArray()))
-            ->setParameter(3, 1)
+            ->setParameter(1, $event->getName())
+            ->setParameter(2, $event->getAggregateId()->toString())
+            ->setParameter(3, json_encode($event->toArray()))
+            ->setParameter(4, 1)
+            ->setParameter(5, (new \DateTime())->format('Y-m-d H:i:s'))
             ->executeQuery();
 
         return $this;

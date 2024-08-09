@@ -8,6 +8,7 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use User\Domain\Model\ValueObject\DateTime;
 
 class OutboxRepository implements OutboxRepositoryPort
 {
@@ -17,17 +18,15 @@ class OutboxRepository implements OutboxRepositoryPort
     }
 
     /**
-     * @param string $name
      * @param Uuid $eventId
-     * @param Uuid $aggregateId
+     * @param string $name
      * @param array $payload
      * @throws Exception
      * @throws InvalidUuidException
      */
     public function save(
-        string $name,
         Uuid $eventId,
-        Uuid $aggregateId,
+        string $name,
         array $payload,
     ): void
     {
@@ -38,16 +37,16 @@ class OutboxRepository implements OutboxRepositoryPort
                 'id' => '?',
                 'name' => '?',
                 'event_id' => '?',
-                'aggregate_id' => '?',
                 'payload' => '?',
                 'status' => '?',
+                'created_at' => '?',
             ])
             ->setParameter(0, Uuid::create()->toString())
             ->setParameter(1, $name)
             ->setParameter(2, $eventId->toString())
-            ->setParameter(3, $aggregateId->toString())
-            ->setParameter(4, json_encode($payload))
-            ->setParameter(5, OutboxStatus::STARTED->value)
+            ->setParameter(3, json_encode($payload))
+            ->setParameter(4, OutboxStatus::STARTED->value)
+            ->setParameter(5, (new \DateTime())->format('Y-m-d H:i:s'))
             ->executeQuery();
     }
 

@@ -8,7 +8,6 @@ class Event
 {
     public function __construct(
         private Uuid $eventId,
-        private Uuid $aggregateId,
         private  string $eventName,
         private array $payload
     )
@@ -18,11 +17,6 @@ class Event
     public function getEventId(): Uuid
     {
         return $this->eventId;
-    }
-
-    public function getAggregateId(): Uuid
-    {
-        return $this->aggregateId;
     }
 
     public function getEventName(): string

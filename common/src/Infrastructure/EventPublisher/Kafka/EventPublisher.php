@@ -31,10 +31,9 @@ class EventPublisher implements EventPublisherPort
         }
 
         $msg = json_encode([
-            'name'         => $event->getEventName(),
-            'event_id'     => $event->getEventId(),
-            'aggregate_id' => $event->getAggregateId(),
-            'payload'      => $event->getPayload(),
+            'name'     => $event->getEventName(),
+            'event_id' => $event->getEventId(),
+            'payload'  => $event->getPayload(),
         ]);
         var_dump($msg);
 

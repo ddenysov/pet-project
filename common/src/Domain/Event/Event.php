@@ -49,9 +49,6 @@ abstract class Event implements Port\Event
         $parts = array_map(function ($input) {
             return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
         }, $parts);
-        $parts = array_filter($parts, function ($input) {
-            return $input !== 'domain';
-        });
 
         return implode('.', $parts);
     }
