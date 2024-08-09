@@ -22,7 +22,6 @@ class User
     private ?string $password = null;
 
 
-
     public function getId(): ?Uuid
     {
         return $this->id;
