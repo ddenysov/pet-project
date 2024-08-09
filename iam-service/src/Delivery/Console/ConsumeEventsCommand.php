@@ -2,6 +2,8 @@
 
 namespace Iam\Delivery\Console;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Iam\Infrastructure\Persistence\Doctrine\Entity\User;
 use Psr\Log\LoggerInterface;
 use \RdKafka\Conf;
 use \RdKafka\Consumer;
@@ -13,6 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Uid\Uuid;
 
 #[AsCommand(
     name: 'events:consume',
@@ -20,7 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ConsumeEventsCommand extends Command
 {
-    public function __construct(private LoggerInterface $logger)
+    public function __construct(private LoggerInterface $logger, private EntityManagerInterface $entityManager)
     {
         parent::__construct('ololo');
     }
@@ -76,14 +79,19 @@ class ConsumeEventsCommand extends Command
                 switch ($message->err) {
                     case RD_KAFKA_RESP_ERR_NO_ERROR:
                         $payload = json_decode($message->payload, true)['payload'];
-                        var_dump(json_decode($message->payload));
-                        $this->logger->info('Received an event', [
-                            'event' => json_decode($message->payload)->name,
+                        $name = json_decode($message->payload)->name;
+                        $this->logger->info('Received an event: ' . $name, [
                             'id' => $payload['id'],
                             'payload' => $payload,
                         ]);
                         var_dump($message->payload);
 
+                        $user = new User();
+                        $user->setId(Uuid::fromString($payload['aggregateId']));
+                        $user->setEmail($payload['email']);
+                        $user->setPassword($payload['password']);
+                        $this->entityManager->persist($user);
+                        $this->entityManager->flush();
 
                         break;
                     case RD_KAFKA_RESP_ERR__PARTITION_EOF:

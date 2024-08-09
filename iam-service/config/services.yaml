@@ -24,9 +24,6 @@ services:
     Iam\Delivery\Console\ConsumeEventsCommand:
         tags: [ 'console.command' ]
 
-    Iam\Delivery\Console\PublishEventsCommand:
-        tags: [ 'console.command' ]
-
     Iam\Delivery\Schedule\ScheduleProvider:
         public: true
 

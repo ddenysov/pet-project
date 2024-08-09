@@ -30,4 +30,64 @@ class EventStore
 
     #[ORM\Column(type: Types::JSON)]
     private int $payload;
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
+
+    public function setId(?Uuid $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getName(): int
+    {
+        return $this->name;
+    }
+
+    public function setName(int $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getAggregateId(): ?Uuid
+    {
+        return $this->aggregateId;
+    }
+
+    public function setAggregateId(?Uuid $aggregateId): void
+    {
+        $this->aggregateId = $aggregateId;
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(int $version): void
+    {
+        $this->version = $version;
+    }
+
+    public function getCreatedAt(): int
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(int $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getPayload(): int
+    {
+        return $this->payload;
+    }
+
+    public function setPayload(int $payload): void
+    {
+        $this->payload = $payload;
+    }
 }
