@@ -6,6 +6,8 @@ services:
     Common\Application\Bus\Port\EventBus:
         class: Common\Infrastructure\Bus\Event\EventBus
 
+    Iam\Application\Handlers\Event\UserRegisteredEventHandler:
+
     #User\Infrastructure\Bus\Event\EventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default', method: 'handle' }

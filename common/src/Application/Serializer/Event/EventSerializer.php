@@ -36,7 +36,7 @@ class EventSerializer
          */
         $event = $reflectionClass->newInstanceArgs($args);
         $event->setId(Uuid::fromString($payload['id']));
-        $event->setAggregateId(Uuid::fromString($payload['aggregate_id']));
+        $event->setAggregateId(Uuid::fromString($payload['aggregateId']));
 
         return $event;
     }

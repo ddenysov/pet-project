@@ -19,10 +19,10 @@ final class EventSerializerTest extends TestCase
          * @var StubEvent $event
          */
         $event = $serializer->deserialize($name, [
-            'id'           => Uuid::create()->toString(),
-            'aggregate_id' => Uuid::create()->toString(),
-            'userName'     => 'ololo',
-            'password'     => 'trololo',
+            'id'          => Uuid::create()->toString(),
+            'aggregateId' => Uuid::create()->toString(),
+            'userName'    => 'ololo',
+            'password'    => 'trololo',
         ]);
 
         $this->assertEquals(StubEvent::class, get_class($event));
