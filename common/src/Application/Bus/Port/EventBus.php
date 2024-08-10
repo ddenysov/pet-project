@@ -10,5 +10,5 @@ interface EventBus
      * @param Event $event
      * @return void
      */
-    public function execute(Event $event): void;
+    public function dispatch(Event $event): void;
 }

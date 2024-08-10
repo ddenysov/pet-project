@@ -70,4 +70,11 @@ abstract class Event implements Port\Event
     {
         $this->aggregateId = $id;
     }
+
+    public static function fromArray(array $payload): static
+    {
+        foreach ($payload as $key => $value) {
+
+        }
+    }
 }

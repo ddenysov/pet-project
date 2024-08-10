@@ -22,7 +22,7 @@ class EventBus implements EventBusPort
      * @throws ExceptionInterface
      * @TODO Add exception handling
      */
-    public function execute(Event $event): void
+    public function dispatch(Event $event): void
     {
         $this->bus->dispatch($event);
     }

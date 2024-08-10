@@ -16,8 +16,8 @@ class UserRegistered extends UserEvent
      * @throws InvalidUuidException
      */
     public function __construct(
-        readonly public UserEmail $email,
-        readonly public UserPassword $password
+        readonly public ?UserEmail $email,
+        readonly public ?UserPassword $password
     )
     {
         parent::__construct();

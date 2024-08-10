@@ -2,6 +2,8 @@
 
 namespace Iam\Delivery\Console;
 
+use Common\Application\Bus\Port\EventBus;
+use Common\Application\Serializer\Event\EventSerializer;
 use Doctrine\ORM\EntityManagerInterface;
 use Iam\Infrastructure\Persistence\Doctrine\Entity\User;
 use Psr\Log\LoggerInterface;
@@ -23,8 +25,17 @@ use Symfony\Component\Uid\Uuid;
 )]
 class ConsumeEventsCommand extends Command
 {
-    public function __construct(private LoggerInterface $logger, private EntityManagerInterface $entityManager)
-    {
+    /**
+     * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
+     * @param EventSerializer $eventSerializer
+     */
+    public function __construct(
+        private LoggerInterface $logger,
+        private EntityManagerInterface $entityManager,
+        private EventSerializer $eventSerializer,
+        private EventBus $eventBus,
+    ) {
         parent::__construct('ololo');
     }
 
@@ -80,6 +91,10 @@ class ConsumeEventsCommand extends Command
                     case RD_KAFKA_RESP_ERR_NO_ERROR:
                         $payload = json_decode($message->payload, true)['payload'];
                         $name = json_decode($message->payload)->name;
+
+                        $event = $this->eventSerializer->deserialize($name, $payload);
+                        $this->eventBus->dispatch($event);
+
                         $this->logger->info('Received an event: ' . $name, [
                             'id' => $payload['id'],
                             'payload' => $payload,
@@ -101,7 +116,7 @@ class ConsumeEventsCommand extends Command
                         echo "Timed out\n";
                         break;
                     default:
-                        throw new \Exception($message->errstr(), $message->err);
+                        throw new \Exception($message->errstr());
                         break;
                 }
             }

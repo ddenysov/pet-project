@@ -29,3 +29,5 @@ services:
 
     Common\Application\EventPublisher\Port\EventPublisher:
         class: Common\Infrastructure\EventPublisher\Kafka\EventPublisher
+
+    Common\Application\Serializer\Event\EventSerializer:

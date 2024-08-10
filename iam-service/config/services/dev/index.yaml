@@ -2,6 +2,6 @@ imports:
     - { resource: ../prod/app.yaml }
     - { resource: ../prod/queries.yaml }
     - { resource: ../prod/commands.yaml }
-    #- { resource: ../prod/events.yaml }
+    - { resource: ../prod/events.yaml }
     - { resource: ../prod/outbox.yaml }
     - { resource: ../prod/user.yaml }

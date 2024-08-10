@@ -38,4 +38,9 @@ interface Event
      */
     public function toArray(): array;
 
+    /**
+     * @param array $payload
+     * @return $this
+     */
+    public static function fromArray(array $payload): static;
 }
