@@ -4,10 +4,14 @@ namespace Common\Application\EventStore;
 
 use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\Event\Event;
+use Psr\Log\LoggerInterface;
 
 abstract class EventStore implements Port\EventStore
 {
-    public function __construct(private Outbox $outbox)
+    public function __construct(
+        private Outbox $outbox,
+        private LoggerInterface $logger,
+    )
     {
 
     }
@@ -42,6 +46,7 @@ abstract class EventStore implements Port\EventStore
      */
     protected function afterAppend(Event $event)
     {
+        $this->logger->info('Event saved to event store: ' . $event->getName(), $event->payload());
         $this->outbox->save($event);
     }
 

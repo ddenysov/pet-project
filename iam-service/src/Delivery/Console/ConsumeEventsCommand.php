@@ -101,13 +101,6 @@ class ConsumeEventsCommand extends Command
                         ]);
                         var_dump($message->payload);
 
-                        $user = new User();
-                        $user->setId(Uuid::fromString($payload['aggregateId']));
-                        $user->setEmail($payload['email']);
-                        $user->setPassword($payload['password']);
-                        $this->entityManager->persist($user);
-                        $this->entityManager->flush();
-
                         break;
                     case RD_KAFKA_RESP_ERR__PARTITION_EOF:
                         echo "No more messages; will wait for more\n";

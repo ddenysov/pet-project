@@ -39,6 +39,11 @@ interface Event
     public function toArray(): array;
 
     /**
+     * @return array
+     */
+    public function payload(): array;
+
+    /**
      * @param array $payload
      * @return $this
      */

@@ -9,3 +9,6 @@ services:
     Iam\Domain\Repository\Port\UserRepositoryPersistence:
         class: Iam\Infrastructure\Persistence\Doctrine\UserRepositoryPersistence
         public: true
+
+    Iam\Application\Projector\Port\UserProjector:
+        class: Iam\Infrastructure\Projector\Doctrine\UserProjector

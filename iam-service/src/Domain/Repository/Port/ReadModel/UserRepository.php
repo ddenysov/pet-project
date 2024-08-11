@@ -19,6 +19,4 @@ interface UserRepository extends Repository
      * @return User
      */
     public function findOneByEmail(UserEmail $email): User;
-
-    public function save();
 }

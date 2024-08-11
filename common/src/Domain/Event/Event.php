@@ -61,6 +61,16 @@ abstract class Event implements Port\Event
         return $this->propertiesToArray();
     }
 
+    /**
+     * @return array
+     */
+    public function payload(): array
+    {
+        return array_filter($this->toArray(), function (string $key) {
+            return !in_array($key, ['id', 'aggregateId']);
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
     public function getAggregateId(): Uuid
     {
         return $this->aggregateId;
@@ -76,5 +86,14 @@ abstract class Event implements Port\Event
         foreach ($payload as $key => $value) {
 
         }
+    }
+
+    /**
+     * @param string $className
+     * @return bool
+     */
+    public function isA(string $className)
+    {
+        return get_class($this) === $className;
     }
 }

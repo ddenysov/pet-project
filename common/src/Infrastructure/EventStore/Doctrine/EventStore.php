@@ -8,19 +8,22 @@ use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\ValueObject\Uuid;
 use Doctrine\ORM\EntityManagerInterface;
 use Iam\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
+use Psr\Log\LoggerInterface;
 
 class EventStore extends BaseEventStore implements EventStorePort
 {
     /**
      * @param EntityManagerInterface $entityManager
      * @param Outbox $outbox
+     * @param LoggerInterface $logger
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly Outbox                 $outbox,
+        private readonly LoggerInterface $logger,
     )
     {
-        parent::__construct($this->outbox);
+        parent::__construct($this->outbox, $logger);
     }
 
     protected function save(\Common\Domain\Event\Event $event)
