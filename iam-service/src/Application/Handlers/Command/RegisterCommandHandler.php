@@ -43,6 +43,7 @@ final class RegisterCommandHandler extends CommandHandler
      * @param RegisterCommand $command
      * @throws InvalidStringLengthException
      * @throws InvalidUuidException
+     * @TODO Already Registered
      */
     #[Transaction]
     protected function handle(RegisterCommand $command): void
