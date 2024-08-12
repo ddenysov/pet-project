@@ -5,6 +5,8 @@ namespace Common\Infrastructure\EventStore\Doctrine;
 use Common\Application\EventStore\EventStore as BaseEventStore;
 use Common\Application\EventStore\Port\EventStore as EventStorePort;
 use Common\Application\Outbox\Port\Outbox;
+use Common\Application\Serializer\Event\EventSerializer;
+use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Uuid;
 use Doctrine\ORM\EntityManagerInterface;
 use Iam\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
@@ -21,6 +23,7 @@ class EventStore extends BaseEventStore implements EventStorePort
         private readonly EntityManagerInterface $entityManager,
         private readonly Outbox                 $outbox,
         private readonly LoggerInterface $logger,
+        private readonly EventSerializer $eventSerializer
     )
     {
         parent::__construct($this->outbox, $logger);
@@ -66,5 +69,26 @@ class EventStore extends BaseEventStore implements EventStorePort
             ->setParameter('aggregateId', $aggregateId->toString())
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function getEventStream(Uuid $id): EventStream
+    {
+        $events = (bool) $this->entityManager->createQueryBuilder()
+            ->select('*')
+            ->from(EventStoreEntity::class, 'e')
+            ->where('e.aggregateId = :aggregateId')
+            ->setParameter('aggregateId', $id->toString())
+            ->getQuery()
+            ->getResult();
+
+        $eventStream = new EventStream();
+        foreach ($events as $event) {
+            $eventStream[] = $this->eventSerializer->deserialize(
+                name: $event->getName(),
+                payload: $event->payload(),
+            );
+        }
+
+        return $eventStream;
     }
 }

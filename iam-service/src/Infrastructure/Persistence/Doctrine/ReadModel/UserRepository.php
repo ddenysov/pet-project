@@ -42,7 +42,9 @@ class UserRepository extends Repository implements UserRepositoryPort
             ->where('u.email = :email')
             ->setParameter('email', $email->toString())
             ->getQuery()
-            ->getSingleResult();
+            ->getResult();
+
+        dd($dUser);
 
 
 

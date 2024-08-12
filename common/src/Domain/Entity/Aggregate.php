@@ -3,6 +3,7 @@
 namespace Common\Domain\Entity;
 
 
+use Common\Domain\Event\EventStream;
 use Common\Domain\Event\Port\Event;
 
 abstract class Aggregate extends Entity implements Port\Aggregate
@@ -49,5 +50,12 @@ abstract class Aggregate extends Entity implements Port\Aggregate
         }
 
         return $this;
+    }
+
+    public function restore(EventStream $events): static
+    {
+        foreach ($events as $event) {
+            $this->apply($event);
+        }
     }
 }

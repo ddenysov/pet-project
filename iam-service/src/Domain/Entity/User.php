@@ -25,7 +25,7 @@ final class User extends Aggregate
     protected static array $subscribers = [
         UserRegistered::class => [
             'onUserRegistered',
-        ]
+        ],
     ];
 
     /**

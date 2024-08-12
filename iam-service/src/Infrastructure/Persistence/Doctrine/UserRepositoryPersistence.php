@@ -23,6 +23,6 @@ class UserRepositoryPersistence extends Repository implements UserRepositoryPers
 
     public function find(UserId $id): User
     {
-        // TODO: Implement find() method.
+        $this->getEventStore()->getEventStream($id);
     }
 }

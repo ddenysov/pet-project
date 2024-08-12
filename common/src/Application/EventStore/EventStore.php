@@ -4,6 +4,8 @@ namespace Common\Application\EventStore;
 
 use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\Event\Event;
+use Common\Domain\Event\EventStream;
+use Common\Domain\ValueObject\Uuid;
 use Psr\Log\LoggerInterface;
 
 abstract class EventStore implements Port\EventStore
