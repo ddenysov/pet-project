@@ -7,7 +7,7 @@ services:
         public: true
 
     Iam\Domain\Repository\Port\UserRepositoryPersistence:
-        class: Iam\Infrastructure\Persistence\Doctrine\UserRepositoryPersistence
+        class: Iam\Application\Repository\UserRepositoryPersistence
         public: true
 
     Iam\Application\Projector\Port\UserProjector:
