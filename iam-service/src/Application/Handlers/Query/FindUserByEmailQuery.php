@@ -2,7 +2,9 @@
 
 namespace Iam\Application\Handlers\Query;
 
-class FindUserByEmailQuery
+use Common\Application\Handlers\Query\Port\Query;
+
+class FindUserByEmailQuery implements Query
 {
     public string $email;
 

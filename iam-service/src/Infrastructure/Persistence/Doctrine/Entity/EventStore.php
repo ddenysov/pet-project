@@ -17,7 +17,7 @@ class EventStore
     private ?Uuid $id = null;
 
     #[ORM\Column(type: Types::STRING)]
-    private int $name;
+    private string $name;
 
     #[ORM\Column(type: UuidType::NAME)]
     private ?Uuid $aggregateId = null;
@@ -26,10 +26,10 @@ class EventStore
     private int $version;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private int $createdAt;
+    private \DateTime $createdAt;
 
     #[ORM\Column(type: Types::JSON)]
-    private int $payload;
+    private array $payload;
 
     public function getId(): ?Uuid
     {
@@ -41,12 +41,12 @@ class EventStore
         $this->id = $id;
     }
 
-    public function getName(): int
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(int $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -71,22 +71,22 @@ class EventStore
         $this->version = $version;
     }
 
-    public function getCreatedAt(): int
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(int $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getPayload(): int
+    public function getPayload(): array
     {
         return $this->payload;
     }
 
-    public function setPayload(int $payload): void
+    public function setPayload(array $payload): void
     {
         $this->payload = $payload;
     }

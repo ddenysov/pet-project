@@ -2,8 +2,8 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
 
-    Iam\Domain\Repository\Port\ReadModel\UserRepository:
-        class: Iam\Infrastructure\Persistence\Doctrine\ReadModel\UserRepository
+    Iam\Application\Handlers\Query\Repository\Port\UserCredentialsRepository:
+        class: Iam\Infrastructure\Persistence\Doctrine\Repository\UserCredentialsRepository
         public: true
 
     Iam\Domain\Repository\Port\UserRepositoryPersistence:

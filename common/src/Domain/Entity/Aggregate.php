@@ -5,6 +5,8 @@ namespace Common\Domain\Entity;
 
 use Common\Domain\Event\EventStream;
 use Common\Domain\Event\Port\Event;
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
+use Common\Domain\ValueObject\Uuid;
 
 abstract class Aggregate extends Entity implements Port\Aggregate
 {
@@ -52,10 +54,16 @@ abstract class Aggregate extends Entity implements Port\Aggregate
         return $this;
     }
 
-    public function restore(EventStream $events): static
+    /**
+     * @throws InvalidUuidException
+     */
+    public static function restore(EventStream $events): static
     {
+        $aggregate = new static(Uuid::create());
         foreach ($events as $event) {
-            $this->apply($event);
+            $aggregate->apply($event);
         }
+
+        return $aggregate;
     }
 }

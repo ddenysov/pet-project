@@ -20,5 +20,5 @@ interface Aggregate extends Entity
      * @param EventStream $events
      * @return $this
      */
-    public function restore(EventStream $events): static;
+    public static function restore(EventStream $events): static;
 }

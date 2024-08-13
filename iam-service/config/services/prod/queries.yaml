@@ -5,3 +5,7 @@ services:
     # QUERY HANDLER
     Common\Application\Bus\Port\QueryBus:
         class: Common\Infrastructure\Bus\Query\QueryBus
+
+    Iam\Application\Handlers\Query\FindUserByEmailQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Iam\Application\Handlers\Query\FindUserByEmailQuery' }

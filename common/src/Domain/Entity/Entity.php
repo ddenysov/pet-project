@@ -13,7 +13,7 @@ abstract class Entity implements Port\Entity
      */
     protected $id;
 
-    public function __construct(Uuid $id)
+    public function __construct(Uuid $id = null)
     {
         $this->id = $id;
     }

@@ -73,19 +73,20 @@ class EventStore extends BaseEventStore implements EventStorePort
 
     public function getEventStream(Uuid $id): EventStream
     {
-        $events = (bool) $this->entityManager->createQueryBuilder()
-            ->select('*')
+        $events = $this->entityManager->createQueryBuilder()
+            ->select('e')
             ->from(EventStoreEntity::class, 'e')
-            ->where('e.aggregateId = :aggregateId')
+            ->where('e.id = :aggregateId')
             ->setParameter('aggregateId', $id->toString())
             ->getQuery()
             ->getResult();
 
         $eventStream = new EventStream();
+
         foreach ($events as $event) {
             $eventStream[] = $this->eventSerializer->deserialize(
                 name: $event->getName(),
-                payload: $event->payload(),
+                payload: $event->getPayload(),
             );
         }
 
