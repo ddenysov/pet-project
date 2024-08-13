@@ -15,13 +15,16 @@ class PasswordValue extends StringValue
 
     /**
      * @param string $value
+     * @param bool $hash
      * @throws InvalidStringLengthException
      */
-    public function __construct(string $value)
+    public function __construct(string $value, bool $hash = false)
     {
         parent::__construct($value);
-        $this->hasher = new PasswordHasherAdapter();
-        $this->value  = $this->hasher->hash($value);
+        if ($hash) {
+            $this->hasher = new PasswordHasherAdapter();
+            $this->value  = $this->hasher->hash($value);
+        }
     }
 
     /**

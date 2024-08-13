@@ -57,7 +57,7 @@ final class RegisterCommandHandler extends CommandHandler
         } else {
             $user = User::register(
                 email: new UserEmail($command->email),
-                password: new UserPassword($command->password)
+                password: new UserPassword($command->password, true)
             );
         }
 
