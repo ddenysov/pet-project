@@ -58,18 +58,20 @@ class EventStore extends BaseEventStore implements EventStorePort
     }
 
     /**
-     * @param string $aggregateId
+     * @param Uuid $aggregateId
      * @return int
      */
     private function getLastVersion(Uuid $aggregateId): int
     {
-        return $this->entityManager->createQueryBuilder()
+        $version = $this->entityManager->createQueryBuilder()
             ->select('MAX(e.version)')
             ->from(EventStoreEntity::class, 'e')
             ->where('e.aggregateId = :aggregateId')
             ->setParameter('aggregateId', $aggregateId->toString())
             ->getQuery()
             ->getSingleScalarResult();
+
+        return $version ?? 0;
     }
 
     public function getEventStream(Uuid $id): EventStream
