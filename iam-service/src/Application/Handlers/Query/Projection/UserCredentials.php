@@ -1,6 +1,6 @@
 <?php
 
-namespace Iam\Application\Handlers\Query\ReadModel;
+namespace Iam\Application\Handlers\Query\Projection;
 
 class UserCredentials
 {
