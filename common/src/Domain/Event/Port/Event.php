@@ -20,7 +20,7 @@ interface Event
     /**
      * @return mixed
      */
-    public function getAggregateId(): Uuid;
+    public function getAggregateId(): ?Uuid;
 
     /**
      * @param Uuid $id

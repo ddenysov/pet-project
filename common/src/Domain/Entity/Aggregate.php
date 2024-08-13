@@ -34,7 +34,9 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     public function recordThat(Event $event): void
     {
-        $event->setAggregateId($this->id);
+        if (!$event->getAggregateId()) {
+            $event->setAggregateId($this->getId());
+        }
         $this->apply($event);
         $this->events[] = $event;
     }
@@ -59,7 +61,7 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     public static function restore(EventStream $events): static
     {
-        $aggregate = new static(Uuid::create());
+        $aggregate = static::create();
         foreach ($events as $event) {
             $aggregate->apply($event);
         }

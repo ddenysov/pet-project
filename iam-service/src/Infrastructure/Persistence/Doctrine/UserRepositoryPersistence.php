@@ -29,7 +29,6 @@ class UserRepositoryPersistence extends Repository implements UserRepositoryPers
     {
         $events = $this->getEventStore()->getEventStream($id);
 
-
         return User::restore($events);
     }
 }

@@ -53,6 +53,7 @@ class EventStore extends BaseEventStore implements EventStorePort
             ->setParameter(5, (new \DateTime())->format('Y-m-d H:i:s'))
             ->executeQuery();
 
+
         return $this;
     }
 
@@ -62,7 +63,7 @@ class EventStore extends BaseEventStore implements EventStorePort
      */
     private function getLastVersion(Uuid $aggregateId): int
     {
-        return (bool) $this->entityManager->createQueryBuilder()
+        return $this->entityManager->createQueryBuilder()
             ->select('MAX(e.version)')
             ->from(EventStoreEntity::class, 'e')
             ->where('e.aggregateId = :aggregateId')
@@ -76,7 +77,7 @@ class EventStore extends BaseEventStore implements EventStorePort
         $events = $this->entityManager->createQueryBuilder()
             ->select('e')
             ->from(EventStoreEntity::class, 'e')
-            ->where('e.id = :aggregateId')
+            ->where('e.aggregateId = :aggregateId')
             ->setParameter('aggregateId', $id->toString())
             ->getQuery()
             ->getResult();

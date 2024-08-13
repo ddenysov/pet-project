@@ -24,9 +24,9 @@ class UserProjector implements UserProjectorPort
     {
         if ($event->isA(UserRegistered::class)) {
             $user = new User();
-            $user->setId(Uuid::fromString($event->getId()->toString()));
+            $user->setId(Uuid::fromString($event->getAggregateId()->toString()));
         } else {
-            $user = $this->entityManager->find(User::class, $event->getAggregateId());
+            $user = $this->entityManager->find(User::class, $event->getAggregateId()->toString());
         }
 
         foreach ($event->payload() as $key => $value) {

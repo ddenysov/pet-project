@@ -7,6 +7,7 @@ services:
         class: Common\Infrastructure\Bus\Event\EventBus
 
     Iam\Application\Handlers\Event\UserRegisteredEventHandler:
+    Iam\Application\Handlers\Event\UserPasswordRequestedEventHandler:
 
     #User\Infrastructure\Bus\Event\EventHandler:
     #    tags:

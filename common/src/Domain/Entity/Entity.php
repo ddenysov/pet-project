@@ -4,7 +4,6 @@ namespace Common\Domain\Entity;
 
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
-use User\Domain\Model\Event\DomainEvent;
 
 abstract class Entity implements Port\Entity
 {
@@ -12,11 +11,6 @@ abstract class Entity implements Port\Entity
      * @var Uuid
      */
     protected $id;
-
-    public function __construct(Uuid $id = null)
-    {
-        $this->id = $id;
-    }
 
     final public function toArray(): array
     {
@@ -39,5 +33,15 @@ abstract class Entity implements Port\Entity
     public static function create(...$args): static
     {
         return new static(Uuid::create(), $args);
+    }
+
+    public function getId(): Uuid
+    {
+        return $this->id;
+    }
+
+    public function setId(Uuid $id): void
+    {
+        $this->id = $id;
     }
 }

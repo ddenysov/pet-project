@@ -13,9 +13,9 @@ abstract class Event implements Port\Event
     /**
      * @var Uuid
      */
-    protected Uuid $id;
+    public Uuid $id;
 
-    protected Uuid $aggregateId;
+    public ?Uuid $aggregateId = null;
 
     /**
      * @throws InvalidUuidException
@@ -71,7 +71,7 @@ abstract class Event implements Port\Event
         }, ARRAY_FILTER_USE_KEY);
     }
 
-    public function getAggregateId(): Uuid
+    public function getAggregateId(): ?Uuid
     {
         return $this->aggregateId;
     }

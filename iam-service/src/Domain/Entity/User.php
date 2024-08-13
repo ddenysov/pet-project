@@ -77,6 +77,7 @@ final class User extends Aggregate
     ): User {
         $user = self::create();
         $user->recordThat(new UserRegistered(
+            UserId::create(),
             $email,
             $password,
         ));
@@ -102,6 +103,7 @@ final class User extends Aggregate
 
     protected function onUserRegistered(UserRegistered $event)
     {
+        $this->setId($event->aggregateId);
         $this->setEmail($event->email);
         $this->setPassword($event->password);
     }

@@ -89,7 +89,8 @@ class ConsumeEventsCommand extends Command
                 $message = $topic->consume(0, 120*10000);
                 switch ($message->err) {
                     case RD_KAFKA_RESP_ERR_NO_ERROR:
-                        $payload = json_decode($message->payload, true)['payload'];
+                        $payload = json_decode($message->payload, true);
+                        $payload = $payload['payload'] ?? [];
                         $name = json_decode($message->payload)->name;
 
                         $event = $this->eventSerializer->deserialize($name, $payload);
