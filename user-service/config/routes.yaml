@@ -1,5 +1,0 @@
-controllers:
-    resource:
-        path: ../src/Delivery/Http/Controller/
-        namespace: \User\Delivery\Http\Controller
-    type: attribute
