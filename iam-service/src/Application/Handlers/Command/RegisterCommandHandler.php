@@ -22,7 +22,6 @@ final class RegisterCommandHandler extends CommandHandler
      * @param ServiceContainer $container
      * @param LoggerInterface $logger
      * @param UserRepositoryPersistence $userRepositoryPersistence
-     * @param QueryBus $queryBus
      */
     public function __construct(
         ServiceContainer                           $container,
@@ -44,7 +43,6 @@ final class RegisterCommandHandler extends CommandHandler
      * @throws InvalidStringLengthException
      * @throws InvalidUuidException
      */
-    #[Transaction]
     protected function handle(RegisterCommand $command): void
     {
         $user = User::register(

@@ -42,7 +42,6 @@ final class RequestPasswordCommandHandler extends CommandHandler
      * @param RequestPasswordCommand $command
      * @throws InvalidUuidException
      */
-    #[Transaction]
     protected function handle(RequestPasswordCommand $command): void
     {
         $user = $this->userRepositoryPersistence->find(UserId::fromString($command->id));

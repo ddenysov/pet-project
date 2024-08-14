@@ -3,6 +3,7 @@
 namespace Common\Application\Handlers\Command;
 
 use Common\Application\Container\Port\ServiceContainer;
+use Common\Application\Handlers\Command\Attributes\NoTransaction;
 use Common\Application\Handlers\Command\Attributes\Transaction;
 use Common\Application\Handlers\Command\Port\TransactionManager;
 use Common\Domain\Entity\Port\Aggregate;
@@ -39,21 +40,22 @@ abstract class CommandHandler
         $methodName = 'handle';
 
         $reflectedMethod = new ReflectionMethod(static::class, $methodName);
-        $hasTransaction = count($reflectedMethod->getAttributes(Transaction::class)) > 0;
+        $noTransaction = count($reflectedMethod->getAttributes(NoTransaction::class)) > 0;
 
-        if ($hasTransaction) {
+
+        if (!$noTransaction) {
             $this->getTransactionManager()->startTransaction();
         }
         try {
             $reflectedMethod->invokeArgs($this, $args);
         } catch (Throwable $exception) {
-            if ($hasTransaction) {
+            if (!$noTransaction) {
                 $this->getTransactionManager()->rollback();
             }
             throw $exception;
         }
 
-        if ($hasTransaction) {
+        if (!$noTransaction) {
             $this->getTransactionManager()->commit();
         }
 
