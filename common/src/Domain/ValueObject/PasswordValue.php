@@ -21,8 +21,8 @@ class PasswordValue extends StringValue
     public function __construct(string $value, bool $hash = false)
     {
         parent::__construct($value);
+        $this->hasher = new PasswordHasherAdapter();
         if ($hash) {
-            $this->hasher = new PasswordHasherAdapter();
             $this->value  = $this->hasher->hash($value);
         }
     }

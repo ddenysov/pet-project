@@ -12,3 +12,5 @@ services:
 
     Iam\Application\Projector\Port\UserProjector:
         class: Iam\Infrastructure\Projector\Doctrine\UserProjector
+
+    Iam\Application\Service\AuthenticationService:

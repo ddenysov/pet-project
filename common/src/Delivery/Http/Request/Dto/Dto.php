@@ -2,6 +2,7 @@
 
 namespace Common\Delivery\Http\Request\Dto;
 
+use Common\Application\Handlers\Command\Port\Command;
 use ReflectionClass;
 
 abstract class Dto implements Port\Dto
@@ -19,5 +20,25 @@ abstract class Dto implements Port\Dto
         }
 
         return $result;
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function transform(string $command): Command
+    {
+        $dtoArray = $this->toArray();
+
+        $ref = new ReflectionClass($command);
+        $props = $ref->getProperties();
+        $propsArray = [];
+
+        foreach ($props as $prop) {
+            if ($prop->isPublic()) {
+                $propsArray[$prop->getName()] = $dtoArray[$prop->getName()];
+            }
+        }
+
+        return new $command(...$propsArray);
     }
 }
