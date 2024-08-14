@@ -7,3 +7,7 @@ services:
     Iam\Application\Handlers\Command\RegisterCommandHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Iam\Application\Handlers\Command\RegisterCommand' }
+
+    Iam\Application\Handlers\Command\RequestPasswordCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Iam\Application\Handlers\Command\RequestPasswordCommand' }

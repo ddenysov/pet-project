@@ -16,13 +16,12 @@ use Iam\Domain\ValueObject\UserId;
 use Iam\Domain\ValueObject\UserPassword;
 use Psr\Log\LoggerInterface;
 
-final class RegisterCommandHandler extends CommandHandler
+final class RequestPasswordCommandHandler extends CommandHandler
 {
     /**
      * @param ServiceContainer $container
      * @param LoggerInterface $logger
      * @param UserRepositoryPersistence $userRepositoryPersistence
-     * @param QueryBus $queryBus
      */
     public function __construct(
         ServiceContainer                           $container,
@@ -40,18 +39,15 @@ final class RegisterCommandHandler extends CommandHandler
      * Save event to outbox
      * Commit
      *
-     * @param RegisterCommand $command
-     * @throws InvalidStringLengthException
+     * @param RequestPasswordCommand $command
      * @throws InvalidUuidException
      * @TODO Already Registered
      */
     #[Transaction]
-    protected function handle(RegisterCommand $command): void
+    protected function handle(RequestPasswordCommand $command): void
     {
-        $user = User::register(
-            email: new UserEmail($command->email),
-            password: new UserPassword($command->password, true)
-        );
+        $user = $this->userRepositoryPersistence->find(UserId::fromString($command->id));
+        $user->requestResetPassword();
 
         $this->userRepositoryPersistence->save($user);
     }
