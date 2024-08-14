@@ -7,6 +7,8 @@ ssh:
 start:
 	docker-compose up -d --remove-orphans
 
+restart: stop start
+
 stop:
 	docker-compose down
 

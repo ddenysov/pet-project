@@ -10,7 +10,20 @@ services:
       - ../common/:/var/www/common
       - ./etc/http/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     ports:
-      - "8000:8000"
+      - "8101:8000"
+    networks:
+      - service_network
+
+  iam-service-fpm:
+    build:
+      context: .
+      dockerfile: ./etc/docker/php-fpm/Dockerfile
+    volumes:
+      - ./:/var/www/html
+      - ../common/:/var/www/common
+      - ./etc/http/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    ports:
+      - "9000:9000"
     networks:
       - service_network
 
