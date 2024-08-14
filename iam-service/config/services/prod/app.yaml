@@ -31,3 +31,9 @@ services:
 
     Common\Application\Outbox\Port\OutboxRepository:
         class: Common\Infrastructure\Outbox\Doctrine\OutboxRepository
+
+    Common\Application\Auth\Port\TokenEncoder:
+        class: Common\Infrastructure\Auth\Firebase\TokenEncoder
+
+    Common\Application\Auth\Port\TokenDecoder:
+        class: Common\Infrastructure\Auth\Firebase\TokenDecoder

@@ -6,19 +6,20 @@ use Common\Application\Bus\Port\CommandBus;
 use Common\Application\Bus\Port\QueryBus;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Iam\Application\Handlers\Query\FindUserByEmailQuery;
+use Iam\Application\Handlers\Query\Projection\UserCredentials;
 use Iam\Application\Service\AuthenticationService;
 use Iam\Delivery\Http\Request\Dto\SecurityCredentials;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends Controller
 {
     public function __construct(
-        CommandBus $commandBus,
-        QueryBus $queryBus,
-        private AuthenticationService $authenticationService
+        CommandBus                             $commandBus,
+        QueryBus                               $queryBus,
+        private readonly AuthenticationService $authenticationService,
     )
     {
         parent::__construct($commandBus, $queryBus);
@@ -34,13 +35,42 @@ class LoginController extends Controller
         #[MapQueryString] SecurityCredentials $securityCredentials
     ): JsonResponse
     {
-        $isValid = $this->authenticationService->checkCredentials(
+        $credentials = $this->authenticationService->checkCredentials(
             $securityCredentials->email,
             $securityCredentials->password,
         );
 
-        dd($isValid);
+        if (!$credentials) {
+            return $this->wrongPasswordResponse();
+        }
 
-        return new JsonResponse();
+        return $this->successResponse($credentials);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    private function wrongPasswordResponse(): JsonResponse
+    {
+        return new JsonResponse([
+            'code'   => 422,
+            'errors' => [
+                'password' => [
+                    'message' => 'Incorrect password',
+                    'key'     => 'password',
+                ],
+            ],
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * @param UserCredentials $credentials
+     * @return JsonResponse
+     */
+    private function successResponse(UserCredentials $credentials): JsonResponse
+    {
+        return new JsonResponse([
+            'token' => $this->authenticationService->createToken($credentials),
+        ]);
     }
 }
