@@ -41,7 +41,6 @@ final class RequestPasswordCommandHandler extends CommandHandler
      *
      * @param RequestPasswordCommand $command
      * @throws InvalidUuidException
-     * @TODO Already Registered
      */
     #[Transaction]
     protected function handle(RequestPasswordCommand $command): void
