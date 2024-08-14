@@ -1,4 +1,4 @@
-APP := api-gateway
+APP := api_gateway
 DC := docker-compose exec
 
 ssh:
