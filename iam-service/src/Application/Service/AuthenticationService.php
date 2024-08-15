@@ -25,7 +25,9 @@ class AuthenticationService
      */
     public function checkCredentials(string $email, string $password): ?UserCredentials
     {
+
         $credentials = $this->queryBus->execute(new FindUserByEmailQuery($email));
+
 
         if (!$credentials) {
             return null;
