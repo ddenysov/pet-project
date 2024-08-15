@@ -3,7 +3,6 @@
 namespace Iam\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Iam\Delivery\Http\Request\Dto\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
