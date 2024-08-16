@@ -10,7 +10,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.3",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.0.4",
+    "vue": "latest",
+    "yup": "^1.4.0"
   }
 }
