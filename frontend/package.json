@@ -11,11 +11,17 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.3",
+    "@primevue/themes": "^4.0.4",
     "nuxt": "^3.12.4",
+    "pinia": "^2.2.2",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.4",
     "vue": "latest",
     "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@primevue/nuxt-module": "^4.0.4",
+    "sass-embedded": "^1.77.8"
   }
 }
