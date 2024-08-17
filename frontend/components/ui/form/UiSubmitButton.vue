@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 import { useFormStore } from './store/index';
-import UiButton from '@/shared/ui-kit/ui/button/UiButton.vue'
 const store = useFormStore();
 
 export interface Props {

@@ -7,6 +7,12 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         '@primevue/nuxt-module'
     ],
+    components: [
+        {
+            path: '~/components/ui',
+            pathPrefix: false,
+        },
+    ],
     primevue: {
         autoImport: false,
         components: {

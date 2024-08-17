@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
 
-import { useBooleanClass, useClass } from '@/shared/ui-kit/composables/style/class'
-import type { Responsive } from '@/shared/ui-kit/types'
+import { useBooleanClass, useClass } from '../../composables/style/class'
+import type { Responsive } from '../../types'
 
 type AlignItems = 'stretch' | 'start' | 'center' | 'baseline' | 'end';
 type JustifyContent = 'between' | 'start' | 'center' | 'around' | 'end' | 'evenly';

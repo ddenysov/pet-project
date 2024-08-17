@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useFormStore } from './store/index';
-import UiFlex from '@/shared/ui-kit/ui/flex/UiFlex.vue'
 const store = useFormStore();
 
 export interface Props {
