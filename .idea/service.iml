@@ -14,8 +14,8 @@
       <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" packagePrefix="Common\" />
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="false" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway-service/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/src" isTestSource="false" packagePrefix="Iam\" />
-      <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/user-service/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/composer" />
@@ -208,6 +208,7 @@
       <excludeFolder url="file://$MODULE_DIR$/iam-service/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/iam-service/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/iam-service/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/iam-service/vendor/nelmio/cors-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

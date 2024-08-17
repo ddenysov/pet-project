@@ -4,14 +4,20 @@ create-network:
 destroy-network:
 	docker network rm service_network
 
-start: start-kafka
+start: start-kafka start-api-gateway
 
-stop: stop-kafka
+stop: stop-kafka stop-api-gateway
 
 start-kafka:
-	cd ./kafka && docker-compose up -d
+	cd ./kafka && make start
 
 stop-kafka:
-	cd ./kafka && docker-compose down
+	cd ./kafka && make stop
+
+start-api-gateway:
+	cd ./api-gateway && make start
+
+stop-api-gateway:
+	cd ./api-gateway && make stop
 
 init: create-network

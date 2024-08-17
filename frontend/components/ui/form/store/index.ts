@@ -138,11 +138,21 @@ export const useFormStore = defineStore('form', {
 
       try {
         const res = await yupSchema.validate(this.getValues(form), {abortEarly: false});
+
         console.log('res');
         console.log(res);
         console.log(this.getValues(form));
+        const values = this.getValues(form);
         this.setLoading(form, true);
 
+        const response = await $fetch('/iam/register?email=' + values.email + '&password=' + values.password);
+
+        this.setLoading(form, false);
+
+        console.log(response);
+
+
+        /**
         const delayTime = (time: number) =>
           new Promise((resolve, reject) => setTimeout(() => {
             this.setLoading(form, false);
@@ -152,6 +162,7 @@ export const useFormStore = defineStore('form', {
           }, time));
 
         await delayTime(1000);
+        */
       } catch (e: any) {
         console.log(JSON.stringify(e));
         console.log(e.inner);

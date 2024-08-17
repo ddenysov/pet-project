@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt-alt/proxy": "^2.5.8",
     "@pinia/nuxt": "^0.5.3",
     "@primevue/themes": "^4.0.4",
     "nuxt": "^3.12.4",

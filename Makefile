@@ -1,19 +1,17 @@
-APP := gateway-service
-DC := docker-compose exec
-MYSQL := $(DC) -T mysql
+start: start-iam-service start-infrastructure
 
-start-gateway-service:
-	cd gateway-service && docker-compose up -d --remove-orphans
+stop:  stop-iam-service stop-infrastructure
 
-stop-gateway-service:
-	cd gateway-service && docker-compose down
+restart: stop start
 
-start-user-service:
-	cd user-service && docker-compose up -d --remove-orphans
+start-infrastructure:
+	cd ./infrastructure && make start
 
-stop-user-service:
-	cd user-service && docker-compose down
+stop-infrastructure:
+	cd ./infrastructure && make stop
 
-start: start-gateway-service start-user-service
+start-iam-service:
+	cd ./iam-service && make start
 
-stop: stop-user-service stop-gateway-service
+stop-iam-service:
+	cd ./iam-service && make stop

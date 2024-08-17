@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     devtools: {enabled: true},
     modules: [
         "@pinia/nuxt",
-        '@primevue/nuxt-module'
+        '@primevue/nuxt-module',
+        '@nuxt-alt/proxy',
     ],
     components: [
         {
@@ -33,4 +34,9 @@ export default defineNuxtConfig({
             }
         },
     },
+    routeRules: {
+        '/iam/**': {
+            proxy: { to: "http://localhost:8000/iam/**", },
+        }
+    }
 })
