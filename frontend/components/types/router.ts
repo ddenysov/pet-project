@@ -1,5 +1,5 @@
-import type { ButtonProps } from '@/shared/ui-kit/types/button'
-import type { ColorProps } from '@/shared/ui-kit/types/color'
+import type { ButtonProps } from '../types/button'
+import type { ColorProps } from '../types/color'
 
 export interface RouterProps {
   to: string,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
 import { defineProps } from 'vue'
-import type { ButtonProps } from '@/shared/ui-kit/types/button'
+import type { ButtonProps } from '../../types/button'
 
 defineProps<ButtonProps>();
 </script>

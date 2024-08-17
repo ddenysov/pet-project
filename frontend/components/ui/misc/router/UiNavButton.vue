@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import type { NavButtonProps } from '@/shared/ui-kit/types/router'
-import UiButton from '@/shared/ui-kit/ui/button/UiButton.vue'
+import type { NavButtonProps } from '../../../types/router'
+import UiButton from '../../button/UiButton.vue'
 
 defineProps<NavButtonProps>();
 

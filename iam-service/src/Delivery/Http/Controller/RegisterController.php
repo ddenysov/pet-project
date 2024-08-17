@@ -13,6 +13,7 @@ use Iam\Domain\Repository\Port\ReadModel\UserRepository;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterController extends Controller
@@ -24,7 +25,7 @@ class RegisterController extends Controller
      */
     #[Route('/register', name: 'register', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(
-        #[MapQueryString] User $user
+        #[MapRequestPayload] User $user
     ): JsonResponse {
         $userCredentials = $this->queryBus->execute(new FindUserByEmailQuery(email: $user->email));
 

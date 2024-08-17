@@ -132,45 +132,28 @@ export const useFormStore = defineStore('form', {
      * Submit given form
      * @param form
      */
-    async submit (form: string): Promise<void> {
+    async submit (form: string, action: string): Promise<void> {
       const yupSchema = createYupSchema(this.validation[form]);
       this.clearAllErrors(form);
 
       try {
         const res = await yupSchema.validate(this.getValues(form), {abortEarly: false});
-
-        console.log('res');
-        console.log(res);
-        console.log(this.getValues(form));
         const values = this.getValues(form);
         this.setLoading(form, true);
 
-        const response = await $fetch('/iam/register?email=' + values.email + '&password=' + values.password);
-
-        this.setLoading(form, false);
-
-        console.log(response);
-
-
-        /**
-        const delayTime = (time: number) =>
-          new Promise((resolve, reject) => setTimeout(() => {
-            this.setLoading(form, false);
-            reject(new ValidationError([
-              new ValidationError('ololo', 'trololo', 'email'),
-            ], 'trololo', 'email'));
-          }, time));
-
-        await delayTime(1000);
-        */
-      } catch (e: any) {
-        console.log(JSON.stringify(e));
-        console.log(e.inner);
-        e.inner.reverse().forEach((e: ValidationError) => {
-          this.setFieldError(form, e.path ?? '', e.message);
+        const response = await $fetch(action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(values)
         });
-        throw e;
+      } catch (e: any) {
+        Object.values(e.data.errors).forEach((e: any) => {
+          this.setFieldError(form, e.key ?? '', e.message);
+        });
       }
+      this.setLoading(form, false);
     }
   }
 })
