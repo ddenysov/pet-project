@@ -23,6 +23,7 @@
           form="sign-up"
           label="Реєстрація"
           name="submit"
+          @submit="onRegisterSuccess"
         />
       </ui-flex>
       <ui-flex grow="1">-</ui-flex>
@@ -30,5 +31,18 @@
   </div>
 </template>
 <script setup lang="ts">
+
+import {useUserStore} from "~/stores/user";
+
+const store = useUserStore();
+
+console.log(store.setToken('as'));
+
+//store.setToken('ololo');
+
+const onRegisterSuccess = (res: any) => {
+  console.log('res');
+  console.log(res);
+}
 
 </script>

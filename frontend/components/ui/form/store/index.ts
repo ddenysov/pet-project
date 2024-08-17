@@ -141,7 +141,7 @@ export const useFormStore = defineStore('form', {
         const values = this.getValues(form);
         this.setLoading(form, true);
 
-        const response = await $fetch(action, {
+        return await $fetch(action, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -153,7 +153,6 @@ export const useFormStore = defineStore('form', {
           this.setFieldError(form, e.key ?? '', e.message);
         });
       }
-      this.setLoading(form, false);
     }
   }
 })

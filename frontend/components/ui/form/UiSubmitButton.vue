@@ -15,8 +15,8 @@ const emit = defineEmits(['error', 'submit', 'click'])
 const onClick = async () => {
   try {
     console.log('ok');
-    await store.submit(props.form, props.action);
-    emit('submit', store.getValues(props.form));
+    const res = await store.submit(props.form, props.action);
+    emit('submit', res);
   } catch (e) {
     emit('error', e.data);
   }
