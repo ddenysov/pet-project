@@ -44,7 +44,6 @@ store.$patch({
     <label :for="name">{{ label }}</label>
     <InputText
       v-model="store.values[form][name]"
-      :id="name"
       :disabled="store.isLoading(form)"
       aria-describedby="username-help"
     />

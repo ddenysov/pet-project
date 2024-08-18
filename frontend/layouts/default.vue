@@ -6,8 +6,7 @@
   <div>
     <p>Some default layout content shared across all pages</p>
     <ui-nav-link to="/" label="home" />
-    <ui-nav-link to="/register" label="register" />
-    <ui-nav-link to="/login" label="login" />
+    <ui-nav-link to="/sign-in" label="register" />
     <slot />
   </div>
 </template>

@@ -12,7 +12,7 @@ class HealthCheckController extends Controller
     /**
      * @return JsonResponse
      */
-    #[Route('/hepetalth-check', name: 'health-check', methods: ['POST', 'GET'], format: 'json')]
+    #[Route('/health-check', name: 'health-check', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(): JsonResponse
     {
         return new JsonResponse('ok');
