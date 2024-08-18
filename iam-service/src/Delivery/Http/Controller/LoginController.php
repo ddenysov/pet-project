@@ -12,6 +12,7 @@ use Iam\Delivery\Http\Request\Dto\SecurityCredentials;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends Controller
@@ -32,7 +33,7 @@ class LoginController extends Controller
      */
     #[Route('/login', name: 'login', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(
-        #[MapQueryString] SecurityCredentials $securityCredentials
+        #[MapRequestPayload] SecurityCredentials $securityCredentials
     ): JsonResponse
     {
         $credentials = $this->authenticationService->checkCredentials(

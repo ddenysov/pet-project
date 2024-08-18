@@ -164,9 +164,9 @@ export const useFormStore = defineStore('form', {
                 return res;
             } catch (e: any) {
                 Object.values(e.data.errors).forEach((e: any) => {
-                    console.log(e);
                     this.setFieldError(form, e.key ?? '', e.message);
                 });
+                this.setLoading(form, false);
             }
         }
     }

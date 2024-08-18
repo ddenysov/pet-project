@@ -16,8 +16,8 @@ const onClick = async () => {
   try {
     console.log('ok');
     const res = await store.submit(props.form, props.action);
-    emit('submit', res);
-  } catch (e) {
+    emit('submit', { res, values: store.getValues(props.form)});
+  } catch (e: any) {
     emit('error', e.data);
   }
 }

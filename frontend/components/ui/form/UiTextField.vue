@@ -5,6 +5,7 @@ const store = useFormStore();
 
 export interface Props {
   original?: string,
+  disabled?: boolean,
   name: string,
   label: string,
   form: string,
@@ -44,7 +45,7 @@ store.$patch({
     <label :for="name">{{ label }}</label>
     <InputText
       v-model="store.values[form][name]"
-      :disabled="store.isLoading(form)"
+      :disabled="store.isLoading(form) || disabled"
       aria-describedby="username-help"
     />
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
