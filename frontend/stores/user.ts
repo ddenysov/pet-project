@@ -1,16 +1,18 @@
 export const useUserStore = defineStore('user', {
     state: () => ({
-        token:  '',
+        token: '',
         email: '',
         emailChecked: false,
         emailExists: false,
     }),
     actions: {
-        init () {
-            if (document) {
-                const storedToken = localStorage.getItem('token') ?? '';
+        init(session: any) {
+            if (session && session.name) {
+                const data = JSON.parse(session.name);
+
                 this.$patch({
-                    token: storedToken,
+                    token: data.token,
+                    email: data.email,
                 });
             }
         },
@@ -22,7 +24,18 @@ export const useUserStore = defineStore('user', {
             this.$patch({
                 token: token,
             });
-            localStorage.setItem('token', token);
+        },
+
+        /**
+         * Logout
+         */
+        logout(): void {
+            this.$patch({
+                token: '',
+                email: '',
+                emailChecked: false,
+                emailExists: false,
+            });
         },
 
         /**

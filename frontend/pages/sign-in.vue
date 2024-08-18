@@ -90,6 +90,8 @@
 <script setup lang="ts">
 
 import {useUserStore} from "~/stores/user";
+const session = useCookie<{ name: string }>('session')
+
 
 const store = useUserStore();
 
@@ -122,6 +124,10 @@ const onLoginSuccess = (data: any) => {
   console.log(data.res.exists);
   console.log(data.values);
   store.setToken(data.res.token);
+  session.value = { name: JSON.stringify({
+      token: data.res.token,
+      email: data.values.email
+    }) };
 }
 
 </script>
