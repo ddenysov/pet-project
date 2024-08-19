@@ -2,6 +2,8 @@
 
 namespace Iam\Delivery\Http\Controller;
 
+use Common\Application\Bus\Port\CommandBus;
+use Common\Application\Bus\Port\QueryBus;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,6 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HealthCheckController extends Controller
 {
+    public function __construct(CommandBus $commandBus, QueryBus $queryBus)
+    {
+        parent::__construct($commandBus, $queryBus);
+    }
+
     /**
      * @return JsonResponse
      */

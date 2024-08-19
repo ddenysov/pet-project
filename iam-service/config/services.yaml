@@ -9,3 +9,14 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+
+    Iam\Application\Service\Port\TestService:
+        class: Iam\Infrastructure\Service\Doctrine\DoctrineTestService
+        public: true
+
+# Just example how to override
+when@test:
+    services:
+        Iam\Application\Service\Port\TestService:
+            class: Iam\Infrastructure\Service\Memory\MemoryTestService
+            public: true
