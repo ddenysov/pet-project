@@ -1,39 +1,7 @@
 services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
-    Common\Infrastructure\Exception\Symfony\ExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
-    #User\Infrastructure\Schedule\Symfony\ScheduleProvider:
-    #    public: true
-
-    # COMMAND HANDLER
-    Common\Application\Bus\Port\CommandBus:
-        class: Common\Infrastructure\Bus\Command\CommandBus
-
-    Common\Application\Handlers\Command\Port\TransactionManager:
-        class: Common\Infrastructure\Persistence\Doctrine\Transaction\TransactionManager
-        public: true
 
     Iam\Domain\:
         resource: '../../../src/Domain/'
 
-    Common\Application\Container\Port\ServiceContainer:
-        class: Common\Infrastructure\Container\Symfony\ServiceContainer
-        arguments:
-            $container: '@service_container'
-
-    Common\Application\EventStore\Port\EventStore:
-        class: Common\Infrastructure\EventStore\Doctrine\EventStore
-
-    Common\Application\Outbox\Port\Outbox:
-        class: Common\Application\Outbox\Outbox
-
-    Common\Application\Outbox\Port\OutboxRepository:
-        class: Common\Infrastructure\Outbox\Doctrine\OutboxRepository
-
-    Common\Application\Auth\Port\TokenEncoder:
-        class: Common\Infrastructure\Auth\Firebase\TokenEncoder
-
-    Common\Application\Auth\Port\TokenDecoder:
-        class: Common\Infrastructure\Auth\Firebase\TokenDecoder

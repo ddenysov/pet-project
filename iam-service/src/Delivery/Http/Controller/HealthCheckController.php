@@ -15,6 +15,8 @@ class HealthCheckController extends Controller
     #[Route('/health-check', name: 'health-check', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(): JsonResponse
     {
-        return new JsonResponse('ok');
+        return new JsonResponse([
+            'ok' => date('Y-m-d H:i:s'),
+        ]);
     }
 }

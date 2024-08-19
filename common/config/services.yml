@@ -1,0 +1,52 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # QUERY BUS
+  Common\Application\Bus\Port\QueryBus:
+    class: Common\Infrastructure\Bus\Query\QueryBus
+
+  # COMMAND BUS
+  Common\Application\Bus\Port\CommandBus:
+    class: Common\Infrastructure\Bus\Command\CommandBus
+
+  # EVENT BUS
+  Common\Application\Bus\Port\EventBus:
+    class: Common\Infrastructure\Bus\Event\EventBus
+
+  # EXCEPTION LISTENER
+  Common\Infrastructure\Exception\Symfony\ExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  # SERVICE CONTAINER
+  Common\Application\Container\Port\ServiceContainer:
+    class: Common\Infrastructure\Container\Symfony\ServiceContainer
+    arguments:
+      $container: '@service_container'
+
+  # EVENT STORE
+  Common\Application\EventStore\Port\EventStore:
+    class: Common\Infrastructure\EventStore\Doctrine\EventStore
+
+  # OUTBOX
+  Common\Application\Outbox\Port\Outbox:
+    class: Common\Application\Outbox\Outbox
+
+  # OUTBOX REPOSITORY
+  Common\Application\Outbox\Port\OutboxRepository:
+    class: Common\Infrastructure\Outbox\Doctrine\OutboxRepository
+
+  # TOKEN ENCODER
+  Common\Application\Auth\Port\TokenEncoder:
+    class: Common\Infrastructure\Auth\Firebase\TokenEncoder
+
+  # TOKEN DECODER
+  Common\Application\Auth\Port\TokenDecoder:
+    class: Common\Infrastructure\Auth\Firebase\TokenDecoder
+
+  # TRANSACTION MANAGER
+  Common\Application\Handlers\Command\Port\TransactionManager:
+    class: Common\Infrastructure\Persistence\Doctrine\Transaction\TransactionManager
+    public: true
