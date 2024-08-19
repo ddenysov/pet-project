@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  template-service-supervisor:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-supervisor
+    volumes:
+      - ./:/var/www/html
+
+  template-service-fpm:
+    extends:
+      file: ../infrastructure/php/php-fpm/compose.yaml
+      service: service-fpm
+    volumes:
+      - ./:/var/www/html
+
+networks:
+  service_network:
+    external: true
