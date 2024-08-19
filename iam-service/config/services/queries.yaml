@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Iam\Application\Handlers\Query\FindUserByEmailQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Iam\Application\Handlers\Query\FindUserByEmailQuery' }

@@ -3,6 +3,18 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+  Common\Application\:
+    resource: '../src/Application/'
+
+  Common\Delivery\:
+    resource: '../src/Delivery/'
+
+  Common\Domain\:
+    resource: '../src/Domain/'
+
+  Common\Infrastructure\:
+    resource: '../src/Infrastructure/'
+
   # QUERY BUS
   Common\Application\Bus\Port\QueryBus:
     class: Common\Infrastructure\Bus\Query\QueryBus
@@ -50,3 +62,7 @@ services:
   Common\Application\Handlers\Command\Port\TransactionManager:
     class: Common\Infrastructure\Persistence\Doctrine\Transaction\TransactionManager
     public: true
+
+  # KAFKA
+  Common\Application\EventPublisher\Port\EventPublisher:
+    class: Common\Infrastructure\EventPublisher\Kafka\EventPublisher

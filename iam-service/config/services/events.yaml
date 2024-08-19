@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Iam\Application\Handlers\Event\UserRegisteredEventHandler:
+    Iam\Application\Handlers\Event\UserPasswordRequestedEventHandler:
