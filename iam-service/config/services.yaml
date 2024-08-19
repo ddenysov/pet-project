@@ -9,10 +9,3 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-
-    Iam\Delivery\Console\ConsumeEventsCommand:
-        tags: [ 'console.command' ]
-
-    Iam\Delivery\Schedule\ScheduleProvider:
-        public: true
-

@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-
-    Iam\Domain\:
-        resource: '../../../src/Domain/'
-
