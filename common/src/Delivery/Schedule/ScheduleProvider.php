@@ -1,14 +1,12 @@
 <?php
 
-namespace Iam\Delivery\Schedule;
+namespace Common\Delivery\Schedule;
 
-use Iam\Delivery\Schedule\Outbox\ProcessOutboxMessage;
-use Symfony\Component\Scheduler\Attribute\AsSchedule;
+use Common\Delivery\Schedule\Outbox\ProcessOutboxMessage;
 use Symfony\Component\Scheduler\RecurringMessage;
 use Symfony\Component\Scheduler\Schedule;
 use Symfony\Component\Scheduler\ScheduleProviderInterface;
 
-#[AsSchedule(name: 'default')]
 class ScheduleProvider implements ScheduleProviderInterface
 {
     public function getSchedule(): Schedule

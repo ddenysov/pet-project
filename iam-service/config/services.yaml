@@ -14,7 +14,7 @@ services:
         class: Iam\Infrastructure\Service\Doctrine\DoctrineTestService
         public: true
 
-# Just example how to override
+# Just example how to overridescheduler.schedule_provider
 when@test:
     services:
         Iam\Application\Service\Port\TestService:

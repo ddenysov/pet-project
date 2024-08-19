@@ -66,3 +66,13 @@ services:
   # KAFKA
   Common\Application\EventPublisher\Port\EventPublisher:
     class: Common\Infrastructure\EventPublisher\Kafka\EventPublisher
+
+  # OUTBOX PROCESSOR
+  Common\Delivery\Schedule\Outbox\ProcessOutboxHandler:
+    tags:
+      - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
+  # SCHEDULER
+  Common\Delivery\Schedule\ScheduleProvider:
+    tags:
+      - scheduler.schedule_provider: { name: 'default' }
