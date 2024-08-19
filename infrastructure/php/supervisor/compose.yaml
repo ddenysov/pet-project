@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  service-supervisor:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ../../../common/:/var/www/common
+      - ./etc/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    networks:
+      - service_network
+
+networks:
+  service_network:
+    external: true

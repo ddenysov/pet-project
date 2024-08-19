@@ -1,16 +1,12 @@
 version: '3'
 
 services:
-  iam-service:
-    build:
-      context: .
-      dockerfile: ../infrastructure/php/supervisor/Dockerfile
+  iam-service-supervisor:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-supervisor
     volumes:
       - ./:/var/www/html
-      - ../common/:/var/www/common
-      - ../infrastructure/php/supervisor/etc/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
-    networks:
-      - service_network
 
   iam-service-fpm:
     extends:
@@ -18,18 +14,6 @@ services:
       service: service-fpm
     volumes:
       - ./:/var/www/html
-
-###> doctrine/doctrine-bundle ###
-  database:
-    extends:
-      file: ../infrastructure/postgres/compose.yaml
-      service: database
-###< doctrine/doctrine-bundle ###
-
-volumes:
-###> doctrine/doctrine-bundle ###
-  database_data:
-###< doctrine/doctrine-bundle ###
 
 networks:
   service_network:

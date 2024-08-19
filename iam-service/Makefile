@@ -1,4 +1,4 @@
-APP := iam-service
+APP := iam-service-supervisor
 DC := docker-compose exec
 MYSQL := $(DC) -T mysql
 
