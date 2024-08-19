@@ -13,14 +13,11 @@ services:
       - service_network
 
   iam-service-fpm:
-    build:
-      context: .
-      dockerfile: ../infrastructure/php/php-fpm/Dockerfile
+    extends:
+      file: ../infrastructure/php/php-fpm/compose.yaml
+      service: service-fpm
     volumes:
       - ./:/var/www/html
-      - ../common/:/var/www/common
-    networks:
-      - service_network
 
 ###> doctrine/doctrine-bundle ###
   database:
