@@ -4,4 +4,9 @@ services:
         autoconfigure: true
 
     Iam\Application\Handlers\Event\UserRegisteredEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
     Iam\Application\Handlers\Event\UserPasswordRequestedEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
