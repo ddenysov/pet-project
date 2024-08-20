@@ -89,6 +89,7 @@
         }
     },
     "require-dev": {
+        "kwn/php-rdkafka-stubs": "^0.0.1",
         "phpunit/phpunit": "^11.2",
         "symfony/maker-bundle": "^1.60"
     }

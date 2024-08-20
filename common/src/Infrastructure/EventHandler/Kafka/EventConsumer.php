@@ -10,6 +10,7 @@ use Common\Application\EventHandler\Message\TimeoutMessage;
 use Common\Application\EventPublisher\Port\EventConsumer as EventConsumerPort;
 use RdKafka\Conf;
 use RdKafka\Consumer;
+use RdKafka\Exception;
 use RdKafka\Topic;
 use RdKafka\TopicConf;
 
@@ -35,11 +36,25 @@ class EventConsumer extends EventConsumerBase implements EventConsumerPort
      */
     private Topic     $topic;
 
+    /**
+     * @param $message
+     * @return Message
+     */
+    public function transformMessage($message): Message
+    {
+        $payload = json_decode($message->payload, true);
+        $payload = $payload['payload'] ?? [];
+        $name    = json_decode($message->payload)->name;
+
+        return new Message($name, $payload);
+    }
+
 
     /**
      * @param $group
      * @param $topic
      * @return void
+     * @throws Exception
      */
     protected function beforeRun($group, $topic)
     {
@@ -50,6 +65,7 @@ class EventConsumer extends EventConsumerBase implements EventConsumerPort
      * @param string $group
      * @param string $topic
      * @return void
+     * @throws Exception
      */
     private function init(string $group, string $topic): void
     {
@@ -78,10 +94,7 @@ class EventConsumer extends EventConsumerBase implements EventConsumerPort
 
         switch ($message->err) {
             case RD_KAFKA_RESP_ERR_NO_ERROR:
-                $payload = json_decode($message->payload, true);
-                $payload = $payload['payload'] ?? [];
-                $name    = json_decode($message->payload)->name;
-                $result = new Message($name, $payload);
+                $result = $this->transformMessage($message);
 
                 break;
             case RD_KAFKA_RESP_ERR__PARTITION_EOF:
