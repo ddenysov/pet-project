@@ -20,7 +20,7 @@ class HealthCheckQueryHandler
      */
     public function __invoke(HealthCheckQuery $query): HealthCheck
     {
-        $this->logger->info('Healthcheck query OK', [
+        $this->logger->info('Query: Healthcheck OK', [
             $query->timestamp,
         ]);
 
