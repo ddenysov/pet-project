@@ -63,9 +63,13 @@ services:
     class: Common\Infrastructure\Persistence\Doctrine\Transaction\TransactionManager
     public: true
 
-  # KAFKA
-  Common\Application\EventPublisher\Port\EventPublisher:
-    class: Common\Infrastructure\EventPublisher\Kafka\EventPublisher
+  # KAFKA PUBLISHER
+  Common\Application\EventHandler\Port\EventPublisher:
+    class: Common\Infrastructure\EventHandler\Kafka\EventPublisher
+
+  # KAFKA CONSUMER
+  Common\Application\EventHandler\Port\EventConsumer:
+    class: Common\Infrastructure\EventHandler\Kafka\EventConsumer
 
   # OUTBOX PROCESSOR
   Common\Delivery\Schedule\Outbox\ProcessOutboxHandler:

@@ -2,8 +2,8 @@
 
 namespace Common\Application\Outbox;
 
-use Common\Application\EventPublisher\Event as PublishableEvent;
-use Common\Application\EventPublisher\Port\EventPublisher;
+use Common\Application\EventHandler\Event as PublishableEvent;
+use Common\Application\EventHandler\Port\EventPublisher;
 use Common\Application\Outbox\Port\OutboxRepository;
 use Common\Domain\Event\Port\Event;
 use Common\Domain\ValueObject\Uuid;
@@ -39,7 +39,7 @@ class Outbox implements Port\Outbox
             $messages = $this->outboxRepository->getUnpublishedMessages($limit);
 
             foreach ($messages as $message) {
-                $this->logger->info('Publishing event', [
+                $this->logger->info('Outbox: Publishing event', [
                     'id' => $message['id'],
                 ]);
                 $this->eventPublisher->publish(new PublishableEvent(

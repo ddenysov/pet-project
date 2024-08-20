@@ -1,8 +1,8 @@
 <?php
 
-namespace Common\Application\EventPublisher\Port;
+namespace Common\Application\EventHandler\Port;
 
-use Common\Application\EventPublisher\Event;
+use Common\Application\EventHandler\Event;
 
 interface EventPublisher
 {

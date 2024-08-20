@@ -2,32 +2,33 @@
 
 namespace Common\Infrastructure\EventHandler\Kafka;
 
-use Common\Application\EventPublisher\Event;
-use Common\Application\EventPublisher\Port\EventPublisher as EventPublisherPort;
+use Common\Application\EventHandler\Event;
+use Common\Application\EventHandler\Port\EventPublisher as EventPublisherPort;
 use RdKafka\Conf;
 use RdKafka\Producer;
+use Exception;
 
-class EventPublisher implements EventPublisherPort
+class EventPublisher extends \Common\Application\EventHandler\EventPublisher implements EventPublisherPort
 {
-    public function publish(Event $event, callable $success, callable $fail): void
+    /**
+     * @param Event $event
+     * @return void
+     * @throws Exception
+     */
+    protected function dispatch(Event $event): void
     {
         $conf = new Conf();
         $conf->set('log_level', (string) LOG_DEBUG);
         $producer = new Producer($conf);
 
         if ($producer->addBrokers("kafka:9092") < 1) {
-            $fail($event);
-            echo "Failed adding brokers\n";
-            $fail($event);
-            return;
+            throw new Exception('Failed to add Kafka broker');
         }
 
         $topic = $producer->newTopic("real-topic");
 
         if (!$producer->getMetadata(false, $topic, 2000)) {
-            echo "Failed to get metadata, is broker down?\n";
-            $fail($event);
-            return;
+            throw new Exception('Failed to get metadata, is broker down?');
         }
 
         $msg = json_encode([
@@ -35,13 +36,8 @@ class EventPublisher implements EventPublisherPort
             'event_id' => $event->getEventId(),
             'payload'  => $event->getPayload(),
         ]);
-        var_dump($msg);
 
         $topic->produce(RD_KAFKA_PARTITION_UA, 0, $msg);
-
         $producer->flush(10000);
-        $success($event);
-
-        echo "Message published\n";
     }
 }

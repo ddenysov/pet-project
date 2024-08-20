@@ -4,7 +4,7 @@ namespace Common\Application\EventHandler;
 
 use Common\Application\Bus\Port\EventBus;
 use Common\Application\EventHandler\Message\Port\Message;
-use Common\Application\EventPublisher\Port\EventConsumer as EventConsumerPort;
+use Common\Application\EventHandler\Port\EventConsumer as EventConsumerPort;
 use Common\Application\Serializer\Event\EventSerializer;
 use Psr\Log\LoggerInterface;
 

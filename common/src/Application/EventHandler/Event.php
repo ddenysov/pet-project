@@ -1,6 +1,6 @@
 <?php
 
-namespace Common\Application\EventPublisher;
+namespace Common\Application\EventHandler;
 
 use Common\Domain\ValueObject\Uuid;
 

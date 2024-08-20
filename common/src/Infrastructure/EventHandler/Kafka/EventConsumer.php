@@ -7,7 +7,7 @@ use Common\Application\EventHandler\Message\EmptyMessage;
 use Common\Application\EventHandler\Message\Message;
 use Common\Application\EventHandler\Message\Port\Message as MessagePort;
 use Common\Application\EventHandler\Message\TimeoutMessage;
-use Common\Application\EventPublisher\Port\EventConsumer as EventConsumerPort;
+use Common\Application\EventHandler\Port\EventConsumer as EventConsumerPort;
 use RdKafka\Conf;
 use RdKafka\Consumer;
 use RdKafka\Exception;
