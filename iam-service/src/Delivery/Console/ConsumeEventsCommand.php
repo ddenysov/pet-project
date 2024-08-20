@@ -5,7 +5,6 @@ namespace Iam\Delivery\Console;
 use Common\Application\Bus\Port\EventBus;
 use Common\Application\Serializer\Event\EventSerializer;
 use Doctrine\ORM\EntityManagerInterface;
-use Iam\Infrastructure\Persistence\Doctrine\Entity\User;
 use Psr\Log\LoggerInterface;
 use \RdKafka\Conf;
 use \RdKafka\Consumer;
@@ -87,6 +86,9 @@ class ConsumeEventsCommand extends Command
 
             while (true) {
                 $message = $topic->consume(0, 120*10000);
+                if (!$message) {
+                    continue;
+                }
                 switch ($message->err) {
                     case RD_KAFKA_RESP_ERR_NO_ERROR:
                         $payload = json_decode($message->payload, true);
