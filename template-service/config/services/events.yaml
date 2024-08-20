@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Template\Application\Handlers\Event\UserRegisteredEventHandler:
+    #    tags:
+    #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
+    # Template\Application\Handlers\Event\UserPasswordRequestedEventHandler:
+    #    tags:
+    #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }

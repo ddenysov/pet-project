@@ -1,0 +1,6 @@
+services:
+    _defaults:
+        autowire: true
+
+    # Template\Application\Projector\Port\UserProjector:
+    #    class: Template\Infrastructure\Projector\Doctrine\UserProjector

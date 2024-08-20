@@ -14,12 +14,11 @@ use Throwable;
 
 abstract class CommandHandler
 {
-
     protected TransactionManager $transactionManager;
 
     public function __construct(
-        private ServiceContainer $container,
-        private LoggerInterface $logger
+        protected ServiceContainer $container,
+        protected LoggerInterface $logger
     ) {
     }
 

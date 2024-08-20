@@ -16,6 +16,9 @@ stop:
 
 restart: stop start
 
+restart-sv:
+	docker compose restart iam-service-supervisor
+
 build:
 	docker-compose build $(APP)
 

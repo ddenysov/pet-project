@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+
+    Template\Application\:
+        resource: '../../src/Application/'
+
+    Template\Domain\:
+        resource: '../../src/Domain/'
+
+    Template\Infrastructure\:
+        resource: '../../src/Infrastructure/'
+
+    Template\Delivery\:
+        resource: '../../src/Delivery/'
+
+    Template\Delivery\Http\Controller\:
+        resource: '../../src/Delivery/Http/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
