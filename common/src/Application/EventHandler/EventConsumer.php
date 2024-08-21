@@ -10,12 +10,31 @@ use Psr\Log\LoggerInterface;
 
 abstract class EventConsumer implements EventConsumerPort
 {
+    /**
+     * @var array
+     */
+    protected array $channelMap;
+
+    /**
+     * @param EventBus $eventBus
+     * @param EventSerializer $eventSerializer
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         private EventBus $eventBus,
         private EventSerializer $eventSerializer,
         private LoggerInterface $logger,
     )
     {
+    }
+
+    public function configureChannelMap(array $map): void
+    {
+        foreach ($map as $channel => $events) {
+            foreach ($events as $event) {
+                $this->channelMap[$event] = $channel;
+            }
+        }
     }
 
     /**

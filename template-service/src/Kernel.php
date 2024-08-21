@@ -2,6 +2,7 @@
 
 namespace Template;
 
+use Common\Application\EventHandler\Port\EventConsumer;
 use Common\Application\EventHandler\Port\EventPublisher;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -15,14 +16,13 @@ class Kernel extends BaseKernel
     public function boot(): void
     {
         parent::boot();
-
-        $service = $this->container->get(EventPublisher::class);
-        $service->configureChannelMap([
+        $channelMap = [
             'template' => [
                 HealthCheckOk::getName(),
             ]
-        ]);
+        ];
+
+        $this->container->get(EventPublisher::class)->configureChannelMap($channelMap);
+        $this->container->get(EventConsumer::class)->configureChannelMap($channelMap);
     }
-
-
 }
