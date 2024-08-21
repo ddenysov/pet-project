@@ -9,7 +9,7 @@ use Common\Application\Serializer\Event\EventSerializer;
 use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Uuid;
 use Doctrine\ORM\EntityManagerInterface;
-use Iam\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
+use Template\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
 use Psr\Log\LoggerInterface;
 
 class EventStore extends BaseEventStore implements EventStorePort
@@ -31,6 +31,7 @@ class EventStore extends BaseEventStore implements EventStorePort
 
     protected function save(\Common\Domain\Event\Event $event)
     {
+
         $version = $this->getLastVersion($event->getAggregateId());
         $version++;
 

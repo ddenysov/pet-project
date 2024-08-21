@@ -6,6 +6,6 @@ services:
     #    class: Iam\Infrastructure\Persistence\Doctrine\Repository\UserCredentialsRepository
     #    public: true
 
-    # Template\Domain\Repository\Port\UserRepositoryPersistence:
-    #    class: Iam\Application\Repository\UserRepositoryPersistence
-    #    public: true
+    Template\Domain\Repository\Port\HealthCheckRepository:
+        class: Template\Application\Repository\HealthCheckRepository
+        public: true

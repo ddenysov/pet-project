@@ -27,3 +27,6 @@ schema:
 
 database:
 	docker-compose run $(APP) symfony console doctrine:database:create
+
+migrate:
+	docker-compose run $(APP) symfony console doctrine:migrations:migrate
