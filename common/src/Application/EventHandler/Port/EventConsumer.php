@@ -8,7 +8,7 @@ interface EventConsumer
      * @param string $group
      * @return void
      */
-    public function consume(string $group): void;
+    public function consume(string $group, string $topic): void;
 
     /**
      * @param array $map
