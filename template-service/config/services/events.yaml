@@ -3,6 +3,10 @@ services:
         autowire: true
         autoconfigure: true
 
+    Template\Application\Handlers\Event\HealthCheckEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
     # Template\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
