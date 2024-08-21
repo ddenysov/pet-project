@@ -48,7 +48,7 @@ abstract class EventStore implements Port\EventStore
      */
     protected function afterAppend(Event $event)
     {
-        $this->logger->info('Event saved to event store: ' . $event->getName(), $event->payload());
+        $this->logger->info('Event saved to event store: ' . $event::getName(), $event->payload());
         $this->outbox->save($event);
     }
 

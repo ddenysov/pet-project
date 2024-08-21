@@ -6,8 +6,10 @@ use Common\Application\EventStore\EventStore as BaseEventStore;
 use Common\Application\EventStore\Port\EventStore as EventStorePort;
 use Common\Application\Outbox\Port\Outbox;
 use Common\Application\Serializer\Event\EventSerializer;
+use Common\Domain\Event\Event;
 use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Uuid;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Template\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
 use Psr\Log\LoggerInterface;
@@ -29,7 +31,7 @@ class EventStore extends BaseEventStore implements EventStorePort
         parent::__construct($this->outbox, $logger);
     }
 
-    protected function save(\Common\Domain\Event\Event $event)
+    protected function save(Event $event)
     {
 
         $version = $this->getLastVersion($event->getAggregateId());
@@ -47,11 +49,11 @@ class EventStore extends BaseEventStore implements EventStorePort
                 'created_at'   => '?',
             ])
             ->setParameter(0, $event->getId()->toString())
-            ->setParameter(1, $event->getName())
+            ->setParameter(1, $event::getName())
             ->setParameter(2, $event->getAggregateId()->toString())
             ->setParameter(3, json_encode($event->toArray()))
             ->setParameter(4, $version)
-            ->setParameter(5, (new \DateTime())->format('Y-m-d H:i:s'))
+            ->setParameter(5, (new DateTime())->format('Y-m-d H:i:s'))
             ->executeQuery();
 
 

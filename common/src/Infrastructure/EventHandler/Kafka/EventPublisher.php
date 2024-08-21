@@ -15,7 +15,7 @@ class EventPublisher extends \Common\Application\EventHandler\EventPublisher imp
      * @return void
      * @throws Exception
      */
-    protected function dispatch(Event $event): void
+    protected function dispatch(Event $event, string $channel): void
     {
         $conf = new Conf();
         $conf->set('log_level', (string) LOG_DEBUG);
@@ -25,7 +25,7 @@ class EventPublisher extends \Common\Application\EventHandler\EventPublisher imp
             throw new Exception('Failed to add Kafka broker');
         }
 
-        $topic = $producer->newTopic("real-topic");
+        $topic = $producer->newTopic($channel);
 
         if (!$producer->getMetadata(false, $topic, 2000)) {
             throw new Exception('Failed to get metadata, is broker down?');

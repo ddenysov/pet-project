@@ -66,10 +66,12 @@ services:
   # KAFKA PUBLISHER
   Common\Application\EventHandler\Port\EventPublisher:
     class: Common\Infrastructure\EventHandler\Kafka\EventPublisher
+    public: true
 
   # KAFKA CONSUMER
   Common\Application\EventHandler\Port\EventConsumer:
     class: Common\Infrastructure\EventHandler\Kafka\EventConsumer
+    public: true
 
   # OUTBOX PROCESSOR
   Common\Delivery\Schedule\Outbox\ProcessOutboxHandler:

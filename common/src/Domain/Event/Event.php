@@ -42,9 +42,9 @@ abstract class Event implements Port\Event
     /**
      * @return string
      */
-    public function getName(): string
+    public static function getName(): string
     {
-        $name = get_class($this);
+        $name = static::class;
         $parts = explode('\\', $name);
         $parts = array_map(function ($input) {
             return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
