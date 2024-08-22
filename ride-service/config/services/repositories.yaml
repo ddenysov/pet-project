@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+
+    # Ride\Application\Handlers\Query\Repository\Port\UserCredentialsRepository:
+    #    class: Iam\Infrastructure\Persistence\Doctrine\Repository\UserCredentialsRepository
+    #    public: true
+
+    Ride\Domain\Repository\Port\HealthCheckRepository:
+        class: Ride\Application\Repository\HealthCheckRepository
+        public: true

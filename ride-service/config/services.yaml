@@ -1,0 +1,23 @@
+imports:
+    - { resource: services/*.yaml }
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+parameters:
+    kernel.logs_dir: '../../var/logs'
+    app_name: 'ride'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # optionally, configure the handler using the constructor arguments (shown values are default)
+    #Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler:
+    #    arguments:
+    #        $endpoint: "http://elasticsearch:9200"
+    #        $index: "monolog"
+    #        $client: null
+    #        $level: !php/enum Monolog\Level::Debug
+    #        $bubble: true
+    #        $elasticsearchVersion: '8.15.0'

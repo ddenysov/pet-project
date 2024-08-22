@@ -1,0 +1,5 @@
+controllers:
+    resource:
+        path: ../src/Delivery/Http/Controller/
+        namespace: Ride\Delivery\Http\Controller
+    type: attribute

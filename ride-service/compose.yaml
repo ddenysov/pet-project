@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  ride-service-scheduler:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-scheduler
+    volumes:
+      - ./:/var/www/html
+
+  ride-service-consumer:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-consumer
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - CONSUMER_CHANNEL=ride
+
+  ride-service-fpm:
+    extends:
+      file: ../infrastructure/php/php-fpm/compose.yaml
+      service: service-fpm
+    volumes:
+      - ./:/var/www/html
+
+networks:
+  service_network:
+    external: true
