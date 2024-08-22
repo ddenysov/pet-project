@@ -23,7 +23,7 @@ class HealthCheckController extends Controller
     #[Route('/health-check', name: 'health-check', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(): JsonResponse
     {
-        $this->logger->info('IAM: Healthcheck OK');
+        $this->logger->info('Healthcheck OK');
         return new JsonResponse([
             'ok' => date('Y-m-d H:i:s'),
         ]);

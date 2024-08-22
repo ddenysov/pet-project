@@ -5,6 +5,7 @@ imports:
 
 parameters:
     kernel.logs_dir: '../../var/logs'
+    app_name: 'iam'
 
 services:
     _defaults:

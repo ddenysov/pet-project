@@ -82,3 +82,12 @@ services:
   Common\Delivery\Schedule\ScheduleProvider:
     tags:
       - scheduler.schedule_provider: { name: 'default' }
+
+  monolog.formatter.session_request:
+    class: Monolog\Formatter\LineFormatter
+    arguments:
+      - "[%%datetime%%] [%%extra.env%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n"
+
+  Common\Infrastructure\Log\Monolog\EnvProcessor:
+    tags:
+      - { name: monolog.processor }

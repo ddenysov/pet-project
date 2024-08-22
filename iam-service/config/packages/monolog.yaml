@@ -11,6 +11,7 @@ when@dev:
                 path: '%kernel.logs_dir%/app.log'  # Путь к файлу, куда будут записываться логи
                 level: debug
                 channels: [ 'app' ]
+                formatter: monolog.formatter.session_request
             # Обработчик для логов Doctrine
             doctrine:
                 type: stream
