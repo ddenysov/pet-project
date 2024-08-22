@@ -7,6 +7,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
+      - ../../../var/:/var/www/var
     networks:
       - service_network
 
