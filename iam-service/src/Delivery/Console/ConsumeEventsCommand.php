@@ -10,13 +10,19 @@ use Symfony\Component\Console\Attribute\AsCommand;
 )]
 class ConsumeEventsCommand extends \Common\Delivery\Console\ConsumeEventsCommand
 {
+    /**
+     * @return string
+     */
     protected function getConsumerGroup(): string
     {
         return 'iam-group';
     }
 
+    /**
+     * @return string
+     */
     protected function getTopic(): string
     {
-        return 'real-topic';
+        return getenv('CONSUMER_CHANNEL', 'default');
     }
 }

@@ -1,12 +1,21 @@
 version: '3'
 
 services:
-  iam-service-supervisor:
+  iam-service-scheduler:
     extends:
       file: ../infrastructure/php/supervisor/compose.yaml
-      service: service-supervisor
+      service: service-scheduler
     volumes:
       - ./:/var/www/html
+
+  iam-service-consumer:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-consumer
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - CONSUMER_CHANNEL=iam
 
   iam-service-fpm:
     extends:

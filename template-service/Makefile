@@ -1,4 +1,4 @@
-APP := template-service-supervisor
+APP := template-service-consumer
 DC := docker-compose exec
 MYSQL := $(DC) -T mysql
 

@@ -1,13 +1,22 @@
 version: '3'
 
 services:
-  service-supervisor:
+  service-scheduler:
     build:
       context: .
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
-      - ./etc/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+      - ./etc/scheduler/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    networks:
+      - service_network
+  service-consumer:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ../../../common/:/var/www/common
+      - ./etc/consumer/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - service_network
 
