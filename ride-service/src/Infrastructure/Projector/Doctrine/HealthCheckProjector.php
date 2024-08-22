@@ -20,8 +20,14 @@ class HealthCheckProjector implements \Ride\Application\Projector\Port\HealthChe
 
     public function apply(HealthCheckOk $event): void
     {
+        $this->logger->info('Healthcheck saving projection: ' . $event->getAggregateId()->toString());
+
+        dump('Saving');
+
         $dbEntity = new HealthCheck();
         $dbEntity->setId(Uuid::fromString($event->getAggregateId()->toString()));
+
+        dump($dbEntity);
 
         $this->entityManager->persist($dbEntity);
         $this->entityManager->flush();

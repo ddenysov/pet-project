@@ -11,7 +11,7 @@ use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Uuid;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Template\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
+use Common\Infrastructure\Persistence\Doctrine\Entity\EventStore as EventStoreEntity;
 use Psr\Log\LoggerInterface;
 
 class EventStore extends BaseEventStore implements EventStorePort
@@ -66,13 +66,15 @@ class EventStore extends BaseEventStore implements EventStorePort
      */
     private function getLastVersion(Uuid $aggregateId): int
     {
-        $version = $this->entityManager->createQueryBuilder()
+        $connection = $this->entityManager->getConnection();
+
+        $version = $connection->createQueryBuilder()
             ->select('MAX(e.version)')
-            ->from(EventStoreEntity::class, 'e')
-            ->where('e.aggregateId = :aggregateId')
+            ->from('event_store', 'e')  // предполагаем, что таблица называется 'event_store'
+            ->where('e.aggregate_id = :aggregateId')
             ->setParameter('aggregateId', $aggregateId->toString())
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->executeQuery()
+            ->fetchOne();
 
         return $version ?? 0;
     }

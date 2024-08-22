@@ -53,12 +53,14 @@ abstract class EventConsumer implements EventConsumerPort
                     'event.empty',
                     'event.timeout',
                 ])) {
-                    $event = $this->eventSerializer->deserialize($message->getName(), $message->getPayload());
-                    $this->eventBus->dispatch($event);
-                    $this->logger->info('Received an event: ' . $message->getName(), [
+                    dump($message);
+                    $this->logger->info('Received message: ' . $message->getName(), [
                         'id'      => $message->getPayload()['id'],
                         'payload' => $message->getPayload(),
                     ]);
+
+                    $event = $this->eventSerializer->deserialize($message->getName(), $message->getPayload());
+                    $this->eventBus->dispatch($event);
                 }
             } catch (\Throwable $exception) {
                 $this->logger->error('Error handling an event' . $exception->getMessage());

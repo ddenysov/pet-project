@@ -2,9 +2,6 @@
 
 namespace Ride\Application\Handlers\Event;
 
-use Iam\Application\Projector\Port\UserProjector;
-use Iam\Domain\Event\UserRegistered;
-use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Ride\Application\Projector\Port\HealthCheckProjector;
 use Ride\Domain\Event\HealthCheckOk;
 
