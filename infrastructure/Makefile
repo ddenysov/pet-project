@@ -1,6 +1,9 @@
 create-network:
 	docker network create service_network
 
+create-logs-storage:
+	docker volume create logs_volume
+
 destroy-network:
 	docker network rm service_network
 
@@ -26,4 +29,4 @@ start-database:
 stop-database:
 	cd ./postgres && make stop
 
-init: create-network
+init: create-network create-logs-storage

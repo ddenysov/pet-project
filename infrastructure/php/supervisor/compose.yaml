@@ -7,21 +7,29 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
-      - ../../../var/:/var/www/var
+      - logs_volume:/var/www/logs:rw
       - ./etc/scheduler/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - service_network
+    environment:
+      - APP_LOG_DIR=/var/www/logs
   service-consumer:
     build:
       context: .
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
-      - ../../../var/:/var/www/var
+      - logs_volume:/var/www/logs:rw
       - ./etc/consumer/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - service_network
+    environment:
+      - APP_LOG_DIR=/var/www/logs
 
 networks:
   service_network:
+    external: true
+
+volumes:
+  logs_volume:
     external: true

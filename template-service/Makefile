@@ -17,10 +17,13 @@ stop:
 restart: stop start
 
 restart-sv:
-	docker compose restart template-service-supervisor
+	docker compose restart template-service-consumer && docker compose restart template-service-scheduler
 
 build:
 	docker-compose build $(APP)
+
+consume:
+	docker-compose run $(APP) symfony console events:consume
 
 schema:
 	docker-compose run $(APP) symfony console doctrine:schema:create

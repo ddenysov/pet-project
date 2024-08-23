@@ -27,3 +27,7 @@ services:
 networks:
   service_network:
     external: true
+
+volumes:
+  logs_volume:
+    external: true

@@ -4,7 +4,6 @@ imports:
 # Files in the packages/ subdirectory configure your dependencies.
 
 parameters:
-    kernel.logs_dir: '../../var/logs'
     app_name: 'template'
 
 services:

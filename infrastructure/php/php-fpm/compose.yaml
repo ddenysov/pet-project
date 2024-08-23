@@ -7,10 +7,17 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
-      - ../../../var/:/var/www/var
+      - logs_volume:/var/www/logs:rw
     networks:
       - service_network
+    environment:
+      - APP_LOG_DIR=/var/www/logs
+    user: root
 
 networks:
   service_network:
+    external: true
+
+volumes:
+  logs_volume:
     external: true

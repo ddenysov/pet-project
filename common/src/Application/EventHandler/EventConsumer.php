@@ -45,15 +45,20 @@ abstract class EventConsumer implements EventConsumerPort
     final public function consume(string $group, string $topic): void
     {
         $this->beforeRun($group, $topic);
+
+        $this->logger->info('Consumer started. ', [
+            'topic' => $topic,
+        ]);
+
         while (true) {
             try {
                 $message = $this->consumeMessage($group, $topic);
+                $this->logger->info('Received message: ' . $message->getName());
 
                 if (!in_array($message->getName(), [
                     'event.empty',
                     'event.timeout',
                 ])) {
-                    dump($message);
                     $this->logger->info('Received message: ' . $message->getName(), [
                         'id'      => $message->getPayload()['id'],
                         'payload' => $message->getPayload(),
