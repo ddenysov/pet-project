@@ -14,11 +14,6 @@ use Ride\Application\Handlers\Query\HealthCheckQuery;
 
 class HealthCheckController extends Controller
 {
-    public function __construct(CommandBus $commandBus, QueryBus $queryBus, private LoggerInterface $logger)
-    {
-        parent::__construct($commandBus, $queryBus);
-    }
-
     /**
      * @return JsonResponse
      */

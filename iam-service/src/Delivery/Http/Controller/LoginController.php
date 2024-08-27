@@ -9,6 +9,7 @@ use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Iam\Application\Handlers\Query\Projection\UserCredentials;
 use Iam\Application\Service\AuthenticationService;
 use Iam\Delivery\Http\Request\Dto\SecurityCredentials;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
@@ -20,10 +21,11 @@ class LoginController extends Controller
     public function __construct(
         CommandBus                             $commandBus,
         QueryBus                               $queryBus,
+        LoggerInterface                        $logger,
         private readonly AuthenticationService $authenticationService,
     )
     {
-        parent::__construct($commandBus, $queryBus);
+        parent::__construct($commandBus, $queryBus, $logger);
     }
 
     /**

@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" packagePrefix="Common\" />
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="false" packagePrefix="Tests\" />
@@ -18,6 +19,7 @@
       <sourceFolder url="file://$MODULE_DIR$/template-service/src" isTestSource="false" packagePrefix="Template\" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/user-service/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/inflector" />

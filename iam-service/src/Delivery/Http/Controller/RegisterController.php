@@ -2,14 +2,12 @@
 
 namespace Iam\Delivery\Http\Controller;
 
-use Common\Application\Bus\Port\CommandBus;
 use Common\Delivery\Http\Request\Dto\DtoToCommandTransformer;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Iam\Application\Handlers\Command\RegisterCommand;
 use Iam\Application\Handlers\Command\RequestPasswordCommand;
 use Iam\Application\Handlers\Query\FindUserByEmailQuery;
 use Iam\Delivery\Http\Request\Dto\User;
-use Iam\Domain\Repository\Port\ReadModel\UserRepository;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
