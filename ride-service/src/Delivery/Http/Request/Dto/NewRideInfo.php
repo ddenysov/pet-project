@@ -1,6 +1,6 @@
 <?php
 
-namespace Iam\Delivery\Http\Request\Dto;
+namespace Ride\Delivery\Http\Request\Dto;
 
 use Common\Delivery\Http\Request\Dto\Dto;
 use Symfony\Component\Validator\Constraints as Assert;

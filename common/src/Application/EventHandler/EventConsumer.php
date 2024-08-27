@@ -68,7 +68,10 @@ abstract class EventConsumer implements EventConsumerPort
                     $this->eventBus->dispatch($event);
                 }
             } catch (\Throwable $exception) {
-                $this->logger->error('Error handling an event' . $exception->getMessage());
+                $this->logger->error('Error handling an event' . $exception->getMessage(), [
+                    'file' => $exception->getFile(),
+                    'line' => $exception->getLine(),
+                ]);
             }
         }
     }

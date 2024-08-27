@@ -7,3 +7,8 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\HealthCheckCommand' }
 
+
+    Ride\Application\Handlers\Command\CreateRideCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\CreateRideCommand' }
+

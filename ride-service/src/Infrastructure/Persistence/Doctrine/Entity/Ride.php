@@ -2,6 +2,7 @@
 
 namespace Ride\Infrastructure\Persistence\Doctrine\Entity;
 
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Ride\Infrastructure\Persistence\Doctrine\Entity\Repository\StubRepository;
@@ -17,17 +18,77 @@ class Ride
     private ?Uuid $id = null;
 
     #[ORM\Column(type: Types::STRING)]
-    private int $name;
+    private string $name;
 
     #[ORM\Column(type: UuidType::NAME)]
     private ?Uuid $userId = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private int $createdAt;
+    private DateTimeInterface $createdAt;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private int $startDateTime;
+    private DateTimeInterface $startDateTime;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private int $endDateTime;
+    private DateTimeInterface $endDateTime;
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
+
+    public function setId(?Uuid $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getUserId(): ?Uuid
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?Uuid $userId): void
+    {
+        $this->userId = $userId;
+    }
+
+    public function getCreatedAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getStartDateTime(): DateTimeInterface
+    {
+        return $this->startDateTime;
+    }
+
+    public function setStartDateTime(DateTimeInterface $startDateTime): void
+    {
+        $this->startDateTime = $startDateTime;
+    }
+
+    public function getEndDateTime(): DateTimeInterface
+    {
+        return $this->endDateTime;
+    }
+
+    public function setEndDateTime(DateTimeInterface $endDateTime): void
+    {
+        $this->endDateTime = $endDateTime;
+    }
 }
