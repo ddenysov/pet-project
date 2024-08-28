@@ -7,7 +7,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
-      - logs_volume:/var/www/logs:rw
+      - ../../var/logs:/var/www/logs:rw
       - ./etc/scheduler/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - service_network
@@ -19,7 +19,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ../../../common/:/var/www/common
-      - logs_volume:/var/www/logs:rw
+      - ../../var/logs:/var/www/logs:rw
       - ./etc/consumer/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - service_network

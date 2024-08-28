@@ -2,7 +2,10 @@ create-network:
 	docker network create service_network
 
 create-logs-storage:
-	docker volume create logs_volume
+	docker volume create --name logs_volume --opt type=none --opt device=./ --opt o=bind
+
+destroy-logs-storage:
+	docker volume rm logs_volume
 
 destroy-network:
 	docker network rm service_network
