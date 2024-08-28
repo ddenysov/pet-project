@@ -37,6 +37,11 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         return $ride;
     }
 
+    public function update(string $name)
+    {
+
+    }
+
     /**
      * @param RideCreated $event
      * @return void

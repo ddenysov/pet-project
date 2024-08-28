@@ -16,5 +16,4 @@ class HealthCheckEventHandler
         dump('HANDLED');
         $this->projector->apply($event);
     }
-
 }
