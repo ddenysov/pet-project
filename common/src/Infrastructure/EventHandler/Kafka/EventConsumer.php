@@ -92,7 +92,7 @@ class EventConsumer extends EventConsumerBase implements EventConsumerPort
     {
         $message = $this->topic->consume(0, 120 * 10000);
 
-        switch ($message?->err) {
+        switch ($message?->err && $message?->payload) {
             case RD_KAFKA_RESP_ERR_NO_ERROR:
                 $result = $this->transformMessage($message);
 
