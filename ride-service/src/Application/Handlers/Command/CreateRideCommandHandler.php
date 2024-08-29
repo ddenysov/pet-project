@@ -24,7 +24,7 @@ final class CreateRideCommandHandler extends CommandHandler
 
     protected function handle(CreateRideCommand $command): void
     {
-        $ride = Ride::createRide(new StringValue($command->name));
+        $ride = Ride::create(new StringValue($command->name));
 
         $this->repository->save($ride);
     }

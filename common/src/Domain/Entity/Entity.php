@@ -26,20 +26,17 @@ abstract class Entity implements Port\Entity
     }
 
     /**
-     * @param mixed ...$args
-     * @return static
-     * @throws InvalidUuidException
+     * @return Uuid
      */
-    public static function create(...$args): static
-    {
-        return new static(Uuid::create(), $args);
-    }
-
     public function getId(): Uuid
     {
         return $this->id;
     }
 
+    /**
+     * @param Uuid $id
+     * @return void
+     */
     public function setId(Uuid $id): void
     {
         $this->id = $id;

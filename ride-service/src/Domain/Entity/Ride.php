@@ -25,7 +25,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     /**
      * @throws InvalidUuidException
      */
-    public static function createRide(
+    public static function create(
         StringValue $name,
     ): Ride {
         $rideId = RideId::create();
@@ -51,7 +51,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public function onRideCreated(RideCreated $event)
     {
-        $this->id = $event->getAggregateId();
+        $this->id   = $event->getAggregateId();
         $this->name = $event->getRideName();
     }
 
