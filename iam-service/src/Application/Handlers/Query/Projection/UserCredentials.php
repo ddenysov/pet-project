@@ -4,7 +4,7 @@ namespace Iam\Application\Handlers\Query\Projection;
 
 use Common\Application\Bus\Query\Projection\Projection;
 
-class UserCredentials extends Projection
+class UserCredentials
 {
     /**
      * @var string
