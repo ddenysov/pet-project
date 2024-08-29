@@ -12,16 +12,10 @@ use Ride\Domain\ValueObject\RideId;
 
 class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
 {
+    /**
+     * @var StringValue
+     */
     private StringValue $name;
-
-    protected static array $subscribers = [
-        RideCreated::class => [
-            'onRideCreated',
-        ],
-        RideUpdated::class => [
-            'onRideUpdated',
-        ],
-    ];
 
     public function getId(): RideId
     {

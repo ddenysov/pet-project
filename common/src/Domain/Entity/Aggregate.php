@@ -47,11 +47,10 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     public function apply(Event $event): static
     {
-        if (isset(static::$subscribers[$event::class])) {
-            foreach (static::$subscribers[$event::class] as $subscriberMethod) {
-                $this->$subscriberMethod($event);
-            }
-        }
+        $parts = explode('\\', $event::class);
+        $method = 'on' . array_pop($parts);
+
+        $this->$method($event);
 
         return $this;
     }
