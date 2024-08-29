@@ -26,11 +26,11 @@ class Outbox implements Port\Outbox
     public function save(Event $event): void
     {
         $this->outboxRepository->save(
-            eventId: $event->getId(),
-            name: $event::getName(),
+            eventId: $event->getEventId(),
+            name: $event::getEventName(),
             payload: $event->toArray(),
         );
-        $this->logger->info('Event saved to outbox: ' . $event::getName());
+        $this->logger->info('Event saved to outbox: ' . $event::getEventName());
     }
 
     public function publish(int|null $limit = null): void

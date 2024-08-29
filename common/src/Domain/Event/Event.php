@@ -13,36 +13,39 @@ abstract class Event implements Port\Event
     /**
      * @var Uuid
      */
-    public Uuid $id;
+    public Uuid $eventId;
 
-    public ?Uuid $aggregateId = null;
+    /**
+     * @var Uuid
+     */
+    public Uuid $aggregateId;
 
     /**
      * @throws InvalidUuidException
      */
     public function __construct()
     {
-        $this->id = Uuid::create();
+        $this->eventId = Uuid::create();
     }
 
-    public function getId(): Uuid
+    public function getEventId(): Uuid
     {
-        return $this->id;
+        return $this->eventId;
     }
 
     /**
      * @param Uuid $id
      * @return void
      */
-    public function setId(Uuid $id): void
+    public function setEventId(Uuid $id): void
     {
-        $this->id = $id;
+        $this->eventId = $id;
     }
 
     /**
      * @return string
      */
-    public static function getName(): string
+    public static function getEventName(): string
     {
         $name = static::class;
         $parts = explode('\\', $name);
@@ -71,7 +74,7 @@ abstract class Event implements Port\Event
         }, ARRAY_FILTER_USE_KEY);
     }
 
-    public function getAggregateId(): ?Uuid
+    public function getAggregateId(): Uuid
     {
         return $this->aggregateId;
     }

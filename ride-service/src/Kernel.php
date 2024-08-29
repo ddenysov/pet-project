@@ -20,9 +20,9 @@ class Kernel extends BaseKernel
         parent::boot();
         $channelMap = [
             'ride' => [
-                HealthCheckOk::getName(),
-                RideCreated::getName(),
-                RideUpdated::getName(),
+                HealthCheckOk::getEventName(),
+                RideCreated::getEventName(),
+                RideUpdated::getEventName(),
             ]
         ];
 

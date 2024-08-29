@@ -9,18 +9,18 @@ interface Event
     /**
      * @return mixed
      */
-    public function getId(): Uuid;
+    public function getEventId(): Uuid;
 
     /**
      * @param Uuid $id
      * @return void
      */
-    public function setId(Uuid $id): void;
+    public function setEventId(Uuid $id): void;
 
     /**
-     * @return mixed
+     * @return Uuid
      */
-    public function getAggregateId(): ?Uuid;
+    public function getAggregateId(): Uuid;
 
     /**
      * @param Uuid $id
@@ -31,7 +31,7 @@ interface Event
     /**
      * @return string
      */
-    public static function getName(): string;
+    public static function getEventName(): string;
 
     /**
      * @return array

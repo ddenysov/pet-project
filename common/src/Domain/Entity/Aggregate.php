@@ -56,11 +56,12 @@ abstract class Aggregate extends Entity implements Port\Aggregate
     }
 
     /**
-     * @throws InvalidUuidException
+     * @param EventStream $events
+     * @return Aggregate
      */
     public static function restore(EventStream $events): static
     {
-        $aggregate = static::create();
+        $aggregate = new static();
         foreach ($events as $event) {
             $aggregate->apply($event);
         }

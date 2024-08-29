@@ -48,8 +48,8 @@ class EventStore extends BaseEventStore implements EventStorePort
                 'version'      => '?',
                 'created_at'   => '?',
             ])
-            ->setParameter(0, $event->getId()->toString())
-            ->setParameter(1, $event::getName())
+            ->setParameter(0, $event->getEventId()->toString())
+            ->setParameter(1, $event::getEventName())
             ->setParameter(2, $event->getAggregateId()->toString())
             ->setParameter(3, json_encode($event->toArray()))
             ->setParameter(4, $version)
