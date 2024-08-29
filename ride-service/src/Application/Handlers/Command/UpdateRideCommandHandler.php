@@ -30,8 +30,7 @@ final class UpdateRideCommandHandler extends CommandHandler
     protected function handle(UpdateRideCommand $command): void
     {
         $ride = $this->repository->find(new RideId($command->id));
-
-        dd($ride);
+        $ride->update(name: $command->name);
 
         $this->repository->save($ride);
     }

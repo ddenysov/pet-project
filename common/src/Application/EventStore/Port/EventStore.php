@@ -14,5 +14,10 @@ interface EventStore
      */
     public function append(Event $event): EventStore;
 
-    public function getEventStream(Uuid $id): EventStream;
+    /**
+     * @param Uuid $id
+     * @param string $entityClass
+     * @return EventStream
+     */
+    public function getEventStream(Uuid $id, string $entityClass): EventStream;
 }

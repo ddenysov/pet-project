@@ -79,11 +79,11 @@ class EventStore extends BaseEventStore implements EventStorePort
         return $version ?? 0;
     }
 
-    public function getEventStream(Uuid $id): EventStream
+    public function getEventStream(Uuid $id, string $entityClass): EventStream
     {
         $events = $this->entityManager->createQueryBuilder()
             ->select('e')
-            ->from(EventStoreEntity::class, 'e')
+            ->from($entityClass, 'e')
             ->where('e.aggregateId = :aggregateId')
             ->setParameter('aggregateId', $id->toString())
             ->getQuery()
