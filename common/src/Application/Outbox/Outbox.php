@@ -40,11 +40,11 @@ class Outbox implements Port\Outbox
 
             foreach ($messages as $message) {
                 $this->logger->info('Outbox: Publishing event', [
-                    'id' => $message['id'],
+                    'id' => $message['event_id'],
                 ]);
                 $this->eventPublisher->publish(new PublishableEvent(
-                    eventId: Uuid::fromString($message['id']),
-                    eventName: $message['name'],
+                    eventId: Uuid::fromString($message['event_id']),
+                    eventName: $message['event_name'],
                     payload: json_decode($message['payload'], true),
                 ), function (PublishableEvent $event) {
                     $this->outboxRepository->complete($event->getEventId());

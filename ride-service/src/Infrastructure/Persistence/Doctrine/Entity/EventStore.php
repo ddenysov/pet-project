@@ -14,10 +14,10 @@ class EventStore
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME)]
-    private ?Uuid $id = null;
+    private ?Uuid $eventId = null;
 
     #[ORM\Column(type: Types::STRING)]
-    private string $name;
+    private string $eventName;
 
     #[ORM\Column(type: UuidType::NAME)]
     private ?Uuid $aggregateId = null;
@@ -31,24 +31,24 @@ class EventStore
     #[ORM\Column(type: Types::JSON)]
     private array $payload;
 
-    public function getId(): ?Uuid
+    public function getEventId(): ?Uuid
     {
-        return $this->id;
+        return $this->eventId;
     }
 
-    public function setId(?Uuid $id): void
+    public function setEventId(?Uuid $eventId): void
     {
-        $this->id = $id;
+        $this->eventId = $eventId;
     }
 
-    public function getName(): string
+    public function getEventName(): string
     {
-        return $this->name;
+        return $this->eventName;
     }
 
-    public function setName(string $name): void
+    public function setEventName(string $eventName): void
     {
-        $this->name = $name;
+        $this->eventName = $eventName;
     }
 
     public function getAggregateId(): ?Uuid

@@ -11,20 +11,22 @@ class RideUpdated extends Event implements RideEvent
 {
     /**
      * @param RideId $aggregateId
-     * @param StringValue $rideName
+     * @param StringValue $name
      * @throws InvalidUuidException
      */
     public function __construct(
         RideId $aggregateId,
-        private StringValue $rideName
+        private StringValue $name
     ) {
         parent::__construct();
         $this->aggregateId = $aggregateId;
     }
 
-
-    public function getRideName(): StringValue
+    /**
+     * @return StringValue
+     */
+    public function getName(): StringValue
     {
-        return $this->rideName;
+        return $this->name;
     }
 }

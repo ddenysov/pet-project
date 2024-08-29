@@ -29,7 +29,7 @@ final readonly class RideCreatedProjector implements RideCreatedProjectorPort
 
         $dbEntity = new Ride();
         $dbEntity->setId(Uuid::fromString($event->getAggregateId()->toString()));
-        $dbEntity->setName($event->getRideName()->toString());
+        $dbEntity->setName($event->getName()->toString());
         $dbEntity->setCreatedAt(new DateTime());
         $dbEntity->setStartDateTime(new DateTime());
         $dbEntity->setEndDateTime(new DateTime());

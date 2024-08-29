@@ -34,19 +34,17 @@ class OutboxRepository implements OutboxRepositoryPort
             ->createQueryBuilder()
             ->insert('outbox')
             ->values([
-                'id' => '?',
-                'name' => '?',
+                'event_name' => '?',
                 'event_id' => '?',
                 'payload' => '?',
                 'status' => '?',
                 'created_at' => '?',
             ])
-            ->setParameter(0, Uuid::create()->toString())
-            ->setParameter(1, $name)
-            ->setParameter(2, $eventId->toString())
-            ->setParameter(3, json_encode($payload))
-            ->setParameter(4, OutboxStatus::STARTED->value)
-            ->setParameter(5, (new \DateTime())->format('Y-m-d H:i:s'))
+            ->setParameter(0, $name)
+            ->setParameter(1, $eventId->toString())
+            ->setParameter(2, json_encode($payload))
+            ->setParameter(3, OutboxStatus::STARTED->value)
+            ->setParameter(4, (new \DateTime())->format('Y-m-d H:i:s'))
             ->executeQuery();
     }
 
@@ -61,9 +59,9 @@ class OutboxRepository implements OutboxRepositoryPort
             ->createQueryBuilder()
             ->update('outbox')
             ->set('status', '?')
-            ->where('id = ?')
+            ->where('event_id = ?')
             ->setParameter(0, OutboxStatus::COMPLETED->value)
-            ->setParameter(1, $eventId->toString()) // Предполагая, что $id - это идентификатор записи, которую нужно обновить
+            ->setParameter(1, $eventId->toString())
             ->executeQuery();
     }
 

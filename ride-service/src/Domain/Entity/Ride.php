@@ -31,7 +31,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         $rideId = RideId::create();
 
         $ride = new static();
-        $ride->recordThat(new RideCreated(aggregateId: $rideId, rideName: $name));
+        $ride->recordThat(new RideCreated(aggregateId: $rideId, name: $name));
 
         return $ride;
     }
@@ -42,7 +42,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public function update(string $name): void
     {
-        $this->recordThat(new RideUpdated(aggregateId: $this->getId(), rideName: new StringValue($name)));
+        $this->recordThat(new RideUpdated(aggregateId: $this->getId(), name: new StringValue($name)));
     }
 
     /**
@@ -52,7 +52,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     public function onRideCreated(RideCreated $event)
     {
         $this->id   = $event->getAggregateId();
-        $this->name = $event->getRideName();
+        $this->name = $event->getName();
     }
 
     /**
@@ -61,6 +61,6 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public function onRideUpdated(RideUpdated $event)
     {
-        $this->name = $event->getRideName();
+        $this->name = $event->getName();
     }
 }

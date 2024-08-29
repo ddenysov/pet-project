@@ -24,8 +24,8 @@ class EventStore extends BaseEventStore implements EventStorePort
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly Outbox                 $outbox,
-        private readonly LoggerInterface $logger,
-        private readonly EventSerializer $eventSerializer
+        private readonly LoggerInterface        $logger,
+        private readonly EventSerializer        $eventSerializer
     )
     {
         parent::__construct($this->outbox, $logger);
@@ -41,8 +41,8 @@ class EventStore extends BaseEventStore implements EventStorePort
             ->createQueryBuilder()
             ->insert('event_store')
             ->values([
-                'id'           => '?',
-                'name'         => '?',
+                'event_id'     => '?',
+                'event_name'   => '?',
                 'aggregate_id' => '?',
                 'payload'      => '?',
                 'version'      => '?',

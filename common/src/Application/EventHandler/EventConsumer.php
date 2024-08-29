@@ -60,7 +60,7 @@ abstract class EventConsumer implements EventConsumerPort
                     'event.timeout',
                 ])) {
                     $this->logger->info('Received message: ' . $message->getName(), [
-                        'id'      => $message->getPayload()['id'],
+                        'id'      => $message->getPayload()['eventId'],
                         'payload' => $message->getPayload(),
                     ]);
 
