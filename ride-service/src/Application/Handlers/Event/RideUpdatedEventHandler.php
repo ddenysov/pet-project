@@ -2,22 +2,24 @@
 
 namespace Ride\Application\Handlers\Event;
 
-use Ride\Application\Projector\Port\HealthCheckProjector;
-use Ride\Domain\Event\HealthCheckOk;
-use Ride\Domain\Event\RideCreated;
-use Ride\Domain\Event\RideEvent;
+use Ride\Application\Projector\Port\RideUpdatedProjector;
 use Ride\Domain\Event\RideUpdated;
-use Ride\Infrastructure\Projector\Doctrine\RideProjector;
 
-class RideUpdatedEventHandler
+final readonly class RideUpdatedEventHandler
 {
-    public function __construct(private RideProjector $projector)
+    /**
+     * @param RideUpdatedProjector $projector
+     */
+    public function __construct(private RideUpdatedProjector $projector)
     {
     }
 
-    public function __invoke(RideUpdated $event)
+    /**
+     * @param RideUpdated $event
+     * @return void
+     */
+    public function __invoke(RideUpdated $event): void
     {
         $this->projector->apply($event);
     }
-
 }

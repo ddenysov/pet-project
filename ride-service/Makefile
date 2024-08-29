@@ -16,8 +16,14 @@ stop:
 
 restart: stop start
 
-restart-sv:
-	docker compose restart ride-service-supervisor
+reload: restart-consumer restart-scheduler
+
+restart-scheduler:
+	docker compose restart ride-service-scheduler
+
+restart-consumer:
+	docker compose restart ride-service-consumer
+
 
 build:
 	docker-compose build $(APP)
@@ -30,5 +36,8 @@ database:
 
 migrate:
 	docker-compose run $(APP) symfony console doctrine:migrations:migrate
+
+consume:
+	docker-compose run $(APP) symfony console events:consume
 
 setup: install database schema

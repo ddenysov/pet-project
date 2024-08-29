@@ -2,15 +2,12 @@
 
 namespace Ride\Application\Handlers\Event;
 
-use Ride\Application\Projector\Port\HealthCheckProjector;
-use Ride\Domain\Event\HealthCheckOk;
+use Ride\Application\Projector\Port\RideCreatedProjector;
 use Ride\Domain\Event\RideCreated;
-use Ride\Domain\Event\RideEvent;
-use Ride\Infrastructure\Projector\Doctrine\RideProjector;
 
 class RideCreatedEventHandler
 {
-    public function __construct(private RideProjector $projector)
+    public function __construct(private RideCreatedProjector $projector)
     {
     }
 
@@ -18,5 +15,4 @@ class RideCreatedEventHandler
     {
         $this->projector->apply($event);
     }
-
 }

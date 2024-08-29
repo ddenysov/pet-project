@@ -4,3 +4,9 @@ services:
 
     Ride\Application\Projector\Port\HealthCheckProjector:
         class: Ride\Infrastructure\Projector\Doctrine\HealthCheckProjector
+
+    Ride\Application\Projector\Port\RideUpdatedProjector:
+        class: Ride\Infrastructure\Projector\Doctrine\RideUpdatedProjector
+
+    Ride\Application\Projector\Port\RideCreatedProjector:
+        class: Ride\Infrastructure\Projector\Doctrine\RideCreatedProjector
