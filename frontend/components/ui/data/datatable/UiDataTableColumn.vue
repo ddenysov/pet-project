@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, defineProps } from 'vue'
+import { defineComponent } from 'vue'
 export interface Props {
   name: string,
   label?: string,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 import { useBooleanClass, useClass } from '../../composables/style/class'
 import type { Responsive } from '../../types'

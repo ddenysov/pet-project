@@ -9,9 +9,6 @@ use Ride\Delivery\Http\Request\Dto\NewRideInfo;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Ride\Application\Handlers\Command\HealthCheckCommand;
-use Ride\Application\Handlers\Query\HealthCheckQuery;
-use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 
@@ -25,10 +22,14 @@ class CreateRideController extends Controller
      */
     #[Route('/create-ride', name: 'create-ride', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(
-        #[MapQueryString] CreateRideRequest $ride,
+        #[MapRequestPayload] CreateRideRequest $ride,
         Request $request
     )
     {
+        $this->logger->debug('Request received', [
+            'data' => $request->toArray(),
+            'headers' => $request->headers->all(),
+        ]);
         $this->logger->info('Ride created');
         $this->commandBus->execute($ride->transform(CreateRideCommand::class));
 

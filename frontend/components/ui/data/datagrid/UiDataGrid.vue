@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useClient } from '@/shared/ui-kit/composables/client'
-import { defineProps, onMounted, type Ref, ref } from 'vue'
+import {onMounted, type Ref, ref } from 'vue'
 import UiGrid from '@/shared/ui-kit/ui/grid/UiGrid.vue'
 import UiCol from '@/shared/ui-kit/ui/grid/UiCol.vue'
 

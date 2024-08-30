@@ -155,7 +155,8 @@ export const useFormStore = defineStore('form', {
                 const res = await $fetch(action, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer lalalal`,
                     },
                     body: JSON.stringify(values)
                 });

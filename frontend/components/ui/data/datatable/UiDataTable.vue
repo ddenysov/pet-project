@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, getCurrentInstance, h } from 'vue'
+import { ref, getCurrentInstance, h } from 'vue'
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
 import { useClient } from './client'
