@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import { useFormStore } from './store/index';
 const store = useFormStore();
 
@@ -14,7 +13,6 @@ const emit = defineEmits(['error', 'submit', 'click'])
 
 const onClick = async () => {
   try {
-    console.log('ok');
     const res = await store.submit(props.form, props.action);
     emit('submit', { res, values: store.getValues(props.form)});
   } catch (e: any) {

@@ -18,8 +18,8 @@ class Kernel extends BaseKernel
         parent::boot();
         $channelMap = [
             'iam' => [
-                UserPasswordResetRequested::getName(),
-                UserRegistered::getName(),
+                UserPasswordResetRequested::getEventName(),
+                UserRegistered::getEventName(),
             ]
         ];
 
