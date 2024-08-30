@@ -2,7 +2,7 @@
 import { defineProps, ref, getCurrentInstance, h } from 'vue'
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
-import { useClient } from '@/components/data/datatable/client'
+import { useClient } from './client'
 import { onMounted } from 'vue';
 const { fetchData } = useClient()
 import type { Ref } from 'vue'
