@@ -8,7 +8,41 @@ interface FetchDataOptions<T> extends UseFetchOptions<T> {
     body?: any;
 }
 
-export function useApiService() {
+export function useApi() {
+    const post = async (url: string, body: any) => {
+        const headers: HeadersInit = {
+            'Content-Type': 'application/json',
+        };
+
+        if (true) {
+            headers['Authorization'] = `Bearer OLOLO`;
+        }
+
+        try {
+            await $fetch(
+                url,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers,
+                },
+            );
+        } catch (err) {
+            console.error(`API request failed: ${err}`);
+            throw err;
+        }
+    };
+
+    return {
+        post: async (url: string, body: any) => {
+            console.log('trololo');
+
+            return await post(url, body);
+        },
+    }
+}
+
+export function useApiService2() {
     const baseUrl = useRuntimeConfig().public.apiBaseUrl || 'https://api.example.com';
 
     const authStore = useAuthStore();

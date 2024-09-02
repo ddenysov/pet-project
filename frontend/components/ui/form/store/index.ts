@@ -2,6 +2,11 @@
 import {defineStore} from 'pinia'
 import {ValidationError} from 'yup'
 import {createYupSchema} from '../validation/schema'
+import {useApi} from "~/components/composables/api/useApiService";
+
+interface Ride {
+    name: string;
+}
 
 type Value<T> = {
     [value: string]: T;
@@ -152,14 +157,9 @@ export const useFormStore = defineStore('form', {
                 const values = this.getValues(form);
                 this.setLoading(form, true);
 
-                const res = await $fetch(action, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer lalalal`,
-                    },
-                    body: JSON.stringify(values)
-                });
+                const {post} = useApi();
+
+                const res = post(action, values);
                 this.setLoading(form, false);
 
                 return res;
