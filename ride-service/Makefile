@@ -44,3 +44,6 @@ consume:
 	docker-compose run $(APP) symfony console events:consume
 
 setup: install database schema
+
+log:
+	docker-compose exec ride-service-consumer tail -f ../logs/app.log
