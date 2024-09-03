@@ -2,6 +2,7 @@
   <div>
     <h1>Create Ride</h1>
 
+    <div>
     <ui-flex>
       <ui-flex grow="1">-</ui-flex>
       <ui-flex grow="1" direction="column">
@@ -21,6 +22,7 @@
       </ui-flex>
       <ui-flex grow="1">-</ui-flex>
     </ui-flex>
+    </div>
   </div>
 </template>
 <script setup lang="ts">

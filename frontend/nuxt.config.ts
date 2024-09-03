@@ -8,9 +8,6 @@ export default defineNuxtConfig({
         '@primevue/nuxt-module',
         '@nuxt-alt/proxy',
     ],
-    plugins: [
-        '~/plugins/fetch.ts',
-    ],
     components: [
         {
             path: '~/components/ui',
@@ -44,10 +41,5 @@ export default defineNuxtConfig({
         '/api/ride/**': {
             proxy: { to: "http://localhost:8000/ride/**", },
         }
-    },
-    runtimeConfig: {
-        public: {
-            apiBaseUrl: process.env.API_BASE_URL || 'https://api.example.com',
-        },
     },
 })

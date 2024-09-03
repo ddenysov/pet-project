@@ -1,3 +1,8 @@
+import {bool} from "yup";
+import { useCookie } from 'nuxt/app';
+
+
+
 export const useUserStore = defineStore('user', {
     state: () => ({
         token: '',
@@ -8,6 +13,7 @@ export const useUserStore = defineStore('user', {
     actions: {
         init(session: any) {
             if (session && session.name) {
+                console.log('OK2');
                 const data = JSON.parse(session.name);
 
                 this.$patch({
@@ -21,6 +27,8 @@ export const useUserStore = defineStore('user', {
          * @param token
          */
         setToken(token: string) {
+            console.log('OK1');
+            console.log(token);
             this.$patch({
                 token: token,
             });
@@ -30,6 +38,8 @@ export const useUserStore = defineStore('user', {
          * Logout
          */
         logout(): void {
+            const session = useCookie('session');
+            session.value = '';
             this.$patch({
                 token: '',
                 email: '',
@@ -57,6 +67,20 @@ export const useUserStore = defineStore('user', {
                 emailChecked: true,
                 emailExists: value,
             });
+        },
+
+        /**
+         * Is logged in
+         */
+        isLoggedIn(): boolean {
+            return !!this.token;
+        },
+
+        /**
+         * Get JWT Token
+         */
+        getToken(): string {
+            return this.token;
         },
     }
 })

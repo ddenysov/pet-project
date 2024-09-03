@@ -1,29 +1,22 @@
 <script setup lang="ts">
 import {useUserStore} from "~/stores/user";
 const store = useUserStore();
-const session = useCookie<{ name: string }>('session')
-
-const isLoggedIn = () => {
-  return store.token;
-}
-
-const logOut = () => {
-  store.logout();
-  session.value = { name: '' };
-}
 </script>
 
 <template>
   <div>
     <p>Some default layout content shared across all pages</p>
+    <p>Token: {{ store.getToken() }}</p>
+    <p>Logged in: {{ store.isLoggedIn() }}</p>
     <ui-nav-link to="/" label="home" />
-    <ui-nav-link to="/sign-in" label="register" />
-    <ui-nav-link to="/ride/create" label="Create Ride" />
+    <ui-nav-link v-if="!store.isLoggedIn()" to="/login" label="Увійти" />
+    <ui-nav-link v-if="!store.isLoggedIn()" to="/register" label="Реєстрація" />
+    <ui-nav-link v-if="store.isLoggedIn()" to="/ride/create" label="Create Ride" />
     <ui-link
-      v-if="isLoggedIn()"
+      v-if="store.isLoggedIn()"
       to="/sign-in"
       label="log out"
-      @click="logOut()"
+      @click="store.logout()"
     />
     <slot />
   </div>

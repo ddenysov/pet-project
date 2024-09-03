@@ -29,7 +29,6 @@ onMounted(async () => {
 });
 
 const onPage = async (event: any) => {
-  console.log(event)
   await loadData();
 }
 

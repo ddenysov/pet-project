@@ -1,6 +1,5 @@
 import { useFetch } from 'nuxt/app';
 import type { UseFetchOptions } from 'nuxt/app';
-import { useAuthStore } from '~/stores/auth';
 
 interface FetchDataOptions<T> extends UseFetchOptions<T> {
     method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -8,23 +7,62 @@ interface FetchDataOptions<T> extends UseFetchOptions<T> {
     body?: any;
 }
 
+const initialHeaders: HeadersInit = {
+    'Content-Type': 'application/json',
+};
+
+const userStore = useUserStore();
+
+/**
+ * Get headers
+ */
+function getHeaders(): HeadersInit
+{
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
+
+    if (true) {
+        headers['Authorization'] = `Bearer OLOLO`;
+    }
+
+    return headers;
+}
+
 export function useApi() {
-    const post = async (url: string, body: any) => {
-        const headers: HeadersInit = {
-            'Content-Type': 'application/json',
-        };
-
-        if (true) {
-            headers['Authorization'] = `Bearer OLOLO`;
-        }
-
+    /**
+     * Post request
+     * @param url
+     * @param data
+     */
+    const post = async (url: string, data: any): Promise<void> => {
         try {
             await $fetch(
                 url,
                 {
                     method: 'POST',
-                    body: JSON.stringify(body),
-                    headers,
+                    body: JSON.stringify(data),
+                    headers: getHeaders(),
+                },
+            );
+        } catch (err) {
+            console.error(`API request failed: ${err}`);
+            throw err;
+        }
+    };
+
+    /**
+     * Get request
+     * @param url
+     * @param data
+     */
+    const get = async (url: string, data: any): Promise<void> => {
+        try {
+            await $fetch(
+                url,
+                {
+                    method: 'GET',
+                    headers: getHeaders(),
                 },
             );
         } catch (err) {
@@ -34,10 +72,22 @@ export function useApi() {
     };
 
     return {
-        post: async (url: string, body: any) => {
-            console.log('trololo');
+        /**
+         * Run query
+         * @param url
+         * @param data
+         */
+        query: async (url: string, data?: Array<string>) => {
+            return await get(url, data);
+        },
 
-            return await post(url, body);
+        /**
+         * Execute command
+         * @param url
+         * @param data
+         */
+        command: async (url: string, data?: any) => {
+            return await post(url, data);
         },
     }
 }

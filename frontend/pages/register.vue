@@ -19,7 +19,7 @@
         />
 
         <ui-submit-button
-          action="/iam/register"
+          action="/api/iam/register"
           form="sign-up"
           label="Реєстрація"
           name="submit"
@@ -35,10 +35,6 @@
 import {useUserStore} from "~/stores/user";
 
 const store = useUserStore();
-
-console.log(store.setToken('as'));
-
-//store.setToken('ololo');
 
 const onRegisterSuccess = (res: any) => {
   console.log('res');

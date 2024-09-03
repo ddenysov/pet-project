@@ -2,7 +2,6 @@
 import {defineStore} from 'pinia'
 import {ValidationError} from 'yup'
 import {createYupSchema} from '../validation/schema'
-import {useApi} from "~/components/composables/api/useApiService";
 
 interface Ride {
     name: string;
@@ -31,6 +30,19 @@ type FormState = {
     validation: Validation,
     errors: Errors,
     loading: Loading,
+}
+
+function getHeaders(): HeadersInit
+{
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
+
+    if (true) {
+        headers['Authorization'] = `Bearer TROLOLO`;
+    }
+
+    return headers;
 }
 
 export const useFormStore = defineStore('form', {
@@ -155,11 +167,16 @@ export const useFormStore = defineStore('form', {
 
             try {
                 const values = this.getValues(form);
-                this.setLoading(form, true);
+                //this.setLoading(form, true);
 
-                const {post} = useApi();
-
-                const res = post(action, values);
+                const res = await $fetch(
+                    action,
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(values),
+                        headers: getHeaders(),
+                    },
+                );
                 this.setLoading(form, false);
 
                 return res;

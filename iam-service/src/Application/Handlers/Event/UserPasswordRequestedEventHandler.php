@@ -8,7 +8,7 @@ use Iam\Domain\Event\UserPasswordResetRequested;
 class UserPasswordRequestedEventHandler
 {
 
-    public function __construct(private UserProjector $projector)
+    public function __construct()
     {
     }
 
