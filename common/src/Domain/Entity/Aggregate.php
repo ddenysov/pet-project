@@ -34,7 +34,7 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      */
     public function recordThat(Event $event): void
     {
-        if (!$event->getAggregateId()) {
+        if ($this->getId()) {
             $event->setAggregateId($this->getId());
         }
         $this->apply($event);

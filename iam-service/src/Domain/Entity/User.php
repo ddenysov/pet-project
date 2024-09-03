@@ -22,12 +22,6 @@ final class User extends Aggregate
      */
     private UserEmail $email;
 
-    protected static array $subscribers = [
-        UserRegistered::class => [
-            'onUserRegistered',
-        ],
-    ];
-
     /**
      * @return UserId
      * @throws InvalidUuidException
@@ -103,8 +97,13 @@ final class User extends Aggregate
 
     protected function onUserRegistered(UserRegistered $event)
     {
-        $this->setId($event->aggregateId);
+        $this->setId($event->getAggregateId());
         $this->setEmail($event->email);
         $this->setPassword($event->password);
+    }
+
+    protected function onUserPasswordResetRequested(UserPasswordResetRequested $event)
+    {
+        // todo implement reset token
     }
 }

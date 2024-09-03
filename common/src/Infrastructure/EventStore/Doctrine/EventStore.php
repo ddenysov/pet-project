@@ -93,7 +93,7 @@ class EventStore extends BaseEventStore implements EventStorePort
 
         foreach ($events as $event) {
             $eventStream[] = $this->eventSerializer->deserialize(
-                name: $event->getName(),
+                name: $event->getEventName(),
                 payload: $event->getPayload(),
             );
         }
