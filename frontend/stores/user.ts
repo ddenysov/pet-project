@@ -1,24 +1,37 @@
 import {bool} from "yup";
 import { useCookie } from 'nuxt/app';
 
+function decodeJWT(token: string) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+        atob(base64)
+            .split('')
+            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+            .join('')
+    );
 
+    return JSON.parse(jsonPayload);
+}
 
 export const useUserStore = defineStore('user', {
     state: () => ({
         token: '',
         email: '',
+        id: '',
         emailChecked: false,
         emailExists: false,
     }),
     actions: {
-        init(session: any) {
-            if (session && session.name) {
-                console.log('OK2');
-                const data = JSON.parse(session.name);
+        init() {
+            const tokenCookie = useCookie('token');
+            if (tokenCookie && tokenCookie.value) {
+                const decoded = decodeJWT(tokenCookie.value);
 
                 this.$patch({
-                    token: data.token,
-                    email: data.email,
+                    token: tokenCookie.value?.toString(),
+                    email: decoded.email,
+                    id: decoded.id,
                 });
             }
         },
@@ -27,10 +40,14 @@ export const useUserStore = defineStore('user', {
          * @param token
          */
         setToken(token: string) {
-            console.log('OK1');
-            console.log(token);
+            const tokenCookie = useCookie('token');
+            tokenCookie.value = token;
+            const decoded = decodeJWT(tokenCookie.value);
+
             this.$patch({
-                token: token,
+                token: tokenCookie.value?.toString(),
+                email: decoded.email,
+                id: decoded.id,
             });
         },
 
@@ -38,11 +55,12 @@ export const useUserStore = defineStore('user', {
          * Logout
          */
         logout(): void {
-            const session = useCookie('session');
-            session.value = '';
+            const tokenCookie = useCookie('token');
+            tokenCookie.value = '';
             this.$patch({
                 token: '',
                 email: '',
+                id: '',
                 emailChecked: false,
                 emailExists: false,
             });

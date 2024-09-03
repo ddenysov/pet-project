@@ -8,14 +8,16 @@ const store = useUserStore();
     <p>Some default layout content shared across all pages</p>
     <p>Token: {{ store.getToken() }}</p>
     <p>Logged in: {{ store.isLoggedIn() }}</p>
+    <p>Id: {{ store.id }}</p>
+    <p>Email: {{ store.email }}</p>
     <ui-nav-link to="/" label="home" />
     <ui-nav-link v-if="!store.isLoggedIn()" to="/login" label="Увійти" />
     <ui-nav-link v-if="!store.isLoggedIn()" to="/register" label="Реєстрація" />
-    <ui-nav-link v-if="store.isLoggedIn()" to="/ride/create" label="Create Ride" />
+    <ui-nav-link v-if="store.isLoggedIn()" to="/ride/create" label="Створити поктушку" />
     <ui-link
       v-if="store.isLoggedIn()"
       to="/sign-in"
-      label="log out"
+      label="Вийти"
       @click="store.logout()"
     />
     <slot />

@@ -31,15 +31,17 @@ type FormState = {
     errors: Errors,
     loading: Loading,
 }
+import {useUserStore} from "~/stores/user";
 
 function getHeaders(): HeadersInit
 {
+    const store = useUserStore();
     const headers: HeadersInit = {
         'Content-Type': 'application/json',
     };
 
-    if (true) {
-        headers['Authorization'] = `Bearer TROLOLO`;
+    if (store.token) {
+        headers['Authorization'] = `Bearer ` + store.token;
     }
 
     return headers;
@@ -167,7 +169,7 @@ export const useFormStore = defineStore('form', {
 
             try {
                 const values = this.getValues(form);
-                //this.setLoading(form, true);
+                this.setLoading(form, true);
 
                 const res = await $fetch(
                     action,

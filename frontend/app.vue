@@ -8,13 +8,13 @@
 import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css';
 import {useUserStore} from "~/stores/user";
-const session = useCookie<{ name: string }>('session')
+const tokenCookie = useCookie('token')
 
 console.log('session');
-console.log(session.value.name);
+console.log(tokenCookie.value);
 
 const userStore = useUserStore();
-userStore.init(session.value);
+userStore.init();
 
 
 </script>

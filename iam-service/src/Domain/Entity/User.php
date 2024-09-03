@@ -70,8 +70,8 @@ final class User extends Aggregate
         UserPassword $password
     ): User {
         $user = new self();
+        $user->setId(UserId::create());
         $user->recordThat(new UserRegistered(
-            UserId::create(),
             $email,
             $password,
         ));

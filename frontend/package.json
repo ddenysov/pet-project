@@ -13,6 +13,7 @@
     "@nuxt-alt/proxy": "^2.5.8",
     "@pinia/nuxt": "^0.5.3",
     "@primevue/themes": "^4.0.4",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.12.4",
     "pinia": "^2.2.2",
     "primeflex": "^3.3.1",

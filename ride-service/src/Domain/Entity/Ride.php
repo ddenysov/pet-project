@@ -31,7 +31,8 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         $rideId = RideId::create();
 
         $ride = new static();
-        $ride->recordThat(new RideCreated(aggregateId: $rideId, name: $name));
+        $ride->setId($rideId);
+        $ride->recordThat(new RideCreated(name: $name));
 
         return $ride;
     }
