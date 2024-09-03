@@ -91,3 +91,7 @@ services:
   Common\Infrastructure\Log\Monolog\EnvProcessor:
     tags:
       - { name: monolog.processor }
+
+  Common\Infrastructure\Security\Symfony\AuthGateListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
