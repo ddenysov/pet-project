@@ -21,7 +21,7 @@ class CreateRideController extends Controller
      * @throws \ReflectionException
      */
     #[Route('/create-ride', name: 'create-ride', methods: ['POST', 'GET'], format: 'json')]
-    #[CanCreateRide('ride')]
+    #[CanCreateRide()]
     public function __invoke(
         #[MapRequestPayload] CreateRideRequest $ride,
         Request $request

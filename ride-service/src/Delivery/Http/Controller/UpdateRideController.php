@@ -28,6 +28,19 @@ class UpdateRideController extends Controller
         #[MapQueryString] UpdatedRideRequest $request,
     )
     {
+        // has token
+        // has request data GET POST
+        // using request data need to find read model
+        // - find by what - implement in policy
+
+
+        $ride = $this->queryBus->execute(new FindByIdQuery($request->id));
+        $hasAccess = (new CanUpdateRide($identity, $ride))->check();
+
+        if (!$hasAccess) {
+            return new JsonResponse('Forbidden', 403);
+        }
+
         $this->logger->info('Ride update started');
         $this->commandBus->execute($request->transform(UpdateRideCommand::class));
 
