@@ -6,3 +6,11 @@ services:
     Ride\Application\Handlers\Query\HealthCheckQueryHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\HealthCheckQuery' }
+
+    Ride\Application\Handlers\Query\RideDataTableQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\RideDataTableQuery' }
+
+
+
+
