@@ -34,12 +34,16 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     public static function create(
         OrganizerId $organizerId,
         StringValue $name,
-    ): Ride {
+    ): Ride
+    {
         $rideId = RideId::create();
 
         $ride = new static();
         $ride->setId($rideId);
-        $ride->recordThat(new RideCreated(name: $name));
+        $ride->recordThat(new RideCreated(
+            name: $name,
+            organizerId: $organizerId,
+        ));
 
         return $ride;
     }
@@ -59,8 +63,9 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public function onRideCreated(RideCreated $event)
     {
-        $this->id   = $event->getAggregateId();
-        $this->name = $event->getName();
+        $this->id          = $event->getAggregateId();
+        $this->name        = $event->getName();
+        $this->organizerId = $event->getOrganizerId();
     }
 
     /**

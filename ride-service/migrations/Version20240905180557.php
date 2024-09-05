@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240829183837 extends AbstractMigration
+final class Version20240905180557 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -27,9 +27,9 @@ final class Version20240829183837 extends AbstractMigration
         $this->addSql('COMMENT ON COLUMN "health_check".id IS \'(DC2Type:uuid)\'');
         $this->addSql('CREATE TABLE "outbox" (event_id UUID NOT NULL, event_name VARCHAR(255) NOT NULL, status VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, payload JSON NOT NULL, PRIMARY KEY(event_id))');
         $this->addSql('COMMENT ON COLUMN "outbox".event_id IS \'(DC2Type:uuid)\'');
-        $this->addSql('CREATE TABLE "ride" (id UUID NOT NULL, name VARCHAR(255) NOT NULL, user_id UUID NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, start_date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, end_date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE "ride" (id UUID NOT NULL, name VARCHAR(255) NOT NULL, organizer_id UUID NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, start_date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, end_date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN "ride".id IS \'(DC2Type:uuid)\'');
-        $this->addSql('COMMENT ON COLUMN "ride".user_id IS \'(DC2Type:uuid)\'');
+        $this->addSql('COMMENT ON COLUMN "ride".organizer_id IS \'(DC2Type:uuid)\'');
         $this->addSql('CREATE TABLE messenger_messages (id BIGSERIAL NOT NULL, body TEXT NOT NULL, headers TEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, available_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, delivered_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
         $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');

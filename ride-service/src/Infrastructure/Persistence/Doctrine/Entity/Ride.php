@@ -21,7 +21,7 @@ class Ride
     private string $name;
 
     #[ORM\Column(type: UuidType::NAME)]
-    private ?Uuid $userId = null;
+    private ?Uuid $organizerId = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private DateTimeInterface $createdAt;
@@ -52,14 +52,14 @@ class Ride
         $this->name = $name;
     }
 
-    public function getUserId(): ?Uuid
+    public function getOrganizerId(): ?Uuid
     {
-        return $this->userId;
+        return $this->organizerId;
     }
 
-    public function setUserId(?Uuid $userId): void
+    public function setOrganizerId(?Uuid $organizerId): void
     {
-        $this->userId = $userId;
+        $this->organizerId = $organizerId;
     }
 
     public function getCreatedAt(): DateTimeInterface
