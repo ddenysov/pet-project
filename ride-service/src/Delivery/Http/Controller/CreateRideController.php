@@ -25,14 +25,16 @@ class CreateRideController extends Controller
     public function __invoke(
         #[MapRequestPayload] CreateRideRequest $ride,
         Request $request
-    )
-    {
+    ) {
         $this->logger->debug('Request received', [
             'data' => $request->toArray(),
             'headers' => $request->headers->all(),
         ]);
         $this->logger->info('Ride created');
-        $this->commandBus->execute($ride->transform(CreateRideCommand::class));
+        $this->commandBus->execute(new CreateRideCommand(
+            organizerId: $this->getIdentity()->getId()->toString(),
+            name: $ride->name
+        ));
 
         return new JsonResponse([
             'ok' => 'created',

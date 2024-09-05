@@ -10,6 +10,7 @@ use Ride\Domain\Entity\Healthcheck;
 use Ride\Domain\Entity\Ride;
 use Ride\Domain\Repository\Port\HealthCheckRepository;
 use Ride\Domain\Repository\Port\RideRepository;
+use Ride\Domain\ValueObject\OrganizerId;
 
 
 final class CreateRideCommandHandler extends CommandHandler
@@ -24,7 +25,10 @@ final class CreateRideCommandHandler extends CommandHandler
 
     protected function handle(CreateRideCommand $command): void
     {
-        $ride = Ride::create(new StringValue($command->name));
+        $ride = Ride::create(
+            organizerId: new OrganizerId($command->organizerId),
+            name: new StringValue($command->name)
+        );
 
         $this->repository->save($ride);
     }

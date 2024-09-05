@@ -6,6 +6,7 @@
         <cache>
           <versions>
             <info id="Local/Users/dmytro.denysov/Work/Sites/service/common/vendor/autoload.php" version="11.2.6" />
+            <info id="Local/Users/dmytro.denysov/Work/Sites/service/iam-service/vendor/autoload.php" version="11.2.7" />
           </versions>
         </cache>
       </tool>
