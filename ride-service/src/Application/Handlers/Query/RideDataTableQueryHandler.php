@@ -9,6 +9,7 @@ class RideDataTableQueryHandler
 {
     /**
      * @param LoggerInterface $logger
+     * @param RideView $view
      */
     public function __construct(private LoggerInterface $logger, RideView $view)
     {
