@@ -73,6 +73,11 @@ services:
     class: Common\Infrastructure\EventHandler\Kafka\EventConsumer
     public: true
 
+  # QUERY BUILDER
+  Common\Application\QueryBuilder\Port\QueryBuilder:
+    class: Common\Infrastructure\QueryBuilder\Doctrine\QueryBuilder
+    public: true
+
   # OUTBOX PROCESSOR
   Common\Delivery\Schedule\Outbox\ProcessOutboxHandler:
     tags:

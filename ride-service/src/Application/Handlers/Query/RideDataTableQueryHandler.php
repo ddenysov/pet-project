@@ -2,6 +2,7 @@
 
 namespace Ride\Application\Handlers\Query;
 
+use Common\Application\QueryBuilder\Port\QueryBuilder;
 use Psr\Log\LoggerInterface;
 use Ride\Application\Handlers\Query\Projection\HealthCheck;
 
@@ -11,14 +12,14 @@ class RideDataTableQueryHandler
      * @param LoggerInterface $logger
      * @param RideView $view
      */
-    public function __construct(private LoggerInterface $logger, RideView $view)
+    public function __construct(private LoggerInterface $logger, private QueryBuilder $queryBuilder)
     {
     }
 
     public function __invoke(RideDataTableQuery $query)
     {
-        return [
-            'ololo'
-        ];
+        $rides = $this->queryBuilder->table('ride')->get();
+
+        return RideView::collection($rides);
     }
 }
