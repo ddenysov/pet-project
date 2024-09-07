@@ -2,6 +2,7 @@
 
 namespace Ride\Delivery\Http\Controller;
 
+use Common\Components\DataTable\View\DataTableView;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Ride\Application\Handlers\Command\CreateRideCommand;
 use Ride\Application\Handlers\Query\RideDataTableQuery;
@@ -25,6 +26,8 @@ class ListRideController extends Controller
     public function __invoke(
         Request $request
     ) {
-        return new JsonResponse($this->queryBus->execute(new RideDataTableQuery()));
+        return new JsonResponse(
+            new DataTableView($this->queryBus->execute(new RideDataTableQuery()))
+        );
     }
 }
