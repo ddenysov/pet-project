@@ -6,7 +6,10 @@
     <ui-flex>
       <ui-flex grow="1">-</ui-flex>
       <ui-flex grow="1" direction="column">
-        List
+        <ui-data-grid
+          name="rides"
+
+        />
       </ui-flex>
       <ui-flex grow="1">-</ui-flex>
     </ui-flex>
@@ -14,6 +17,5 @@
   </div>
 </template>
 <script setup lang="ts">
-
 
 </script>

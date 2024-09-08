@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
-import { useBooleanClass } from '@/shared/ui-kit/composables/style/class'
+import { useBooleanClass } from '../..//composables/style/class'
 
 export interface Props {
   noGutter?: boolean

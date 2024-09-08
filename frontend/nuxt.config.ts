@@ -26,6 +26,9 @@ export default defineNuxtConfig({
                 'IconField',
                 'InputIcon',
                 'InputText',
+                'Card',
+                'Skeleton',
+                'DataView',
             ],
         },
         options: {
