@@ -26,11 +26,6 @@ const data: Ref<any> = ref([
   }
 ])
 
-const loadData = async () => {
-  loading.value = true
-  data.value = await fetchData()
-  loading.value = false
-}
 
 onMounted(async () => {
   //await loadData()
@@ -43,7 +38,29 @@ const onPage = async (event: any) => {
 </script>
 
 <template>
+
+  <div>{{ store.loading }}</div>
+
+  <ui-grid v-if="!!store.loading.rides">
+    <ui-col v-for="(item, index) in [1, 2, 3, 4, 5, 6, 7, 8]" :key="index" :col="3">
+      <div class="m-4">
+        <Skeleton class="h-10rem" />
+
+        <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
+
+        <Skeleton class="mt-4 w-10 ml-2" />
+        <Skeleton class="mt-1 ml-2 " />
+        <Skeleton class="mt-1 w-10 ml-2 " />
+        <Skeleton class="mt-1 ml-2 " />
+        <Skeleton class="mt-1 w-10 ml-2 " />
+
+        <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
+      </div>
+
+    </ui-col>
+  </ui-grid>
   <DataView
+    v-else
     :value="store.rows.rides"
     paginator
     :rows="8"
@@ -52,7 +69,7 @@ const onPage = async (event: any) => {
     @page="onPage"
   >
     <template #list="slotProps">
-      <ui-grid v-if="!loading">
+      <ui-grid>
         <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="3">
           <Card class="m-4" style="overflow: hidden">
             <template #header>
@@ -75,24 +92,6 @@ const onPage = async (event: any) => {
               </div>
             </template>
           </Card>
-        </ui-col>
-      </ui-grid>
-      <ui-grid v-else>
-        <ui-col v-for="(item, index) in [1, 2, 3, 4, 5, 6, 7, 8]" :key="index" :col="3">
-          <div class="m-4">
-            <Skeleton class="h-10rem" />
-
-            <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
-
-            <Skeleton class="mt-4 w-10 ml-2" />
-            <Skeleton class="mt-1 ml-2 " />
-            <Skeleton class="mt-1 w-10 ml-2 " />
-            <Skeleton class="mt-1 ml-2 " />
-            <Skeleton class="mt-1 w-10 ml-2 " />
-
-            <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
-          </div>
-
         </ui-col>
       </ui-grid>
     </template>

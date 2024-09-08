@@ -53,13 +53,13 @@ export const useDataStore = defineStore('data', {
     actions: {
         /**
          * Set form loading state
-         * @param form
+         * @param data
          * @param value
          */
-        setLoading(form: string, value: boolean) {
+        setLoading(data: string, value: boolean) {
             this.$patch({
                 loading: {
-                    [form]: value,
+                    [data]: value,
                 }
             })
         },
@@ -106,7 +106,6 @@ export const useDataStore = defineStore('data', {
                         headers: getHeaders(),
                     },
                 );
-
 
                 this.setRows(data, res.data);
                 console.log(data);
