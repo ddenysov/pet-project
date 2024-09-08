@@ -59,4 +59,9 @@ class QueryBuilder implements QueryBuilderPort
 
         return $this;
     }
+
+    public function limit()
+    {
+
+    }
 }
