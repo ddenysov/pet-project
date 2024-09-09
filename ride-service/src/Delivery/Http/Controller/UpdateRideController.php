@@ -3,49 +3,39 @@
 namespace Ride\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Ride\Application\Handlers\Command\CreateRideCommand;
 use Ride\Application\Handlers\Command\UpdateRideCommand;
-use Ride\Delivery\Http\Request\Dto\NewRideInfo;
+use Ride\Application\Handlers\Query\FindRideByIdQuery;
 use Ride\Delivery\Http\Request\Dto\UpdatedRideRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Ride\Application\Handlers\Command\HealthCheckCommand;
-use Ride\Application\Handlers\Query\HealthCheckQuery;
-use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 
 class UpdateRideController extends Controller
 {
     /**
+     * @param string $id
      * @param UpdatedRideRequest $request
      * @return JsonResponse
      * @throws \ReflectionException
      */
-    #[Route('/update-ride', name: 'update-ride', methods: ['POST', 'GET'], format: 'json')]
+    #[Route('/update-ride/{id}', name: 'update-ride', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(
-        #[MapQueryString] UpdatedRideRequest $request,
+        string $id,
+        #[MapRequestPayload] UpdatedRideRequest $request,
     )
     {
-        // has token
-        // has request data GET POST
-        // using request data need to find read model
-        // - find by what - implement in policy
-
-
-        $ride = $this->queryBus->execute(new FindByIdQuery($request->id));
-        $hasAccess = (new CanUpdateRide($identity, $ride))->check();
-
-        if (!$hasAccess) {
-            return new JsonResponse('Forbidden', 403);
-        }
+        $ride = $this->queryBus->execute(new FindRideByIdQuery($id));
 
         $this->logger->info('Ride update started');
-        $this->commandBus->execute($request->transform(UpdateRideCommand::class));
+        $this->commandBus->execute(new UpdateRideCommand(
+            id: $id,
+            name: $request->name,
+        ));
+        $this->logger->info('Ride update finished');
 
         return new JsonResponse([
-            'ok' => 'created',
+            'ok' => 'updated',
         ]);
     }
 }

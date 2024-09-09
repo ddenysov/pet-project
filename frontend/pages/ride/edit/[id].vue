@@ -22,11 +22,11 @@
             label="Назва"
             name="name"
             :original="store.ride.name"
-            :validation="{ required: true, email: true }"
+            :validation="{ required: true }"
           />
 
           <ui-submit-button
-            action="/api/ride/edit-ride"
+            :action="'/api/ride/update-ride/' + route.params.id"
             form="ride"
             label="Редагувати"
             name="submit"

@@ -25,7 +25,7 @@ class RideUpdated extends Event implements RideEvent
     /**
      * @return StringValue
      */
-    public function getName(): StringValue
+    public function getRideName(): StringValue
     {
         return $this->name;
     }

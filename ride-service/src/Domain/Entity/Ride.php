@@ -61,7 +61,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @param RideCreated $event
      * @return void
      */
-    public function onRideCreated(RideCreated $event)
+    public function onRideCreated(RideCreated $event): void
     {
         $this->id          = $event->getAggregateId();
         $this->name        = $event->getName();
@@ -72,9 +72,9 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @param RideUpdated $event
      * @return void
      */
-    public function onRideUpdated(RideUpdated $event)
+    public function onRideUpdated(RideUpdated $event): void
     {
-        $this->name = $event->getName();
+        $this->name = $event->getRideName();
     }
 
     public function getName(): StringValue

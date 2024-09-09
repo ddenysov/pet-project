@@ -33,4 +33,11 @@ interface QueryBuilder
      * @return array
      */
     public function first(): array;
+
+    /**
+     * @param string $column
+     * @param string $direction
+     * @return $this
+     */
+    public function orderBy(string $column, string $direction = 'asc'): static;
 }

@@ -59,6 +59,18 @@ class QueryBuilder implements QueryBuilderPort
 
     /**
      * @param string $column
+     * @param string $direction
+     * @return $this
+     */
+    public function orderBy(string $column, string $direction = 'asc'): static
+    {
+        $this->queryBuilder->orderBy($column, $direction);
+
+        return $this;
+    }
+
+    /**
+     * @param string $column
      * @param string $operand
      * @param string $value
      * @return $this
