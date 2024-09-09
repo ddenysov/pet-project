@@ -14,7 +14,7 @@ const store = useUserStore();
     <ui-nav-link v-if="!store.isLoggedIn()" to="/login" label="Увійти" />
     <ui-nav-link v-if="!store.isLoggedIn()" to="/register" label="Реєстрація" />
     <ui-nav-link v-if="store.isLoggedIn()" to="/ride/create" label="Створити поктушку" />
-    <ui-nav-link to="/ride/list" label="Список покатушек" />
+    <ui-nav-link to="/ride" label="Список покатушек" />
     <ui-link
       v-if="store.isLoggedIn()"
       to="/sign-in"

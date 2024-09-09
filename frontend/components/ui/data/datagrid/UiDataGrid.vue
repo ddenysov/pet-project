@@ -32,6 +32,10 @@ if (!store.rows.ride) {
   store.load('rides', '/api/ride/list-ride');
 }
 
+async function edit(id: string) {
+  await navigateTo('/ride/edit/' + id)
+}
+
 </script>
 
 <template>
@@ -53,7 +57,7 @@ if (!store.rows.ride) {
             <template #header>
               alalal
             </template>
-            <template #title><ui-nav-link :label="item.name" :to="'/ride/' + item.id" /></template>
+            <template #title><ui-nav-link :label="item.name" :to="'/ride/view/' + item.id" /></template>
             <template #subtitle>Card subtitle</template>
             <template #content>
               <p class="m-0">
@@ -65,8 +69,8 @@ if (!store.rows.ride) {
             </template>
             <template #footer>
               <div class="flex gap-3 mt-1">
-                <Button label="Cancel" severity="secondary" outlined class="w-full" />
-                <Button label="Save" class="w-full" />
+                <Button label="Видалити" severity="danger" outlined class="w-full" />
+                <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
               </div>
             </template>
           </Card>
