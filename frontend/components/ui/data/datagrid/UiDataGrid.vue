@@ -11,7 +11,7 @@ export interface Props {
 const store = useDataStore();
 
 console.log('alala');
-store.load('rides', '/api/ride/list-ride');
+
 
 defineProps<Props>()
 
@@ -27,46 +27,29 @@ const data: Ref<any> = ref([
 ])
 
 
-onMounted(async () => {
-  //await loadData()
-});
+console.log('store.rows');
+console.log(store.rows);
+if (!store.rows.ride) {
+  store.load('rides', '/api/ride/list-ride');
+}
 
-const onPage = async (event: any) => {
-  //await loadData();
+const onMounted = async (event: any) => {
+  console.log('OOKOK');
 }
 
 </script>
 
 <template>
 
-  <div>{{ store.loading }}</div>
+  {{ store.isLoading('rides') }}
 
-  <ui-grid v-if="!!store.loading.rides">
-    <ui-col v-for="(item, index) in [1, 2, 3, 4, 5, 6, 7, 8]" :key="index" :col="3">
-      <div class="m-4">
-        <Skeleton class="h-10rem" />
-
-        <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
-
-        <Skeleton class="mt-4 w-10 ml-2" />
-        <Skeleton class="mt-1 ml-2 " />
-        <Skeleton class="mt-1 w-10 ml-2 " />
-        <Skeleton class="mt-1 ml-2 " />
-        <Skeleton class="mt-1 w-10 ml-2 " />
-
-        <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
-      </div>
-
-    </ui-col>
-  </ui-grid>
   <DataView
-    v-else
+    v-if="store.rows.rides"
     :value="store.rows.rides"
     paginator
     :rows="8"
     :total-records="10000"
     lazy
-    @page="onPage"
   >
     <template #list="slotProps">
       <ui-grid>
@@ -75,7 +58,7 @@ const onPage = async (event: any) => {
             <template #header>
               alalal
             </template>
-            <template #title>{{ item.name }}</template>
+            <template #title><ui-nav-link :label="item.name" :to="'/ride/' + item.id" /></template>
             <template #subtitle>Card subtitle</template>
             <template #content>
               <p class="m-0">

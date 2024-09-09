@@ -85,8 +85,15 @@ export const useDataStore = defineStore('data', {
          * Is field loading
          * @param form
          */
-        isLoading(form: string): boolean {
-            return this.loading[form];
+        isLoading(data: string): boolean {
+            const isLoading = (this.loading[data] && !process.server);
+
+            console.log('XXXXXX');
+            console.log(isLoading);
+            console.log(this.loading);
+            console.log(this.rows.rides.length);
+
+            return this.loading[data] && !process.server && this.rows.rides.length === 0;
         },
 
         /**
@@ -99,7 +106,7 @@ export const useDataStore = defineStore('data', {
                 console.log('aasasas');
                 this.setLoading(data, true);
 
-                const res: any = await $fetch(
+                const res: any = await useFetch(
                     resource,
                     {
                         method: 'GET',
@@ -107,9 +114,12 @@ export const useDataStore = defineStore('data', {
                     },
                 );
 
-                this.setRows(data, res.data);
+
                 console.log(data);
-                console.log(res.data);
+                console.log(res.data.value.data);
+
+                this.setRows(data, res.data.value.data);
+
 
                 this.setLoading(data, false);
 
