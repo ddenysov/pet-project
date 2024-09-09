@@ -35,6 +35,22 @@ store.$patch({
   },
 });
 
+console.log('CREATED BUTTON');
+console.log(props.original);
+
+watch(
+  () => props.original,
+  (newValue, oldValue) => {
+    console.log(`Count changed from ${oldValue} to ${newValue}`);
+    store.$patch({
+      values: {
+        [props.form]: {
+          [props.name]: newValue,
+        },
+      },
+    })
+  }
+);
 </script>
 
 <template>
