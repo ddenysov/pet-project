@@ -76,7 +76,7 @@ async function joinRide(id: string) {
             </template>
             <template #footer>
               <div class="flex gap-3 mt-1">
-                <Button @click="joinRide(item.id)" label="Поїхати" severity="danger" outlined class="w-full" />
+                <Button v-if="!item.joined" @click="joinRide(item.id)" label="Поїхати" severity="danger" outlined class="w-full" />
                 <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
               </div>
             </template>

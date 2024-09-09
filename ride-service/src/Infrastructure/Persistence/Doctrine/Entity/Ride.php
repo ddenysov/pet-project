@@ -32,6 +32,9 @@ class Ride
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private DateTimeInterface $endDateTime;
 
+    #[ORM\Column(type: Types::JSON, options: ['default'=> '[]'])]
+    private array $riders = [];
+
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -90,5 +93,24 @@ class Ride
     public function setEndDateTime(DateTimeInterface $endDateTime): void
     {
         $this->endDateTime = $endDateTime;
+    }
+
+    public function getRiders(): array
+    {
+        return $this->riders;
+    }
+
+    public function setRiders(array $riders): void
+    {
+        $this->riders = $riders;
+    }
+
+    /**
+     * @param string $riderId
+     * @return void
+     */
+    public function addRider(string $riderId)
+    {
+        $this->riders[] = $riderId;
     }
 }

@@ -3,15 +3,21 @@
 namespace Ride\Application\Handlers\Query;
 
 use Common\Application\QueryBuilder\Port\QueryBuilder;
+use Common\Delivery\Http\Security\Identity;
 use Psr\Log\LoggerInterface;
 
 class FindRideByIdQueryHandler
 {
     /**
      * @param LoggerInterface $logger
-     * @param RideView $view
+     * @param QueryBuilder $queryBuilder
+     * @param Identity $identity
      */
-    public function __construct(private LoggerInterface $logger, private QueryBuilder $queryBuilder)
+    public function __construct(
+        private LoggerInterface $logger,
+        private QueryBuilder $queryBuilder,
+        private Identity $identity,
+    )
     {
     }
 
@@ -21,8 +27,10 @@ class FindRideByIdQueryHandler
      */
     public function __invoke(FindRideByIdQuery $query): RideView
     {
-        $ride = $this->queryBuilder->table('ride')->id($query->id);
+        $ride = $this->queryBuilder
+            ->table('ride')
+            ->id($query->id);
 
-        return new RideView($ride);
+        return new RideView($ride, $this->identity);
     }
 }

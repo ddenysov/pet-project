@@ -10,3 +10,6 @@ services:
 
     Ride\Application\Projector\Port\RideCreatedProjector:
         class: Ride\Infrastructure\Projector\Doctrine\RideCreatedProjector
+
+    Ride\Application\Projector\Port\RiderJoinedProjector:
+        class: Ride\Infrastructure\Projector\Doctrine\RideJoinedProjector

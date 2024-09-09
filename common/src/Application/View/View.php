@@ -2,14 +2,16 @@
 
 namespace Common\Application\View;
 
+use Common\Delivery\Http\Security\Identity;
 use JsonSerializable;
 
 abstract readonly class View implements JsonSerializable
 {
     /**
      * @param array $data
+     * @param Identity|null $identity
      */
-    public function __construct(protected array $data = [])
+    public function __construct(protected array $data, protected Identity|null $identity = null)
     {
     }
 
@@ -41,13 +43,14 @@ abstract readonly class View implements JsonSerializable
 
     /**
      * @param array $collection
+     * @param Identity|null $identity
      * @return array
      */
-    final public static function collection(array $collection): array
+    final public static function collection(array $collection, Identity|null $identity = null): array
     {
         return [
-            'data' => array_map(function (array $item) {
-                return new static($item);
+            'data' => array_map(function (array $item) use($identity) {
+                return new static($item, $identity);
             }, $collection)
         ];
     }

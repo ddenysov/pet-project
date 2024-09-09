@@ -15,6 +15,10 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
+    Ride\Application\Handlers\Event\RiderJoinedEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
     # Ride\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }

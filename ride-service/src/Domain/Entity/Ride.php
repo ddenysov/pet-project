@@ -76,9 +76,19 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @param RiderId $riderId
      * @return void
      * @throws InvalidUuidException
+     * @throws AccessDeniedException
      */
     public function join(RiderId $riderId): void
     {
+        /**
+         * @var RiderId $rider
+         */
+        foreach ($this->riders as $rider) {
+            if ($rider->equals($riderId)) {
+                throw new AccessDeniedException('Rider already joined the ride');
+            }
+        }
+
         $this->recordThat(new RiderJoinedToRide(
             aggregateId: $this->getId(),
             riderId: $riderId,
@@ -88,6 +98,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     /**
      * @param RiderJoinedToRide $event
      * @return void
+     * @throws AccessDeniedException
      */
     public function onRiderJoinedToRide(RiderJoinedToRide $event)
     {
