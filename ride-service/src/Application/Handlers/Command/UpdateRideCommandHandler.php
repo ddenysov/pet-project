@@ -5,12 +5,15 @@ namespace Ride\Application\Handlers\Command;
 use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\Handlers\Command\CommandHandler;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
+use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\StringValue;
 use Psr\Log\LoggerInterface;
 use Ride\Domain\Entity\Healthcheck;
 use Ride\Domain\Entity\Ride;
+use Ride\Domain\Exception\AccessDeniedException;
 use Ride\Domain\Repository\Port\HealthCheckRepository;
 use Ride\Domain\Repository\Port\RideRepository;
+use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideId;
 
 
@@ -26,11 +29,16 @@ final class UpdateRideCommandHandler extends CommandHandler
 
     /**
      * @throws InvalidUuidException
+     * @throws InvalidStringLengthException
+     * @throws AccessDeniedException
      */
     protected function handle(UpdateRideCommand $command): void
     {
         $ride = $this->repository->find(new RideId($command->id));
-        $ride->update(name: $command->name);
+        $ride->updateByOrganizer(
+            name: new StringValue($command->name),
+            organizerId: new OrganizerId($command->organizerId)
+        );
 
         $this->repository->save($ride);
     }

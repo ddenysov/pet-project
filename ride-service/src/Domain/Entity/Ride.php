@@ -8,6 +8,7 @@ use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\StringValue;
 use Ride\Domain\Event\RideCreated;
 use Ride\Domain\Event\RideUpdated;
+use Ride\Domain\Exception\AccessDeniedException;
 use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideId;
 
@@ -41,20 +42,27 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         $ride = new static();
         $ride->setId($rideId);
         $ride->recordThat(new RideCreated(
-            name: $name,
             organizerId: $organizerId,
+            name: $name,
         ));
 
         return $ride;
     }
 
     /**
-     * @throws InvalidStringLengthException
      * @throws InvalidUuidException
+     * @throws AccessDeniedException
      */
-    public function update(string $name): void
+    public function updateByOrganizer(StringValue $name, OrganizerId $organizerId): void
     {
-        $this->recordThat(new RideUpdated(aggregateId: $this->getId(), name: new StringValue($name)));
+        if ($this->organizerId->notEquals($organizerId)) {
+            throw new AccessDeniedException('Organizer can edit only its own rides');
+        }
+
+        $this->recordThat(new RideUpdated(
+            aggregateId: $this->getId(),
+            name: $name
+        ));
     }
 
     /**

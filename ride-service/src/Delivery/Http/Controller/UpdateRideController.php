@@ -28,10 +28,19 @@ class UpdateRideController extends Controller
         $ride = $this->queryBus->execute(new FindRideByIdQuery($id));
 
         $this->logger->info('Ride update started');
-        $this->commandBus->execute(new UpdateRideCommand(
-            id: $id,
-            name: $request->name,
-        ));
+
+        try {
+            $this->commandBus->execute(new UpdateRideCommand(
+                id: $id,
+                organizerId: $this->identity->getId()->toString(),
+                name: $request->name,
+            ));
+        } catch (\Throwable $e) {
+            return new JsonResponse([
+                'error' => $e->getPrevious()->getMessage(),
+            ], 403);
+        }
+
         $this->logger->info('Ride update finished');
 
         return new JsonResponse([
