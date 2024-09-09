@@ -22,4 +22,15 @@ interface QueryBuilder
      * @return $this
      */
     public function where(string $column, string $operand, string $value): static;
+
+    /**
+     * @param string $id
+     * @return array
+     */
+    public function id(string $id): array;
+
+    /**
+     * @return array
+     */
+    public function first(): array;
 }

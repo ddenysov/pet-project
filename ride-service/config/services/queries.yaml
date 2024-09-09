@@ -11,6 +11,12 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\RideDataTableQuery' }
 
+    Ride\Application\Handlers\Query\FindRideByIdQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\FindRideByIdQuery' }
+
+
+
 
 
 

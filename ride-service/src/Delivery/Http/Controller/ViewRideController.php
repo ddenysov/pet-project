@@ -22,7 +22,6 @@ class ViewRideController extends Controller
         string $id,
     )
     {
-        dd($id);
         $ride = $this->queryBus->execute(new FindRideByIdQuery($request->get('id')));
 
         return new JsonResponse($ride);

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {onMounted, type Ref, ref } from 'vue'
 import UiGrid from '../../grid/UiGrid.vue'
 import UiCol from '../../grid/UiCol.vue'
 import {useDataStore} from "~/components/ui/data/store";
@@ -31,10 +30,6 @@ console.log('store.rows');
 console.log(store.rows);
 if (!store.rows.ride) {
   store.load('rides', '/api/ride/list-ride');
-}
-
-const onMounted = async (event: any) => {
-  console.log('OOKOK');
 }
 
 </script>

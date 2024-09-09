@@ -91,9 +91,8 @@ export const useDataStore = defineStore('data', {
             console.log('XXXXXX');
             console.log(isLoading);
             console.log(this.loading);
-            console.log(this.rows.rides.length);
 
-            return this.loading[data] && !process.server && this.rows.rides.length === 0;
+            return this.loading[data] && !process.server;
         },
 
         /**

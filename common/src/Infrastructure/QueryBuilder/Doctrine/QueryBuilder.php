@@ -47,6 +47,17 @@ class QueryBuilder implements QueryBuilderPort
     }
 
     /**
+     * @throws Exception
+     */
+    public function first(): array
+    {
+        return $this->queryBuilder
+            ->setParameters($this->parameters)
+            ->executeQuery()
+            ->fetchAssociative();
+    }
+
+    /**
      * @param string $column
      * @param string $operand
      * @param string $value
@@ -58,6 +69,16 @@ class QueryBuilder implements QueryBuilderPort
         $this->parameters[] = $value;
 
         return $this;
+    }
+
+    /**
+     * @param string $id
+     * @return array
+     * @throws Exception
+     */
+    public function id(string $id): array
+    {
+        return $this->where('id', '=', $id)->first();
     }
 
     public function limit()

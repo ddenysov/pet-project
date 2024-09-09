@@ -2,7 +2,9 @@
 
 namespace Ride\Application\Handlers\Query;
 
-class FindRideByIdQuery
+use Common\Application\Handlers\Query\Port\Query;
+
+class FindRideByIdQuery implements Query
 {
     /**
      * @var string
