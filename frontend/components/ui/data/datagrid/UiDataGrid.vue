@@ -2,12 +2,14 @@
 import UiGrid from '../../grid/UiGrid.vue'
 import UiCol from '../../grid/UiCol.vue'
 import {useDataStore} from "~/components/ui/data/store";
+import {useRideStore} from "~/stores/ride";
 
 export interface Props {
   name: string,
 }
 
 const store = useDataStore();
+const rideStore = useRideStore();
 
 console.log('alala');
 
@@ -34,6 +36,11 @@ if (!store.rows.ride) {
 
 async function edit(id: string) {
   await navigateTo('/ride/edit/' + id)
+}
+
+async function joinRide(id: string) {
+  console.log('OK JOIN RIDE');
+  await rideStore.join(id)
 }
 
 </script>
@@ -69,7 +76,7 @@ async function edit(id: string) {
             </template>
             <template #footer>
               <div class="flex gap-3 mt-1">
-                <Button label="Видалити" severity="danger" outlined class="w-full" />
+                <Button @click="joinRide(item.id)" label="Поїхати" severity="danger" outlined class="w-full" />
                 <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
               </div>
             </template>

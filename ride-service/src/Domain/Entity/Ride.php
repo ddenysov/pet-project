@@ -7,10 +7,12 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\StringValue;
 use Ride\Domain\Event\RideCreated;
+use Ride\Domain\Event\RiderJoinedToRide;
 use Ride\Domain\Event\RideUpdated;
 use Ride\Domain\Exception\AccessDeniedException;
 use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideId;
+use Ride\Domain\ValueObject\RiderId;
 
 class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
 {
@@ -23,6 +25,11 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @var OrganizerId
      */
     private OrganizerId $organizerId;
+
+    /**
+     * @var array
+     */
+    protected array $riders = [];
 
     public function getId(): RideId
     {
@@ -63,6 +70,28 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
             aggregateId: $this->getId(),
             name: $name
         ));
+    }
+
+    /**
+     * @param RiderId $riderId
+     * @return void
+     * @throws InvalidUuidException
+     */
+    public function join(RiderId $riderId): void
+    {
+        $this->recordThat(new RiderJoinedToRide(
+            aggregateId: $this->getId(),
+            riderId: $riderId,
+        ));
+    }
+
+    /**
+     * @param RiderJoinedToRide $event
+     * @return void
+     */
+    public function onRiderJoinedToRide(RiderJoinedToRide $event)
+    {
+        $this->riders[] = $event->getRiderId();
     }
 
     /**

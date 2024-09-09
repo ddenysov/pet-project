@@ -16,3 +16,7 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\UpdateRideCommand' }
 
+    Ride\Application\Handlers\Command\JoinRideCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\JoinRideCommand' }
+

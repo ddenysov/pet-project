@@ -5,6 +5,7 @@ namespace Ride;
 use Common\Application\EventHandler\Port\EventConsumer;
 use Common\Application\EventHandler\Port\EventPublisher;
 use Ride\Domain\Event\RideCreated;
+use Ride\Domain\Event\RiderJoinedToRide;
 use Ride\Domain\Event\RideUpdated;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -23,6 +24,7 @@ class Kernel extends BaseKernel
                 HealthCheckOk::getEventName(),
                 RideCreated::getEventName(),
                 RideUpdated::getEventName(),
+                RiderJoinedToRide::getEventName(),
             ]
         ];
 

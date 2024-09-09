@@ -107,6 +107,28 @@ export const useRideStore = defineStore('ride', {
                 console.error(e);
                 this.setLoading(false);
             }
+        },
+
+        async join(id: string): Promise<any> {
+            try {
+                this.setLoading(true);
+
+                const res: any = await useFetch(
+                    '/api/ride/join-ride/' + id,
+                    {
+                        method: 'GET',
+                        headers: getHeaders(),
+                    },
+                );
+                console.log('ok2');
+                console.log(res.data.value);
+                this.setLoading(false);
+
+                return res;
+            } catch (e: any) {
+                console.error(e);
+                this.setLoading(false);
+            }
         }
     }
 })
