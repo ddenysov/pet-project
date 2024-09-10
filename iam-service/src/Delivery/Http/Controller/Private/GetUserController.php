@@ -1,26 +1,20 @@
 <?php
 
-namespace Iam\Delivery\Http\Controller;
+namespace Iam\Delivery\Http\Controller\Private;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Iam\Application\Handlers\Query\FindUserByEmailQuery;
 use Iam\Application\Handlers\Query\Projection\UserCredentials;
-use Iam\Delivery\Http\Request\Dto\CheckEmail;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CheckEmailController extends Controller
+class GetUserController extends Controller
 {
-    /**
-     * @param CheckEmail $checkEmail
-     * @return JsonResponse
-     */
-    #[Route('/check-email', name: 'check_email', methods: ['POST', 'GET'], format: 'json')]
-    public function __invoke(
-        #[MapRequestPayload] CheckEmail $checkEmail
-    ): JsonResponse
+
+    #[Route('/private/user/{id}', name: 'private_get_user', methods: ['GET'], format: 'json')]
+    public function __invoke(string $id): JsonResponse
     {
+        dd($id);
         $credentials = $this->queryBus->execute(new FindUserByEmailQuery($checkEmail->email));
 
         return $this->successResponse($credentials);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Iam\Delivery\Http\Controller;
+namespace Iam\Delivery\Http\Controller\Public;
 
 use Common\Application\Bus\Port\CommandBus;
 use Common\Application\Bus\Port\QueryBus;
@@ -12,7 +12,6 @@ use Iam\Delivery\Http\Request\Dto\SecurityCredentials;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 

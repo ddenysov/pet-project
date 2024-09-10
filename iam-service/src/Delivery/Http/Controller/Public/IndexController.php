@@ -1,14 +1,14 @@
 <?php
 
-namespace Iam\Delivery\Http\Controller;
+namespace Iam\Delivery\Http\Controller\Public;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Iam\Delivery\Http\Request\Dto\User;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-
 use RdKafka\Conf;
 use RdKafka\Producer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use const Iam\Delivery\Http\Controller\RD_KAFKA_PARTITION_UA;
 
 class IndexController extends Controller
 {
