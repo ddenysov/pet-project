@@ -2,50 +2,8 @@
 import {defineStore} from 'pinia'
 import {ValidationError} from 'yup'
 import {createYupSchema} from '../validation/schema'
-
-interface Ride {
-    name: string;
-}
-
-type Value<T> = {
-    [value: string]: T;
-}
-
-interface Values<T> {
-    [form: string]: Value<T>;
-}
-
-interface Loading {
-    [form: string]: boolean;
-}
-
-interface Errors extends Values<string> {
-}
-
-interface Validation extends Values<{}> {
-}
-
-type FormState = {
-    values: Values<string>,
-    validation: Validation,
-    errors: Errors,
-    loading: Loading,
-}
-import {useUserStore} from "~/stores/user";
-
-function getHeaders(): HeadersInit
-{
-    const store = useUserStore();
-    const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-    };
-
-    if (store.token) {
-        headers['Authorization'] = `Bearer ` + store.token;
-    }
-
-    return headers;
-}
+import {useApi} from "~/composables/api/api";
+import type {FormState, Value} from "~/components/ui/form/store/types";
 
 export const useFormStore = defineStore('form', {
     /**
@@ -59,6 +17,7 @@ export const useFormStore = defineStore('form', {
             loading: {},
         }
     },
+
     /**
      * Actions
      */
@@ -150,35 +109,34 @@ export const useFormStore = defineStore('form', {
             })
         },
 
-        /**
-         * Submit given form
-         * @param form
-         */
-        async submit(form: string, action: string): Promise<any> {
+        async validate(form: string) {
             const yupSchema = createYupSchema(this.validation[form]);
             this.clearAllErrors(form);
 
             try {
-                const res = await yupSchema.validate(this.getValues(form), {abortEarly: false});
+                await yupSchema.validate(this.getValues(form), {abortEarly: false});
             } catch (e: any) {
                 e.inner.reverse().forEach((e: ValidationError) => {
                     this.setFieldError(form, e.path ?? '', e.message);
                 });
                 throw e;
             }
+        },
+
+        /**
+         * Submit given form
+         * @param form
+         * @param action
+         */
+        async submit(form: string, action: string): Promise<any> {
+            await this.validate(form);
 
             try {
+                const { post } = useApi();
                 const values = this.getValues(form);
                 this.setLoading(form, true);
 
-                const res = await $fetch(
-                    action,
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(values),
-                        headers: getHeaders(),
-                    },
-                );
+                const res = await post(action, values);
                 this.setLoading(form, false);
 
                 return res;
