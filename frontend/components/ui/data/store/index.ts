@@ -1,37 +1,8 @@
 // stores/counter.js
 import {defineStore} from 'pinia'
 import {useApi} from "~/composables/api/api";
+import type {DataSetState} from "~/components/ui/data/store/types";
 
-type Value<T> = {
-    [value: string]: T;
-}
-
-interface Values<T> {
-    [data: string]: Value<T>;
-}
-
-interface Loading {
-    [data: string]: boolean;
-}
-
-interface Input {
-    [data: string]: {
-        start: number,
-        length: number,
-        sortColumn: string,
-        sortOrder: string,
-    }
-}
-
-interface Rows {
-    [data: string]: any
-}
-
-type DataSetState = {
-    rows: Rows,
-    loading: Loading,
-    input: Input,
-}
 
 export const useDataStore = defineStore('data', {
     /**
