@@ -1,6 +1,6 @@
 // stores/counter.js
 import {defineStore} from 'pinia'
-
+import {useApi} from "~/composables/api/api";
 
 type Value<T> = {
     [value: string]: T;
@@ -14,37 +14,34 @@ interface Loading {
     [data: string]: boolean;
 }
 
-interface Validation extends Values<{}> {
-}
-
-type FormState = {
-    rows: {},
-    loading: Loading,
-}
-import {useUserStore} from "~/stores/user";
-
-function getHeaders(): HeadersInit
-{
-    const store = useUserStore();
-    const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-    };
-
-    if (store.token) {
-        headers['Authorization'] = `Bearer ` + store.token;
+interface Input {
+    [data: string]: {
+        start: number,
+        length: number,
+        sortColumn: string,
+        sortOrder: string,
     }
+}
 
-    return headers;
+interface Rows {
+    [data: string]: any
+}
+
+type DataSetState = {
+    rows: Rows,
+    loading: Loading,
+    input: Input,
 }
 
 export const useDataStore = defineStore('data', {
     /**
      * State
      */
-    state: (): any => {
+    state: (): DataSetState => {
         return {
             rows: {},
             loading: {},
+            input: {},
         }
     },
     /**
@@ -64,6 +61,11 @@ export const useDataStore = defineStore('data', {
             })
         },
 
+        /**
+         * Set Rows
+         * @param data
+         * @param rows
+         */
         setRows(data: string, rows: any) {
             this.$patch({
                 rows: {
@@ -73,53 +75,32 @@ export const useDataStore = defineStore('data', {
         },
 
         /**
-         *
+         * Get rows
          * @param data
          */
         getRows(data: string): any {
             return this.rows[data];
         },
 
-
         /**
          * Is field loading
-         * @param form
+         * @param data
          */
         isLoading(data: string): boolean {
-            const isLoading = (this.loading[data] && !process.server);
-
-            console.log('XXXXXX');
-            console.log(isLoading);
-            console.log(this.loading);
-
             return this.loading[data] && !process.server;
         },
 
         /**
-         * Submit given form
+         * Load data
          * @param data
          * @param resource
          */
         async load(data: string, resource: string): Promise<any> {
             try {
-                console.log('aasasas');
                 this.setLoading(data, true);
-
-                const res: any = await useFetch(
-                    resource,
-                    {
-                        method: 'GET',
-                        headers: getHeaders(),
-                    },
-                );
-
-
-                console.log(data);
-                console.log(res.data.value.data);
-
-                this.setRows(data, res.data.value.data);
-
-
+                const {get} = useApi();
+                const res: any = await get(resource);
+                this.setRows(data, res.data);
                 this.setLoading(data, false);
 
                 return res;
