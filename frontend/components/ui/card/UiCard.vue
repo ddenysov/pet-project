@@ -1,10 +1,10 @@
 <script setup lang="ts">
 export interface Props {
-  header: string | null,
-  title: string | null,
-  subtitle: string | null,
-  content: string | null,
-  footer: string | null,
+  header?: string | null,
+  title?: string | null,
+  subtitle?: string | null,
+  content?: string | null,
+  footer?: string | null,
 }
 
 defineProps<Props>();
