@@ -13,7 +13,7 @@ export function useApi () {
          * @param resource
          */
         async get (resource: string) {
-            const res: any = await useFetch(
+            const res: any = await $fetch(
                 resource,
                 {
                     method: 'GET',
@@ -21,7 +21,7 @@ export function useApi () {
                 },
             );
 
-            return res.data.value;
+            return res;
         },
 
         /**
@@ -30,7 +30,7 @@ export function useApi () {
          * @param data
          */
         async post (resource: string, data: any) {
-            const res: any = await useFetch(
+            const res: any = await $fetch(
                 resource,
                 {
                     method: 'POST',
@@ -39,7 +39,7 @@ export function useApi () {
                 },
             );
 
-            return res.data.value;
+            return res;
         },
     }
 }
