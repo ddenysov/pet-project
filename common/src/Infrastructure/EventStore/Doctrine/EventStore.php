@@ -2,6 +2,7 @@
 
 namespace Common\Infrastructure\EventStore\Doctrine;
 
+use Common\Application\EventStore\EventRouter;
 use Common\Application\EventStore\EventStore as BaseEventStore;
 use Common\Application\EventStore\Port\EventStore as EventStorePort;
 use Common\Application\Outbox\Port\Outbox;
@@ -25,10 +26,11 @@ class EventStore extends BaseEventStore implements EventStorePort
         private readonly EntityManagerInterface $entityManager,
         private readonly Outbox                 $outbox,
         private readonly LoggerInterface        $logger,
-        private readonly EventSerializer        $eventSerializer
+        private readonly EventSerializer        $eventSerializer,
+        EventRouter $eventRouter,
     )
     {
-        parent::__construct($this->outbox, $logger);
+        parent::__construct($this->outbox, $eventRouter, $logger);
     }
 
     protected function save(Event $event)

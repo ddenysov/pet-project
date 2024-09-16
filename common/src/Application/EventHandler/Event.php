@@ -24,6 +24,16 @@ class Event
         return $this->eventName;
     }
 
+    public function getEventClass(): string
+    {
+        $parts = explode('.', $this->getEventName());
+        $parts = array_map(function ($input) {
+            return str_replace('_', '', ucwords($input, '_'));
+        }, $parts);
+
+        return implode('\\', $parts);
+    }
+
     public function getPayload(): array
     {
         return $this->payload;

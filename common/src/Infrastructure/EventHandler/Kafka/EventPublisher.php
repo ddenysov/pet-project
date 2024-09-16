@@ -40,4 +40,6 @@ class EventPublisher extends \Common\Application\EventHandler\EventPublisher imp
         $topic->produce(RD_KAFKA_PARTITION_UA, 0, $msg);
         $producer->flush(10000);
     }
+
+
 }

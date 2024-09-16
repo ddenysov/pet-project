@@ -5,11 +5,13 @@ namespace Ride\Infrastructure\Projector\Doctrine;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Ride\Application\Projector\Port\RiderJoinedProjector;
+use Ride\Application\Projector\Port\RiderRequestedJoinToRideProjector;
 use Ride\Domain\Event\RiderJoinedToRide;
+use Ride\Domain\Event\RiderRequestedJoinToRide;
 use Ride\Infrastructure\Persistence\Doctrine\Entity\Ride;
 use Symfony\Component\Uid\Uuid;
 
-class RideJoinedProjector implements RiderJoinedProjector
+class RideJoinRequestedProjector implements RiderRequestedJoinToRideProjector
 {
     /**
      * @param EntityManagerInterface $entityManager
@@ -22,7 +24,7 @@ class RideJoinedProjector implements RiderJoinedProjector
     {
     }
 
-    public function apply(RiderJoinedToRide $event): void
+    public function apply(RiderRequestedJoinToRide $event): void
     {
         $this->logger->info('Saving Ride Requested to Join projection');
 

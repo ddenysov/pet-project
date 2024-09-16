@@ -2,6 +2,7 @@
 
 namespace Common\Application\EventHandler;
 
+use Common\Application\EventStore\EventRouter;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -13,7 +14,7 @@ abstract class EventPublisher implements Port\EventPublisher
      */
     protected array $channelMap = [];
 
-    public function __construct(private readonly LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger, private EventRouter $eventRouter)
     {
     }
 
@@ -27,31 +28,15 @@ abstract class EventPublisher implements Port\EventPublisher
     {
         try {
             $eventName = $event->getEventName();
-            if (!$this->channelMap[$eventName]) {
-                throw new Exception('There are no channel configured for this event');
-            }
             $this->logger->info('Publishing event', [
                 'event'   => $eventName,
-                'channel' => $this->channelMap[$eventName],
+                'channel' => $this->eventRouter->getChannel($event->getEventClass()),
             ]);
-            $this->dispatch($event, $this->channelMap[$eventName]);
+            $this->dispatch($event, $this->eventRouter->getChannel($event->getEventClass()));
             $success($event);
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage());
             $fail($exception);
-        }
-    }
-
-    /**
-     * @param array $map
-     * @return void
-     */
-    public function configureChannelMap(array $map): void
-    {
-        foreach ($map as $channel => $events) {
-            foreach ($events as $event) {
-                $this->channelMap[$event] = $channel;
-            }
         }
     }
 

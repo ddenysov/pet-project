@@ -8,8 +8,11 @@ use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\StringValue;
 use Ride\Domain\Event\RideCreated;
 use Ride\Domain\Event\RiderJoinedToRide;
+use Ride\Domain\Event\RiderRequestedJoinToRide;
 use Ride\Domain\Event\RideUpdated;
 use Ride\Domain\Exception\AccessDeniedException;
+use Ride\Domain\Exception\RiderAlreadyJoinedTheRideException;
+use Ride\Domain\Exception\RiderAlreadyRequestedJoinTheRideException;
 use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideId;
 use Ride\Domain\ValueObject\RiderId;
@@ -29,8 +32,17 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     /**
      * @var array
      */
-    protected array $riders = [];
+    protected array $joinedRiders = [];
 
+    /**
+     * @var array
+     */
+    protected array $requestedToJoinRiders = [];
+
+    /**
+     * @return RideId
+     * @throws InvalidUuidException
+     */
     public function getId(): RideId
     {
         return RideId::fromUuid($this->id);
@@ -78,14 +90,43 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @throws InvalidUuidException
      * @throws AccessDeniedException
      */
+    public function requestToJoin(RiderId $riderId): void
+    {
+        /**
+         * @var RiderId $rider
+         */
+        foreach ($this->joinedRiders as $rider) {
+            if ($rider->equals($riderId)) {
+                throw new RiderAlreadyJoinedTheRideException('Rider already joined the ride');
+            }
+        }
+
+        foreach ($this->requestedToJoinRiders as $rider) {
+            if ($rider->equals($riderId)) {
+                throw new RiderAlreadyRequestedJoinTheRideException('Rider already requested to join ride');
+            }
+        }
+
+        $this->recordThat(new RiderRequestedJoinToRide(
+            aggregateId: $this->getId(),
+            riderId: $riderId,
+        ));
+    }
+
+    /**
+     * @param RiderId $riderId
+     * @return void
+     * @throws InvalidUuidException
+     * @throws RiderAlreadyJoinedTheRideException
+     */
     public function join(RiderId $riderId): void
     {
         /**
          * @var RiderId $rider
          */
-        foreach ($this->riders as $rider) {
+        foreach ($this->joinedRiders as $rider) {
             if ($rider->equals($riderId)) {
-                throw new AccessDeniedException('Rider already joined the ride');
+                throw new RiderAlreadyJoinedTheRideException('Rider already joined the ride');
             }
         }
 
@@ -96,13 +137,21 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     }
 
     /**
+     * @param RiderRequestedJoinToRide $event
+     * @return void
+     */
+    public function onRiderRequestedJoinToRide(RiderRequestedJoinToRide $event): void
+    {
+        $this->requestedToJoinRiders[] = $event->getRiderId();
+    }
+
+    /**
      * @param RiderJoinedToRide $event
      * @return void
-     * @throws AccessDeniedException
      */
     public function onRiderJoinedToRide(RiderJoinedToRide $event)
     {
-        $this->riders[] = $event->getRiderId();
+        $this->joinedRiders[] = $event->getRiderId();
     }
 
     /**

@@ -100,3 +100,10 @@ services:
   Common\Infrastructure\Security\Symfony\AuthGateListener:
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+  Common\Application\EventStore\PublishStrategy\AllPublishStrategy:
+    public: true
+  Common\Application\EventStore\PublishStrategy\EventBusPublishStrategy:
+    public: true
+  Common\Application\EventStore\PublishStrategy\OutboxPublishStrategy:
+    public: true

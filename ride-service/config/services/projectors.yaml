@@ -13,3 +13,6 @@ services:
 
     Ride\Application\Projector\Port\RiderJoinedProjector:
         class: Ride\Infrastructure\Projector\Doctrine\RideJoinedProjector
+
+    Ride\Application\Projector\Port\RiderRequestedJoinToRideProjector:
+        class: Ride\Infrastructure\Projector\Doctrine\RideJoinRequestedProjector

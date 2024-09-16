@@ -3,6 +3,16 @@ services:
         autowire: true
         autoconfigure: true
 
+    # EVENTS
+    Ride\Domain\Event\RiderRequestedJoinToRide:
+        tags:
+            - { name: 'event.domain_event', channel: 'ride', transport: 'sync' }
+
+    Ride\Domain\Event\RideCreated:
+        tags:
+            - { name: 'event.domain_event', channel: 'ride', transport: 'async' }
+
+    # HANDLERS
     Ride\Application\Handlers\Event\HealthCheckEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
