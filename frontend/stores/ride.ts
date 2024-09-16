@@ -1,5 +1,6 @@
 // stores/counter.js
 import {defineStore} from 'pinia'
+import {useApi} from "~/composables/api/api";
 
 
 type Value<T> = {
@@ -86,9 +87,7 @@ export const useRideStore = defineStore('ride', {
         async load(id: string): Promise<any> {
             try {
                 this.setRide({});
-                console.log('ok1');
                 this.setLoading(true);
-                console.log('ok2');
 
                 const res: any = await useFetch(
                     '/api/ride/view-ride/' + id,
@@ -112,16 +111,10 @@ export const useRideStore = defineStore('ride', {
         async join(id: string): Promise<any> {
             try {
                 this.setLoading(true);
+                const { post } = useApi();
 
-                const res: any = await useFetch(
-                    '/api/ride/join-ride/' + id,
-                    {
-                        method: 'GET',
-                        headers: getHeaders(),
-                    },
-                );
-                console.log('ok2');
-                console.log(res.data.value);
+                const res: any = await post('/api/ride/join-ride/' + id);
+                console.log(res.data);
                 this.setLoading(false);
 
                 return res;

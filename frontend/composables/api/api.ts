@@ -12,6 +12,22 @@ export function useApi () {
          * Get request
          * @param resource
          */
+        async getAsync (resource: string) {
+            const { data } = await useFetch(
+                resource,
+                {
+                    method: 'GET',
+                    headers,
+                },
+            );
+
+            return data.value;
+        },
+
+        /**
+         * Get
+         * @param resource
+         */
         async get (resource: string) {
             const res: any = await $fetch(
                 resource,
@@ -29,7 +45,25 @@ export function useApi () {
          * @param resource
          * @param data
          */
-        async post (resource: string, data: any) {
+        async postAsync (resource: string, data: any) {
+            const res: any = await useFetch(
+                resource,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers,
+                },
+            );
+
+            return res.data.value;
+        },
+
+        /**
+         *
+         * @param resource
+         * @param data
+         */
+        async post (resource: string, data?: any) {
             const res: any = await $fetch(
                 resource,
                 {

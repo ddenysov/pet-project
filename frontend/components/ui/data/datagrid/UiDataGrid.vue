@@ -11,15 +11,14 @@ export interface Props {
 const store = useDataStore();
 const props = defineProps<Props>()
 
-if (!store.rows.ride) {
-  store.load(props.name, props.dataset);
-}
+store.init(props.name, props.dataset);
 
 </script>
 
 <template>
+  {{ store.isLoading(name) }}
   <DataView
-    v-if="store.rows.rides"
+    v-if="!store.isLoading(name)"
     :value="store.rows.rides"
     paginator
     :rows="8"
@@ -28,12 +27,16 @@ if (!store.rows.ride) {
   >
     <template #list="slotProps">
       <ui-grid>
+
+
+
         <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="3">
           <slot :item="item" />
         </ui-col>
       </ui-grid>
     </template>
   </DataView>
+  <ui-data-grid-loader v-else />
 </template>
 
 <style scoped>

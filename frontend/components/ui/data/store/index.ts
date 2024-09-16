@@ -13,6 +13,7 @@ export const useDataStore = defineStore('data', {
             rows: {},
             loading: {},
             input: {},
+            settings: {},
         }
     },
     /**
@@ -45,6 +46,16 @@ export const useDataStore = defineStore('data', {
             })
         },
 
+        setResource(data: string, resource: string) {
+            this.$patch({
+                settings: {
+                    [data]: {
+                        resource: resource,
+                    },
+                }
+            })
+        },
+
         /**
          * Get rows
          * @param data
@@ -58,19 +69,29 @@ export const useDataStore = defineStore('data', {
          * @param data
          */
         isLoading(data: string): boolean {
-            return this.loading[data] && !process.server;
+            return this.loading[data];
         },
+
+        /**
+         * Find data by id
+         * @param data
+         * @param id
+         */
+        find(data: string, id: string): any {
+            return this.rows[data].find((d: any) => d.id === id);
+        },
+
 
         /**
          * Load data
          * @param data
-         * @param resource
          */
-        async load(data: string, resource: string): Promise<any> {
+        async load(data: string): Promise<any> {
             try {
                 this.setLoading(data, true);
-                const {get} = useApi();
-                const res: any = await get(resource);
+                const {getAsync, get} = useApi();
+                const res: any = await getAsync(this.settings[data].resource);
+
                 this.setRows(data, res.data);
                 this.setLoading(data, false);
 
@@ -78,6 +99,19 @@ export const useDataStore = defineStore('data', {
             } catch (e: any) {
                 this.setLoading(data, false);
             }
+        },
+
+
+        /**
+         * Init
+         * @param data
+         * @param resource
+         */
+        async init(data: string, resource: string): Promise<any> {
+            this.setResource(data, resource);
+            if (!this.getRows(data)) {
+                await this.load(data);
+            }
         }
-    }
+    },
 })

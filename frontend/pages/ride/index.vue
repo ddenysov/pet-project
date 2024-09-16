@@ -16,7 +16,14 @@
               </template>
               <template #footer>
                 <div class="flex gap-3 mt-1">
-                  <Button v-if="!item.joined" @click="joinRide(item.id)" label="Поїхати" severity="danger" outlined class="w-full" />
+                  <Button
+                    v-if="!item.joined" @click="joinRide(item.id)"
+                    label="Поїхати"
+                    severity="danger"
+                    outlined
+                    class="w-full"
+                    :disabled="item.pending"
+                  />
                   <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
                 </div>
               </template>
@@ -30,14 +37,18 @@
 </template>
 <script setup lang="ts">
 import {useRideStore} from "~/stores/ride";
+import {useDataStore} from "~/components/ui/data/store";
 
 const rideStore = useRideStore();
+const dataStore = useDataStore();
 async function edit(id: string) {
   await navigateTo('/ride/edit/' + id)
 }
 
 async function joinRide(id: string) {
   console.log('OK JOIN RIDE');
-  await rideStore.join(id)
+  const ride = dataStore.find('rides', id);
+  rideStore.join(id)
+  ride.joined = true;
 }
 </script>

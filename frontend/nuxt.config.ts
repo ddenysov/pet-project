@@ -29,6 +29,7 @@ export default defineNuxtConfig({
                 'Card',
                 'Skeleton',
                 'DataView',
+                'Paginator',
             ],
         },
         options: {
