@@ -35,6 +35,12 @@ class Ride
     #[ORM\Column(type: Types::JSON, options: ['default'=> '[]'])]
     private array $riders = [];
 
+    /**
+     * @var array
+     */
+    #[ORM\Column(type: Types::JSON, options: ['default'=> '[]'])]
+    private array $pendingRiders = [];
+
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -112,5 +118,20 @@ class Ride
     public function addRider(string $riderId)
     {
         $this->riders[] = $riderId;
+    }
+
+    public function getPendingRiders(): array
+    {
+        return $this->pendingRiders;
+    }
+
+    public function setPendingRiders(array $pendingRiders): void
+    {
+        $this->pendingRiders = $pendingRiders;
+    }
+
+    public function addPendingRider(string $riderId)
+    {
+        $this->pendingRiders[] = $riderId;
     }
 }

@@ -31,8 +31,6 @@ abstract class EventStore implements Port\EventStore
 
     protected function publish(Event $event): void
     {
-        $this->logger->info('Event saved to event store: ' . $event::getEventName(), $event->payload());
-
         $strategy = $this->eventRouter->getTransportStrategy($event);
         $strategy->handle($event);
     }

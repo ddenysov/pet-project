@@ -20,3 +20,8 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\JoinRideCommand' }
 
+
+    Ride\Application\Handlers\Command\RequestJoinRideCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\RequestJoinRideCommand' }
+

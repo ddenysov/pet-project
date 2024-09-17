@@ -18,11 +18,11 @@
                 <div class="flex gap-3 mt-1">
                   <Button
                     v-if="!item.joined" @click="joinRide(item.id)"
-                    label="Поїхати"
+                    :label="item.pending_join ? 'На розгляді' : 'Поїхали'"
                     severity="danger"
                     outlined
                     class="w-full"
-                    :disabled="item.pending"
+                    :disabled="item.pending_join"
                   />
                   <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
                 </div>
@@ -49,6 +49,6 @@ async function joinRide(id: string) {
   console.log('OK JOIN RIDE');
   const ride = dataStore.find('rides', id);
   rideStore.join(id)
-  ride.joined = true;
+  ride.pending_join = true;
 }
 </script>

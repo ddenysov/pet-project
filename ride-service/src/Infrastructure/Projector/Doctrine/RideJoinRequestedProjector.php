@@ -30,7 +30,7 @@ class RideJoinRequestedProjector implements RiderRequestedJoinToRideProjector
 
         $ride = $this->entityManager->find(Ride::class, Uuid::fromString($event->getAggregateId()->toString()));
 
-        $ride->addRider($event->getRiderId()->toString());
+        $ride->addPendingRider($event->getRiderId()->toString());
         $this->entityManager->persist($ride);
         $this->entityManager->flush();
 

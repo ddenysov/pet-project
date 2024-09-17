@@ -4,6 +4,7 @@ namespace Ride\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Ride\Application\Handlers\Command\JoinRideCommand;
+use Ride\Application\Handlers\Command\RequestJoinRideCommand;
 use Ride\Application\Handlers\Command\UpdateRideCommand;
 use Ride\Application\Handlers\Query\FindRideByIdQuery;
 use Ride\Delivery\Http\Request\Dto\UpdatedRideRequest;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 
-class JoinRideController extends Controller
+class RequestJoinRideController extends Controller
 {
     /**
      * @param string $id
@@ -23,10 +24,10 @@ class JoinRideController extends Controller
         string $id,
     )
     {
-        $this->logger->info('Ride join started');
+        $this->logger->info('Received request to join Ride');
 
         try {
-            $this->commandBus->execute(new JoinRideCommand(
+            $this->commandBus->execute(new RequestJoinRideCommand(
                 rideId: $id,
                 riderId: $this->identity->getId()->toString(),
             ));
@@ -36,7 +37,7 @@ class JoinRideController extends Controller
             ], 403);
         }
 
-        $this->logger->info('Ride join finished');
+        $this->logger->info('Request to join ride processed');
 
         return new JsonResponse([
             'ok' => 'updated',
