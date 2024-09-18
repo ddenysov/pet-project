@@ -7,9 +7,9 @@ use Common\Domain\ValueObject\Uuid;
 class Identity
 {
     /**
-     * @var Uuid
+     * @var Uuid|null
      */
-    public Uuid $id;
+    public ?Uuid $id = null;
 
     /**
      * @var array
@@ -17,9 +17,9 @@ class Identity
     public array $roles = [];
 
     /**
-     * @return Uuid
+     * @return Uuid|null
      */
-    public function getId(): Uuid
+    public function getId(): ?Uuid
     {
         return $this->id;
     }

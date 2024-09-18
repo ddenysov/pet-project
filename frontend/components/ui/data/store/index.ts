@@ -85,15 +85,22 @@ export const useDataStore = defineStore('data', {
         /**
          * Load data
          * @param data
+         * @param silent
          */
-        async load(data: string): Promise<any> {
+        async load(data: string, silent: boolean = false): Promise<any> {
             try {
-                this.setLoading(data, true);
+                if (!silent) {
+                    this.setLoading(data, true);
+                }
+
                 const {getAsync, get} = useApi();
                 const res: any = await getAsync(this.settings[data].resource);
 
                 this.setRows(data, res.data);
-                this.setLoading(data, false);
+
+                if (!silent) {
+                    this.setLoading(data, false);
+                }
 
                 return res;
             } catch (e: any) {
@@ -108,6 +115,9 @@ export const useDataStore = defineStore('data', {
          * @param resource
          */
         async init(data: string, resource: string): Promise<any> {
+            const { $listen } = useNuxtApp()
+            $listen('rides', e => this.load(data, true) )
+
             this.setResource(data, resource);
             if (!this.getRows(data)) {
                 await this.load(data);

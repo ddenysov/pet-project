@@ -17,6 +17,7 @@ use Ride\Application\Handlers\Query\HealthCheckQuery;
 class HealthCheckController extends Controller
 {
     /**
+     * @param HubInterface $hub
      * @return JsonResponse
      */
     #[Route('/health-check', name: 'health-check', methods: ['POST', 'GET'], format: 'json')]
@@ -27,8 +28,11 @@ class HealthCheckController extends Controller
         //$this->commandBus->execute(new HealthCheckCommand());
 
         $update = new Update(
-            'https://example.com/books/1',
-            json_encode(['status' => 'OutOfStock'])
+            'https://updates/user/123',
+            json_encode([
+                'entity' => 'rides',
+                'id' => '123',
+            ])
         );
 
         $hub->publish($update);
