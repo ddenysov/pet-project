@@ -6,7 +6,8 @@ export default defineNuxtPlugin(() => {
     return {
         provide: {
             event: emitter.emit, // Will emit an event
-            listen: emitter.on // Will register a listener for an event
+            listen: emitter.on, // Will register a listener for an event
+            clear: emitter.off
         }
     }
 })

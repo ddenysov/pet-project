@@ -30,6 +30,7 @@ export default defineNuxtConfig({
                 'Skeleton',
                 'DataView',
                 'Paginator',
+                'Toast',
             ],
         },
         options: {

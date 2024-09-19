@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Toast />
     <h1>Список покатушек</h1>
 
     <div>
@@ -38,9 +39,18 @@
 <script setup lang="ts">
 import {useRideStore} from "~/stores/ride";
 import {useDataStore} from "~/components/ui/data/store";
+import { useToast } from 'primevue/usetoast';
 
+const toast = useToast();
+const show = (text: string) => {
+  toast.add({ severity: 'success', summary: 'Info', detail: text, life: 3000 });
+};
 // ride.domain.event.rider_request_accepted_join_to_ride
-
+const { $listen, $clear } = useNuxtApp()
+$clear('ride.domain.event.rider_request_accepted_join_to_ride')
+$clear('ride.domain.event.ride_created')
+$listen('ride.domain.event.rider_request_accepted_join_to_ride', e => show('Запит на участь в покатушці схвалено') )
+$listen('ride.domain.event.ride_created', e => show('Покатушка створена') )
 const rideStore = useRideStore();
 const dataStore = useDataStore();
 async function edit(id: string) {

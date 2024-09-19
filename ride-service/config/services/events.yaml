@@ -6,15 +6,15 @@ services:
     # EVENTS
     Ride\Domain\Event\RiderRequestedJoinToRide:
         tags:
-            - { name: 'event.domain_event', channel: 'ride', transport: 'sync', sse: true }
+            - { name: 'event.domain_event', channel: 'ride', transport: 'sync' }
 
     Ride\Domain\Event\RiderRequestAcceptedJoinToRide:
         tags:
-            - { name: 'event.domain_event', channel: 'ride', transport: 'sync', sse: true }
+            - { name: 'event.domain_event', channel: 'ride', transport: 'async' }
 
     Ride\Domain\Event\RideCreated:
         tags:
-            - { name: 'event.domain_event', channel: 'ride', transport: 'async', sse: true }
+            - { name: 'event.domain_event', channel: 'ride', transport: 'async' }
 
     # HANDLERS
     Ride\Application\Handlers\Event\HealthCheckEventHandler:
