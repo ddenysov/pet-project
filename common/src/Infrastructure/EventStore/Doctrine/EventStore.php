@@ -33,7 +33,7 @@ class EventStore extends BaseEventStore implements EventStorePort
         parent::__construct($this->outbox, $eventRouter, $logger);
     }
 
-    protected function save(Event $event)
+    protected function save(Event $event): void
     {
 
         $version = $this->getLastVersion($event->getAggregateId());
@@ -57,9 +57,6 @@ class EventStore extends BaseEventStore implements EventStorePort
             ->setParameter(4, $version)
             ->setParameter(5, (new DateTime())->format('Y-m-d H:i:s'))
             ->executeQuery();
-
-
-        return $this;
     }
 
     /**

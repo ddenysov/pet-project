@@ -20,14 +20,14 @@ abstract class Controller
         protected readonly CommandBus $commandBus,
         protected readonly QueryBus $queryBus,
         protected LoggerInterface $logger,
-        protected Identity $identity,
+        protected ?Identity $identity = null,
     ) {
     }
 
     /**
      * @return Identity
      */
-    public function getIdentity(): Identity
+    public function getIdentity(): ?Identity
     {
         return $this->identity;
     }

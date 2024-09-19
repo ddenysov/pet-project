@@ -101,12 +101,10 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
-  Common\Application\EventStore\PublishStrategy\AllPublishStrategy:
+  Common\Application\EventStore\PublishStrategy\AsyncPublishStrategy:
     public: true
-  Common\Application\EventStore\PublishStrategy\EventBusPublishStrategy:
-    public: true
-  Common\Application\EventStore\PublishStrategy\OutboxPublishStrategy:
+  Common\Application\EventStore\PublishStrategy\SyncPublishStrategy:
     public: true
 
-  Common\Application\EventStore\Port\SsePublisher:
-    class: Common\Infrastructure\EventStore\Mercure\SsePublisher
+  Common\Application\Broadcaster\Port\Broadcaster:
+    class: Common\Infrastructure\Broadcaster\Mercure\Broadcaster

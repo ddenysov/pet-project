@@ -18,7 +18,6 @@ use Ride\Domain\Repository\Port\RideRepository;
 use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideId;
 use Ride\Domain\ValueObject\RiderId;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 
 final class JoinRideCommandHandler extends CommandHandler

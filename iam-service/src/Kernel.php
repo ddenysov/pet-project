@@ -16,14 +16,5 @@ class Kernel extends BaseKernel
     public function boot(): void
     {
         parent::boot();
-        $channelMap = [
-            'iam' => [
-                UserPasswordResetRequested::getEventName(),
-                UserRegistered::getEventName(),
-            ]
-        ];
-
-        $this->container->get(EventPublisher::class)->configureChannelMap($channelMap);
-        $this->container->get(EventConsumer::class)->configureChannelMap($channelMap);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Ride\Application\Handlers\Event;
 
+use Common\Application\EventStore\Port\SsePublisher;
 use Ride\Application\Projector\Port\RiderJoinedProjector;
 use Ride\Domain\Event\RiderJoinedToRide;
 
@@ -9,9 +10,11 @@ final readonly class RiderJoinedEventHandler
 {
     /**
      * @param RiderJoinedProjector $projector
+     * @param SsePublisher $ssePublisher
      */
-    public function __construct(private RiderJoinedProjector $projector)
-    {
+    public function __construct(
+        private RiderJoinedProjector $projector,
+    ) {
     }
 
     /**

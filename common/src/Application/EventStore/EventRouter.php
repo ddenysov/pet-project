@@ -27,11 +27,6 @@ class EventRouter
     private array $transports = [];
 
     /**
-     * @var array
-     */
-    private array $sse = [];
-
-    /**
      * Type sync
      */
     private const TRANSPORT_TYPE_SYNC = 'sync';
@@ -90,29 +85,6 @@ class EventRouter
     public function getChannel(string $event): string
     {
         return $this->channels[$event];
-    }
-
-    /**
-     * @param string $event
-     * @param bool $isEnabled
-     * @return void
-     */
-    public function registerSse(string $event, bool $isEnabled): void
-    {
-        $this->sse[$event] = $isEnabled;
-    }
-
-    /**
-     * @param string $event
-     * @return bool
-     */
-    public function hasSse(string|Event $event): bool
-    {
-        if ($event instanceof Event) {
-            $event = get_class($event);
-        }
-
-        return $this->sse[$event] ?? false;
     }
 
     /**
