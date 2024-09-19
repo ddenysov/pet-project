@@ -39,6 +39,8 @@
 import {useRideStore} from "~/stores/ride";
 import {useDataStore} from "~/components/ui/data/store";
 
+// ride.domain.event.rider_request_accepted_join_to_ride
+
 const rideStore = useRideStore();
 const dataStore = useDataStore();
 async function edit(id: string) {

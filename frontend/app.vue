@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css';
+import '~/assets/scss/app.scss';
 import {useUserStore} from "~/stores/user";
 const tokenCookie = useCookie('token')
 const userStore = useUserStore();

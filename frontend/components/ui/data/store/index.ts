@@ -116,7 +116,8 @@ export const useDataStore = defineStore('data', {
          */
         async init(data: string, resource: string): Promise<any> {
             const { $listen } = useNuxtApp()
-            $listen('rides', e => this.load(data, true) )
+            $listen('ride.domain.event.rider_request_accepted_join_to_ride', e => this.load(data, true) )
+            $listen('ride.domain.event.ride_created', e => this.load(data, true) )
 
             this.setResource(data, resource);
             if (!this.getRows(data)) {

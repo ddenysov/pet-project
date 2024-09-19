@@ -13,7 +13,9 @@ export default defineNuxtPlugin(({$emitter: any}) => {
 
         eventSource.onmessage = e => {
             const update = JSON.parse(e.data);
-            $event(update.entity, update)
+            console.log('update');
+            console.log(update);
+            $event(update.name, update.payload)
             console.log('JSON.parse(e.data)')
             console.log(JSON.parse(e.data))
         };
