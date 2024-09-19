@@ -107,3 +107,6 @@ services:
     public: true
   Common\Application\EventStore\PublishStrategy\OutboxPublishStrategy:
     public: true
+
+  Common\Application\EventStore\Port\SsePublisher:
+    class: Common\Infrastructure\EventStore\Mercure\SsePublisher

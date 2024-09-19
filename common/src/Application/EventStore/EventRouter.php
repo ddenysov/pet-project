@@ -4,9 +4,12 @@ namespace Common\Application\EventStore;
 
 use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\EventStore\PublishStrategy\AllPublishStrategy;
+use Common\Application\EventStore\PublishStrategy\AsyncPublishStrategy;
 use Common\Application\EventStore\PublishStrategy\EventBusPublishStrategy;
 use Common\Application\EventStore\PublishStrategy\OutboxPublishStrategy;
 use Common\Application\EventStore\PublishStrategy\Port\PublishStrategy;
+use Common\Application\EventStore\PublishStrategy\SsePublishStrategy;
+use Common\Application\EventStore\PublishStrategy\SyncPublishStrategy;
 use Common\Domain\Event\Port\Event;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -24,6 +27,11 @@ class EventRouter
     private array $transports = [];
 
     /**
+     * @var array
+     */
+    private array $sse = [];
+
+    /**
      * Type sync
      */
     private const TRANSPORT_TYPE_SYNC = 'sync';
@@ -34,17 +42,11 @@ class EventRouter
     private const TRANSPORT_TYPE_ASYNC = 'async';
 
     /**
-     * Type all
-     */
-    private const TRANSPORT_TYPE_ALL = 'all';
-
-    /**
      * @var array|string[]
      */
     private static array $STRATEGIES = [
-        self::TRANSPORT_TYPE_ASYNC => OutboxPublishStrategy::class,
-        self::TRANSPORT_TYPE_SYNC => EventBusPublishStrategy::class,
-        self::TRANSPORT_TYPE_ALL => AllPublishStrategy::class,
+        self::TRANSPORT_TYPE_ASYNC => AsyncPublishStrategy::class,
+        self::TRANSPORT_TYPE_SYNC => SyncPublishStrategy::class,
     ];
 
     public function __construct(private ServiceContainer $container)
@@ -92,6 +94,30 @@ class EventRouter
 
     /**
      * @param string $event
+     * @param bool $isEnabled
+     * @return void
+     */
+    public function registerSse(string $event, bool $isEnabled): void
+    {
+        $this->sse[$event] = $isEnabled;
+    }
+
+    /**
+     * @param string $event
+     * @return bool
+     */
+    public function hasSse(string|Event $event): bool
+    {
+        if ($event instanceof Event) {
+            $event = get_class($event);
+        }
+
+        return $this->sse[$event] ?? false;
+    }
+
+    /**
+     * @param string|Event $event
+     * @return PublishStrategy
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */

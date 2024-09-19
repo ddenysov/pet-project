@@ -6,11 +6,11 @@ services:
     # EVENTS
     Ride\Domain\Event\RiderRequestedJoinToRide:
         tags:
-            - { name: 'event.domain_event', channel: 'ride', transport: 'sync' }
+            - { name: 'event.domain_event', channel: 'ride', transport: 'sync', sse: true }
 
     Ride\Domain\Event\RideCreated:
         tags:
-            - { name: 'event.domain_event', channel: 'ride', transport: 'async' }
+            - { name: 'event.domain_event', channel: 'ride', transport: 'async', sse: true }
 
     # HANDLERS
     Ride\Application\Handlers\Event\HealthCheckEventHandler:

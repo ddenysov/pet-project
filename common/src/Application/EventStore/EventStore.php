@@ -2,6 +2,7 @@
 
 namespace Common\Application\EventStore;
 
+use Common\Application\EventStore\Port\SsePublisher;
 use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\Event\Event;
 use Psr\Log\LoggerInterface;
@@ -12,6 +13,7 @@ abstract class EventStore implements Port\EventStore
         private Outbox $outbox,
         private EventRouter $eventRouter,
         private LoggerInterface $logger,
+        private SsePublisher $ssePublisher,
     )
     {
 
@@ -33,6 +35,10 @@ abstract class EventStore implements Port\EventStore
     {
         $strategy = $this->eventRouter->getTransportStrategy($event);
         $strategy->handle($event);
+
+        if ($this->eventRouter->hasSse($event)) {
+            $this->ssePublisher->publish($event);
+        }
     }
 
     /**

@@ -18,6 +18,9 @@ class EventRouterCompilerPass implements CompilerPassInterface
         foreach ($definitions as $event => $params) {
             $definition->addMethodCall('registerChannel', [$event, $params[0]['channel']]);
             $definition->addMethodCall('registerTransport', [$event, $params[0]['transport']]);
+            if (isset($params[0]['sse']) && $params[0]['sse']) {
+                $definition->addMethodCall('registerSse', [$event, $params[0]['sse']]);
+            }
         }
     }
 

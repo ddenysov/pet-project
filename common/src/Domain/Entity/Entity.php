@@ -12,6 +12,10 @@ abstract class Entity implements Port\Entity
      */
     protected $id;
 
+    final protected function __construct()
+    {
+    }
+
     final public function toArray(): array
     {
         return [

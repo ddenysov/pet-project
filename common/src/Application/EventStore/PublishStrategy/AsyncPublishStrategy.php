@@ -6,7 +6,7 @@ use Common\Application\EventStore\PublishStrategy\Port\PublishStrategy;
 use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\Event\Port\Event;
 
-class OutboxPublishStrategy implements PublishStrategy
+class AsyncPublishStrategy implements PublishStrategy
 {
     /**
      * @param Outbox $outbox
