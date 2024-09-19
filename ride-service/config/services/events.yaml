@@ -8,6 +8,10 @@ services:
         tags:
             - { name: 'event.domain_event', channel: 'ride', transport: 'sync', sse: true }
 
+    Ride\Domain\Event\RiderRequestAcceptedJoinToRide:
+        tags:
+            - { name: 'event.domain_event', channel: 'ride', transport: 'sync', sse: true }
+
     Ride\Domain\Event\RideCreated:
         tags:
             - { name: 'event.domain_event', channel: 'ride', transport: 'async', sse: true }
@@ -32,6 +36,11 @@ services:
     Ride\Application\Handlers\Event\RiderJoinRequestedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
+    Ride\Application\Handlers\Event\RiderJoinAcceptedEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
 
     # Ride\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:

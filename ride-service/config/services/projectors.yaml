@@ -16,3 +16,6 @@ services:
 
     Ride\Application\Projector\Port\RiderRequestedJoinToRideProjector:
         class: Ride\Infrastructure\Projector\Doctrine\RideJoinRequestedProjector
+
+    Ride\Application\Projector\Port\RiderRequestAcceptedJoinToRideProjector:
+        class: Ride\Infrastructure\Projector\Doctrine\RideJoinRequestAcceptedProjector

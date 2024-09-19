@@ -23,7 +23,10 @@ class Broadcaster implements BroadcasterPort
     {
         $update = new Update(
             'https://updates/user/' . $identity->toString(),
-            json_encode($event->payload())
+            json_encode([
+                'name' => $event->getEventName(),
+                'payload' => $event->payload(),
+            ])
         );
 
         $this->hub->publish($update);

@@ -9,6 +9,8 @@ import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css';
 import {useUserStore} from "~/stores/user";
 const tokenCookie = useCookie('token')
+const userStore = useUserStore();
+userStore.init();
 const { $listen } = useNuxtApp()
 
 $listen('*', (type, e) => console.log(type, e) )

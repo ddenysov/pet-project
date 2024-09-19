@@ -5,10 +5,12 @@ namespace Ride\Application\Handlers\Event;
 use Common\Application\Broadcaster\Port\Broadcaster;
 use Common\Application\Bus\Port\CommandBus;
 use Ride\Application\Handlers\Command\AcceptJoinRideCommand;
+use Ride\Application\Projector\Port\RiderRequestAcceptedJoinToRideProjector;
+use Ride\Domain\Event\RiderRequestAcceptedJoinToRide;
 use Ride\Domain\Event\RiderRequestedJoinToRide;
 use Ride\Infrastructure\Projector\Doctrine\RideJoinRequestedProjector;
 
-final readonly class RiderJoinRequestedEventHandler
+final readonly class RiderJoinAcceptedEventHandler
 {
     /**
      * @param RideJoinRequestedProjector $projector
@@ -16,22 +18,18 @@ final readonly class RiderJoinRequestedEventHandler
      * @param CommandBus $commandBus
      */
     public function __construct(
-        private RideJoinRequestedProjector $projector,
+        private RiderRequestAcceptedJoinToRideProjector $projector,
         private Broadcaster $broadcaster,
-        private CommandBus $commandBus,
     ) {
     }
 
     /**
-     * @param RiderRequestedJoinToRide $event
+     * @param RiderRequestAcceptedJoinToRide $event
      * @return void
      */
-    public function __invoke(RiderRequestedJoinToRide $event): void
+    public function __invoke(RiderRequestAcceptedJoinToRide $event): void
     {
         $this->projector->apply($event);
-        $this->commandBus->execute(new AcceptJoinRideCommand(
-            rideId: $event->getAggregateId()->toString(),
-            riderId: $event->getRiderId()->toString(),
-        ));
+        $this->broadcaster->broadcastMessageTo($event->getRiderId(), $event);
     }
 }

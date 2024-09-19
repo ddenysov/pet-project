@@ -25,3 +25,7 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\RequestJoinRideCommand' }
 
+    Ride\Application\Handlers\Command\AcceptJoinRideCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\AcceptJoinRideCommand' }
+
