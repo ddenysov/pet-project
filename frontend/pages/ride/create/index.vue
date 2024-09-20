@@ -13,6 +13,27 @@
           :validation="{ required: true }"
         />
 
+        <ui-date-field
+          form="create-ride"
+          label="Дата"
+          name="date"
+          :validation="{ required: true }"
+        />
+
+        <ui-time-field
+          form="create-ride"
+          label="час початку"
+          name="time_start"
+          :validation="{ required: true }"
+        />
+
+        <ui-time-field
+          form="create-ride"
+          label="Час закінчення"
+          name="time_end"
+          :validation="{ required: true }"
+        />
+
         <ui-submit-button
           action="/api/ride/create-ride"
           form="create-ride"

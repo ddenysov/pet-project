@@ -35,6 +35,8 @@ export default defineNuxtConfig({
                 'Toolbar',
                 'Menubar',
                 'Avatar',
+                'Dialog',
+                'DatePicker',
             ],
         },
         options: {
