@@ -27,6 +27,7 @@ const menuItems = ref([
   }
 ]);
 const visible = ref(false);
+const rvisible = ref(false);
 const toggle = (event: any) => {
   menu.value.toggle(event);
 };
@@ -36,6 +37,12 @@ const onLoginSuccess = async (res: any) => {
   userStore.setToken(res.res.token);
   visible.value = false;
 }
+
+
+const onRegisterSuccess = (res: any) => {
+  rvisible.value = false;
+}
+
 </script>
 
 <template>
@@ -50,10 +57,10 @@ const onLoginSuccess = async (res: any) => {
         <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
         <ui-button v-if="store.isLoggedIn()" class="ml-2" label="Створити покатушку" @click="() => navigateTo('/ride/create')" />
         <ui-button v-if="!store.isLoggedIn()" class="ml-2" label="Увійти" @click="() => visible = true" />
+        <ui-button v-if="!store.isLoggedIn()" class="ml-2" label="Реєстрація" @click="() => rvisible = true" />
       </template>
     </ui-toolbar>
     <ui-message name="layout" />
-    <ui-nav-link v-if="!store.isLoggedIn()" to="/login" label="Увійти" />
     <ui-nav-link v-if="!store.isLoggedIn()" to="/register" label="Реєстрація" />
     <slot />
 
@@ -80,6 +87,31 @@ const onLoginSuccess = async (res: any) => {
           label="Увійти"
           name="submit"
           @submit="onLoginSuccess"
+        />
+      </ui-flex>
+    </Dialog>
+
+    <Dialog v-model:visible="rvisible" modal header="Реєстрація" :style="{ width: '25rem' }">
+      <ui-flex grow="1" direction="column">
+        <ui-text-field
+          form="sign-up"
+          label="Електронна пошта"
+          name="email"
+          :validation="{ required: true, email: true }"
+        />
+
+        <ui-text-field
+          form="sign-up"
+          label="Пароль"
+          name="password"
+        />
+
+        <ui-submit-button
+          action="/api/iam/register"
+          form="sign-up"
+          label="Реєстрація"
+          name="submit"
+          @submit="onRegisterSuccess"
         />
       </ui-flex>
     </Dialog>

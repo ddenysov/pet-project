@@ -56,10 +56,11 @@ watch(
     :gap="2"
   >
     <label :for="name">{{ label }}</label>
-    <InputText
+    <Textarea
       v-model="store.values[form][name]"
       :disabled="store.isLoading(form) || disabled"
-      aria-describedby="username-help"
+      rows="5"
+      cols="30"
     />
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
   </ui-flex>

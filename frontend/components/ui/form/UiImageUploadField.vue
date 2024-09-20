@@ -56,11 +56,22 @@ watch(
     :gap="2"
   >
     <label :for="name">{{ label }}</label>
-    <InputText
-      v-model="store.values[form][name]"
-      :disabled="store.isLoading(form) || disabled"
-      aria-describedby="username-help"
-    />
+
+    <FileUpload
+      name="demo[]"
+      url="/api/upload"
+      :multiple="true"
+      accept="image/*"
+      :show-cancel-button="false"
+      :show-upload-button="false"
+      auto
+      :maxFileSize="1000000"
+    >
+      <template #empty>
+        <span>Drag and drop files to here to upload.</span>
+      </template>
+    </FileUpload>
+
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
   </ui-flex>
 </template>

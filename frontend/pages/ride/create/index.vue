@@ -13,6 +13,13 @@
           :validation="{ required: true }"
         />
 
+        <ui-text-area-field
+          form="create-ride"
+          label="Опис покатушки"
+          name="description"
+          :validation="{ required: true }"
+        />
+
         <ui-date-field
           form="create-ride"
           label="Дата"
@@ -34,6 +41,16 @@
           :validation="{ required: true }"
         />
 
+        <ui-image-upload-field
+          form="create-ride"
+          label="Фото"
+          name="images"
+          :validation="{ required: true }"
+        />
+
+        <ToggleButton v-model="lock" onLabel="Закрита" offLabel="Відкрита" onIcon="pi pi-lock"
+                      offIcon="pi pi-lock-open" class="w-36 mb-2" aria-label="Do you confirm" />
+
         <ui-submit-button
           action="/api/ride/create-ride"
           form="create-ride"
@@ -41,6 +58,8 @@
           name="submit"
           @submit="submit"
         />
+
+
       </ui-flex>
       <ui-flex grow="1">-</ui-flex>
     </ui-flex>
@@ -49,6 +68,8 @@
 </template>
 <script setup lang="ts">
 import {useMessageStore} from "~/components/ui/message/store";
+
+const lock = ref(0);
 
 const messageStore = useMessageStore();
 async function submit(id: string) {

@@ -37,6 +37,9 @@ export default defineNuxtConfig({
                 'Avatar',
                 'Dialog',
                 'DatePicker',
+                'Textarea',
+                'ToggleButton',
+                'FileUpload',
             ],
         },
         options: {
