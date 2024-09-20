@@ -31,6 +31,10 @@ export default defineNuxtConfig({
                 'DataView',
                 'Paginator',
                 'Toast',
+                'Message',
+                'Toolbar',
+                'Menubar',
+                'Avatar',
             ],
         },
         options: {

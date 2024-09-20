@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <Toolbar>
+  <Toolbar style="border: none; border-radius: 0">
     <template #start>
       <slot name="start" />
     </template>

@@ -18,6 +18,7 @@
           form="create-ride"
           label="Створити покатушку"
           name="submit"
+          @submit="submit"
         />
       </ui-flex>
       <ui-flex grow="1">-</ui-flex>
@@ -26,6 +27,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import {useMessageStore} from "~/components/ui/message/store";
+
+const messageStore = useMessageStore();
+async function submit(id: string) {
+  messageStore.showMessage('layout', 'Покатушка буде створена незабаром.');
+  await navigateTo('/ride');
+}
 
 
 </script>
