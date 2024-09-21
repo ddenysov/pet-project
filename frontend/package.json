@@ -15,12 +15,16 @@
     "@primevue/themes": "^4.0.7",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.12.4",
+    "ol": "^10.1.0",
+    "ol-contextmenu": "^5.5.0",
+    "ol-ext": "^4.0.23",
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4.0.1",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.4",
     "vue": "latest",
+    "vue3-openlayers": "^11.2.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
