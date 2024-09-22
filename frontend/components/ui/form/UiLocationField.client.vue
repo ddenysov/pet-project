@@ -2,7 +2,7 @@
 import {defineProps} from 'vue'
 import {useFormStore} from './store/index';
 import {Map, Layers, Sources} from "vue3-openlayers";
-import { useTemplateRef, onMounted } from 'vue'
+import {useTemplateRef, onMounted} from 'vue'
 
 const store = useFormStore();
 
@@ -14,7 +14,7 @@ export interface Props {
   form: string,
   validation?: {},
 }
-
+const dialogVisible = ref(false);
 const props = defineProps<Props>();
 
 store.$patch({
@@ -61,11 +61,23 @@ function latLonToMercator(lat, lon) {
   // Преобразуем широту в радианы и используем формулу Меркатора
   const y = R * Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360));
 
-  return { x, y };
+  return {x, y};
+}
+
+function mercatorToLatLon(x, y) {
+  const R = 6378137; // Радиус Земли в метрах (используемый для проекции Web Mercator)
+
+  // Преобразуем x в долготу
+  const lon = x / R * 180 / Math.PI;
+
+  // Преобразуем y в широту
+  const lat = (Math.atan(Math.exp(y / R)) - Math.PI / 4) * 360 / Math.PI;
+
+  return {lat, lon};
 }
 
 // Пример использования:
-const kievCoords = { lat: 50.4501, lon: 30.5234 };
+const kievCoords = {lat: 50.4501, lon: 30.5234};
 const mercatorCoords = latLonToMercator(kievCoords.lat, kievCoords.lon);
 
 const map = useTemplateRef('mapRef')
@@ -89,7 +101,7 @@ function click(e: any) {
   console.log(e);
 }
 
-const markerIcon='/images/marker.png';
+const markerIcon = '/images/marker.png';
 
 const drawEnable = ref(true);
 const drawType = ref("Point");
@@ -99,11 +111,24 @@ const drawstart = (event) => {
 };
 
 const drawend = (event) => {
-  console.log(event.target.sketchCoords_);
   markerCenter.value = event.target.sketchCoords_;
 
-  console.log('markerCenter.value');
-  console.log(markerCenter.value);
+  store.$patch({
+    values: {
+      [props.form]: {
+        [props.name]: mercatorToLatLon(
+          event.target.sketchCoords_[0],
+          event.target.sketchCoords_[1],
+        )
+      },
+    },
+  });
+};
+
+const modalRef = ref(null);
+const openModal = () => {
+  console.log(modalRef.value);
+  modalRef.value.show();
 };
 
 </script>
@@ -114,8 +139,11 @@ const drawend = (event) => {
     :gap="2"
   >
     <label :for="name">{{ label }}</label>
-    <ClientOnly>
-      <ol-map :loadTilesWhileAnimating="true" :loadTilesWhileInteracting="true" style="height:400px">
+
+    <ui-button label="Оберіть місце зустрічі" @click="openModal" />
+
+    <ui-dialog ref="modalRef">
+      <ol-map :loadTilesWhileAnimating="true" :loadTilesWhileInteracting="true" style="height:600px">
         <ol-view :center="center" :rotation="rotation" :zoom="zoom"
                  :projection="projection"
                  @change:center="centerChanged"
@@ -178,7 +206,8 @@ const drawend = (event) => {
           </ol-style>
         </ol-vector-layer>
       </ol-map>
-    </ClientOnly>
+    </ui-dialog>
+
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
   </ui-flex>
 </template>

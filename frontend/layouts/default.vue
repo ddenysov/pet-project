@@ -91,7 +91,7 @@ const onRegisterSuccess = (res: any) => {
       </ui-flex>
     </Dialog>
 
-    <Dialog v-model:visible="rvisible" modal header="Реєстрація" :style="{ width: '25rem' }">
+    <Dialog v-model:visible="rvisible" modal header="Увійти" :style="{ width: '25rem' }">
       <ui-flex grow="1" direction="column">
         <ui-text-field
           form="sign-up"
