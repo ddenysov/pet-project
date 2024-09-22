@@ -12,11 +12,16 @@ const show = () => {
   visible.value = true;
 }
 
+defineExpose({
+  close,
+  show,
+});
+
 </script>
 
 <template>
   <Dialog
-    style="width: 90%; height: 600px"
+    style="width: 90%; height: 705px"
     v-model:visible="visible"
     modal
     header="Реєстрація"

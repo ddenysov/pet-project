@@ -55,6 +55,13 @@
           :validation="{ required: true }"
         />
 
+        <ui-location-field
+          form="create-ride"
+          label="Місце фінфшу"
+          name="finish_location"
+          :validation="{ required: true }"
+        />
+
         <ToggleButton v-model="lock" onLabel="Закрита" offLabel="Відкрита" onIcon="pi pi-lock"
                       offIcon="pi pi-lock-open" class="w-36 mb-2" aria-label="Do you confirm" />
 
