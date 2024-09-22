@@ -76,7 +76,7 @@
 <script setup lang="ts">
 import {useMessageStore} from "~/components/ui/message/store";
 
-const lock = ref(0);
+const lock = ref(false);
 
 const messageStore = useMessageStore();
 async function submit(id: string) {

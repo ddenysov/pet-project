@@ -74,7 +74,7 @@ onMounted(() => {
   console.log(map.value);
 })
 
-const center = ref([3396641.46, 6523275.84])
+const center = ref([3386118.8560320227, 6527692.993243565])
 const projection = ref('EPSG:3857')
 const zoom = ref(16)
 const rotation = ref(0)
@@ -83,23 +83,27 @@ function centerChanged(a: any, b: any) {
   //markerCenter.value = a.target.getCenter();
 }
 
-const markerCenter = ref([3396641.46, 6519275.84])
+const markerCenter = ref([3386118.8560320227, 6527692.993243565])
 
 function click(e: any) {
   console.log(e);
 }
 
-const markerIcon='~/assets/images/marker.png';
+const markerIcon='/images/marker.png';
 
 const drawEnable = ref(true);
 const drawType = ref("Point");
 
 const drawstart = (event) => {
-  console.log(event);
+  //console.log(event);
 };
 
 const drawend = (event) => {
-  console.log(event);
+  console.log(event.target.sketchCoords_);
+  markerCenter.value = event.target.sketchCoords_;
+
+  console.log('markerCenter.value');
+  console.log(markerCenter.value);
 };
 
 </script>
@@ -120,6 +124,35 @@ const drawend = (event) => {
           <ol-source-osm />
         </ol-tile-layer>
 
+
+        <ol-vector-layer
+          :updateWhileAnimating="true"
+          :updateWhileInteracting="true"
+          title="STAR"
+          preview="https://raw.githubusercontent.com/MelihAltintas/vue3-openlayers/main/src/assets/star.png"
+        >
+          <ol-source-vector ref="vectorsource">
+            <ol-animation-shake>
+              <ol-feature>
+                <ol-geom-point
+                  :coordinates="markerCenter"
+                ></ol-geom-point>
+
+                <ol-style>
+                  <ol-style-icon :src="markerIcon" :scale="0.1"></ol-style-icon>
+                </ol-style>
+              </ol-feature>
+            </ol-animation-shake>
+            <ol-feature>
+              <ol-geom-circle :center="markerCenter" :radius="2"></ol-geom-circle>
+              <ol-style>
+                <ol-style-stroke color="blue" :width="2"></ol-style-stroke>
+                <ol-style-fill color="rgba(255,200,0,0.2)"></ol-style-fill>
+              </ol-style>
+            </ol-feature>
+          </ol-source-vector>
+        </ol-vector-layer>
+
         <ol-vector-layer>
           <ol-source-vector :projection="projection">
             <ol-interaction-draw
@@ -129,11 +162,11 @@ const drawend = (event) => {
               @drawstart="drawstart"
             >
               <ol-style>
-                <ol-style-stroke color="blue" :width="2"></ol-style-stroke>
-                <ol-style-fill color="rgba(255, 255, 0, 0.4)"></ol-style-fill>
-                <ol-style-circle :radius="5">
-                  <ol-style-fill color="#00dd11" />
-                  <ol-style-stroke color="blue" :width="2" />
+                <ol-style-stroke color="red" :width="2"></ol-style-stroke>
+                <ol-style-fill color="rgba(255, 0, 0, 0.4)"></ol-style-fill>
+                <ol-style-circle :radius="10">
+                  <ol-style-fill color="#CCCCCC" />
+                  <ol-style-stroke color="red" :width="2" />
                 </ol-style-circle>
               </ol-style>
             </ol-interaction-draw>
@@ -142,9 +175,6 @@ const drawend = (event) => {
           <ol-style>
             <ol-style-stroke color="red" :width="2"></ol-style-stroke>
             <ol-style-fill color="rgba(255,255,255,0.1)"></ol-style-fill>
-            <ol-style-circle :radius="7">
-              <ol-style-fill color="red"></ol-style-fill>
-            </ol-style-circle>
           </ol-style>
         </ol-vector-layer>
       </ol-map>
@@ -152,3 +182,13 @@ const drawend = (event) => {
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
   </ui-flex>
 </template>
+
+<style scoped>
+.marker {
+  background-color: #ffddaa;
+  padding: 10px;
+  border-radius: 25px;
+  margin: 5px;
+  font-size: 25px;
+}
+</style>
