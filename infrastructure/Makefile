@@ -10,7 +10,7 @@ destroy-logs-storage:
 destroy-network:
 	docker network rm service_network
 
-start: start-kafka start-api-gateway start-database start-mercure start-minio
+start: start-kafka start-minio start-api-gateway start-database start-mercure
 
 stop: stop-kafka stop-api-gateway stop-database stop-minio stop-mercure
 
