@@ -48,6 +48,22 @@ watch(
     })
   }
 );
+
+const onUpload = (event) => {
+  const { xhr, files } = event;
+  const response = JSON.parse(xhr.response); // You can also directly check xhr.responseText
+  console.log('Server Response:', response);
+  console.log('Uploaded Files:', files);
+
+  store.$patch({
+    values: {
+      [props.form]: {
+        [props.name]: response.url,
+      },
+    },
+  })
+}
+
 </script>
 
 <template>
@@ -66,6 +82,7 @@ watch(
       :show-upload-button="false"
       auto
       :maxFileSize="10000000"
+      @upload="onUpload"
     >
       <template #empty>
         <span>Drag and drop files to here to upload.</span>

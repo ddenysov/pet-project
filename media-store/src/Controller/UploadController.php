@@ -57,9 +57,7 @@ class UploadController
             'Bucket' => 'images',
         ]);
 
-        $url = "http://localhost:9000/{$bucket}/photo_2024-09-12_18-33-56.jpg";
-        echo "Public URL: $url\n";
-        echo $url;
+        $url = "http://localhost:9000/{$bucket}/$fileName";
 
         try {
             // Загружаем файл в MinIO
@@ -70,13 +68,14 @@ class UploadController
                 'ContentType' => $file->getMimeType(), // Указываем MIME тип
             ]);
 
+
             // Возвращаем ответ с URL загруженного файла
-            dd('ok');
+            return new JsonResponse([
+                'url' => str_ireplace('minio:9000', 'localhost:9100', $result->get('ObjectURL')),
+            ]);
         } catch (\Exception $e) {
             // Обрабатываем ошибки
             dd($e->getMessage());
         }
-
-        dd($a);
     }
 }
