@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  media-store-fpm:
+    extends:
+      file: ../infrastructure/php/php-fpm/compose.yaml
+      service: service-fpm
+    volumes:
+      - ./:/var/www/html
+
+networks:
+  service_network:
+    external: true
+
+volumes:
+  logs_volume:
+    external: true
