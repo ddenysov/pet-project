@@ -21,8 +21,6 @@ reload: restart-consumer restart-scheduler
 restart-scheduler:
 	docker compose restart ride-service-scheduler
 
-restart-mercure:
-	docker compose restart mercure
 
 restart-consumer:
 	docker compose restart ride-service-consumer

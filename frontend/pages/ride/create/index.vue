@@ -17,49 +17,42 @@
           form="create-ride"
           label="Опис покатушки"
           name="description"
-          :validation="{ required: true }"
         />
 
         <ui-date-field
           form="create-ride"
           label="Дата"
           name="date"
-          :validation="{ required: true }"
         />
 
         <ui-time-field
           form="create-ride"
           label="час початку"
           name="time_start"
-          :validation="{ required: true }"
         />
 
         <ui-time-field
           form="create-ride"
           label="Час закінчення"
           name="time_end"
-          :validation="{ required: true }"
         />
 
         <ui-image-upload-field
           form="create-ride"
           label="Фото"
           name="images"
-          :validation="{ required: true }"
         />
 
         <ui-location-field
           form="create-ride"
           label="Місце зустрічі"
           name="start_location"
-          :validation="{ required: true }"
         />
 
         <ui-location-field
           form="create-ride"
           label="Місце фінфшу"
           name="finish_location"
-          :validation="{ required: true }"
         />
 
         <ToggleButton v-model="lock" onLabel="Закрита" offLabel="Відкрита" onIcon="pi pi-lock"

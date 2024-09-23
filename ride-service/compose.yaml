@@ -24,33 +24,6 @@ services:
     volumes:
       - ./:/var/www/html
 
-###> symfony/mercure-bundle ###
-  mercure:
-    image: dunglas/mercure
-    restart: unless-stopped
-    environment:
-      CORS_ALLOWED_ORIGINS: 'http://localhost:3000'
-      # Uncomment the following line to disable HTTPS,
-      SERVER_NAME: ':3010'
-      MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
-      MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
-      # Set the URL of your Symfony project (without trailing slash!) as value of the cors_origins directive
-    # Comment the following line to disable the development mode
-    command: /usr/bin/caddy run --config /etc/caddy/dev.Caddyfile
-    healthcheck:
-      test: ["CMD", "curl", "-f", "https://localhost:3010/healthz"]
-      timeout: 5s
-      retries: 5
-      start_period: 60s
-    networks:
-      - service_network
-    ports:
-      - 3010:3010
-    volumes:
-      - mercure_data:/data
-      - mercure_config:/config
-###< symfony/mercure-bundle ###
-
 networks:
   service_network:
     external: true
@@ -58,8 +31,3 @@ networks:
 volumes:
   logs_volume:
     external: true
-
-###> symfony/mercure-bundle ###
-  mercure_data:
-  mercure_config:
-###< symfony/mercure-bundle ###
