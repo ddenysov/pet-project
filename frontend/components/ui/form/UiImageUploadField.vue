@@ -59,13 +59,13 @@ watch(
 
     <FileUpload
       name="demo[]"
-      url="/api/upload"
+      url="/api/media/upload"
       :multiple="true"
       accept="image/*"
       :show-cancel-button="false"
       :show-upload-button="false"
       auto
-      :maxFileSize="1000000"
+      :maxFileSize="10000000"
     >
       <template #empty>
         <span>Drag and drop files to here to upload.</span>
