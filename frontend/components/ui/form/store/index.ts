@@ -145,6 +145,7 @@ export const useFormStore = defineStore('form', {
                     this.setFieldError(form, e.key ?? '', e.message);
                 });
                 this.setLoading(form, false);
+                throw e;
             }
         }
     }

@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" packagePrefix="Common\" />
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/src" isTestSource="false" packagePrefix="Iam\" />
-      <sourceFolder url="file://$MODULE_DIR$/media-store" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/template-service/src" isTestSource="false" packagePrefix="Template\" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />

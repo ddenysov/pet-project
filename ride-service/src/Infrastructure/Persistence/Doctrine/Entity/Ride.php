@@ -20,6 +20,24 @@ class Ride
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private string $description;
+
+    #[ORM\Column(type: Types::STRING)]
+    private string $imageUrl;
+
+    #[ORM\Column(type: Types::FLOAT)]
+    private float $startLat;
+
+    #[ORM\Column(type: Types::FLOAT)]
+    private float $startLon;
+
+    #[ORM\Column(type: Types::FLOAT)]
+    private float $endLat;
+
+    #[ORM\Column(type: Types::FLOAT)]
+    private float $endLon;
+
     #[ORM\Column(type: UuidType::NAME)]
     private ?Uuid $organizerId = null;
 

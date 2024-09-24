@@ -59,7 +59,7 @@ const drawstart = (event) => {
   //console.log(event);
 };
 
-defineEmits(['select'])
+const $emit = defineEmits(['select'])
 
 const drawend = async (event) => {
   markerCenter.value = event.target.sketchCoords_;

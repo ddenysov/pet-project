@@ -50,6 +50,19 @@ watch(
 );
 
 
+const onSelectLocation = (location) => {
+  console.log('SELECT');
+  console.log(location);
+  store.$patch({
+    values: {
+      [props.form]: {
+        [props.name]: location,
+      },
+    },
+  })
+}
+
+
 const modalRef = ref(null);
 const openModal = () => {
   modalRef.value.show();
@@ -65,7 +78,7 @@ const openModal = () => {
     <label :for="name">{{ label }}</label>
     <ui-button :label="label" @click="openModal" />
     <ui-dialog ref="modalRef">
-      <osm-map />
+      <osm-map @select="onSelectLocation" />
     </ui-dialog>
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
   </ui-flex>

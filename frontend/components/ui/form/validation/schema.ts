@@ -5,6 +5,11 @@ export const createYupSchema = (schema: any) => {
   const yupSchema: any = {};
   for (const key in schema) {
     const field = schema[key];
+
+    if (!field) {
+      //continue;
+    }
+
     let validator: yup.StringSchema = yup.string();
 
     for (const rule in field) {
