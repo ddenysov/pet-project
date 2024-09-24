@@ -40,7 +40,7 @@
         <ui-image-upload-field
           form="create-ride"
           label="Фото"
-          name="images"
+          name="image"
         />
 
         <ui-location-field

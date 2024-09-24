@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
-
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CreateRideController extends Controller
 {
@@ -23,9 +24,23 @@ class CreateRideController extends Controller
     #[Route('/create-ride', name: 'create-ride', methods: ['POST', 'GET'], format: 'json')]
     #[CanCreateRide()]
     public function __invoke(
-        #[MapRequestPayload] CreateRideRequest $ride,
         Request $request
     ) {
+        $validator = Validation::createValidator();
+
+
+        $groups = new Assert\GroupSequence(['Default', 'custom']);
+
+        $constraint = new Assert\Collection([
+            // the keys correspond to the keys in the input array
+            'name' => new Assert\Email(),
+        ]);
+
+        $violations = $validator->validate($request->toArray(), $constraint, $groups);
+
+
+        dd($violations);
+
         $this->logger->debug('Request received', [
             'data' => $request->toArray(),
             'headers' => $request->headers->all(),

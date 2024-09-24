@@ -7,7 +7,7 @@ export const createYupSchema = (schema: any) => {
     const field = schema[key];
 
     if (!field) {
-      //continue;
+      continue;
     }
 
     let validator: yup.StringSchema = yup.string();
