@@ -19,6 +19,9 @@ trait ObjectToArray
         $propsArray = [];
 
         foreach ($props as $prop) {
+            if (!$prop->isInitialized($this)) {
+                continue;
+            }
             $value = $prop->getValue($this);
             $propsArray[$prop->getName()] = $value instanceof StringValue || !$deep ? $value->toString() : $value;
         }

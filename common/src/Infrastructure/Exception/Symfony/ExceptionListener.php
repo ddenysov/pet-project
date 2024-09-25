@@ -19,20 +19,21 @@ class ExceptionListener
         $exception = $event->getThrowable();
         $previous  = $exception->getPrevious();
 
-        if ($previous instanceof ValidationFailedException) {
+        if ($previous instanceof ValidationFailedException || $exception instanceof ValidationFailedException) {
             /**
              * @var ValidationFailedException $previous
              */
-            $violations = $previous->getViolations();
+            $violations = $previous?->getViolations() ?? $exception->getViolations();
             $response   = [];
 
             foreach ($violations as $error) {
+                $key = trim($error->getPropertyPath(), '[]');
                 $item = [
                     'message' => $error->getMessage(),
-                    'key'     => $error->getPropertyPath(),
+                    'key'     => $key,
                 ];
 
-                $response[$error->getPropertyPath()] = $item;
+                $response[$key] = $item;
             }
 
             $response = new JsonResponse([
