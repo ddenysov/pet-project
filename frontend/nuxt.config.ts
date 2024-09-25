@@ -9,6 +9,15 @@ export default defineNuxtConfig({
         enabled: true,
       },
     },
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    api: 'modern-compiler' // or "modern"
+                }
+            }
+        }
+    },
     modules: [
         "@pinia/nuxt",
         '@primevue/nuxt-module',

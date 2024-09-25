@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {defineProps} from 'vue'
-import {useFormStore} from './store/index';
+import { useFormStore } from './store/formStore';
 import OsmMap from "~/components/ui/form/LocationField/OsmMap.vue";
 
 const store = useFormStore();

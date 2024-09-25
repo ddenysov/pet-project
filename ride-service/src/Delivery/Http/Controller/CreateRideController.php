@@ -8,8 +8,6 @@ use Ride\Delivery\Http\Request\CreateRideRequest;
 use Ride\Delivery\Http\Security\CanCreateRide;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validation;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class CreateRideController extends Controller
 {
@@ -21,7 +19,7 @@ class CreateRideController extends Controller
         $this->logger->info('Ride created');
         $this->commandBus->execute(new CreateRideCommand(
             organizerId: $this->getIdentity()->getId()->toString(),
-            name: $ride->name
+            name: $request->name
         ));
 
         return new JsonResponse([

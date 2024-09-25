@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFormStore } from './store/index';
+import { useFormStore } from './store/formStore';
 const store = useFormStore();
 
 export interface Props {
