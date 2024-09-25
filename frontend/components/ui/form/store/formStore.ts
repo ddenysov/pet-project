@@ -1,9 +1,9 @@
 // stores/counter.js
 import {defineStore} from 'pinia'
-import {ValidationError} from 'yup'
+import {bool, ValidationError} from 'yup'
 import {createYupSchema} from '../validation/schema'
 import {useApi} from "~/composables/api/api";
-import type {FormState, Value} from "~/components/ui/form/store/types";
+import type {FormState, Value} from "~/components/ui/form/store/formTypes";
 
 export const useFormStore = defineStore('form', {
     /**
@@ -80,6 +80,15 @@ export const useFormStore = defineStore('form', {
          */
         getFieldError(form: string, field: string): string {
             return this.errors[form][field];
+        },
+
+        /**
+         * Has field error
+         * @param form
+         * @param field
+         */
+        hasFieldError(form: string, field: string): boolean {
+            return !!this.getFieldError(form, field);
         },
 
         /**

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useFormStore } from './store/formStore';
+import FieldError from "~/components/ui/form/Common/FieldError.vue";
 const store = useFormStore();
 
 export interface Props {
@@ -55,12 +56,13 @@ watch(
     direction="column"
     :gap="2"
   >
-    <label :for="name">{{ label }}</label>
+    <label class="p-error" :for="name">{{ label }}</label>
     <InputText
+      class="p-invalid"
       v-model="store.values[form][name]"
       :disabled="store.isLoading(form) || disabled"
       aria-describedby="username-help"
     />
-    <small id="username-help">{{ store.getFieldError(form, name) }}</small>
+    <field-error :form="form" :name="name" />
   </ui-flex>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useFormStore } from './store/formStore';
+import FieldError from "~/components/ui/form/Common/FieldError.vue";
 const store = useFormStore();
 
 export interface Props {
@@ -62,6 +63,6 @@ watch(
       rows="5"
       cols="30"
     />
-    <small id="username-help">{{ store.getFieldError(form, name) }}</small>
+    <field-error :form="form" :name="name" />
   </ui-flex>
 </template>

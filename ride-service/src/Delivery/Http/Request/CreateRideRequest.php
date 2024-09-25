@@ -34,7 +34,7 @@ class CreateRideRequest
     public function __construct(RequestStack $requestStack)
     {
         $request = $requestStack->getCurrentRequest();
-        $data = json_decode($request->getContent(), true);
+        $data    = json_decode($request->getContent(), true);
         $this->validate($data);
 
         foreach ($data as $key => $value) {
@@ -44,11 +44,14 @@ class CreateRideRequest
 
     protected function validate(array $data)
     {
-        $validator = Validation::createValidator();
+        $validator  = Validation::createValidator();
         $constraint = new Assert\Collection([
             // the keys correspond to the keys in the input array
-            'name' => new Assert\NotBlank(),
+            'name'        => new Assert\NotBlank(),
             'description' => new Assert\NotBlank(),
+            'date'        => new Assert\Collection([
+                new Assert\NotBlank(),
+            ]),
         ]);
 
         $violations = $validator->validate($data, $constraint);
@@ -58,8 +61,8 @@ class CreateRideRequest
         if (count($violations) > 0) {
             foreach ($violations as $violation) {
                 $errors[] = [
-                    'key' => trim($violation->getPropertyPath(), '[]'), // Имя поля, например 'email'
-                    'message' => $violation->getMessage(), // Сообщение об ошибке
+                    'key'     => trim($violation->getPropertyPath(), '[]'), // Имя поля, например 'email'
+                    'message' => $violation->getMessage(),                  // Сообщение об ошибке
                 ];
             }
         }
