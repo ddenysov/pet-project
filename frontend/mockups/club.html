@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Клуб "Городские велолюбители" - Велосайт</title>
+    <style>
+        /* Стили для оформления страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header, footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 15px;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        .club-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .club-header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #2E8B57;
+            margin-bottom: 15px;
+        }
+        .club-header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .club-header p {
+            color: #777;
+            margin: 5px 0;
+        }
+        .club-actions {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .club-actions button {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .club-actions button:hover {
+            background-color: #246B45;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .nav-tabs a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #2E8B57;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            margin-right: 5px;
+            background-color: #fff;
+            border-radius: 5px 5px 0 0;
+        }
+        .nav-tabs a.active {
+            background-color: #2E8B57;
+            color: #fff;
+        }
+        .tab-content {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 5px;
+        }
+        .ride-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ride-card h3 {
+            margin: 0;
+        }
+        .ride-card a {
+            text-decoration: none;
+            color: #2E8B57;
+        }
+        .ride-card button {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .participant {
+            display: inline-block;
+            text-align: center;
+            margin: 10px;
+        }
+        .participant img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .participant p {
+            margin-top: 5px;
+        }
+        .discussion {
+            margin-bottom: 20px;
+        }
+        .discussion h3 {
+            margin-top: 0;
+        }
+        .message {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .message h4 {
+            margin: 0;
+        }
+        .message p {
+            margin: 5px 0 0 0;
+        }
+        .message-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+        .message-form button {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <a href="index.html">Велосайт</a>
+    <nav>
+        <a href="pokatushki.html">Покатушки</a>
+        <a href="kluby.html">Клубы</a>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="profile.html">Мой профиль</a> <!-- Предполагается, что пользователь вошел в систему -->
+    </nav>
+</header>
+
+<!-- Основной контент страницы -->
+<div class="container">
+    <!-- Заголовок клуба -->
+    <div class="club-header">
+        <img src="club_logo.jpg" alt="Логотип клуба">
+        <h1>Городские велолюбители</h1>
+        <p>Клуб для всех, кто любит кататься по городу и общаться с единомышленниками.</p>
+    </div>
+
+    <!-- Кнопки действий -->
+    <div class="club-actions">
+        <button>Вступить в клуб</button> <!-- Или "Покинуть клуб" в зависимости от статуса -->
+        <button>Пригласить друзей</button>
+    </div>
+
+    <!-- Навигационные вкладки -->
+    <div class="nav-tabs">
+        <a href="#club-rides" class="active" onclick="showTab(event, 'club-rides')">Покатушки клуба</a>
+        <a href="#club-members" onclick="showTab(event, 'club-members')">Участники</a>
+        <a href="#club-discussion" onclick="showTab(event, 'club-discussion')">Обсуждения</a>
+    </div>
+
+    <!-- Контент вкладок -->
+    <div class="tab-content" id="club-rides">
+        <!-- Вкладки подкатегорий -->
+        <div class="nav-tabs" style="margin-bottom: 10px;">
+            <a href="#upcoming-rides" class="active" onclick="showSubTab(event, 'upcoming-rides')">Предстоящие покатушки</a>
+            <a href="#past-rides" onclick="showSubTab(event, 'past-rides')">Прошедшие покатушки</a>
+        </div>
+        <!-- Содержимое подкатегорий -->
+        <div class="tab-content" id="upcoming-rides">
+            <!-- Список покатушек -->
+            <div class="ride-card">
+                <h3><a href="pokatushka_detail.html">Вечерний заезд по набережной</a></h3>
+                <button onclick="location.href='pokatushka_detail.html'">Подробнее</button>
+            </div>
+            <!-- Дополнительные покатушки... -->
+        </div>
+        <div class="tab-content" id="past-rides" style="display: none;">
+            <!-- Список покатушек -->
+            <div class="ride-card">
+                <h3><a href="past_pokatushka_detail.html">Утренняя прогулка по парку</a></h3>
+                <button onclick="location.href='past_pokatushka_detail.html'">Подробнее</button>
+            </div>
+            <!-- Дополнительные покатушки... -->
+        </div>
+    </div>
+
+    <div class="tab-content" id="club-members" style="display: none;">
+        <!-- Список участников -->
+        <div class="participants-list">
+            <div class="participant">
+                <a href="user_profile.html">
+                    <img src="user1.jpg" alt="Пользователь 1">
+                    <p>Иван И.</p>
+                </a>
+            </div>
+            <div class="participant">
+                <a href="user_profile.html">
+                    <img src="user2.jpg" alt="Пользователь 2">
+                    <p>Мария П.</p>
+                </a>
+            </div>
+            <!-- Дополнительные участники... -->
+        </div>
+    </div>
+
+    <div class="tab-content" id="club-discussion" style="display: none;">
+        <!-- Обсуждения клуба -->
+        <div class="discussion">
+            <h3>Обсуждения</h3>
+            <!-- Список сообщений -->
+            <div class="message">
+                <h4><a href="user_profile.html">Иван И.</a> <span style="font-size: 12px; color: #777;">(24 сентября 2023, 14:30)</span></h4>
+                <p>Предлагаю организовать покатушку в эти выходные. Кто за?</p>
+            </div>
+            <div class="message">
+                <h4><a href="user_profile.html">Екатерина С.</a> <span style="font-size: 12px; color: #777;">(24 сентября 2023, 15:45)</span></h4>
+                <p>Отличная идея! Я смогу присоединиться в воскресенье.</p>
+            </div>
+            <!-- Дополнительные сообщения... -->
+            <!-- Форма для добавления сообщения -->
+            <div class="message-form">
+                <textarea placeholder="Напишите сообщение..."></textarea>
+                <button>Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Управление клубом (для администраторов) -->
+    <!-- Предполагается, что текущий пользователь является администратором клуба -->
+    <div class="club-management" style="display: none;">
+        <h2>Управление клубом</h2>
+        <button onclick="location.href='edit_club.html'">Редактировать информацию о клубе</button>
+        <button onclick="location.href='manage_members.html'">Модерация участников</button>
+        <button onclick="location.href='create_pokatushka.html'">Создать покатушку для клуба</button>
+    </div>
+</div>
+
+<!-- Футер сайта -->
+<footer>
+    <nav>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="pomosh.html">Помощь</a>
+        <a href="pravila.html">Правила пользования</a>
+        <a href="politika.html">Политика конфиденциальности</a>
+    </nav>
+    <p>© 2023 Велосайт</p>
+</footer>
+
+<!-- Скрипты -->
+<script>
+  // Функция для переключения между основными вкладками
+  function showTab(evt, tabName) {
+    evt.preventDefault();
+    var i, tabcontent, tablinks;
+    tabcontent = document.querySelectorAll('.container .tab-content');
+    tablinks = document.querySelectorAll('.nav-tabs a');
+    tabcontent.forEach(function(content) {
+      content.style.display = 'none';
+    });
+    tablinks.forEach(function(link) {
+      link.classList.remove('active');
+    });
+    document.getElementById(tabName).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+  }
+
+  // Функция для переключения между подкатегориями
+  function showSubTab(evt, subTabName) {
+    evt.preventDefault();
+    var i, tabcontent, tablinks;
+    var parent = evt.currentTarget.parentElement.parentElement;
+    tabcontent = parent.querySelectorAll('.tab-content');
+    tablinks = parent.querySelectorAll('.nav-tabs a');
+    tabcontent.forEach(function(content) {
+      content.style.display = 'none';
+    });
+    tablinks.forEach(function(link) {
+      link.classList.remove('active');
+    });
+    document.getElementById(subTabName).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+  }
+
+  // Инициализация отображения первой вкладки
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.nav-tabs a.active').click();
+  });
+</script>
+
+</body>
+</html>
