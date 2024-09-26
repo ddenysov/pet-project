@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать покатушку - Велосайт</title>
+    <style>
+        /* Стили для оформления страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 15px;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="datetime-local"], textarea, select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .map-container {
+            margin-bottom: 20px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .checkbox-group label, .radio-group label {
+            font-weight: normal;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .buttons button {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .buttons button:hover {
+            background-color: #246B45;
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <a href="index.html">Велосайт</a>
+    <nav>
+        <a href="pokatushki.html">Покатушки</a>
+        <a href="kluby.html">Клубы</a>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="profile.html">Мой профиль</a> <!-- Предполагается, что пользователь вошел в систему -->
+    </nav>
+</header>
+
+<!-- Основной контент страницы -->
+<div class="container">
+    <h1>Создать покатушку</h1>
+    <form action="submit_pokatushka.html" method="post">
+        <!-- Название покатушки -->
+        <label for="title">Название покатушки<span style="color: red;">*</span></label>
+        <input type="text" id="title" name="title" required placeholder="Введите название">
+
+        <!-- Описание покатушки -->
+        <label for="description">Описание<span style="color: red;">*</span></label>
+        <textarea id="description" name="description" required placeholder="Опишите покатушку"></textarea>
+
+        <!-- Дата и время начала -->
+        <label for="datetime">Дата и время начала<span style="color: red;">*</span></label>
+        <input type="datetime-local" id="datetime" name="datetime" required>
+
+        <!-- Местоположение старта -->
+        <label for="location">Местоположение старта<span style="color: red;">*</span></label>
+        <input type="text" id="location" name="location" required placeholder="Введите адрес или координаты">
+
+        <!-- Маршрут на карте -->
+        <label>Маршрут</label>
+        <div class="map-container">
+            <!-- Здесь можно интегрировать интерактивную карту для построения маршрута -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18..."></iframe>
+        </div>
+        <!-- Кнопки для взаимодействия с картой -->
+        <div class="buttons" style="justify-content: flex-start;">
+            <button type="button">Построить маршрут</button>
+            <button type="button">Загрузить GPS-трек</button>
+        </div>
+
+        <!-- Тип доступа -->
+        <label>Тип доступа<span style="color: red;">*</span></label>
+        <div class="radio-group">
+            <label><input type="radio" name="access_type" value="open" checked> Открытая (доступна всем пользователям)</label>
+            <label><input type="radio" name="access_type" value="approval"> По подтверждению (требуется одобрение организатора)</label>
+            <label><input type="radio" name="access_type" value="private"> Приватная для клуба</label>
+        </div>
+
+        <!-- Выбор клуба (если выбрана приватная покатушка) -->
+        <div id="club-selection" style="display: none;">
+            <label for="club">Выберите клуб<span style="color: red;">*</span></label>
+            <select id="club" name="club">
+                <option value="">-- Выберите клуб --</option>
+                <option value="club1">Клуб 1</option>
+                <option value="club2">Клуб 2</option>
+                <!-- Дополнительные клубы пользователя -->
+            </select>
+        </div>
+
+        <!-- Максимальное количество участников -->
+        <label for="max_participants">Максимальное количество участников</label>
+        <input type="number" id="max_participants" name="max_participants" min="1" placeholder="Оставьте пустым для неограниченного">
+
+        <!-- Уровень сложности -->
+        <label for="difficulty">Уровень сложности<span style="color: red;">*</span></label>
+        <select id="difficulty" name="difficulty" required>
+            <option value="">-- Выберите уровень --</option>
+            <option value="beginner">Начинающий</option>
+            <option value="intermediate">Средний</option>
+            <option value="advanced">Продвинутый</option>
+        </select>
+
+        <!-- Загрузка изображений -->
+        <label for="images">Загрузить изображения</label>
+        <input type="file" id="images" name="images[]" accept="image/*" multiple>
+
+        <!-- Кнопки действия -->
+        <div class="buttons">
+            <button type="submit">Создать покатушку</button>
+            <button type="reset">Отмена</button>
+        </div>
+    </form>
+</div>
+
+<!-- Футер сайта -->
+<footer>
+    <nav>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="pomosh.html">Помощь</a>
+        <a href="pravila.html">Правила пользования</a>
+        <a href="politika.html">Политика конфиденциальности</a>
+    </nav>
+    <p>© 2023 Велосайт</p>
+</footer>
+
+<!-- Скрипты -->
+<script>
+  // Показать/скрыть выбор клуба в зависимости от типа доступа
+  document.addEventListener('DOMContentLoaded', function() {
+    const accessTypes = document.getElementsByName('access_type');
+    const clubSelection = document.getElementById('club-selection');
+
+    function updateClubSelection() {
+      if (document.querySelector('input[name="access_type"]:checked').value === 'private') {
+        clubSelection.style.display = 'block';
+        document.getElementById('club').setAttribute('required', 'required');
+      } else {
+        clubSelection.style.display = 'none';
+        document.getElementById('club').removeAttribute('required');
+      }
+    }
+
+    accessTypes.forEach(function(radio) {
+      radio.addEventListener('change', updateClubSelection);
+    });
+
+    updateClubSelection(); // Инициализировать при загрузке страницы
+  });
+</script>
+
+</body>
+</html>

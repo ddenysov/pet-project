@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Покатушки - Велосайт</title>
+    <style>
+        /* Стили для оформления страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 15px;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 15px;
+            background-color: #f0f0f0;
+        }
+        .main-content {
+            width: 80%;
+            padding: 15px;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .ride-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .ride-card h3 {
+            margin-top: 0;
+        }
+        .ride-card a {
+            text-decoration: none;
+            color: #2E8B57;
+        }
+        .ride-card button {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .toggle-buttons {
+            margin-bottom: 20px;
+        }
+        .toggle-buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .active-toggle {
+            background-color: #2E8B57;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <a href="index.html">Велосайт</a>
+    <nav>
+        <a href="pokatushki.html">Покатушки</a>
+        <a href="kluby.html">Клубы</a>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="login.html">Вход</a> / <a href="register.html">Регистрация</a>
+    </nav>
+</header>
+
+<!-- Основной контент страницы -->
+<div class="container">
+    <!-- Боковая панель -->
+    <aside class="sidebar">
+        <h2>Рекомендуемые покатушки</h2>
+        <ul>
+            <li><a href="#">Покатушка 1</a></li>
+            <li><a href="#">Покатушка 2</a></li>
+            <li><a href="#">Покатушка 3</a></li>
+        </ul>
+        <h2>Популярные клубы</h2>
+        <ul>
+            <li><a href="#">Клуб 1</a></li>
+            <li><a href="#">Клуб 2</a></li>
+            <li><a href="#">Клуб 3</a></li>
+        </ul>
+    </aside>
+
+    <!-- Главный контент -->
+    <main class="main-content">
+        <!-- Переключатель "Актуальные / Прошедшие" -->
+        <div class="toggle-buttons">
+            <button class="active-toggle">Актуальные</button>
+            <button>Прошедшие</button>
+        </div>
+
+        <!-- Фильтры и поиск -->
+        <div class="filter-section">
+            <input type="text" placeholder="Поиск покатушек...">
+            <select name="date-range">
+                <option value="">Дата</option>
+                <option value="today">Сегодня</option>
+                <option value="week">Эта неделя</option>
+                <option value="month">Этот месяц</option>
+            </select>
+            <select name="distance">
+                <option value="">Расстояние</option>
+                <option value="short">До 20 км</option>
+                <option value="medium">20-50 км</option>
+                <option value="long">Более 50 км</option>
+            </select>
+            <select name="difficulty">
+                <option value="">Уровень сложности</option>
+                <option value="beginner">Начинающий</option>
+                <option value="intermediate">Средний</option>
+                <option value="advanced">Продвинутый</option>
+            </select>
+            <select name="access-type">
+                <option value="">Тип доступа</option>
+                <option value="open">Открытые</option>
+                <option value="approval">По подтверждению</option>
+            </select>
+            <button>Фильтровать</button>
+        </div>
+
+        <!-- Список покатушек -->
+        <div class="ride-list">
+            <!-- Карточка покатушки -->
+            <div class="ride-card">
+                <h3><a href="pokatushka_detail.html">Вечерняя покатушка по городу</a></h3>
+                <p><strong>Дата и время:</strong> 25 сентября 2023, 18:00</p>
+                <p><strong>Организатор:</strong> <a href="user_profile.html">Иван Иванов</a></p>
+                <p>Приглашаем всех желающих на легкую вечернюю покатушку по центральным улицам города.</p>
+                <button>Присоединиться</button>
+            </div>
+
+            <div class="ride-card">
+                <h3><a href="pokatushka_detail.html">Загородная поездка</a></h3>
+                <p><strong>Дата и время:</strong> 27 сентября 2023, 10:00</p>
+                <p><strong>Организатор:</strong> <a href="user_profile.html">Петр Петров</a></p>
+                <p>Средний уровень сложности. Поедем за город, насладимся природой и свежим воздухом.</p>
+                <button>Запросить подтверждение</button>
+            </div>
+
+            <!-- Дополнительные карточки покатушек... -->
+        </div>
+    </main>
+</div>
+
+<!-- Футер сайта -->
+<footer>
+    <nav>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="pomosh.html">Помощь</a>
+        <a href="pravila.html">Правила пользования</a>
+        <a href="politika.html">Политика конфиденциальности</a>
+    </nav>
+    <p>© 2023 Велосайт</p>
+</footer>
+
+</body>
+</html>

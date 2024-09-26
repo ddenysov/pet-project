@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя - Велосайт</title>
+    <style>
+        /* Стили для оформления страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header, footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 15px;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            display: flex;
+        }
+        .sidebar {
+            width: 25%;
+            background-color: #fff;
+            padding: 15px;
+            box-sizing: border-box;
+            border-right: 1px solid #ccc;
+        }
+        .main-content {
+            width: 75%;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #2E8B57;
+            margin-bottom: 15px;
+        }
+        .profile-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .profile-header p {
+            color: #777;
+            margin: 5px 0;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .nav-tabs a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #2E8B57;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            margin-right: 5px;
+            background-color: #fff;
+            border-radius: 5px 5px 0 0;
+        }
+        .nav-tabs a.active {
+            background-color: #2E8B57;
+            color: #fff;
+        }
+        .tab-content {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 5px;
+        }
+        .ride-card, .club-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ride-card h3, .club-card h3 {
+            margin: 0;
+        }
+        .ride-card a, .club-card a {
+            text-decoration: none;
+            color: #2E8B57;
+        }
+        .ride-card button, .club-card button {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .settings-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .settings-list li {
+            margin-bottom: 10px;
+        }
+        .settings-list a {
+            text-decoration: none;
+            color: #2E8B57;
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <a href="index.html">Велосайт</a>
+    <nav>
+        <a href="pokatushki.html">Покатушки</a>
+        <a href="kluby.html">Клубы</a>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="logout.html">Выйти</a> <!-- Предполагается, что пользователь вошел в систему -->
+    </nav>
+</header>
+
+<!-- Основной контент страницы -->
+<div class="container">
+    <!-- Боковая панель -->
+    <aside class="sidebar">
+        <h2>Навигация</h2>
+        <ul class="settings-list">
+            <li><a href="edit_profile.html">Редактировать профиль</a></li>
+            <li><a href="settings.html">Настройки аккаунта</a></li>
+            <li><a href="notifications.html">Уведомления</a></li>
+            <li><a href="privacy.html">Приватность</a></li>
+            <li><a href="social_links.html">Социальные сети</a></li>
+        </ul>
+    </aside>
+
+    <!-- Главный контент -->
+    <main class="main-content">
+        <!-- Заголовок профиля -->
+        <div class="profile-header">
+            <img src="user_avatar.jpg" alt="Аватар пользователя">
+            <h1>Иван Иванов</h1>
+            <p>Город: Москва</p>
+            <p>Интересы: Городские покатушки, горный велосипед, велопоходы</p>
+            <button onclick="location.href='edit_profile.html'">Редактировать профиль</button>
+        </div>
+
+        <!-- Навигационные вкладки -->
+        <div class="nav-tabs">
+            <a href="#my-rides" class="active" onclick="showTab(event, 'my-rides')">Мои покатушки</a>
+            <a href="#my-clubs" onclick="showTab(event, 'my-clubs')">Мои клубы</a>
+            <a href="#my-friends" onclick="showTab(event, 'my-friends')">Друзья</a>
+        </div>
+
+        <!-- Контент вкладок -->
+        <div class="tab-content" id="my-rides">
+            <!-- Вкладки подкатегорий -->
+            <div class="nav-tabs" style="margin-bottom: 10px;">
+                <a href="#created-rides" class="active" onclick="showSubTab(event, 'created-rides')">Созданные</a>
+                <a href="#joined-rides" onclick="showSubTab(event, 'joined-rides')">Участвующие</a>
+                <a href="#past-rides" onclick="showSubTab(event, 'past-rides')">Прошедшие</a>
+            </div>
+            <!-- Содержимое подкатегорий -->
+            <div class="tab-content" id="created-rides">
+                <!-- Список покатушек -->
+                <div class="ride-card">
+                    <h3><a href="pokatushka_detail.html">Утренняя прогулка по парку</a></h3>
+                    <button onclick="location.href='edit_pokatushka.html'">Редактировать</button>
+                </div>
+                <!-- Дополнительные покатушки... -->
+            </div>
+            <div class="tab-content" id="joined-rides" style="display: none;">
+                <!-- Список покатушек -->
+                <div class="ride-card">
+                    <h3><a href="pokatushka_detail.html">Ночной заезд по городу</a></h3>
+                    <button onclick="location.href='leave_pokatushka.html'">Покинуть</button>
+                </div>
+                <!-- Дополнительные покатушки... -->
+            </div>
+            <div class="tab-content" id="past-rides" style="display: none;">
+                <!-- Список покатушек -->
+                <div class="ride-card">
+                    <h3><a href="past_pokatushka_detail.html">Горный маршрут</a></h3>
+                    <button onclick="location.href='past_pokatushka_detail.html'">Подробнее</button>
+                </div>
+                <!-- Дополнительные покатушки... -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="my-clubs" style="display: none;">
+            <!-- Вкладки подкатегорий -->
+            <div class="nav-tabs" style="margin-bottom: 10px;">
+                <a href="#managed-clubs" class="active" onclick="showSubTab(event, 'managed-clubs')">Управляемые</a>
+                <a href="#member-clubs" onclick="showSubTab(event, 'member-clubs')">Участие</a>
+            </div>
+            <!-- Содержимое подкатегорий -->
+            <div class="tab-content" id="managed-clubs">
+                <!-- Список клубов -->
+                <div class="club-card">
+                    <h3><a href="klub_detail.html">Городские велолюбители</a></h3>
+                    <button onclick="location.href='edit_klub.html'">Управлять</button>
+                </div>
+                <!-- Дополнительные клубы... -->
+            </div>
+            <div class="tab-content" id="member-clubs" style="display: none;">
+                <!-- Список клубов -->
+                <div class="club-card">
+                    <h3><a href="klub_detail.html">Горные байкеры</a></h3>
+                    <button onclick="location.href='leave_klub.html'">Покинуть клуб</button>
+                </div>
+                <!-- Дополнительные клубы... -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="my-friends" style="display: none;">
+            <!-- Список друзей -->
+            <div class="participants-list">
+                <div class="participant" style="display: inline-block; text-align: center; margin: 10px;">
+                    <a href="user_profile.html">
+                        <img src="user2.jpg" alt="Пользователь 2" style="width: 100px; height: 100px; border-radius: 50%;">
+                        <p>Мария П.</p>
+                    </a>
+                </div>
+                <!-- Дополнительные друзья... -->
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Футер сайта -->
+<footer>
+    <nav>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="pomosh.html">Помощь</a>
+        <a href="pravila.html">Правила пользования</a>
+        <a href="politika.html">Политика конфиденциальности</a>
+    </nav>
+    <p>© 2023 Велосайт</p>
+</footer>
+
+<!-- Скрипты -->
+<script>
+  // Функция для переключения между основными вкладками
+  function showTab(evt, tabName) {
+    evt.preventDefault();
+    var i, tabcontent, tablinks;
+    tabcontent = document.querySelectorAll('.main-content .tab-content');
+    tablinks = document.querySelectorAll('.nav-tabs a');
+    tabcontent.forEach(function(content) {
+      content.style.display = 'none';
+    });
+    tablinks.forEach(function(link) {
+      link.classList.remove('active');
+    });
+    document.getElementById(tabName).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+  }
+
+  // Функция для переключения между подкатегориями
+  function showSubTab(evt, subTabName) {
+    evt.preventDefault();
+    var i, tabcontent, tablinks;
+    var parent = evt.currentTarget.parentElement.parentElement;
+    tabcontent = parent.querySelectorAll('.tab-content');
+    tablinks = parent.querySelectorAll('.nav-tabs a');
+    tabcontent.forEach(function(content) {
+      content.style.display = 'none';
+    });
+    tablinks.forEach(function(link) {
+      link.classList.remove('active');
+    });
+    document.getElementById(subTabName).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+  }
+
+  // Инициализация отображения первой вкладки
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.nav-tabs a.active').click();
+  });
+</script>
+
+</body>
+</html>
