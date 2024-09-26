@@ -9,13 +9,10 @@ import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css';
 import '/node_modules/primeflex/themes/primeone-dark.scss';
 import '~/assets/scss/app.scss';
-import {useUserStore} from "~/stores/user";
-const tokenCookie = useCookie('token')
-const userStore = useUserStore();
-userStore.init();
-const { $listen } = useNuxtApp()
+import {useAuthStore} from "~/app/shared/auth/store/auth";
 
-$listen('*', (type, e) => console.log(type, e) )
+const authStore = useAuthStore();
+authStore.init();
 
 // fire an event
 </script>

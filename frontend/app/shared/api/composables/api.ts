@@ -1,4 +1,5 @@
 import {useAuth} from "./auth";
+
 export function useApi () {
     const {addAuthHeaders} = useAuth();
 

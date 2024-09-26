@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {useUserStore} from "~/stores/user";
-import {useMessageStore} from "~/components/ui/message/store";
-const store = useUserStore();
+import {useAuthStore} from "~/app/shared/auth/store/auth";
+const authStore = useAuthStore();
 const items = ref([
   {
     label: 'Покатушки',
@@ -20,7 +19,7 @@ const menuItems = ref([
         label: 'Вийти',
         icon: 'pi pi-sign-out',
         command: () => {
-          store.logout()
+          authStore.logout()
         }
       }
     ]
@@ -32,9 +31,8 @@ const toggle = (event: any) => {
   menu.value.toggle(event);
 };
 
-const userStore = useUserStore();
 const onLoginSuccess = async (res: any) => {
-  userStore.setToken(res.res.token);
+  authStore.setToken(res.res.token);
   visible.value = false;
 }
 
@@ -49,72 +47,18 @@ const onRegisterSuccess = (res: any) => {
   <div>
     <ui-toolbar>
       <template #start>
-        <ui-nav-link to="/" label="ПЕТ ПРОЄКТ" />
+        <ui-router-link to="/" label="ПЕТ ПРОЄКТ" />
         <Menubar style="border: none" :model="items" />
       </template>
       <template #end>
-        <Avatar v-if="store.isLoggedIn()" @click="toggle" label="P" class="mr-2 cursor-pointer" size="large" shape="circle" />
+        <Avatar v-if="authStore.isLoggedIn()" @click="toggle" label="P" class="mr-2 cursor-pointer" size="large" shape="circle" />
         <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
-        <ui-button v-if="store.isLoggedIn()" class="ml-2" label="Створити покатушку" @click="() => navigateTo('/ride/create')" />
-        <ui-button v-if="!store.isLoggedIn()" class="ml-2" label="Увійти" @click="() => visible = true" />
-        <ui-button v-if="!store.isLoggedIn()" class="ml-2" label="Реєстрація" @click="() => rvisible = true" />
+        <ui-button v-if="authStore.isLoggedIn()" class="ml-2" label="Створити покатушку" @click="() => navigateTo('/ride/create')" />
+        <ui-button v-if="!authStore.isLoggedIn()" class="ml-2" label="Увійти" @click="() => visible = true" />
+        <ui-button v-if="!authStore.isLoggedIn()" class="ml-2" label="Реєстрація" @click="() => rvisible = true" />
       </template>
     </ui-toolbar>
-    <ui-message name="layout" />
-    <ui-nav-link v-if="!store.isLoggedIn()" to="/register" label="Реєстрація" />
     <slot />
-
-
-    <Dialog v-model:visible="visible" modal header="Увійти" :style="{ width: '25rem' }">
-      <ui-flex grow="1" direction="column">
-        <ui-text-field
-          form="login"
-          label="Електронна пошта"
-          name="email"
-          :validation="{ required: true, email: true }"
-        />
-
-        <ui-text-field
-          form="login"
-          label="Пароль"
-          name="password"
-        />
-
-        <ui-submit-button
-          class="mt-2"
-          action="/api/iam/login"
-          form="login"
-          label="Увійти"
-          name="submit"
-          @submit="onLoginSuccess"
-        />
-      </ui-flex>
-    </Dialog>
-
-    <Dialog v-model:visible="rvisible" modal header="Увійти" :style="{ width: '25rem' }">
-      <ui-flex grow="1" direction="column">
-        <ui-text-field
-          form="sign-up"
-          label="Електронна пошта"
-          name="email"
-          :validation="{ required: true, email: true }"
-        />
-
-        <ui-text-field
-          form="sign-up"
-          label="Пароль"
-          name="password"
-        />
-
-        <ui-submit-button
-          action="/api/iam/register"
-          form="sign-up"
-          label="Реєстрація"
-          name="submit"
-          @submit="onRegisterSuccess"
-        />
-      </ui-flex>
-    </Dialog>
   </div>
 </template>
 
