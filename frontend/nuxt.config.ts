@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Aura from '@primevue/themes/aura';
+import Lara from '@primevue/themes/lara';
+import Nora from '@primevue/themes/nora';
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     devtools: {
@@ -59,7 +61,10 @@ export default defineNuxtConfig({
         },
         options: {
             theme: {
-                preset: Aura
+                preset: Nora,
+                options: {
+                    darkModeSelector: 'light',
+                },
             }
         },
     },

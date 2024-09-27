@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница - Велосайт</title>
+    <style>
+        /* Стили для оформления страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 15px;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .banner {
+            background-image: url('background.jpg'); /* Замените на путь к выбранному изображению */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 15px;
+            text-align: center;
+        }
+        .banner h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .filters {
+            background-color: rgba(0, 0, 0, 0.6);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .filters select {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+        .filters button {
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #2E8B57;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .content-section {
+            padding: 50px 15px;
+        }
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .rides-list, .clubs-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .ride-card, .club-card {
+            width: 30%;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+        .ride-card h3, .club-card h3 {
+            margin-top: 0;
+        }
+        .ride-card a, .club-card a {
+            text-decoration: none;
+            color: #2E8B57;
+        }
+        .footer-nav {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .social-icons {
+            text-align: center;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <a href="index.html">Велосайт</a>
+    <nav>
+        <a href="pokatushki.html">Покатушки</a>
+        <a href="kluby.html">Клубы</a>
+        <a href="marshruty.html">Маршруты</a>
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="login.html">Вход</a> / <a href="register.html">Регистрация</a>
+    </nav>
+</header>
+
+<!-- Баннер с фильтрами -->
+<div class="banner">
+    <h1>Добро пожаловать на Велосайт!</h1>
+    <p>Найдите идеальную покатушку для себя</p>
+    <div class="filters">
+        <select name="bike-type">
+            <option value="">Тип велосипеда</option>
+            <option value="mountain">Горный</option>
+            <option value="gravel">Гравийный</option>
+            <option value="road">Шоссейный</option>
+            <option value="city">Городской</option>
+            <!-- Дополнительные типы -->
+        </select>
+        <select name="distance">
+            <option value="">Длина маршрута</option>
+            <option value="short">До 20 км</option>
+            <option value="medium">20-50 км</option>
+            <option value="long">Более 50 км</option>
+        </select>
+        <select name="difficulty">
+            <option value="">Сложность</option>
+            <option value="beginner">Начинающий</option>
+            <option value="intermediate">Средний</option>
+            <option value="advanced">Продвинутый</option>
+        </select>
+        <select name="location">
+            <option value="">Локация</option>
+            <option value="moscow">Москва</option>
+            <option value="spb">Санкт-Петербург</option>
+            <!-- Дополнительные города -->
+        </select>
+        <br>
+        <button onclick="location.href='pokatushki.html'">Найти покатушки</button>
+    </div>
+</div>
+
+<!-- Секция "Предстоящие покатушки" -->
+<div class="content-section">
+    <h2 class="section-title">Предстоящие покатушки</h2>
+    <div class="rides-list">
+        <div class="ride-card">
+            <h3><a href="pokatushka_detail.html">Горный маршрут для продвинутых</a></h3>
+            <p><strong>Дата и время:</strong> 10 октября 2023, 9:00</p>
+            <p><strong>Тип велосипеда:</strong> Горный</p>
+            <p>Сложный маршрут по горным тропам для опытных велосипедистов.</p>
+            <button onclick="location.href='pokatushka_detail.html'">Подробнее</button>
+        </div>
+        <div class="ride-card">
+            <h3><a href="pokatushka_detail.html">Гравийный заезд по полям</a></h3>
+            <p><strong>Дата и время:</strong> 12 октября 2023, 11:00</p>
+            <p><strong>Тип велосипеда:</strong> Гравийный</p>
+            <p>Умеренный маршрут по красивым местам для всех желающих.</p>
+            <button onclick="location.href='pokatushka_detail.html'">Подробнее</button>
+        </div>
+        <div class="ride-card">
+            <h3><a href="pokatushka_detail.html">Городская прогулка</a></h3>
+            <p><strong>Дата и время:</strong> 15 октября 2023, 17:00</p>
+            <p><strong>Тип велосипеда:</strong> Городской</p>
+            <p>Легкая вечерняя поездка по центральным улицам города.</p>
+            <button onclick="location.href='pokatushka_detail.html'">Подробнее</button>
+        </div>
+    </div>
+</div>
+
+<!-- Секция "Популярные клубы" -->
+<div class="content-section" style="background-color: #f9f9f9;">
+    <h2 class="section-title">Популярные клубы</h2>
+    <div class="clubs-list">
+        <div class="club-card">
+            <h3><a href="klub_detail.html">Горные байкеры</a></h3>
+            <p>Сообщество любителей горных покатушек.</p>
+            <button onclick="location.href='klub_detail.html'">Перейти в клуб</button>
+        </div>
+        <div class="club-card">
+            <h3><a href="klub_detail.html">Гравийные путешественники</a></h3>
+            <p>Объединяем тех, кто любит открывать новые горизонты.</p>
+            <button onclick="location.href='klub_detail.html'">Перейти в клуб</button>
+        </div>
+        <div class="club-card">
+            <h3><a href="klub_detail.html">Городские райдеры</a></h3>
+            <p>Покатушки по городу для всех уровней подготовки.</p>
+            <button onclick="location.href='klub_detail.html'">Перейти в клуб</button>
+        </div>
+    </div>
+</div>
+
+<!-- Футер сайта -->
+<footer>
+    <div class="footer-nav">
+        <a href="o_nas.html">О нас</a>
+        <a href="kontakty.html">Контакты</a>
+        <a href="pomosh.html">Помощь</a>
+        <a href="pravila.html">Правила пользования</a>
+        <a href="politika.html">Политика конфиденциальности</a>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fa fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+    </div>
+    <p style="text-align: center;">© 2023 Велосайт</p>
+</footer>
+
+<!-- Подключение Font Awesome для иконок социальных сетей -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</body>
+</html>
