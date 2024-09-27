@@ -2,10 +2,7 @@
 </script>
 
 <template>
-  <Toolbar
-    pt:root:class="border-none"
-    pt:root:style="background-color: var(--p-primary-600)"
-  >
+  <Toolbar>
     <template #start>
       <slot name="start" />
     </template>

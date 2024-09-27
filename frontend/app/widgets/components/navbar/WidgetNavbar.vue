@@ -6,6 +6,12 @@ import {useAuthStore} from "~/app/shared/auth/store/auth";
 const authStore = useAuthStore();
 const items = ref([
   {
+    label: 'Головна',
+    command: () => {
+      navigateTo('/ride');
+    },
+  },
+  {
     label: 'Покатушки',
     command: () => {
       navigateTo('/ride');
@@ -37,7 +43,9 @@ const registerFormVisible = ref(false);
 <template>
   <ui-toolbar>
     <template #start>
-      <ui-router-link to="/" label="ПЕТ ПРОЄКТ ДФДФДФД" />
+      <img style="position: absolute; top: 4px; left: 0" src="/images/logo2.png" width="160" />
+      <div style="width: 140px"></div>
+
       <Menubar
         :model="items"
         :pt="{
