@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { useFormStore } from './store/formStore';
-import FieldError from "~/components/ui/form/Common/FieldError.vue";
+import FieldError from "~/app/ui/components/form/Common/FieldError.vue";
+import {useFormStore} from "~/app/ui/store/form";
 const store = useFormStore();
 
 export interface Props {
@@ -58,7 +58,6 @@ watch(
   >
     <label class="p-error" :for="name">{{ label }}</label>
     <InputText
-      class="p-invalid"
       v-model="store.values[form][name]"
       :disabled="store.isLoading(form) || disabled"
       aria-describedby="username-help"

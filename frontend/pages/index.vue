@@ -1,23 +1,54 @@
 <template>
   <div>
-    <div class="flex lg:flex-row flex-col gap-4 bg-surface-0 dark:bg-surface-900">
-      <div class="flex-1 flex items-center justify-center">
-        <div class="p-6 pt-12 lg:p-12">
-          <h1 class="text-3xl lg:text-5xl font-bold text-surface-900 dark:text-surface-0 mb-4 lg:leading-normal text-center lg:text-left">
-            Create the screens your <br /><span class="text-blue-500 dark:text-blue-400">visitors deserve to see</span>
-          </h1>
-          <p class="text-surface-700 dark:text-surface-200 leading-normal mb-8 text-center lg:text-left">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <div class="flex items-center justify-center lg:justify-start gap-6">
-            <Button label="Learn More" type="button" />
-            <Button label="Live Demo" type="button" outlined />
-          </div>
-        </div>
-      </div>
-      <div class="flex-1 overflow-hidden">
-        <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/hero/hero-1.png" alt="hero-1" class="h-full w-full object-cover lg:[clip-path:polygon(12%_0,100%_0%,100%_100%,0_100%)]" />
-      </div>
-    </div>
+    <ui-section
+      style="height: 400px;background-color:  var(--p-surface-100)"
+    >
+      <ui-flex
+        style="background-color: var(--p-surface-200); padding: 2rem;"
+        direction="column"
+      >
+        <ui-flex gap="3">
+          <ui-text-field
+            form="search-ride"
+            label="Тип велосипеду"
+            name="name"
+            :validation="{ required: true }"
+          />
+
+          <ui-text-field
+            form="search-ride"
+            label="Довжина маршруту"
+            name="name"
+            :validation="{ required: true }"
+          />
+
+          <ui-text-field
+            form="search-ride"
+            label="Складність"
+            name="name"
+            :validation="{ required: true }"
+          />
+
+          <ui-text-field
+            form="search-ride"
+            label="Локація"
+            name="name"
+            :validation="{ required: true }"
+          />
+        </ui-flex>
+        <ui-flex justify-content="center" style="margin-top: 1rem">
+          <ui-button label="Шукати"></ui-button>
+        </ui-flex>
+
+      </ui-flex>
+    </ui-section>
+    <ui-section
+      style="height: 400px;background-color:  var(--p-surface-100); margin-top: 1px"
+    >
+      another section
+    </ui-section>
   </div>
 </template>
+<script setup lang="ts">
+import UiSection from "~/app/ui/components/section/UiSection.vue";
+</script>

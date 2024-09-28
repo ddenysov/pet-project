@@ -2,8 +2,8 @@
 import {defineStore} from 'pinia'
 import {bool, ValidationError} from 'yup'
 import {useCreateYupSchema} from '../composables/validation/schema'
-import {useApi} from "~/composables/api/api";
-import type {FormState, Value} from "~/components/ui/form/store/formTypes";
+import {useApi} from "~/app/shared/api/composables/api";
+import type {FormState, Value} from "~/app/ui/types/form";
 
 export const useFormStore = defineStore('form', {
     /**
