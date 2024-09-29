@@ -6,7 +6,7 @@ const props = defineProps<RouterProps>();
 </script>
 
 <template>
-  <NuxtLink :to="to" >
+  <NuxtLink class="ui-link" :to="to" >
     {{ props.label }}
   </NuxtLink>
 </template>

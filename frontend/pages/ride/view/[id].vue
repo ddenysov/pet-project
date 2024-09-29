@@ -17,7 +17,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useRideStore} from "~/stores/ride";
 
 const route = useRoute()
 const store = useRideStore();

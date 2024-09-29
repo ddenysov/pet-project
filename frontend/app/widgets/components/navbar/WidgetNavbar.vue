@@ -57,7 +57,7 @@ const registerFormVisible = ref(false);
       />
     </template>
     <template #end>
-      <ui-button v-if="authStore.isLoggedIn()" class="ml-2" label="Створити покатушку"
+      <ui-button style="padding: 10px 20px;margin-right: 12px; background-color:  var(--p-amber-500);" v-if="authStore.isLoggedIn()" class="ml-2" label="+ Додати"
                  @click="() => navigateTo('/ride/create')" />
       <ui-button v-if="!authStore.isLoggedIn()" class="ml-2" label="Увійти" @click="() => loginFormVisible = true" />
       <ui-button v-if="!authStore.isLoggedIn()" class="ml-2" label="Реєстрація"

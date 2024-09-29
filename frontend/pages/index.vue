@@ -1,11 +1,11 @@
 <template>
   <div>
     <ui-section
-      style="height: 400px;background-color:  var(--p-surface-100)"
+      style="height: 350px;"
     >
       <ui-flex
-        style="background-color: var(--p-surface-200); padding: 2rem;"
         direction="column"
+        style="background-color: var(--p-surface-100); padding: 2rem"
       >
         <ui-flex gap="3">
           <ui-text-field
@@ -42,10 +42,64 @@
 
       </ui-flex>
     </ui-section>
-    <ui-section
-      style="height: 400px;background-color:  var(--p-surface-100); margin-top: 1px"
-    >
-      another section
+    <ui-section style="padding: 0 5rem">
+      <ui-flex direction="column">
+        <ui-flex justify-content="center">
+          <h1>Наступні покатушки</h1>
+        </ui-flex>
+        <ui-flex grow="1" gap="8">
+          <ui-flex grow="1">
+            <ui-card style="width: 100%; overflow: hidden">
+              <template #header>
+                <img style="width: 100%" alt="user header" src="/media/sample1.jpeg" />
+              </template>
+              <template #title>Advanced Card</template>
+              <template #subtitle>Card subtitle</template>
+              <template #footer>
+                <div class="flex gap-4 mt-1">
+                  <Button label="Cancel" severity="secondary" outlined class="w-full" />
+                  <Button label="Save" class="w-full" />
+                </div>
+              </template>
+            </ui-card>
+          </ui-flex>
+
+          <ui-flex grow="1">
+            <ui-card style="width: 100%; overflow: hidden">
+              <template #header>
+                <img style="width: 100%" alt="user header" src="/media/sample1.jpeg" />
+              </template>
+              <template #title>Advanced Card</template>
+              <template #subtitle>Card subtitle</template>
+              <template #footer>
+                <div class="flex gap-4 mt-1">
+                  <Button label="Cancel" severity="secondary" outlined class="w-full" />
+                  <Button label="Save" class="w-full" />
+                </div>
+              </template>
+            </ui-card>
+          </ui-flex>
+
+          <ui-flex grow="1">
+            <ui-card style="width: 100%; overflow: hidden">
+              <template #header>
+                <img style="width: 100%" alt="user header" src="/media/sample1.jpeg" />
+              </template>
+              <template #title>Advanced Card</template>
+              <template #subtitle>Card subtitle</template>
+              <template #footer>
+                <div class="flex gap-4 mt-1">
+                  <Button label="Cancel" severity="secondary" outlined class="w-full" />
+                  <Button label="Save" class="w-full" />
+                </div>
+              </template>
+            </ui-card>
+          </ui-flex>
+
+
+        </ui-flex>
+      </ui-flex>
+
     </ui-section>
   </div>
 </template>

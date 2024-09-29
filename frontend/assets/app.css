@@ -1,0 +1,8 @@
+.ui-link {
+    color: var(--p-primary-color);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--p-primary-hover-color);
+    }
+}

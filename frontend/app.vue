@@ -9,6 +9,7 @@ import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css';
 import '/node_modules/primeflex/themes/primeone-light.scss';
 import '~/assets/scss/app.scss';
+import '~/assets/app.css';
 import {useAuthStore} from "~/app/shared/auth/store/auth";
 
 const authStore = useAuthStore();
