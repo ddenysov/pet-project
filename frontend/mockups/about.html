@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Про нас - Велосайт</title>
+    <style>
+        /* Загальні стилі */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        header, footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 20px 15px;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 15px;
+            background-color: #fff;
+        }
+        .banner {
+            background-image: url('about_banner.jpg'); /* Замініть на шлях до вашого зображення */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 15px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .banner h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .banner p {
+            font-size: 24px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #2E8B57;
+            border-bottom: 2px solid #2E8B57;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .mission, .history, .values, .team, .achievements, .contact {
+            line-height: 1.6;
+        }
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .team-member {
+            width: 30%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #2E8B57;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .team-member h3 {
+            margin: 10px 0 5px 0;
+            color: #2E8B57;
+        }
+        .values ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .achievements ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        .contact ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .contact li {
+            margin-bottom: 10px;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+        }
+        @media (max-width: 768px) {
+            .team-member {
+                width: 45%;
+            }
+        }
+        @media (max-width: 480px) {
+            .team-member {
+                width: 100%;
+            }
+            .banner h1 {
+                font-size: 32px;
+            }
+            .banner p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайту -->
+<header>
+    <a href="index.html">Велосайт</a>
+    <nav>
+        <a href="pokatushki.html">Покатушки</a>
+        <a href="kluby.html">Клуби</a>
+        <a href="marshruty.html">Маршрути</a>
+        <a href="profile.html">Профіль</a>
+        <a href="logout.html">Вийти</a>
+    </nav>
+</header>
+
+<!-- Баннер "Про нас" -->
+<div class="banner">
+    <h1>Про нас</h1>
+    <p>Спільнота велосипедистів для всіх рівнів підготовки</p>
+</div>
+
+<!-- Основний контент -->
+<div class="container">
+    <!-- Розділ "Наша місія" -->
+    <section class="mission">
+        <h2>Наша місія</h2>
+        <p>Велосайт створено для того, щоб об'єднати любителів велосипедних прогулянок, надати платформу для організації покатушок, створення та обміну маршрутами, участі в клубах та взаємодії в спільноті. Ми прагнемо зробити велосипедний спорт доступним, захоплюючим та безпечним для всіх.</p>
+    </section>
+
+    <!-- Розділ "Наша історія" -->
+    <section class="history">
+        <h2>Наша історія</h2>
+        <p>Велосайт був заснований у 2023 році групою ентузіастів, які захоплюються велосипедом та бажають поділитися своїм досвідом з іншими. З самого початку ми ставили за мету створити зручну та функціональну платформу, яка б об'єднувала велосипедистів різних рівнів підготовки та допомагала їм знаходити однодумців для спільних поїздок.</p>
+    </section>
+
+    <!-- Розділ "Наші цінності" -->
+    <section class="values">
+        <h2>Наші цінності</h2>
+        <ul>
+            <li><strong>Спільнота:</strong> Ми віримо в силу єдності та підтримки серед велосипедистів.</li>
+            <li><strong>Безпека:</strong> Забезпечуємо інформацію та інструменти для безпечних поїздок.</li>
+            <li><strong>Доступність:</strong> Створюємо умови, щоб велосипедний спорт був доступним для всіх, незалежно від рівня підготовки.</li>
+            <li><strong>Екологічність:</strong> Підтримуємо екологічно чистий спосіб життя та зменшення вуглецевого сліду.</li>
+            <li><strong>Інновації:</strong> Постійно розвиваємо нові функції та покращення для зручності наших користувачів.</li>
+        </ul>
+    </section>
+
+    <!-- Розділ "Наша команда" -->
+    <section class="team">
+        <h2>Наша команда</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="team_member1.jpg" alt="Іван Іванов">
+                <h3>Іван Іванов</h3>
+                <p>Засновник та керівник проекту. Велосипедист з 10-річним досвідом та пристрастю до організації покатушок.</p>
+            </div>
+            <div class="team-member">
+                <img src="team_member2.jpg" alt="Марія Петрова">
+                <h3>Марія Петрова</h3>
+                <p>Менеджер по контенту. Відповідальна за створення та курирування корисної інформації для наших користувачів.</p>
+            </div>
+            <div class="team-member">
+                <img src="team_member3.jpg" alt="Дмитро Смирнов">
+                <h3>Дмитро Смирнов</h3>
+                <p>Технічний директор. Розробляє та підтримує технічну частину сайту, забезпечуючи його стабільну роботу.</p>
+            </div>
+            <!-- Додайте більше членів команди за потребою -->
+        </div>
+    </section>
+
+    <!-- Розділ "Наші досягнення" -->
+    <section class="achievements">
+        <h2>Наші досягнення</h2>
+        <ul>
+            <li>Більше 10,000 активних користувачів по всій Україні та за її межами.</li>
+            <li>Сотні успішно організованих покатушок та заходів.</li>
+            <li>Партнерство з провідними велосипедними магазинами та брендами.</li>
+            <li>Нагороди за інновації в сфері спортивних платформ.</li>
+        </ul>
+    </section>
+
+    <!-- Розділ "Контакти" -->
+    <section class="contact">
+        <h2>Зв'яжіться з нами</h2>
+        <p>Якщо у вас є питання, пропозиції або ви хочете приєднатися до нашої команди, зв'яжіться з нами:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:info@velosait.ua">info@velosait.ua</a></li>
+            <li><strong>Телефон:</strong> +380 (44) 123-45-67</li>
+            <li><strong>Адреса:</strong> м. Київ, вул. Велосипедистів, буд. 1</li>
+        </ul>
+    </section>
+</div>
+
+<!-- Футер сайту -->
+<footer>
+    <nav>
+        <a href="pro_nas.html">Про нас</a>
+        <a href="kontakty.html">Контакти</a>
+        <a href="pomosh.html">Допомога</a>
+        <a href="pravila.html">Правила користування</a>
+        <a href="politika.html">Політика конфіденційності</a>
+    </nav>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+        <!-- Додайте інші соціальні мережі за потребою -->
+    </div>
+    <p>© 2023 Велосайт</p>
+</footer>
+
+<!-- Підключення Font Awesome для іконок соціальних мереж -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

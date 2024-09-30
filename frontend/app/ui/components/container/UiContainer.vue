@@ -3,11 +3,7 @@
 </script>
 
 <template>
-  <ui-flex
-    align-items="center"
-    justify-content="center"
-    direction="column"
-  >
+  <ui-flex direction="column" class="ui-container">
     <slot />
   </ui-flex>
 </template>

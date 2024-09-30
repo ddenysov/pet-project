@@ -8,7 +8,7 @@ const items = ref([
   {
     label: 'Головна',
     command: () => {
-      navigateTo('/ride');
+      navigateTo('/');
     },
   },
   {
@@ -32,7 +32,7 @@ const items = ref([
   {
     label: 'О нас',
     command: () => {
-      navigateTo('/ride');
+      navigateTo('/about');
     },
   },
 ]);
