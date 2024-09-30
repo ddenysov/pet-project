@@ -13,7 +13,7 @@
             <template #default="{ item }">
               <ui-card>
                 <template #title>
-                  <ui-nav-link :label="item.name" :to="'/ride/view/' + item.id" />
+                  <ui-router-link :label="item.name" :to="'/ride/view/' + item.id" />
                 </template>
                 <template #footer>
                   <div class="flex gap-3 mt-1">
@@ -37,10 +37,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useRideStore} from "~/stores/ride";
-import {useDataStore} from "~/components/ui/data/store";
+import {useRideStore} from "~/app/model/store/ride";
+import {useDataStore} from "~/app/ui/store/data";
 import {useToast} from 'primevue/usetoast';
-import {useMessageStore} from "~/components/ui/message/store";
+import {useMessageStore} from "~/app/ui/store/messages";
 
 const messageStore = useMessageStore();
 const toast = useToast();

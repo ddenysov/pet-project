@@ -1,7 +1,7 @@
 // stores/counter.js
 import {defineStore} from 'pinia'
-import {useApi} from "~/composables/api/api";
-import type {DataSetState} from "~/components/ui/data/store/dataTypes";
+import {useApi} from "~/app/shared/api/composables/api";
+import type {DataSetState} from "~/app/ui/types/data";
 
 
 export const useDataStore = defineStore('data', {

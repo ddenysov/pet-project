@@ -45,7 +45,7 @@ import WidgetBlockText from "~/app/widgets/components/block/WidgetBlockText.vue"
       >
         <ui-flex>
           <div class="team-member">
-            <img src="/media/sample_avatar.jpg" alt="Іван Іванов">
+            <ui-avatar image="/media/sample_avatar.jpg" />
             <h3>Іван Іванов</h3>
             <p>Засновник та керівник проекту. Велосипедист з 10-річним досвідом та пристрастю до організації покатушок.</p>
           </div>

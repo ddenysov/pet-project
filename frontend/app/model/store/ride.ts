@@ -1,6 +1,6 @@
 // stores/counter.js
 import {defineStore} from 'pinia'
-import {useApi} from "~/composables/api/api";
+import {useApi} from "~/app/shared/api/composables/api";
 
 
 type Value<T> = {
@@ -21,21 +21,6 @@ interface Validation extends Values<{}> {
 type FormState = {
     rows: {},
     loading: Loading,
-}
-import {useUserStore} from "~/stores/user";
-
-function getHeaders(): HeadersInit
-{
-    const store = useUserStore();
-    const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-    };
-
-    if (store.token) {
-        headers['Authorization'] = `Bearer ` + store.token;
-    }
-
-    return headers;
 }
 
 export const useRideStore = defineStore('ride', {
@@ -89,13 +74,9 @@ export const useRideStore = defineStore('ride', {
                 this.setRide({});
                 this.setLoading(true);
 
-                const res: any = await useFetch(
-                    '/api/ride/view-ride/' + id,
-                    {
-                        method: 'GET',
-                        headers: getHeaders(),
-                    },
-                );
+                const {get} = useApi();
+
+                const res: any = await get('/api/ride/view-ride/' + id);
                 console.log('ok2');
                 console.log(res.data.value);
                 this.setRide(res.data.value);

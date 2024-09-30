@@ -17,8 +17,10 @@ const menuItems = ref([
 </script>
 
 <template>
+  <div style="margin-left: 10px">
   <ui-menu ref="menu" :items="menuItems" id="overlay_menu" />
   <Avatar @click="toggle" label="DD" class="mr-2 cursor-pointer" size="medium" shape="circle" />
+  </div>
 </template>
 
 <style scoped>

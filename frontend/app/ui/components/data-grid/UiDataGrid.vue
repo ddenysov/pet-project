@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import UiGrid from '../../grid/UiGrid.vue'
-import UiCol from '../../grid/UiCol.vue'
-import {useDataStore} from "~/components/ui/data/store";
+import UiGrid from "~/app/ui/components/grid/UiGrid.vue";
+import UiCol from "~/app/ui/components/grid/UiCol.vue";
+import {useDataStore} from "~/app/ui/store/data";
 
 export interface Props {
   name: string,
