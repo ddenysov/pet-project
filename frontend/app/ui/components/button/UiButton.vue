@@ -9,7 +9,8 @@ const props = defineProps<ButtonProps>()
     class="ui-button"
     :label="label"
     :class="{
-      accent: props.color === 'accent'
+      accent: props.color === 'accent',
+      primary: props.color === 'primary',
     }"
   />
 </template>
@@ -29,5 +30,17 @@ const props = defineProps<ButtonProps>()
     }
   }
 
+  &.primary {
+    background-color: var(--p-primary-color);
+    color: var(--p-primary-contrast-color);
+    border-color: var(--p-primary-color);
+    &:hover {
+      background-color: var(--p-primary-hover-color);
+      border-color: var(--p-primary-hover-color);
+    }
+    &:active {
+      background-color: var(--p-primary-active-color);
+    }
+  }
 }
 </style>

@@ -37,7 +37,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useRideStore} from "~/app/model/store/ride";
+import {useRideStore} from "~/app/model/ride/store/ride";
 import {useDataStore} from "~/app/ui/store/data";
 import {useToast} from 'primevue/usetoast';
 import {useMessageStore} from "~/app/ui/store/messages";
