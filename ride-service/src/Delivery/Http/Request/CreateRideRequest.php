@@ -4,7 +4,11 @@ namespace Ride\Delivery\Http\Request;
 
 use Common\Delivery\Http\Request\Dto\Dto;
 use Common\Utils\Serialize\Trait\ObjectToArray;
+use DateTimeImmutable;
 use DateTimeInterface;
+use Exception;
+use InvalidArgumentException;
+use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +21,7 @@ class CreateRideRequest
 
     public string $name;
 
-    public $description;
+    public string $description;
 
     public DateTimeInterface $date;
 
@@ -36,26 +40,25 @@ class CreateRideRequest
         $request = $requestStack->getCurrentRequest();
         $data    = json_decode($request->getContent(), true);
         $this->validate($data);
-
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
+        $this->fromArray($data);
     }
+
+
 
     protected function validate(array $data)
     {
         $validator  = Validation::createValidator();
         $constraint = new Assert\Collection([
             // the keys correspond to the keys in the input array
-            'name'        => new Assert\NotBlank(),
-            'description' => new Assert\NotBlank(),
-            'date'        => [
+            'name'            => new Assert\NotBlank(),
+            'description'     => new Assert\NotBlank(),
+            'date'            => [
                 new Assert\NotBlank(),
                 new Assert\DateTime([
                     'format' => 'Y-m-d\TH:i:s.v\Z',
                 ]),
             ],
-            'time_start'        => [
+            'time_start'      => [
                 new Assert\NotBlank(),
                 new Assert\DateTime([
                     'format' => 'Y-m-d\TH:i:s.v\Z',
@@ -67,13 +70,12 @@ class CreateRideRequest
                     'format' => 'Y-m-d\TH:i:s.v\Z',
                 ]),
             ],
-            'image' => new Assert\NotBlank(),
-            'start_location' => new Assert\NotBlank(),
+            'image'           => new Assert\NotBlank(),
+            'start_location'  => new Assert\NotBlank(),
             'finish_location' => new Assert\NotBlank(),
         ]);
 
         $violations = $validator->validate($data, $constraint);
-
 
         $errors = [];
         if (count($violations) > 0) {
@@ -89,6 +91,7 @@ class CreateRideRequest
             throw new ValidationFailedException('errors', $violations);
         }
 
+
     }
 
     /**
@@ -99,4 +102,62 @@ class CreateRideRequest
         return $this->propertiesToArray();
     }
 
+    /**
+     * @param string $className
+     * @param array $data
+     * @return object|string
+     * @throws \ReflectionException
+     */
+    public function fromArray(array $data): void
+    {
+        $reflectionClass = new ReflectionClass($this);
+
+        foreach ($data as $property => $value) {
+            if ($reflectionClass->hasProperty($property)) {
+                $propertyReflection = $reflectionClass->getProperty($property);
+                $propertyReflection->setAccessible(true); // Позволяет устанавливать значения для приватных и защищённых свойств
+
+                $type = $propertyReflection->getType();
+
+                if ($type !== null) {
+                    $typeName = $type->getName();
+                    $isNullable = $type->allowsNull();
+
+                    // Обработка типов данных
+                    switch ($typeName) {
+                        case 'int':
+                            $value = is_null($value) && $isNullable ? null : (int)$value;
+                            break;
+                        case 'float':
+                            $value = is_null($value) && $isNullable ? null : (float)$value;
+                            break;
+                        case 'string':
+                            $value = is_null($value) && $isNullable ? null : (string)$value;
+                            break;
+                        case 'bool':
+                            $value = is_null($value) && $isNullable ? null : filter_var($value, FILTER_VALIDATE_BOOLEAN);
+                            break;
+                        case 'DateTimeInterface':
+                            if (is_null($value) && $isNullable) {
+                                $value = null;
+                            } else {
+                                try {
+                                    $value = new DateTimeImmutable($value);
+                                } catch (Exception $e) {
+                                    throw new InvalidArgumentException("Неверный формат даты для свойства {$property}: " . $e->getMessage());
+                                }
+                            }
+                            break;
+                        // Добавьте дополнительные типы по необходимости
+                        default:
+                            // Для других классов можно добавить дополнительную обработку или оставить как есть
+                            break;
+                    }
+                }
+
+                // Установка значения свойства
+                $propertyReflection->setValue($this, $value);
+            }
+        }
+    }
 }
