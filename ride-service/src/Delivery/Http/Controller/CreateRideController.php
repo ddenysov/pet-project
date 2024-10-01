@@ -19,7 +19,13 @@ class CreateRideController extends Controller
         $this->logger->info('Ride created');
         $this->commandBus->execute(new CreateRideCommand(
             organizerId: $this->getIdentity()->getId()->toString(),
-            name: $request->name
+            name: $request->name,
+            description: $request->description,
+            dateTimeStart: $request->time_start,
+            dateTimeEnd: $request->time_end,
+            image: $request->image,
+            startLocation: $request->start_location,
+            finishLocation: $request->finish_location
         ));
 
         return new JsonResponse([
