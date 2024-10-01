@@ -14,8 +14,8 @@ class CreateRideCommand extends Command
         public DateTimeInterface $dateTimeStart,
         public DateTimeInterface $dateTimeEnd,
         public string            $image,
-        public array             $startLocation,
-        public array             $finishLocation,
+        public array             $locationStart,
+        public array             $locationFinish,
     )
     {
     }

@@ -3,8 +3,13 @@
 namespace Ride\Domain\Entity;
 
 use Common\Domain\Entity\Aggregate;
+use Common\Domain\ValueObject\DateTime;
+use Common\Domain\ValueObject\DateTimeValue;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
+use Common\Domain\ValueObject\ImageValue;
+use Common\Domain\ValueObject\Location;
+use Common\Domain\ValueObject\LocationValue;
 use Common\Domain\ValueObject\StringValue;
 use Ride\Domain\Event\RideCreated;
 use Ride\Domain\Event\RiderJoinedToRide;
@@ -53,8 +58,14 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @throws InvalidUuidException
      */
     public static function create(
-        OrganizerId $organizerId,
-        StringValue $name,
+        OrganizerId   $organizerId,
+        StringValue   $name,
+        StringValue   $description,
+        DateTimeValue $dateTimeStart,
+        DateTimeValue $dateTimeEnd,
+        ImageValue    $image,
+        LocationValue $locationStart,
+        LocationValue $locationFinish
     ): Ride
     {
         $rideId = RideId::create();
@@ -64,6 +75,12 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         $ride->recordThat(new RideCreated(
             organizerId: $organizerId,
             name: $name,
+            description: $description,
+            dateTimeStart: $dateTimeStart,
+            dateTimeEnd: $dateTimeEnd,
+            image: $image,
+            locationStart: $locationStart,
+            locationFinish: $locationFinish,
         ));
 
         return $ride;
