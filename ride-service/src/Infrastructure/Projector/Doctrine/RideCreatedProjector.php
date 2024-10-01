@@ -34,6 +34,12 @@ final readonly class RideCreatedProjector implements RideCreatedProjectorPort
         $dbEntity->setCreatedAt(new DateTime());
         $dbEntity->setStartDateTime(new DateTime());
         $dbEntity->setEndDateTime(new DateTime());
+        $dbEntity->setDescription($event->getDescription()->toString());
+        $dbEntity->setStartLat($event->getLocationStart()->getLat());
+        $dbEntity->setStartLon($event->getLocationStart()->getLon());
+        $dbEntity->setEndLat($event->getLocationFinish()->getLat());
+        $dbEntity->setEndLon($event->getLocationFinish()->getLon());
+        $dbEntity->setImageUrl($event->getImage()->getUrl());
 
         $this->entityManager->persist($dbEntity);
         $this->entityManager->flush();

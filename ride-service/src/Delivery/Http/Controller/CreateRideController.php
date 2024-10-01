@@ -24,8 +24,8 @@ class CreateRideController extends Controller
             dateTimeStart: $request->time_start,
             dateTimeEnd: $request->time_end,
             image: $request->image,
-            startLocation: $request->start_location,
-            finishLocation: $request->finish_location
+            locationStart: $request->start_location,
+            locationFinish: $request->finish_location
         ));
 
         return new JsonResponse([

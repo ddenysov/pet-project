@@ -2,7 +2,7 @@
 
 namespace Common\Domain\ValueObject;
 
-abstract class ValueObject
+abstract class ValueObject implements \Common\Domain\ValueObject\Port\StringValue
 {
     /**
      * @return string

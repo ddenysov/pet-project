@@ -2,18 +2,23 @@
 
 namespace Common\Domain\ValueObject;
 
-use DateTimeImmutable;
+use DateTime;
 use DateTimeInterface;
+use Exception;
 
 class DateTimeValue extends ValueObject
 {
     private DateTimeInterface $value;
 
     /**
-     * @param DateTimeImmutable $value
+     * @param DateTimeInterface|string $value
+     * @throws Exception
      */
-    public function __construct(DateTimeInterface $value)
+    public function __construct(DateTimeInterface|string $value)
     {
+        if (is_string($value)) {
+            $value = new DateTime($value);
+        }
         $this->value = $value;
     }
 

@@ -2,7 +2,7 @@
 
 namespace Common\Utils\Serialize\Trait;
 
-use Common\Application\Handlers\Command\Port\Command;
+use Common\Domain\ValueObject\Port\ArrayValue;
 use Common\Domain\ValueObject\Port\StringValue;
 use ReflectionClass;
 
@@ -23,7 +23,13 @@ trait ObjectToArray
                 continue;
             }
             $value = $prop->getValue($this);
-            $propsArray[$prop->getName()] = $value instanceof StringValue || !$deep ? $value->toString() : $value;
+
+            if ($value instanceof ArrayValue) {
+                $propsArray[$prop->getName()] = $value->toArray();
+            } elseif ($value instanceof StringValue || !$deep) {
+                $propsArray[$prop->getName()] = $value->toString();
+            }
+
         }
 
         return $propsArray;

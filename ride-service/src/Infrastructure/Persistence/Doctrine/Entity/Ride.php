@@ -152,4 +152,64 @@ class Ride
     {
         $this->pendingRiders[] = $riderId;
     }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): void
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    public function getStartLat(): float
+    {
+        return $this->startLat;
+    }
+
+    public function setStartLat(float $startLat): void
+    {
+        $this->startLat = $startLat;
+    }
+
+    public function getStartLon(): float
+    {
+        return $this->startLon;
+    }
+
+    public function setStartLon(float $startLon): void
+    {
+        $this->startLon = $startLon;
+    }
+
+    public function getEndLat(): float
+    {
+        return $this->endLat;
+    }
+
+    public function setEndLat(float $endLat): void
+    {
+        $this->endLat = $endLat;
+    }
+
+    public function getEndLon(): float
+    {
+        return $this->endLon;
+    }
+
+    public function setEndLon(float $endLon): void
+    {
+        $this->endLon = $endLon;
+    }
 }

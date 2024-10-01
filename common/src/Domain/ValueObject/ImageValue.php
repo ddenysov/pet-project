@@ -16,12 +16,11 @@ class ImageValue extends ValueObject
 
     /**
      * @param string $url
-     * @param string $filename
      */
-    public function __construct(string $url, string $filename)
+    public function __construct(string $url)
     {
-        $this->url      = $url;
-        $this->filename = $filename;
+        $this->url      = parse_url($url, PHP_URL_PATH);
+        $this->filename = basename($url);
     }
 
     /**
@@ -48,6 +47,6 @@ class ImageValue extends ValueObject
      */
     public static function fromUrl(string $url): static
     {
-        return new static($url,basename($url));
+        return new static($url);
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Common\Domain\ValueObject;
 
-class LocationValue extends ValueObject
+use Common\Domain\ValueObject\Port\ArrayValue;
+
+class LocationValue extends ValueObject implements ArrayValue
 {
     /**
      * @var float
@@ -47,5 +49,15 @@ class LocationValue extends ValueObject
             'lat' => $this->lat,
             'lon' => $this->lon,
         ];
+    }
+
+    public function getLat(): float
+    {
+        return $this->lat;
+    }
+
+    public function getLon(): float
+    {
+        return $this->lon;
     }
 }
