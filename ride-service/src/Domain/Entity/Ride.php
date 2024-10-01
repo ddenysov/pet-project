@@ -36,6 +36,36 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     private OrganizerId $organizerId;
 
     /**
+     * @var StringValue
+     */
+    private StringValue $description;
+
+    /**
+     * @var DateTimeValue
+     */
+    private DateTimeValue $dateTimeStart;
+
+    /**
+     * @var DateTimeValue
+     */
+    private DateTimeValue $dateTimeEnd;
+
+    /**
+     * @var ImageValue
+     */
+    private ImageValue $image;
+
+    /**
+     * @var LocationValue
+     */
+    private LocationValue $locationStart;
+
+    /**
+     * @var LocationValue
+     */
+    private LocationValue $locationFinish;
+
+    /**
      * @var array
      */
     protected array $joinedRiders = [];
@@ -178,9 +208,13 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public function onRideCreated(RideCreated $event): void
     {
-        $this->id          = $event->getAggregateId();
-        $this->name        = $event->getName();
-        $this->organizerId = $event->getOrganizerId();
+        $this->id            = $event->getAggregateId();
+        $this->name          = $event->getName();
+        $this->organizerId   = $event->getOrganizerId();
+        $this->description   = $event->getDescription();
+        $this->image         = $event->getImage();
+        $this->dateTimeStart = $event->getDateTimeStart();
+        $this->dateTimeEnd   = $event->getDateTimeEnd();
     }
 
     /**
