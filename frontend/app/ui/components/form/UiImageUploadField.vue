@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { useFormStore } from './store/formStore';
+import { useFormStore} from "~/app/ui/store/form";
+
 const store = useFormStore();
 
 export interface Props {

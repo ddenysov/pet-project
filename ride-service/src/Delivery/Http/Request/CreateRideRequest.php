@@ -49,9 +49,27 @@ class CreateRideRequest
             // the keys correspond to the keys in the input array
             'name'        => new Assert\NotBlank(),
             'description' => new Assert\NotBlank(),
-            'date'        => new Assert\Collection([
+            'date'        => [
                 new Assert\NotBlank(),
-            ]),
+                new Assert\DateTime([
+                    'format' => 'Y-m-d\TH:i:s.v\Z',
+                ]),
+            ],
+            'time_start'        => [
+                new Assert\NotBlank(),
+                new Assert\DateTime([
+                    'format' => 'Y-m-d\TH:i:s.v\Z',
+                ]),
+            ],
+            'time_end'        => [
+                new Assert\NotBlank(),
+                new Assert\DateTime([
+                    'format' => 'Y-m-d\TH:i:s.v\Z',
+                ]),
+            ],
+            'image' => new Assert\NotBlank(),
+            'start_location' => new Assert\NotBlank(),
+            'finish_location' => new Assert\NotBlank(),
         ]);
 
         $violations = $validator->validate($data, $constraint);

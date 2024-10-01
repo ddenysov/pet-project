@@ -52,14 +52,12 @@
           form="create-ride"
           label="Місце зустрічі"
           name="start_location"
-          :validation="{ required: true }"
         />
 
         <ui-location-field
           form="create-ride"
           label="Місце фінфшу"
           name="finish_location"
-          :validation="{ required: true }"
         />
 
         <ToggleButton v-model="lock" onLabel="Закрита" offLabel="Відкрита" onIcon="pi pi-lock"
@@ -81,7 +79,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useMessageStore} from "~/components/ui/message/store";
+import {useMessageStore} from "~/app/ui/store/messages";
 
 const lock = ref(false);
 

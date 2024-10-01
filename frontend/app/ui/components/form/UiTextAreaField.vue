@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { useFormStore } from './store/formStore';
-import FieldError from "~/components/ui/form/Common/FieldError.vue";
+import { useFormStore} from "~/app/ui/store/form";
+import FieldError from "~/app/ui/components/form/Common/FieldError.vue";
 const store = useFormStore();
 
 export interface Props {
