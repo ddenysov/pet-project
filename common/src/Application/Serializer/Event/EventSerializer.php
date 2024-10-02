@@ -27,7 +27,11 @@ class EventSerializer
 
         foreach ($parameters as $parameter) {
             $argTypeName = $parameter->getType()->getName();
-            $arg         = new $argTypeName($payload[$parameter->getName()]);
+            $value = $payload[$parameter->getName()];
+            if (is_array($value)) {
+                $value = json_encode($value);
+            }
+            $arg         = $argTypeName::deserialize($value);
             $args[]      = $arg;
         }
 

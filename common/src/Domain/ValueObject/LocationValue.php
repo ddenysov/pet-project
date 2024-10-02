@@ -60,4 +60,15 @@ class LocationValue extends ValueObject implements ArrayValue
     {
         return $this->lon;
     }
+
+    /**
+     * @param string $value
+     * @return static
+     */
+    public static function deserialize(string $value): static
+    {
+        $location = json_decode($value, true);
+
+        return new static($location['lat'], $location['lon']);
+    }
 }

@@ -2,7 +2,9 @@
 
 namespace Common\Domain\ValueObject;
 
-abstract class ValueObject implements \Common\Domain\ValueObject\Port\StringValue
+use Common\Domain\ValueObject\Port\SerializableValue;
+
+abstract class ValueObject implements \Common\Domain\ValueObject\Port\StringValue, SerializableValue
 {
     /**
      * @return string
@@ -25,5 +27,14 @@ abstract class ValueObject implements \Common\Domain\ValueObject\Port\StringValu
     public function notEquals(ValueObject $object): bool
     {
         return !$this->equals($object);
+    }
+
+    /**
+     * @param string $value
+     * @return static
+     */
+    public static function deserialize(string $value): static
+    {
+        return new static($value);
     }
 }
