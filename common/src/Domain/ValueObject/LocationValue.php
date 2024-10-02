@@ -71,4 +71,12 @@ class LocationValue extends ValueObject implements ArrayValue
 
         return new static($location['lat'], $location['lon']);
     }
+
+    /**
+     * @return string
+     */
+    public function serialize(): string
+    {
+        return json_encode($this->toArray());
+    }
 }

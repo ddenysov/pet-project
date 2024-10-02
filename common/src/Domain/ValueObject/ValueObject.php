@@ -37,4 +37,12 @@ abstract class ValueObject implements \Common\Domain\ValueObject\Port\StringValu
     {
         return new static($value);
     }
+
+    /**
+     * @return string
+     */
+    public function serialize(): string
+    {
+        return $this->toString();
+    }
 }

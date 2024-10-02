@@ -9,4 +9,9 @@ interface SerializableValue
      * @return static
      */
     public static function deserialize(string $value): static;
+
+    /**
+     * @return string
+     */
+    public function serialize(): string;
 }
