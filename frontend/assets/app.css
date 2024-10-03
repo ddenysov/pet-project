@@ -7,6 +7,16 @@
     }
 }
 
+a {
+    color: var(--p-primary-color);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--p-primary-hover-color);
+    }
+}
+
 .ui-text-primary {
     color: var(--p-primary-color);
 }
+

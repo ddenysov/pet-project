@@ -44,6 +44,7 @@ export default defineNuxtConfig({
                 'IconField',
                 'InputIcon',
                 'InputText',
+                'Image',
                 'Card',
                 'Skeleton',
                 'DataView',
@@ -58,6 +59,7 @@ export default defineNuxtConfig({
                 'Textarea',
                 'ToggleButton',
                 'FileUpload',
+                'Breadcrumb',
             ],
         },
         options: {

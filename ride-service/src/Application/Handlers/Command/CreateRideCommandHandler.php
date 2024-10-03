@@ -36,7 +36,7 @@ final class CreateRideCommandHandler extends CommandHandler
         $ride = Ride::create(
             organizerId: new OrganizerId($command->organizerId),
             name: new StringValue($command->name),
-            description: new StringValue($command->name),
+            description: new StringValue($command->description),
             dateTimeStart: new DateTimeValue($command->dateTimeStart),
             dateTimeEnd: new DateTimeValue($command->dateTimeEnd),
             image: ImageValue::fromUrl($command->image),

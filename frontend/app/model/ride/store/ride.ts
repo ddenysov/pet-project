@@ -77,9 +77,7 @@ export const useRideStore = defineStore('ride', {
                 const {get} = useApi();
 
                 const res: any = await get('/api/ride/view-ride/' + id);
-                console.log('ok2');
-                console.log(res.data.value);
-                this.setRide(res.data.value);
+                this.setRide(res);
                 this.setLoading(false);
 
                 return res;
