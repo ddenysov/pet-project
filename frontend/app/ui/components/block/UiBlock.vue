@@ -12,5 +12,6 @@
   .ui-block {
     background-color: var(--pink-200);
     padding: 1rem;
+    width: 100%;
   }
 </style>

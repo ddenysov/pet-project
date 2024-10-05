@@ -2,9 +2,7 @@
   <div>
     <h1>Create Ride</h1>
 
-    <div>
-    <ui-flex>
-      <ui-flex grow="1">-</ui-flex>
+    <ui-flex style="width: 800px">
       <ui-flex grow="1" direction="column">
         <ui-text-field
           form="create-ride"
@@ -70,12 +68,8 @@
           name="submit"
           @submit="submit"
         />
-
-
       </ui-flex>
-      <ui-flex grow="1">-</ui-flex>
     </ui-flex>
-    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -84,6 +78,7 @@ import {useMessageStore} from "~/app/ui/store/messages";
 const lock = ref(false);
 
 const messageStore = useMessageStore();
+
 async function submit(id: string) {
   messageStore.showMessage('layout', 'Покатушка буде створена незабаром.');
   await navigateTo('/ride');

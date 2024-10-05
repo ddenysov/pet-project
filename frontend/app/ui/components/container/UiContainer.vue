@@ -3,11 +3,12 @@
 </script>
 
 <template>
-  <ui-flex justify-content="center" class="ui-container">
-    <ui-flex style="width: 60%" direction="column">
+  <div class="flex flex-wrap justify-content-center">
+    <div class="w-full xl:w-9">
       <slot />
-    </ui-flex>
-  </ui-flex>
+    </div>
+  </div>
+
 </template>
 
 <style scoped>

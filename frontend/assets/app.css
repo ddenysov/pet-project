@@ -20,3 +20,10 @@ a {
     color: var(--p-primary-color);
 }
 
+.bg-xl {
+    background-color: var(--p-rose-400)
+}
+
+.bg-lg {
+    background-color: var(--p-green-400)
+}

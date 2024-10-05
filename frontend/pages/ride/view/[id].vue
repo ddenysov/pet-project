@@ -1,5 +1,4 @@
 <template>
-  <ui-container>
     <ui-section>
       <ui-breadcrumbs :items="items" :home="home" />
     </ui-section>
@@ -15,22 +14,22 @@
       <h1>{{ store.ride.name }}</h1>
     </ui-section>
 
-    <ui-section>
-      <p>{{ store.ride.description }}</p>
-    </ui-section>
-    <ui-flex>
+    <ui-flex :gap="4">
       <ui-flex :grow="1">
-        <ui-block>
-          ololo
-        </ui-block>
+        <div style="background-color: var(--p-surface-100); border-radius: 8px; padding: 1rem">
+          <p>{{ store.ride.description }}</p>
+        </div>
       </ui-flex>
-      <ui-flex>
-        <ui-block>
-          ololo
-        </ui-block>
+      <ui-flex :gap="4" direction="column" class="w-4">
+        <div style="background-color: var(--p-amber-100); border-radius: 8px; padding: 1rem">
+          <div>Дата: <ui-date-value :value="store.ride.start_date_time" /></div>
+          <div>Час початку: <ui-time-value :value="store.ride.start_date_time" /></div>
+          <div>Час фінішу: <ui-time-value :value="store.ride.end_date_time" /></div>
+          <div>Місце початку: Назва місця. <a href="#">Мапа</a></div>
+
+        </div>
       </ui-flex>
     </ui-flex>
-  </ui-container>
 </template>
 <script setup lang="ts">
 import {useRideStore} from "~/app/model/ride/store/ride";

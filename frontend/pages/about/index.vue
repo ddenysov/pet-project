@@ -6,7 +6,7 @@ import WidgetBlockText from "~/app/widgets/components/block/WidgetBlockText.vue"
 </script>
 
 <template>
-  <ui-container>
+  <div>
     <widget-section-header
       title="Про нас"
       subtitle="Спільнота велосипедистів для всіх рівнів підготовки"
@@ -34,7 +34,9 @@ import WidgetBlockText from "~/app/widgets/components/block/WidgetBlockText.vue"
         <ul>
           <li>Спільнота: Ми віримо в силу єдності та підтримки серед велосипедистів.</li>
           <li>Безпека: Забезпечуємо інформацію та інструменти для безпечних поїздок.</li>
-          <li>Доступність: Створюємо умови, щоб велосипедний спорт був доступним для всіх, незалежно від рівня підготовки.</li>
+          <li>Доступність: Створюємо умови, щоб велосипедний спорт був доступним для всіх, незалежно від рівня
+            підготовки.
+          </li>
           <li>Екологічність: Підтримуємо екологічно чистий спосіб життя та зменшення вуглецевого сліду.</li>
           <li>Інновації: Постійно розвиваємо нові функції та покращення для зручності наших користувачів.</li>
         </ul>
@@ -47,7 +49,8 @@ import WidgetBlockText from "~/app/widgets/components/block/WidgetBlockText.vue"
           <div class="team-member">
             <ui-avatar image="/media/sample_avatar.jpg" />
             <h3>Іван Іванов</h3>
-            <p>Засновник та керівник проекту. Велосипедист з 10-річним досвідом та пристрастю до організації покатушок.</p>
+            <p>Засновник та керівник проекту. Велосипедист з 10-річним досвідом та пристрастю до організації
+              покатушок.</p>
           </div>
           <!-- Додайте більше членів команди за потребою -->
         </ui-flex>
@@ -76,7 +79,7 @@ import WidgetBlockText from "~/app/widgets/components/block/WidgetBlockText.vue"
       </widget-block-text>
 
     </ui-section>
-  </ui-container>
+  </div>
 </template>
 
 <style scoped>

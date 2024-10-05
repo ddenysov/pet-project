@@ -17,7 +17,9 @@ import WidgetAvatar from "~/app/widgets/components/navbar/avatar/WidgetAvatar.vu
         <widget-avatar />
       </template>
     </widget-navbar>
-    <slot />
+    <ui-container>
+      <slot />
+    </ui-container>
   </div>
 </template>
 
