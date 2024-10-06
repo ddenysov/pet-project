@@ -2,18 +2,26 @@
 import type {Responsive} from "~/app/ui/types/responsive";
 
 export interface Props {
-  value: string,
+  value?: string,
 }
 const props = defineProps<Props>();
 
-const dateString = props.value;
-const isoDateString = dateString.replace(' ', 'T');
-const date = new Date(isoDateString);
+const formatTime = (dateString?: string) => {
+  if (!dateString) {
+    return '';
+  }
 
-const hours = date.getHours().toString().padStart(2, '0');
-const minutes = date.getMinutes().toString().padStart(2, '0');
+  const isoDateString = dateString.replace(' ', 'T');
+  const date = new Date(isoDateString);
 
-const timeString = `${hours}:${minutes}`;
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  return `${hours}:${minutes}`;
+}
+
+
+const timeString = formatTime(props.value)
 </script>
 
 <template>

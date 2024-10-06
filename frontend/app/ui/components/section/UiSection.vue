@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<Props>(), {
   align: 'start' as AlignItems, // Set default value here
 });
 export interface Props {
-  align: AlignItems,
+  align?: AlignItems,
 }
 </script>
 

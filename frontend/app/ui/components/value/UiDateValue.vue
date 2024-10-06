@@ -2,7 +2,7 @@
 import type {Responsive} from "~/app/ui/types/responsive";
 
 export interface Props {
-  value: string,
+  value?: string,
 }
 const props = defineProps<Props>();
 
@@ -21,7 +21,10 @@ const ukrMonths = {
   'Грудня': 11
 };
 
-function formatUkrainianDate(dateString: any) {
+function formatUkrainianDate(dateString?: string) {
+  if (!dateString) {
+    return '';
+  }
   const date = new Date(dateString);
 
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
