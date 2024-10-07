@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Велосипедное сообщество - Главная страница</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #1c1c1e;
+            color: #fff;
+            padding: 2rem 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff9900;
+        }
+
+        main {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .container {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ff9900;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            margin: 0;
+            padding: 1.5rem;
+            background: #ff9900;
+            color: #fff;
+            font-size: 1.6rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card p {
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .card .details {
+            padding: 0 1.5rem 1.5rem;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 0;
+            padding: 0.75rem 1.5rem;
+            background: #ff9900;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-weight: 700;
+        }
+
+        .button:hover {
+            background: #e68a00;
+        }
+
+        .comments-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment {
+            border-bottom: 1px solid #e6e6e6;
+            padding: 1.5rem 0;
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            background-color: #1c1c1e;
+            color: #fff;
+            padding: 3rem 0;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .social-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links li a:hover {
+            color: #ff9900;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Велосипедное сообщество</h1>
+        <nav>
+            <ul>
+                <li><a href="#rides">Покатушки</a></li>
+                <li><a href="#routes">Маршруты</a></li>
+                <li><a href="#groups">Группы</a></li>
+                <li><a href="#blog">Блог</a></li>
+                <li><a href="#newcomers">Новичкам</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <section id="rides" class="container">
+        <h2>Ближайшие покатушки</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?forest-bike" alt="Покатушка 1">
+                <h3>Покатушка по лесу</h3>
+                <p>Дата: 15 октября 2024</p>
+                <p>Расстояние: 30 км</p>
+                <div class="details">
+                    <p><strong>Сложность:</strong> Средняя</p>
+                    <a href="#" class="button">Присоединиться</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?mountain-bike" alt="Покатушка 2">
+                <h3>Горный маршрут</h3>
+                <p>Дата: 20 октября 2024</p>
+                <p>Расстояние: 50 км</p>
+                <div class="details">
+                    <p><strong>Сложность:</strong> Высокая</p>
+                    <a href="#" class="button">Присоединиться</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?city-bike" alt="Покатушка 3">
+                <h3>Городская прогулка</h3>
+                <p>Дата: 25 октября 2024</p>
+                <p>Расстояние: 15 км</p>
+                <div class="details">
+                    <p><strong>Сложность:</strong> Легкая</p>
+                    <a href="#" class="button">Присоединиться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="routes" class="container">
+        <h2>Популярные маршруты</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?forest-path" alt="Маршрут 1">
+                <h3>Лесная тропа</h3>
+                <p>Длина: 25 км</p>
+                <div class="details">
+                    <p><strong>Местность:</strong> Лесная зона</p>
+                    <a href="#" class="button">Подробнее</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?mountain-trail" alt="Маршрут 2">
+                <h3>Горная вершина</h3>
+                <p>Длина: 40 км</p>
+                <div class="details">
+                    <p><strong>Местность:</strong> Горная зона</p>
+                    <a href="#" class="button">Подробнее</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?river-trail" alt="Маршрут 3">
+                <h3>Река и равнины</h3>
+                <p>Длина: 35 км</p>
+                <div class="details">
+                    <p><strong>Местность:</strong> Равнинная зона</p>
+                    <a href="#" class="button">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="groups" class="container">
+        <h2>Популярные группы</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?group-bike" alt="Группа 1">
+                <h3>Группа "Горные велоэксперты"</h3>
+                <p>Участники: 120</p>
+                <div class="details">
+                    <p><strong>Регион:</strong> Карпаты</p>
+                    <a href="#" class="button">Присоединиться</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?urban-biking" alt="Группа 2">
+                <h3>Группа "Городские велоэнтузиасты"</h3>
+                <p>Участники: 95</p>
+                <div class="details">
+                    <p><strong>Регион:</strong> Киев</p>
+                    <a href="#" class="button">Присоединиться</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?weekend-bike" alt="Группа 3">
+                <h3>Группа "Вело на выходных"</h3>
+                <p>Участники: 80</p>
+                <div class="details">
+                    <p><strong>Регион:</strong> Львов</p>
+                    <a href="#" class="button">Присоединиться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comments" class="container">
+        <h2>Последние комментарии</h2>
+        <div class="comments-container">
+            <div class="comment">
+                <p><strong>Алексей:</strong> Отличная покатушка, было весело!</p>
+            </div>
+            <div class="comment">
+                <p><strong>Мария:</strong> Маршрут просто великолепен, рекомендую всем!</p>
+            </div>
+            <div class="comment">
+                <p><strong>Иван:</strong> Спасибо организаторам за прекрасное мероприятие!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="container">
+        <h2>Последние записи в блогах</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?bike-gear" alt="Блог 1">
+                <h3>Как выбрать велосипед для начинающих</h3>
+                <p>Опубликовано: 1 октября 2024</p>
+                <div class="details">
+                    <a href="#" class="button">Читать</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?city-bike-ride" alt="Блог 2">
+                <h3>Преимущества катания на велосипеде в городе</h3>
+                <p>Опубликовано: 5 октября 2024</p>
+                <div class="details">
+                    <a href="#" class="button">Читать</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/800x600?bike-trip" alt="Блог 3">
+                <h3>Подготовка к длительным велопоходам</h3>
+                <p>Опубликовано: 10 октября 2024</p>
+                <div class="details">
+                    <a href="#" class="button">Читать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="newcomers" class="container">
+        <h2>Новичкам</h2>
+        <p>Добро пожаловать в наше сообщество! Здесь вы найдете советы, как начать кататься на велосипеде, какие маршруты выбрать, и как присоединиться к нашим покатушкам.</p>
+        <a href="#" class="button">Узнать больше</a>
+    </section>
+</main>
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Велосипедное сообщество. Все права защищены.</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>

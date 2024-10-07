@@ -11,29 +11,19 @@
             dataset="/api/ride/list-ride"
           >
             <template #default="{ item }">
-              <ui-card style="margin: 10px">
-                <template #header>
-                  <div class="image-container">
-                    <img :src="item.preview_image_url" />
-                  </div>
+              <model-ride-card :ride="item">
+                <template #actions>
+                  <Button
+                    v-if="!item.joined" @click="joinRide(item.id)"
+                    :label="item.pending_join ? 'На розгляді' : 'Поїхали'"
+                    severity="danger"
+                    outlined
+                    class="w-full"
+                    :disabled="item.pending_join"
+                  />
+                  <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
                 </template>
-                <template #title>
-                  <ui-router-link :label="item.name" :to="'/ride/view/' + item.id" />
-                </template>
-                <template #footer>
-                  <div class="flex gap-3 mt-1">
-                    <Button
-                      v-if="!item.joined" @click="joinRide(item.id)"
-                      :label="item.pending_join ? 'На розгляді' : 'Поїхали'"
-                      severity="danger"
-                      outlined
-                      class="w-full"
-                      :disabled="item.pending_join"
-                    />
-                    <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
-                  </div>
-                </template>
-              </ui-card>
+              </model-ride-card>
             </template>
           </ui-data-grid>
         </ui-flex>
@@ -46,6 +36,7 @@ import {useRideStore} from "~/app/model/ride/store/ride";
 import {useDataStore} from "~/app/ui/store/data";
 import {useToast} from 'primevue/usetoast';
 import {useMessageStore} from "~/app/ui/store/messages";
+import ModelRideCard from "~/app/model/ride/components/ModelRideCard.vue";
 
 const messageStore = useMessageStore();
 const toast = useToast();

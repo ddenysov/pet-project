@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import WidgetAvatar from "~/app/widgets/components/navbar/avatar/WidgetAvatar.vue";
+import WidgetAvatar from "~/app/widgets//navbar/components/avatar/WidgetAvatar.vue";
 import {useAuthStore} from "~/app/shared/auth/store/auth";
 
 const authStore = useAuthStore();
