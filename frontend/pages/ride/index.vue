@@ -11,7 +11,12 @@
             dataset="/api/ride/list-ride"
           >
             <template #default="{ item }">
-              <ui-card>
+              <ui-card style="margin: 10px">
+                <template #header>
+                  <div class="image-container">
+                    <img :src="item.preview_image_url" />
+                  </div>
+                </template>
                 <template #title>
                   <ui-router-link :label="item.name" :to="'/ride/view/' + item.id" />
                 </template>
@@ -73,3 +78,19 @@ async function joinRide(id: string) {
   ride.pending_join = true;
 }
 </script>
+
+<style>
+.image-container {
+  width: 100%; /* Можно задать любую нужную ширину */
+  height: 200px; /* Можно задать любую нужную высоту */
+  overflow: hidden; /* Обрезать все, что выходит за пределы контейнера */
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Увеличить пропорционально и обрезать по краям */
+  object-position: center; /* Разместить изображение по центру */
+}
+</style>

@@ -2,10 +2,13 @@
     <ui-section>
       <ui-breadcrumbs :items="items" :home="home" />
     </ui-section>
+
+    <widget-ride-details />
+
     <ui-section>
       <div
         style="border-radius: 1rem; height: 400px; overflow: hidden; display: flex; justify-content: center; align-items: center">
-        <Image style="object-fit: cover; object-position: center" src="/media/sample1.jpeg" alt="Image" width="100%"
+        <Image style="object-fit: cover; object-position: center" :src="store.ride.image_url" alt="Image" width="100%"
                height="100%" />
       </div>
     </ui-section>
@@ -34,6 +37,7 @@
 <script setup lang="ts">
 import {useRideStore} from "~/app/model/ride/store/ride";
 import UiBreadcrumbs from "~/app/ui/components/breadcrumbs/UiBreadcrumbs.vue";
+import WidgetRideDetails from "~/app/widgets/ride/ride-details/components/WidgetRideDetails.vue";
 
 const route = useRoute()
 const store = useRideStore();

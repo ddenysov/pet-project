@@ -19,6 +19,16 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && if [ "$DA_DEBUG" = "true" ]; then apk add --no-cache $PHPIZE_DEPS && pecl install xdebug-3.2.1 \
     && docker-php-ext-enable xdebug; fi
 
+RUN apk update && apk add --no-cache \
+     libjpeg-turbo-dev \
+     libpng-dev \
+     freetype-dev && \
+     docker-php-ext-configure gd --with-freetype --with-jpeg && \
+     docker-php-ext-install gd
+
+RUN echo "upload_max_filesize=10M" > /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "post_max_size=12M" > /usr/local/etc/php/conf.d/post.ini
+
 # LIBS
 RUN docker-php-ext-install pgsql pdo pdo_pgsql
 
