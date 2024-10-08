@@ -9,16 +9,26 @@ export interface Props {
 defineProps<Props>();
 
 const rideStore = useRideStore();
+const isPending = ref(false);
 
 async function joinRide(id: string) {
-  rideStore.join(id)
+  // Сначала изменяем локальное состояние кнопки
+  isPending.value = true;
+
+  try {
+    // Отправляем запрос к серверу
+    await rideStore.join(id);
+  } catch (e) {
+    // Независимо от результата устанавливаем статус обратно в зависимости от ответа от сервера
+    isPending.value = false;
+  }
 }
 </script>
 
 <template>
   <Button
     v-if="!ride.joined" @click="joinRide(ride.id)"
-    :label="ride.pending_join ? 'На розгляді' : 'Поїхали'"
+    :label="(isPending || ride.pending_join) ? 'На розгляді' : 'Поїхали'"
     severity="danger"
     outlined
     class="w-full"
