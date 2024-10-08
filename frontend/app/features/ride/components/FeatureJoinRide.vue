@@ -27,7 +27,8 @@ async function joinRide(id: string) {
 
 <template>
   <Button
-    v-if="!ride.joined" @click="joinRide(ride.id)"
+    v-if="!ride.joined"
+    @click="joinRide(ride.id)"
     :label="(isPending || ride.pending_join) ? 'На розгляді' : 'Поїхали'"
     severity="danger"
     outlined
