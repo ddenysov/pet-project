@@ -13,15 +13,8 @@
             <template #default="{ item }">
               <model-ride-card :ride="item">
                 <template #actions>
-                  <Button
-                    v-if="!item.joined" @click="joinRide(item.id)"
-                    :label="item.pending_join ? 'На розгляді' : 'Поїхали'"
-                    severity="danger"
-                    outlined
-                    class="w-full"
-                    :disabled="item.pending_join"
-                  />
-                  <Button @click="edit(item.id)" label="Редагувати" outlined class="w-full" />
+                  <feature-join-ride :ride="item" />
+                  <feature-edit-ride :ride="item" />
                 </template>
               </model-ride-card>
             </template>
@@ -37,6 +30,8 @@ import {useDataStore} from "~/app/ui/store/data";
 import {useToast} from 'primevue/usetoast';
 import {useMessageStore} from "~/app/ui/store/messages";
 import ModelRideCard from "~/app/model/ride/components/ModelRideCard.vue";
+import FeatureJoinRide from "~/app/features/ride/components/FeatureJoinRide.vue";
+import FeatureEditRide from "~/app/features/ride/components/FeatureEditRide.vue";
 
 const messageStore = useMessageStore();
 const toast = useToast();
@@ -54,20 +49,6 @@ $listen('ride.domain.event.rider_request_accepted_join_to_ride', e => {
 $listen('ride.domain.event.ride_created', e => {
   show('Покатушка створена')
 })
-const rideStore = useRideStore();
-const dataStore = useDataStore();
-
-
-async function edit(id: string) {
-  await navigateTo('/ride/edit/' + id)
-}
-
-async function joinRide(id: string) {
-  console.log('OK JOIN RIDE');
-  const ride = dataStore.find('rides', id);
-  rideStore.join(id)
-  ride.pending_join = true;
-}
 </script>
 
 <style>
