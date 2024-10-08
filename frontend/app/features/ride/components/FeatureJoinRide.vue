@@ -32,7 +32,7 @@ async function joinRide(id: string) {
     severity="danger"
     outlined
     class="w-full"
-    :disabled="ride.pending_join"
+    :disabled="(isPending || ride.pending_join)"
   />
 </template>
 
