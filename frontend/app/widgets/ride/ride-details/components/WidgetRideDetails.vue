@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {useRideStore} from "~/app/model/ride/store/ride";
+import SidebarSection from "~/app/widgets/ride/ride-details/components/ride-details/SidebarSection.vue";
 
 const { ride } = useRideStore();
 </script>
@@ -55,6 +56,24 @@ const { ride } = useRideStore();
           </ui-flex>
           <div class="bg-gray-600 h-10rem">Map</div>
         </ui-flex>
+
+        <sidebar-section>
+          <template #right>
+            ICON
+          </template>
+          <template #first>
+            Місце сбору:
+          </template>
+
+          <template #second>
+            Заправка WOG на окружній
+          </template>
+          <template #bottom>
+            <div style="height: 150px">
+              Map
+            </div>
+          </template>
+        </sidebar-section>
       </ui-flex>
     </ui-flex>
   </ui-flex>
