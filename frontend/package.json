@@ -10,9 +10,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@nuxt-alt/proxy": "^2.5.8",
     "@pinia/nuxt": "^0.5.3",
     "@primevue/themes": "^4.0.7",
+    "@vesp/nuxt-fontawesome": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.12.4",
     "ol": "^10.1.0",
@@ -28,6 +31,9 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@nuxt/types": "^2.18.1",
     "@nuxt/typescript-build": "^3.0.2",
     "@primevue/nuxt-module": "^4.0.7",

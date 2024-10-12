@@ -22,10 +22,17 @@ export default defineNuxtConfig({
         }
     },
     modules: [
-        "@pinia/nuxt",
-        '@primevue/nuxt-module',
-        '@nuxt-alt/proxy',
+      "@pinia/nuxt",
+      '@primevue/nuxt-module',
+      '@nuxt-alt/proxy',
+      '@vesp/nuxt-fontawesome',
     ],
+    fontawesome: {
+        icons: {
+            solid: ['dollar-sign', 'cog', 'circle', 'check', 'calendar-days'],
+            regular: ['user']
+        }
+    },
     components: [
         {
             path: '~/app/ui/components',
