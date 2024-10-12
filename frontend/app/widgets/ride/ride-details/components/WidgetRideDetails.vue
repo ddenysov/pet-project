@@ -34,7 +34,9 @@ const { ride } = useRideStore();
         <sidebar-section>
           <template #right>ICON</template>
           <template #first><ui-date-value :value="ride.start_date_time" /> </template>
-          <template #second>Початок: <ui-time-value :value="ride.start_date_time" />, кінець: <ui-time-value :value="ride.end_date_time" /></template>
+          <template #second>
+            <div>Початок: <ui-time-value :value="ride.start_date_time" />, кінець: <ui-time-value :value="ride.end_date_time" /></div>
+          </template>
         </sidebar-section>
 
         <sidebar-section>
@@ -43,7 +45,7 @@ const { ride } = useRideStore();
           <template #second>Заправка WOG на окружній</template>
           <template #bottom>
             <div style="height: 150px">
-              Map
+              <osm-map />
             </div>
           </template>
         </sidebar-section>
@@ -54,7 +56,7 @@ const { ride } = useRideStore();
           <template #second>метро Нивки</template>
           <template #bottom>
             <div style="height: 150px">
-              Map
+              <osm-map />
             </div>
           </template>
         </sidebar-section>

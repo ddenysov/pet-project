@@ -10,7 +10,7 @@
       </ui-flex>
       <ui-flex justify-content="between" direction="column" :grow="1">
         <ui-flex class="p-1"><slot name="first" /></ui-flex>
-        <ui-flex class="p-1"><slot name="second" /></ui-flex>
+        <ui-flex class="p-1" ><slot name="second" /></ui-flex>
       </ui-flex>
     </ui-flex>
     <div class="bg-gray-600">
