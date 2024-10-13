@@ -31,7 +31,7 @@ class StringValue extends ValueObject implements Port\StringValue
 
     public function getMaxLength(): int
     {
-        return 255;
+        return 9999999;
     }
 
     public function getMinLength(): int

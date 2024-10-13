@@ -1,23 +1,42 @@
 <script setup lang="ts">
 import {useRideStore} from "~/app/model/ride/store/ride";
 import SidebarSection from "~/app/widgets/ride/ride-details/components/ride-details/SidebarSection.vue";
+import FeatureJoinRide from "~/app/features/ride/components/FeatureJoinRide.vue";
 
 const { ride } = useRideStore();
 </script>
 
 <template>
-  <ui-flex gap="6" class="py-6">
-    <ui-flex gap="4" direction="column" :grow="1" >
-      <ui-flex class="bg-yellow-200 preview-image-container">
-        <div class="container">
-          <img :src="ride.image_url" alt="Image">
-        </div>
+  <div class="grid py-4">
+    <div class="col">
+      <ui-flex gap="4" direction="column"  >
+        <ui-flex class="bg-yellow-200 preview-image-container">
+          <div class="container">
+            <img :src="ride.image_url" alt="Image">
+          </div>
+        </ui-flex>
+        <ui-flex><h1>{{ ride.name }}</h1></ui-flex>
+        <ui-flex>
+          <div style="white-space: pre-line">{{ ride.description }}</div>
+        </ui-flex>
       </ui-flex>
-      <ui-flex><h1>{{ ride.name }}</h1></ui-flex>
-      <ui-flex>{{ ride.description }}</ui-flex>
-    </ui-flex>
 
-    <ui-flex class="w-4">
+      <ui-flex direction="column">
+        <ui-flex>
+          <h2>Учасники:</h2>
+        </ui-flex>
+
+        <ui-flex :gap="4">
+          <ui-avatar image="/media/sample_avatar.jpg" />
+          <ui-avatar image="/media/sample_avatar.jpg" />
+          <ui-avatar image="/media/sample_avatar.jpg" />
+          <ui-avatar image="/media/sample_avatar.jpg" />
+          <ui-avatar image="/media/sample_avatar.jpg" />
+        </ui-flex>
+      </ui-flex>
+    </div>
+
+    <div class="col-fixed" style="width:350px">
       <ui-flex gap="4" direction="column" :grow="1">
         <ui-flex style="background-color: var(--p-surface-100);"  direction="column">
           <ui-flex gap="2" class="p-3">
@@ -61,9 +80,11 @@ const { ride } = useRideStore();
           </template>
         </sidebar-section>
 
+        <feature-join-ride :ride="ride" />
+
       </ui-flex>
-    </ui-flex>
-  </ui-flex>
+    </div>
+  </div>
 </template>
 
 <style scoped>
