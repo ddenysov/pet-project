@@ -1,3 +1,30 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.full-height-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Задаем минимальную высоту как высоту окна браузера */
+    box-sizing: border-box; /* Для учета паддингов и границ в высоте */
+}
+
+.nested {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Растягиваем вложенный блок на всю высоту родителя */
+    box-sizing: border-box;
+}
+
+.nested-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Растягиваем еще один вложенный блок */
+    box-sizing: border-box;
+}
+
 .ui-link {
     color: var(--p-primary-color);
     text-decoration: none;

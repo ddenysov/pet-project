@@ -57,8 +57,20 @@ const registerFormVisible = ref(false);
       />
     </template>
     <template #end>
-      <ui-button style="padding: 10px 20px;margin-right: 12px; background-color:  var(--p-amber-500);" v-if="authStore.isLoggedIn()" class="ml-2" label="+ Додати"
-                 @click="() => navigateTo('/ride/create')" />
+      <ui-button
+        v-if="authStore.isLoggedIn()"
+        style="padding: 10px 20px;margin-right: 12px; background-color:  var(--p-amber-500);"
+        class="ml-2"
+        label="Додати маршрут"
+        @click="() => navigateTo('/track/create')"
+      />
+      <ui-button
+        v-if="authStore.isLoggedIn()"
+        style="padding: 10px 20px;margin-right: 12px; background-color:  var(--p-amber-500);"
+        class="ml-2"
+        label="Додати катку"
+        @click="() => navigateTo('/ride/create')"
+      />
       <slot name="actions" />
     </template>
   </ui-toolbar>
