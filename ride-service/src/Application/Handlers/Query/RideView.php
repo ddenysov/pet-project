@@ -22,6 +22,14 @@ readonly class RideView extends View
             'preview_image_url' => 'http://localhost:8000' . str_ireplace('images/', 'images/preview_', $this->data['image_url']),
             'joined'            => in_array($this->identity->getId()?->toString(), json_decode($this->data['riders'], true)),
             'pending_join'      => in_array($this->identity->getId()?->toString(), json_decode($this->data['pending_riders'], true)),
+            'start_location'    => [
+                (float) $this->data['start_lat'],
+                (float) $this->data['start_lon'],
+            ],
+            'end_location'    => [
+                (float) $this->data['end_lat'],
+                (float) $this->data['end_lon'],
+            ],
         ];
     }
 }

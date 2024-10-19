@@ -8,7 +8,7 @@ const { ride } = useRideStore();
 </script>
 
 <template>
-  <div class="grid py-4">
+  <div v-if="ride.id" class="grid py-4">
     <div class="col">
       <ui-flex gap="4" direction="column"  >
         <ui-flex class="bg-yellow-200 preview-image-container">
@@ -65,7 +65,7 @@ const { ride } = useRideStore();
           <template #second>Заправка WOG на окружній</template>
           <template #bottom>
             <div style="height: 150px">
-              <osm-map />
+              <ui-map-view-location :center="ride.start_location" />
             </div>
           </template>
         </sidebar-section>
@@ -76,7 +76,7 @@ const { ride } = useRideStore();
           <template #second>метро Нивки</template>
           <template #bottom>
             <div style="height: 150px">
-              <osm-map />
+              <ui-map-view-location :center="ride.end_location" />
             </div>
           </template>
         </sidebar-section>
