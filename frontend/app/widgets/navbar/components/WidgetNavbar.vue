@@ -18,15 +18,9 @@ const items = ref([
     },
   },
   {
-    label: 'Клуби',
-    command: () => {
-      navigateTo('/ride');
-    },
-  },
-  {
     label: 'Маршрути',
     command: () => {
-      navigateTo('/ride');
+      navigateTo('/track');
     },
   },
   {

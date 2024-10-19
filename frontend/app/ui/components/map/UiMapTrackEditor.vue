@@ -1,76 +1,78 @@
 <template>
-<div>
-  <div class="mb-2">
-    <ui-button color="accent" @click="clearDrawings" label="Зберегти" />
-    <ui-button style="margin-left: 5px" @click="clearDrawings" label="Скасувати" />
-    <ui-button style="margin-left: 5px" @click="clearDrawings" label="Очистити" />
-    <ui-button style="margin-left: 5px" @click="undo" label="Відмінити останнє" />
+  <div>
+    <ClientOnly>
+      <div class="mb-2">
+        <ui-button color="accent" @click="clearDrawings" label="Зберегти" />
+        <ui-button style="margin-left: 5px" @click="cancel" label="Скасувати" />
+        <ui-button style="margin-left: 5px" @click="clearDrawings" label="Очистити" />
+        <ui-button style="margin-left: 5px" @click="undo" label="Відмінити останнє" />
 
-    {{ calculateDistance(selected) }} км
-  </div>
+        {{ calculateDistance(selected) }} км
+      </div>
 
 
-  <ol-map
-    ref="mapRef"
-    :loadTilesWhileAnimating="true"
-    :loadTilesWhileInteracting="true"
-    style="height: 82vh"
-  >
-    <ol-view
-      ref="view"
-      :center="center"
-      :zoom="15"
-      :projection="projection"
-    />
-
-    <ol-tile-layer>
-      <ol-source-osm />
-    </ol-tile-layer>
-
-    <ol-vector-layer ref="vectorLayer">
-      <ol-source-vector ref="sourceRef">
-        <ol-interaction-draw
-          type="Point"
-          @drawend="drawend"
+      <ol-map
+        ref="mapRef"
+        :loadTilesWhileAnimating="true"
+        :loadTilesWhileInteracting="true"
+        style="height: 82vh"
+      >
+        <ol-view
+          ref="view"
+          :center="center"
+          :zoom="15"
+          :projection="projection"
         />
-      </ol-source-vector>
-      <ol-style>
-        <ol-style-fill color="rgba(255, 255, 255, 0.2)" />
-        <ol-style-circle color="rgba(255, 255, 255, 0.2)" :radius="0">
-          <ol-style-fill :color="stroke" />
-        </ol-style-circle>
-      </ol-style>
-    </ol-vector-layer>
 
-    <ol-vector-layer>
-      <ol-source-vector ref="sourceRefRoute">
-        <ol-feature>
-          <ol-geom-line-string
-            :coordinates="selected"
-          ></ol-geom-line-string>
-          <ol-style>
-            <ol-style-stroke
-              :color="stroke"
-              :width="strokeWidth"
-            ></ol-style-stroke>
-          </ol-style>
-        </ol-feature>
-      </ol-source-vector>
-    </ol-vector-layer>
+        <ol-tile-layer>
+          <ol-source-osm />
+        </ol-tile-layer>
 
-    <ol-vector-layer>
-      <ol-source-vector>
-        <ol-feature>
-          <ol-geom-circle :center="startPoint()" :radius="20"></ol-geom-circle>
+        <ol-vector-layer ref="vectorLayer">
+          <ol-source-vector ref="sourceRef">
+            <ol-interaction-draw
+              type="Point"
+              @drawend="drawend"
+            />
+          </ol-source-vector>
           <ol-style>
-            <ol-style-stroke color="red" :width="3"></ol-style-stroke>
-            <ol-style-fill color="rgba(255,200,0,0.2)"></ol-style-fill>
+            <ol-style-fill color="rgba(255, 255, 255, 0.2)" />
+            <ol-style-circle color="rgba(255, 255, 255, 0.2)" :radius="0">
+              <ol-style-fill :color="stroke" />
+            </ol-style-circle>
           </ol-style>
-        </ol-feature>
-      </ol-source-vector>
-    </ol-vector-layer>
-  </ol-map>
-</div>
+        </ol-vector-layer>
+
+        <ol-vector-layer>
+          <ol-source-vector ref="sourceRefRoute">
+            <ol-feature>
+              <ol-geom-line-string
+                :coordinates="selected"
+              ></ol-geom-line-string>
+              <ol-style>
+                <ol-style-stroke
+                  :color="stroke"
+                  :width="strokeWidth"
+                ></ol-style-stroke>
+              </ol-style>
+            </ol-feature>
+          </ol-source-vector>
+        </ol-vector-layer>
+
+        <ol-vector-layer>
+          <ol-source-vector>
+            <ol-feature>
+              <ol-geom-circle :center="startPoint()" :radius="20"></ol-geom-circle>
+              <ol-style>
+                <ol-style-stroke color="red" :width="3"></ol-style-stroke>
+                <ol-style-fill color="rgba(255,200,0,0.2)"></ol-style-fill>
+              </ol-style>
+            </ol-feature>
+          </ol-source-vector>
+        </ol-vector-layer>
+      </ol-map>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -89,8 +91,12 @@ const vectorLayer = ref(null); // Ссылка на векторный слой
 const center = ref([3386118.8560320227, 6527692.993243565])
 const projection = ref('EPSG:3857')
 
+const cancel = () => {
+  navigateTo('/');
+}
+
 const startPoint = () => {
-  return selected.value.length > 0 ? selected.value[0] : [0,0];
+  return selected.value.length > 0 ? selected.value[0] : [0, 0];
 }
 
 const clearDrawings = () => {
@@ -139,7 +145,7 @@ function calculateDistance(route) {
     totalDistance += R * c;
   }
 
-  return  Math.round(totalDistance * 10) / 10;
+  return Math.round(totalDistance * 10) / 10;
 }
 
 function degreesToRadians(degrees) {
