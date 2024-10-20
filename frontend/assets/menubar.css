@@ -1,0 +1,12 @@
+.active {
+    .p-menubar-item-content {
+        border: 1px solid var(--p-button-outlined-secondary-border-color) !important;
+        background-color: var(--p-surface-100);
+        color: var(--p-surface-700);
+        font-weight: 500;
+    }
+}
+
+.p-menubar-item-content {
+    font-weight: 500;
+}

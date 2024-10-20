@@ -1,8 +1,9 @@
 import {definePreset} from "@primeuix/styled";
 import Nora from "@primevue/themes/nora";
 import Aura from "@primevue/themes/aura";
+import Lara from "@primevue/themes/lara";
 
-export const MainPreset = definePreset(Nora, {
+export const MainPreset = definePreset(Aura, {
   semantic: {
     accent: {
       50: '{amber.50}',
@@ -17,6 +18,19 @@ export const MainPreset = definePreset(Nora, {
       900: '{amber.900}',
       950: '{amber.950}'
     },
+    primary: {
+      50: '{surface.50}',
+      100: '{surface.100}',
+      200: '{surface.200}',
+      300: '{surface.300}',
+      400: '{surface.400}',
+      500: '{surface.500}',
+      600: '{surface.600}',
+      700: '{surface.700}',
+      800: '{surface.800}',
+      900: '{surface.900}',
+      950: '{surface.950}'
+    },
     colorScheme: {
       accent: {
         color: '{accent.500}',
@@ -27,28 +41,15 @@ export const MainPreset = definePreset(Nora, {
     },
   },
   components: {
-    toolbar: {
-      colorScheme: {
-        light: {
-          root: {
-            background: '{primary.color}',
-            color: '{surface.50}'
-          },
-        },
-      }
-    },
     menubar: {
       colorScheme: {
         light: {
-          root: {
-            background: '{primary.color}',
-            color: '{surface.50}'
+          border: {
+            color: '#ffffff'
           },
           item: {
-            color: '{surface.50}',
-            focus: {
-              background: '{primary.hover.color}',
-            }
+            color: '{surface.500}',
+            fontWeight: 500,
           },
         },
       }

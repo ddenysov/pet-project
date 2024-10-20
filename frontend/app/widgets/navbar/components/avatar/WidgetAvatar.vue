@@ -12,6 +12,10 @@ const menuItems = ref([
     label: 'Профіль',
     items: [
       {
+        label: 'Дешборд',
+        icon: 'pi pi-sign-out',
+      },
+      {
         label: 'Вийти',
         icon: 'pi pi-sign-out',
       }

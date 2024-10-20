@@ -16,7 +16,7 @@ export interface Props {
   alignItems?: AlignItems | Responsive<AlignItems>
   justifyContent?: JustifyContent | Responsive<JustifyContent>
   direction?: Direction | Responsive<Direction>
-  gap?: Gap | Responsive<Gap>
+  gap?: number | Responsive<number>
   fullHeight?: boolean,
 }
 

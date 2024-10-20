@@ -4,7 +4,7 @@
 
 <template>
   <div class="flex flex-wrap justify-content-center">
-    <div class="w-full xl:w-9">
+    <div>
       <slot />
     </div>
   </div>
