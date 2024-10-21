@@ -17,7 +17,7 @@ import WidgetAvatar from "~/app/widgets/navbar/components/avatar/WidgetAvatar.vu
         <widget-avatar />
       </template>
     </widget-navbar>
-    <ui-container style="padding: 2rem; background-color: var(--p-surface-100)">
+    <ui-container style="padding: 2rem; background-color: var(--p-surface-100); width: 100%">
       <slot />
     </ui-container>
   </div>

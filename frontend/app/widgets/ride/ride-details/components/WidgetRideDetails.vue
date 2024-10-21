@@ -8,7 +8,7 @@ const { ride } = useRideStore();
 </script>
 
 <template>
-  <div v-if="ride.id" class="grid py-4">
+  <div v-if="ride.id" class="grid py-4" style="width: 100%">
     <div class="col">
       <ui-flex gap="4" direction="column"  >
         <ui-flex class="bg-yellow-200 preview-image-container">
