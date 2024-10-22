@@ -4,12 +4,12 @@ import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
 </script>
 
 <template>
-  <widget-profile active="dashboard">
+  <widget-profile active="tracks">
     <template #title>
-      Панель керування
+      Маршрути
     </template>
     <template #content>
-      Панель керування в розробці
+      Маршрути в розробці
     </template>
   </widget-profile>
 </template>
