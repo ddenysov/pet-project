@@ -68,6 +68,7 @@ export default defineNuxtConfig({
                 'ToggleButton',
                 'FileUpload',
                 'Breadcrumb',
+                'Popover',
             ],
         },
         options: {

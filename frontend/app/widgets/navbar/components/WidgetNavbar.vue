@@ -49,6 +49,40 @@ const items = reactive([
     },
   },
 ]);
+
+const menu = ref();
+const profileItems = ref([
+  {
+    items: [
+      {
+        label: 'Профіль',
+        icon: 'pi pi-refresh',
+        command: () => {
+          items[0].class = '';
+          items[1].class = '';
+          items[2].class = 'active';
+          items[3].class = '';
+          navigateTo('/profile');
+        },
+      },
+      {
+        label: 'Вийти',
+        icon: 'pi pi-upload'
+      }
+    ]
+  }
+]);
+
+const toggle = (event) => {
+  menu.value.toggle(event);
+};
+const op = ref();
+const togglePopover = (event) => {
+  op.value.toggle(event);
+};
+
+
+
 </script>
 
 <template>
@@ -73,8 +107,17 @@ const items = reactive([
         />
       </ui-flex>
       <ui-flex :gap="2" align-items="center">
-        <Button style="width: 31px; height: 31px" outlined icon="pi pi-bell" aria-label="Save" />
-        <Button style="width: 31px; height: 31px" outlined icon="pi pi-cog" aria-label="Save" />
+        <Button @click="togglePopover" style="width: 31px; height: 31px" outlined icon="pi pi-bell" aria-label="Save" />
+        <Popover ref="op">
+          <div class="flex flex-col gap-4">
+            <div>
+              <span class="font-medium block mb-2">Нових повідомлень енмає</span>
+            </div>
+          </div>
+        </Popover>
+
+        <Button @click="toggle" style="width: 31px; height: 31px" outlined icon="pi pi-cog" aria-label="Save" />
+        <Menu ref="menu" id="overlay_menu" :model="profileItems" :popup="true" />
         <Divider layout="vertical" />
         <Avatar style="height: 35px; width: 35px" icon="pi pi-user" class="mr-2" size="small" shape="circle" />
         <div>Dmytro D.</div>
