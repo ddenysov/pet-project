@@ -6,7 +6,7 @@ async function submit(id: string) {
 </script>
 
 <template>
-  <ui-flex class="w-5">
+  <ui-flex>
     <ui-flex grow="1" direction="column">
       <ui-text-field
         form="create-ride"

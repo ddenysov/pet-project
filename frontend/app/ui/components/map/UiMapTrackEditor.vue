@@ -92,7 +92,7 @@ const center = ref([3386118.8560320227, 6527692.993243565])
 const projection = ref('EPSG:3857')
 
 const cancel = () => {
-  navigateTo('/');
+  navigateTo('/profile/tracks');
 }
 
 const startPoint = () => {

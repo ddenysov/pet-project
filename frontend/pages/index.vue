@@ -1,47 +1,40 @@
 <template>
-  <Layout>
-    <ui-section
-      style="height: 350px;"
+  <div>
+    <ui-flex
+      style="height: 200px"
+      justify-content="center"
+      align-items="center"
     >
       <ui-flex
         direction="column"
-        style="background-color: var(--p-surface-100); padding: 2rem"
+        style="background-color: var(--p-surface-100);"
+
       >
-        <ui-flex gap="3">
-          <ui-text-field
-            form="search-ride"
-            label="Тип велосипеду"
-            name="name"
-            :validation="{ required: true }"
-          />
+        <ui-flex style="border-radius: 1rem; background-color: white; padding: 1rem" gap="3">
+          <Button @click="toggle" label="Тип велосипеда" text :class="{ selected: selected === 'type' }" />
+          <Popover ref="op">
+            <div class="flex flex-col gap-4">
+              <div>
+                <span class="font-medium block mb-2">Team Members</span>
+                <ul class="list-none p-0 m-0 flex flex-col">
+                  <li v-for="member in members" :key="member.name" class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border" @click="selectMember(member)">
+                    <img :src="`https://primefaces.org/cdn/primevue/images/avatar/${member.image}`" style="width: 32px" />
+                    <div>
+                      <span class="font-medium">{{ member.name }}</span>
+                      <div class="text-sm text-surface-500 dark:text-surface-400">{{ member.email }}</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </Popover>
 
-          <ui-text-field
-            form="search-ride"
-            label="Довжина маршруту"
-            name="name"
-            :validation="{ required: true }"
-          />
-
-          <ui-text-field
-            form="search-ride"
-            label="Складність"
-            name="name"
-            :validation="{ required: true }"
-          />
-
-          <ui-text-field
-            form="search-ride"
-            label="Локація"
-            name="name"
-            :validation="{ required: true }"
-          />
+          <Button label="Складність" text  />
+          <Button label="Дистанція" text  />
+          <Button icon="pi pi-search" aria-label="Save" />
         </ui-flex>
-        <ui-flex justify-content="center" style="margin-top: 1rem">
-          <ui-button label="Шукати"></ui-button>
-        </ui-flex>
-
       </ui-flex>
-    </ui-section>
+    </ui-flex>
     <ui-section style="padding: 0 5rem">
       <ui-flex direction="column">
         <ui-flex justify-content="center">
@@ -101,12 +94,33 @@
       </ui-flex>
 
     </ui-section>
-  </Layout>
+  </div>
 </template>
 <script setup lang="ts">
 import UiSection from "~/app/ui/components/section/UiSection.vue";
+
+const members = ref([
+  { name: 'Amy Elsner', image: 'amyelsner.png', email: 'amy@email.com', role: 'Owner' },
+  { name: 'Bernardo Dominic', image: 'bernardodominic.png', email: 'bernardo@email.com', role: 'Editor' },
+  { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' }
+]);
+
+const selected = ref('');
+
+const op = ref();
+const toggle = (event) => {
+  op.value.toggle(event);
+  selected.value = 'type';
+}
 
 definePageMeta({
   menu: 'main',
 })
 </script>
+
+<style scoped>
+.selected {
+  background-color: var(--p-surface-100) !important;
+  border-color: var(--p-surface-200) !important;
+}
+</style>

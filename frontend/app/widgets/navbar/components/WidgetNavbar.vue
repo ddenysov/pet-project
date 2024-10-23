@@ -117,7 +117,6 @@ const togglePopover = (event) => {
     justify-content="between"
     :gap="4"
   >
-    {{ active }}
     <ui-flex :gap="2" align-items="center" class="py-3 px-5">
       <div style="background-color: var(--p-surface-700); height: 35px; width: 35px" />
       <div>Покатушки</div>

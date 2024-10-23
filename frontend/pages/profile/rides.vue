@@ -9,7 +9,14 @@ import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
       Покатушки
     </template>
     <template #content>
-      Покатушки в розробці
+      <div>
+        Покатушки в розробці
+        <ui-button
+          class="ml-2"
+          label="Додати катку"
+          @click="() => navigateTo('/ride/create')"
+        />
+      </div>
     </template>
   </widget-profile>
 </template>

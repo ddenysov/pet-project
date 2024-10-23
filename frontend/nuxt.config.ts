@@ -69,6 +69,7 @@ export default defineNuxtConfig({
                 'FileUpload',
                 'Breadcrumb',
                 'Popover',
+                'SplitButton',
             ],
         },
         options: {

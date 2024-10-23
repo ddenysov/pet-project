@@ -1,18 +1,19 @@
 <template>
-  <div>
-    <ui-section align="center">
-      <h1>Створити покатушку</h1>
-      <feature-ride-form />
-    </ui-section>
-  </div>
+  <widget-profile active="rides">
+    <template #title>
+      Покатушки
+    </template>
+    <template #content>
+      <div>
+        <h1>Створити покатушку</h1>
+        <feature-ride-form />
+      </div>
+    </template>
+  </widget-profile>
 </template>
 <script setup lang="ts">
-import {useMessageStore} from "~/app/ui/store/messages";
 import FeatureRideForm from "~/app/features/ride/components/FeatureRideForm.vue";
-
-const lock = ref(false);
-
-const messageStore = useMessageStore();
+import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
 
 definePageMeta({
   menu: 'ride',

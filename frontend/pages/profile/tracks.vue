@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
+import FeatureTrackMap from "~/app/features/track/components/FeatureTrackMap.vue";
 </script>
 
 <template>
@@ -9,7 +10,14 @@ import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
       Маршрути
     </template>
     <template #content>
-      Маршрути в розробці
+      <div>
+        Маршрути в розробці
+        <ui-button
+          class="ml-2"
+          label="Додати маршрут"
+          @click="() => navigateTo('/track/create')"
+        />
+      </div>
     </template>
   </widget-profile>
 </template>
