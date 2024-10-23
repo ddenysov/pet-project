@@ -4,11 +4,13 @@ import FeatureRegister from "~/app/features/register/components/FeatureRegister.
 import FeatureLogin from "~/app/features/login/components/FeatureLogin.vue";
 import WidgetAvatar from "~/app/widgets/navbar/components/avatar/WidgetAvatar.vue";
 
+const route = useRoute()
+console.log(route.meta);
 </script>
 
 <template>
   <div>
-    <widget-navbar>
+    <widget-navbar :active="route.meta.menu">
       <template #actions>
         <feature-login />
         <div style="width: 16px"></div>

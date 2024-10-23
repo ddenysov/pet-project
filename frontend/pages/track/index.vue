@@ -1,5 +1,7 @@
 <script setup lang="ts">
-
+definePageMeta({
+  menu: 'track',
+})
 </script>
 
 <template>

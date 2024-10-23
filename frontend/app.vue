@@ -16,4 +16,6 @@ const authStore = useAuthStore();
 authStore.init();
 
 // fire an event
+
+
 </script>

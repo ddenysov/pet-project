@@ -10,7 +10,8 @@ import FeatureRideForm from "~/app/features/ride/components/FeatureRideForm.vue"
 import FeatureTrackMap from "~/app/features/track/components/FeatureTrackMap.vue";
 
 definePageMeta({
-  layout: 'full-width'
+  layout: 'full-width',
+  menu: 'main',
 })
 
 </script>

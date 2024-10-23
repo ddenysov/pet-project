@@ -14,4 +14,7 @@ const lock = ref(false);
 
 const messageStore = useMessageStore();
 
+definePageMeta({
+  menu: 'ride',
+})
 </script>

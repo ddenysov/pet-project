@@ -20,4 +20,8 @@ const items = ref([
   {label: 'Покатушки', route: '/ride'},
   {label: 'Деталі'},
 ]);
+
+definePageMeta({
+  menu: 'ride',
+})
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Layout>
     <ui-section
       style="height: 350px;"
     >
@@ -101,8 +101,12 @@
       </ui-flex>
 
     </ui-section>
-  </div>
+  </Layout>
 </template>
 <script setup lang="ts">
 import UiSection from "~/app/ui/components/section/UiSection.vue";
+
+definePageMeta({
+  menu: 'main',
+})
 </script>

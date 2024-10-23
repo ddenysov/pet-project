@@ -1,15 +1,58 @@
 <script setup lang="ts">
+import {defineProps} from "vue";
+
+export interface Props {
+  active?: string,
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  active: '',
+})
+
+const getItems = () => [
+  {
+    label: 'Головна',
+    icon: 'pi pi-home',
+    class: props.active === 'main' ? 'active' : '',
+    key: 'home',
+    command: (e) => {
+      navigateTo('/');
+    },
+  },
+  {
+    label: 'Покатушки',
+    icon: 'pi pi-calendar',
+    class: props.active === 'ride' ? 'active' : '',
+    command: (e) => {
+      navigateTo('/ride');
+    },
+  },
+  {
+    label: 'Маршрути',
+    icon: 'pi pi-map',
+    key: 'tracks',
+    class: props.active === 'track' ? 'active' : '',
+    command: () => {
+      navigateTo('/track');
+    },
+  },
+  {
+    label: 'О нас',
+    icon: 'pi pi-envelope',
+    key: 'about',
+    class: props.active === 'about' ? 'active' : '',
+    command: () => {
+      navigateTo('/about');
+    },
+  },
+];
+
 const items = reactive([
   {
     label: 'Головна',
-    class: 'active',
     icon: 'pi pi-home',
     key: 'home',
     command: (e) => {
-      items[0].class = 'active';
-      items[1].class = '';
-      items[2].class = '';
-      items[3].class = '';
       navigateTo('/');
     },
   },
@@ -17,10 +60,6 @@ const items = reactive([
     label: 'Покатушки',
     icon: 'pi pi-calendar',
     command: (e) => {
-      items[0].class = '';
-      items[1].class = 'active';
-      items[2].class = '';
-      items[3].class = '';
       navigateTo('/ride');
     },
   },
@@ -29,10 +68,6 @@ const items = reactive([
     icon: 'pi pi-map',
     key: 'tracks',
     command: () => {
-      items[0].class = '';
-      items[1].class = '';
-      items[2].class = 'active';
-      items[3].class = '';
       navigateTo('/track');
     },
   },
@@ -41,10 +76,6 @@ const items = reactive([
     icon: 'pi pi-envelope',
     key: 'about',
     command: () => {
-      items[0].class = '';
-      items[1].class = '';
-      items[2].class = '';
-      items[3].class = 'active';
       navigateTo('/about');
     },
   },
@@ -58,10 +89,6 @@ const profileItems = ref([
         label: 'Профіль',
         icon: 'pi pi-refresh',
         command: () => {
-          items[0].class = '';
-          items[1].class = '';
-          items[2].class = 'active';
-          items[3].class = '';
           navigateTo('/profile');
         },
       },
@@ -82,7 +109,6 @@ const togglePopover = (event) => {
 };
 
 
-
 </script>
 
 <template>
@@ -91,6 +117,7 @@ const togglePopover = (event) => {
     justify-content="between"
     :gap="4"
   >
+    {{ active }}
     <ui-flex :gap="2" align-items="center" class="py-3 px-5">
       <div style="background-color: var(--p-surface-700); height: 35px; width: 35px" />
       <div>Покатушки</div>
@@ -103,7 +130,7 @@ const togglePopover = (event) => {
     >
       <ui-flex >
         <Menubar
-          :model="items"
+          :model="getItems()"
         />
       </ui-flex>
       <ui-flex :gap="2" align-items="center">

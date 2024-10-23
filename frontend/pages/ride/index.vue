@@ -49,6 +49,10 @@ $listen('ride.domain.event.rider_request_accepted_join_to_ride', e => {
 $listen('ride.domain.event.ride_created', e => {
   show('Покатушка створена')
 })
+
+definePageMeta({
+  menu: 'ride',
+})
 </script>
 
 <style>

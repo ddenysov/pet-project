@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import UiContainer from "~/app/ui/components/container/UiContainer.vue";
-import WidgetSectionHeader from "~/app/widgets/components/section/WidgetSectionHeader.vue";
-import WidgetBlockText from "~/app/widgets/components/block/WidgetBlockText.vue";
+definePageMeta({
+  menu: 'about',
+})
 </script>
 
 <template>
