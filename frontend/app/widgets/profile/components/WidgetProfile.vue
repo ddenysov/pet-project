@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
     justify-content="between"
     style="min-height: 84vh"
   >
-    <ui-flex :gap="2" class="px-6 mr-4" direction="column" style="width: 400px">
+    <ui-flex :gap="2" class="px-6 mr-4" direction="column" style="min-width: 400px">
       <navigation-button
         label="Панель керування"
         icon="building-columns"

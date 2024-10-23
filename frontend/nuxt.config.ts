@@ -70,6 +70,8 @@ export default defineNuxtConfig({
                 'Breadcrumb',
                 'Popover',
                 'SplitButton',
+                'Tag',
+                'SelectButton',
             ],
         },
         options: {

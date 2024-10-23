@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
+import WidgetMyRides from "~/app/widgets/ride/my-rides/components/WidgetMyRides.vue";
 </script>
 
 <template>
@@ -16,6 +17,8 @@ import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
           label="Додати катку"
           @click="() => navigateTo('/ride/create')"
         />
+
+        <widget-my-rides />
       </div>
     </template>
   </widget-profile>
