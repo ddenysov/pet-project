@@ -65,3 +65,9 @@ a {
 .bg-lg {
     background-color: var(--p-green-400)
 }
+
+.ui-ride-list {
+    .p-dataview-header, .p-dataview-paginator-bottom {
+        border-style: none !important;
+    }
+}
