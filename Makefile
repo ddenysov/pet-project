@@ -1,6 +1,6 @@
-start: start-iam-service start-template-service start-ride-service start-media-store start-infrastructure
+start: start-iam-service start-template-service start-ride-service start-track-service start-media-store start-infrastructure
 
-stop:  stop-iam-service stop-template-service stop-ride-service stop-media-store stop-infrastructure
+stop:  stop-iam-service stop-template-service stop-ride-service stop-track-service stop-media-store stop-infrastructure
 
 restart: stop start
 
@@ -27,6 +27,13 @@ start-ride-service:
 
 stop-ride-service:
 	cd ./ride-service && make stop
+
+start-track-service:
+	cd ./track-service && make start
+
+stop-track-service:
+	cd ./track-service && make stop
+
 
 start-media-store:
 	cd ./media-store && make start

@@ -7,6 +7,10 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
+    Template\Domain\Event\HealthCheckOk.php:
+        tags:
+            - { name: 'event.domain_event', channel: 'track', transport: 'sync' }
+
     # Template\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }

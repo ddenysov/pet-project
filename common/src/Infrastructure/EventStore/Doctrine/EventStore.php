@@ -35,7 +35,6 @@ class EventStore extends BaseEventStore implements EventStorePort
 
     protected function save(Event $event): void
     {
-
         $version = $this->getLastVersion($event->getAggregateId());
         $version++;
 
