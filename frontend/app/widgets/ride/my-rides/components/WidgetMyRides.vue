@@ -1,16 +1,6 @@
 <template>
   <div class="card ui-ride-list">
     <DataView paginator :rows="5" :value="products" :layout="layout">
-      <template #header>
-        <div class="flex justify-end">
-          <SelectButton v-model="layout" :options="options" :allowEmpty="false">
-            <template #option="{ option }">
-              <i :class="[option === 'list' ? 'pi pi-bars' : 'pi pi-table']" />
-            </template>
-          </SelectButton>
-        </div>
-      </template>
-
       <template #list="slotProps">
         <ui-panel color="dark" class="my-2">
           <div v-for="(item, index) in slotProps.items" :key="index">
@@ -176,7 +166,7 @@ const products = ref([
   },
 
 ]);
-const layout = ref('grid');
+const layout = ref('list');
 const options = ref(['list', 'grid']);
 
 const getSeverity = (product) => {
