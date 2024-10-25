@@ -23,7 +23,3 @@ import WidgetMyRides from "~/app/widgets/ride/my-rides/components/WidgetMyRides.
     </template>
   </widget-profile>
 </template>
-
-<style scoped>
-
-</style>

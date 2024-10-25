@@ -1,0 +1,12 @@
+- Rename
+  - Make file - service name
+  - Docker Compose - service name
+  - Namespaces
+    - Kernel and public/index.php and console
+    - Healthcheck controller
+    - routes.yml - namespace
+    - config/services/autowire.yml
+    - config/services/commands.yml
+    - packages/doctrine
+- Proxy
+  - Register fpm service

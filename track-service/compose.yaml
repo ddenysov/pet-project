@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  track-service-scheduler:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-scheduler
+    volumes:
+      - ./:/var/www/html
+
+  track-service-consumer:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-consumer
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - CONSUMER_CHANNEL=track
+
+  track-service-fpm:
+    extends:
+      file: ../infrastructure/php/php-fpm/compose.yaml
+      service: service-fpm
+    volumes:
+      - ./:/var/www/html
+
+networks:
+  service_network:
+    external: true
+
+volumes:
+  logs_volume:
+    external: true

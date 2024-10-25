@@ -1,0 +1,6 @@
+services:
+    _defaults:
+        autowire: true
+
+    Track\Application\Projector\Port\HealthCheckProjector:
+        class: Track\Infrastructure\Projector\Doctrine\HealthCheckProjector

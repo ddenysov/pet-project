@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Track\Application\Handlers\Event\HealthCheckEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
+    # Track\Application\Handlers\Event\UserRegisteredEventHandler:
+    #    tags:
+    #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
+    # Track\Application\Handlers\Event\UserPasswordRequestedEventHandler:
+    #    tags:
+    #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
