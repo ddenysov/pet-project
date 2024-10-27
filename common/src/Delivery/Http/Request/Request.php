@@ -57,4 +57,13 @@ abstract class Request
     {
         return $this->values;
     }
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function get(string $key)
+    {
+        return $this->values[$key];
+    }
 }
