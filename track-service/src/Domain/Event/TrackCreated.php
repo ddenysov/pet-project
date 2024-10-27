@@ -24,9 +24,9 @@ class TrackCreated extends Event
      * @param TrackPath $trackPath
      * @throws InvalidUuidException
      */
-    public function __construct(OwnerId $creatorId, TrackName $trackName, TrackAccessType $trackAccessType, TrackPath $trackPath)
+    public function __construct(OwnerId $ownerId, TrackName $trackName, TrackAccessType $trackAccessType, TrackPath $trackPath)
     {
-        $this->ownerId         = $creatorId;
+        $this->ownerId         = $ownerId;
         $this->trackName       = $trackName;
         $this->trackAccessType = $trackAccessType;
         $this->trackPath       = $trackPath;

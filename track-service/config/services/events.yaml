@@ -7,6 +7,10 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
+    Track\Application\Event\TrackCreatedEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
     Track\Domain\Event\HealthCheckOk:
         tags:
             - { name: 'event.domain_event', channel: 'track', transport: 'sync' }

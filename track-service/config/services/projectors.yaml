@@ -4,3 +4,6 @@ services:
 
     Track\Application\Projector\Port\HealthCheckProjector:
         class: Track\Infrastructure\Projector\Doctrine\HealthCheckProjector
+
+    Track\Application\Projector\Port\TrackCreatedProjector:
+        class: Track\Infrastructure\Projector\Doctrine\TrackCreatedProjector
