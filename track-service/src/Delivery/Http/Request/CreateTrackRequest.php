@@ -10,6 +10,7 @@ class CreateTrackRequest extends CommonRequest
     public function rules(): Assert\Collection
     {
         return new Assert\Collection([
+            'name' => new Assert\NotBlank(),
             'path' => new Assert\NotBlank(),
         ]);
     }

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class TrackCheckController extends Controller
+class CreateTrackController extends Controller
 {
     /**
      * @param CreateTrackRequest $request
@@ -20,7 +20,7 @@ class TrackCheckController extends Controller
     {
         $this->commandBus->execute(new CreateTrackCommand(
             name: $request->get('name'),
-            creatorId:  $this->getIdentity()->getId()->toString(),
+            ownerId:  $this->getIdentity()->getId()->toString(),
             accessType: 'private',
             path: $request->get('path')
         ));

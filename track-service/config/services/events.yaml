@@ -11,6 +11,10 @@ services:
         tags:
             - { name: 'event.domain_event', channel: 'track', transport: 'sync' }
 
+    Track\Domain\Event\TrackCreated:
+        tags:
+            - { name: 'event.domain_event', channel: 'track', transport: 'async' }
+
     # Track\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }

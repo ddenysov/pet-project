@@ -90,6 +90,9 @@ export default defineNuxtConfig({
         '/api/ride/**': {
             proxy: { to: "http://localhost:8000/ride/**", },
         },
+        '/api/track/**': {
+            proxy: { to: "http://localhost:8000/track/**", },
+        },
         '/api/media/**': {
             proxy: { to: "http://localhost:8000/media/**", },
         },

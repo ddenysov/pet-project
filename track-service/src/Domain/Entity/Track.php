@@ -8,6 +8,7 @@ use Common\Domain\ValueObject\Uuid;
 use Track\Domain\Event\HealthCheckOk;
 use Track\Domain\Event\TrackCreated;
 use Track\Domain\ValueObject\CreatorId;
+use Track\Domain\ValueObject\OwnerId;
 use Track\Domain\ValueObject\TrackAccessType;
 use Track\Domain\ValueObject\TrackName;
 use Track\Domain\ValueObject\TrackPath;
@@ -15,13 +16,13 @@ use Track\Domain\ValueObject\TrackPath;
 class Track extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
 {
 
-    private CreatorId       $creatorId;
+    private OwnerId         $ownerId;
     private TrackName       $trackName;
     private TrackAccessType $trackAccessType;
     private TrackPath       $trackPath;
 
     /**
-     * @param CreatorId $creatorId
+     * @param OwnerId $creatorId
      * @param TrackName $trackName
      * @param TrackAccessType $trackAccessType
      * @param TrackPath $trackPath
@@ -29,7 +30,7 @@ class Track extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      * @throws InvalidUuidException
      */
     public static function create(
-        CreatorId       $creatorId,
+        OwnerId         $ownerId,
         TrackName       $trackName,
         TrackAccessType $trackAccessType,
         TrackPath       $trackPath,
@@ -39,7 +40,7 @@ class Track extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         $instance->id = Uuid::create();
 
         $event = new TrackCreated(
-            $creatorId,
+            $ownerId,
             $trackName,
             $trackAccessType,
             $trackPath,
@@ -56,7 +57,7 @@ class Track extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public function onTrackCreated(TrackCreated $event): void
     {
-        $this->creatorId       = $event->creatorId;
+        $this->ownerId         = $event->ownerId;
         $this->trackName       = $event->trackName;
         $this->trackAccessType = $event->trackAccessType;
         $this->trackPath       = $event->trackPath;

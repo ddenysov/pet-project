@@ -2,7 +2,13 @@
 
 namespace Track\Domain\Repository\Port;
 
+use Track\Domain\Entity\Track;
+
 interface TrackRepository
 {
-    public function save();
+    /**
+     * @param Track $entity
+     * @return void
+     */
+    public function save(Track $entity): void;
 }

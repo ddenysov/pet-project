@@ -2,9 +2,9 @@
 
 namespace Track\Domain\ValueObject;
 
-use Common\Domain\ValueObject\GeoLocationValue;
+use Common\Domain\ValueObject\GeoPathValue;
 
-class TrackPath extends GeoLocationValue
+class TrackPath extends GeoPathValue
 {
 
 }

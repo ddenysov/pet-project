@@ -6,9 +6,9 @@ use Common\Domain\ValueObject\ValueObject;
 
 class TrackAccessType extends ValueObject
 {
-    public const string PUBLIC = 'public';
+    public const PUBLIC = 'public';
 
-    public const string PRIVATE = 'private';
+    public const PRIVATE = 'private';
 
     /**
      * @param string $value

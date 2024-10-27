@@ -9,3 +9,7 @@ services:
     Track\Domain\Repository\Port\HealthCheckRepository:
         class: Track\Application\Repository\HealthCheckRepository
         public: true
+
+    Track\Domain\Repository\Port\TrackRepository:
+        class: Track\Application\Repository\TrackRepository
+        public: true

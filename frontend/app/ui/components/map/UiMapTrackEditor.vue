@@ -2,7 +2,7 @@
   <div>
     <ClientOnly>
       <div class="mb-2">
-        <ui-button color="accent" @click="clearDrawings" label="Зберегти" />
+        <ui-button color="accent" @click="save" label="Зберегти" />
         <ui-button style="margin-left: 5px" @click="cancel" label="Скасувати" />
         <ui-button style="margin-left: 5px" @click="clearDrawings" label="Очистити" />
         <ui-button style="margin-left: 5px" @click="undo" label="Відмінити останнє" />
@@ -82,6 +82,8 @@ import {ref} from "vue";
 import {getLength} from "ol/sphere";
 import type VectorSource from "ol/source/vector";
 
+const $emit = defineEmits(['save'])
+
 const selected = ref([]);
 const strokeWidth = ref(6);
 const stroke = ref("#FF5500");
@@ -90,6 +92,10 @@ const mapRef = ref<{ map: Map } | null>(null);
 const vectorLayer = ref(null); // Ссылка на векторный слой
 const center = ref([3386118.8560320227, 6527692.993243565])
 const projection = ref('EPSG:3857')
+
+const save = () => {
+  $emit('save', selected.value);
+}
 
 const cancel = () => {
   navigateTo('/profile/tracks');
