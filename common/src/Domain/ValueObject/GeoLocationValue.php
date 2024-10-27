@@ -4,7 +4,7 @@ namespace Common\Domain\ValueObject;
 
 use Common\Domain\ValueObject\Port\ArrayValue;
 
-class LocationValue extends ValueObject implements ArrayValue
+class GeoLocationValue extends ValueObject implements ArrayValue
 {
     /**
      * @var float

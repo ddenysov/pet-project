@@ -8,7 +8,7 @@ use Common\Domain\ValueObject\DateTimeValue;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\ImageValue;
-use Common\Domain\ValueObject\LocationValue;
+use Common\Domain\ValueObject\GeoLocationValue;
 use Common\Domain\ValueObject\StringValue;
 use Psr\Log\LoggerInterface;
 use Ride\Domain\Entity\Ride;
@@ -40,8 +40,8 @@ final class CreateRideCommandHandler extends CommandHandler
             dateTimeStart: new DateTimeValue($command->dateTimeStart),
             dateTimeEnd: new DateTimeValue($command->dateTimeEnd),
             image: ImageValue::fromUrl($command->image),
-            locationStart: LocationValue::fromArray($command->locationStart),
-            locationFinish: LocationValue::fromArray($command->locationFinish),
+            locationStart: GeoLocationValue::fromArray($command->locationStart),
+            locationFinish: GeoLocationValue::fromArray($command->locationFinish),
         );
 
         $this->repository->save($ride);

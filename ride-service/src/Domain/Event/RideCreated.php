@@ -6,10 +6,9 @@ use Common\Domain\Event\Event;
 use Common\Domain\ValueObject\DateTimeValue;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\ImageValue;
-use Common\Domain\ValueObject\LocationValue;
+use Common\Domain\ValueObject\GeoLocationValue;
 use Common\Domain\ValueObject\StringValue;
 use Ride\Domain\ValueObject\OrganizerId;
-use Ride\Domain\ValueObject\RideId;
 
 class RideCreated extends Event implements RideEvent
 {
@@ -20,19 +19,19 @@ class RideCreated extends Event implements RideEvent
      * @param DateTimeValue $dateTimeStart
      * @param DateTimeValue $dateTimeEnd
      * @param ImageValue $image
-     * @param LocationValue $locationStart
-     * @param LocationValue $locationFinish
+     * @param GeoLocationValue $locationStart
+     * @param GeoLocationValue $locationFinish
      * @throws InvalidUuidException
      */
     public function __construct(
-        private OrganizerId   $organizerId,
-        private StringValue   $name,
-        private StringValue   $description,
-        private DateTimeValue $dateTimeStart,
-        private DateTimeValue $dateTimeEnd,
-        private ImageValue    $image,
-        private LocationValue $locationStart,
-        private LocationValue $locationFinish
+        private OrganizerId      $organizerId,
+        private StringValue      $name,
+        private StringValue      $description,
+        private DateTimeValue    $dateTimeStart,
+        private DateTimeValue    $dateTimeEnd,
+        private ImageValue       $image,
+        private GeoLocationValue $locationStart,
+        private GeoLocationValue $locationFinish
     )
     {
         parent::__construct();
@@ -66,12 +65,12 @@ class RideCreated extends Event implements RideEvent
         return $this->dateTimeEnd;
     }
 
-    public function getLocationStart(): LocationValue
+    public function getLocationStart(): GeoLocationValue
     {
         return $this->locationStart;
     }
 
-    public function getLocationFinish(): LocationValue
+    public function getLocationFinish(): GeoLocationValue
     {
         return $this->locationFinish;
     }
