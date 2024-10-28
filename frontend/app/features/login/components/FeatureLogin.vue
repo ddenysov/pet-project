@@ -17,12 +17,12 @@ const onLoginSuccess = async (res: any) => {
 
 <template>
   <div v-if="!authStore.isLoggedIn()">
-    <ui-button
+    <ui-link
       label="Увійти"
       color="primary"
       @click="onLoginButtonClick"
     />
-    <ui-dialog ref="dialog">
+    <ui-dialog title="Увійти"  style="min-width: 500px" ref="dialog">
       <ui-flex grow="1" direction="column">
         <ui-text-field
           form="login"

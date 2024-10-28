@@ -28,6 +28,9 @@ class UserRegisteredProjector implements UserRegisteredProjectorPort
     public function apply(UserRegistered $event): void
     {
         $this->logger->info('User creating projection: ' . $event->getAggregateId()->toString());
+        $this->logger->info('Event data: ', [
+            'event' => $event->toArray(),
+        ]);
 
         $dbEntity = new User();
         $dbEntity->setId(Uuid::fromString($event->getAggregateId()->toString()));

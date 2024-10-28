@@ -18,11 +18,11 @@ const onRegisterSuccess = () => {
 <template>
   <div v-if="!authStore.isLoggedIn()">
     <ui-button
+      style="height: 35px"
       label="Реєстрація"
-      color="accent"
       @click="onRegisterButtonClick"
     />
-    <ui-dialog ref="dialog">
+    <ui-dialog title="Реєстрація" style="min-width: 500px" ref="dialog">
       <ui-flex grow="1" direction="column">
         <ui-text-field
           form="sign-up"

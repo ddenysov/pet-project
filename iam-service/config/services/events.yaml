@@ -6,7 +6,7 @@ services:
     # EVENTS
     Iam\Domain\Event\UserRegistered:
         tags:
-            - { name: 'event.domain_event', channel: 'iam', transport: 'sync' }
+            - { name: 'event.domain_event', channel: 'iam', transport: 'async' }
 
     Iam\Application\Handlers\Event\UserRegisteredEventHandler:
         tags:

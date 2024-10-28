@@ -3,10 +3,12 @@ import {defineProps} from "vue";
 
 export interface Props {
   active?: string,
+  logged?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   active: '',
+  logged: false,
 })
 
 const getItems = () => [
@@ -127,33 +129,21 @@ const togglePopover = (event) => {
       justify-content="between"
       class="px-5"
     >
-      <ui-flex >
+      <ui-flex>
         <Menubar
           :model="getItems()"
         />
       </ui-flex>
       <ui-flex :gap="2" align-items="center">
-        <Button @click="togglePopover" style="width: 31px; height: 31px" outlined icon="pi pi-bell" aria-label="Save" />
-        <Popover ref="op">
-          <div class="flex flex-col gap-4">
-            <div>
-              <span class="font-medium block mb-2">Нових повідомлень енмає</span>
-            </div>
-          </div>
-        </Popover>
-
-        <Button @click="toggle" style="width: 31px; height: 31px" outlined icon="pi pi-cog" aria-label="Save" />
-        <Menu ref="menu" id="overlay_menu" :model="profileItems" :popup="true" />
-        <Divider layout="vertical" />
-        <Avatar style="height: 35px; width: 35px" icon="pi pi-user" class="mr-2" size="small" shape="circle" />
-        <div>Dmytro D.</div>
+        <slot v-if="logged" name="user" />
+        <slot v-else name="guest" />
       </ui-flex>
     </ui-flex>
   </ui-flex>
 </template>
 
 <style scoped>
-  .active {
-    background-color: orangered;
-  }
+.active {
+  background-color: orangered;
+}
 </style>

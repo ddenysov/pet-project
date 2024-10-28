@@ -10,13 +10,19 @@ console.log(route.meta);
 
 <template>
   <div>
-    <widget-navbar :active="route.meta.menu">
-      <template #actions>
+    <widget-navbar
+      :active="route.meta.menu"
+      :logged="true"
+    >
+      <template #guest>
         <feature-login />
         <div style="width: 16px"></div>
         <feature-register />
         <div style="width: 16px"></div>
-        <widget-avatar />
+      </template>
+
+      <template #user>
+
       </template>
     </widget-navbar>
     <ui-container style="padding: 2rem; background-color: var(--p-surface-100); width: 100%">

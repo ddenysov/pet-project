@@ -17,14 +17,18 @@ defineExpose({
   show,
 });
 
+export interface Props {
+  title: string,
+}
+const props = defineProps<Props>();
+
 </script>
 
 <template>
   <Dialog
-    style="width: 90%; height: 705px"
     v-model:visible="visible"
     modal
-    header="Реєстрація"
+    :header="title"
     @close="close"
   >
     <slot />

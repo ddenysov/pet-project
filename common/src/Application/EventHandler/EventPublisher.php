@@ -33,6 +33,9 @@ abstract class EventPublisher implements Port\EventPublisher
                 'channel' => $this->eventRouter->getChannel($event->getEventClass()),
             ]);
             $this->dispatch($event, $this->eventRouter->getChannel($event->getEventClass()));
+            $this->logger->info('Event published', [
+                'event'   => $eventName,
+            ]);
             $success($event);
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage());
