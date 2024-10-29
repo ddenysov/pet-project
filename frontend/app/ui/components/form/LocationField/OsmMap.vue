@@ -74,7 +74,7 @@ const drawend = async (event) => {
     <ol-map
       :loadTilesWhileAnimating="true"
       :loadTilesWhileInteracting="true"
-      style="height:150px"
+      style="height:800px"
     >
       <ol-view
         :center="center"

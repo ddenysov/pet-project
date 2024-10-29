@@ -65,7 +65,11 @@ const { ride } = useRideStore();
           <template #second>Заправка WOG на окружній</template>
           <template #bottom>
             <div style="height: 150px">
-              <ui-map-view-location :center="ride.start_location" />
+              <ui-map-view
+                :center="ride.start_location"
+                :height="150"
+                :marker="true"
+              />
             </div>
           </template>
         </sidebar-section>
@@ -76,7 +80,11 @@ const { ride } = useRideStore();
           <template #second>метро Нивки</template>
           <template #bottom>
             <div style="height: 150px">
-              <ui-map-view-location :center="ride.end_location" />
+              <ui-map-view
+                :center="ride.end_location"
+                :height="150"
+                :marker="true"
+              />
             </div>
           </template>
         </sidebar-section>

@@ -77,8 +77,8 @@ const openModal = () => {
   >
     <label :for="name">{{ label }}</label>
     <ui-button :label="label" @click="openModal" />
-    <ui-dialog ref="modalRef">
-      <osm-map @select="onSelectLocation" />
+    <ui-dialog style="width: 90%; height: 90%" ref="modalRef">
+      <osm-map style="height: 90%" @select="onSelectLocation" />
     </ui-dialog>
     <small id="username-help">{{ store.getFieldError(form, name) }}</small>
   </ui-flex>

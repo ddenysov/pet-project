@@ -61,7 +61,7 @@ const previewClick = () => {
       </ol-vector-layer>
     </ol-map>
 
-    <ui-dialog title="Мапа" style="min-width: 90%" ref="dialog">
+    <ui-dialog title="Мапа" style="min-width: 90%; padding-bottom: 20px" ref="dialog">
       <ol-map
         :loadTilesWhileAnimating="true"
         :loadTilesWhileInteracting="true"
