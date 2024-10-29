@@ -6,7 +6,10 @@ definePageMeta({
 
 <template>
   <div>
-    <ui-map-view-location />
+    <ui-map-view
+      :height="300"
+      :marker="true"
+    />
   </div>
 </template>
 
