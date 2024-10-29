@@ -1,6 +1,6 @@
 <?php
 
-namespace Track\Application\Handlers\Query;
+namespace Track\Application\Query;
 
 use Common\Application\Handlers\Query\Port\Query;
 

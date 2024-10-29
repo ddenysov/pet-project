@@ -1,6 +1,6 @@
 <?php
 
-namespace Track\Application\Handlers\Query\Projection;
+namespace Track\Application\Query\Projection;
 
 class HealthCheck
 {

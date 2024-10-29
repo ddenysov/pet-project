@@ -1,6 +1,6 @@
 <?php
 
-namespace Track\Application\Handlers\Command;
+namespace Track\Application\Command;
 
 use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\Handlers\Command\CommandHandler;

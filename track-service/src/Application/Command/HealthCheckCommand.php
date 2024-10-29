@@ -1,6 +1,6 @@
 <?php
 
-namespace Track\Application\Handlers\Command;
+namespace Track\Application\Command;
 
 
 use Common\Application\Handlers\Command\Command;
