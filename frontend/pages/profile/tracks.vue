@@ -2,6 +2,8 @@
 
 import WidgetProfile from "~/app/widgets/profile/components/WidgetProfile.vue";
 import WidgetMyTracks from "~/app/widgets/track/my-tracks/components/WidgetMyTracks.vue";
+import FeatureUploadTrackGpx from "~/app/features/track/components/FeatureUploadTrackGpx.vue";
+
 </script>
 
 <template>
@@ -17,7 +19,7 @@ import WidgetMyTracks from "~/app/widgets/track/my-tracks/components/WidgetMyTra
           label="Додати маршрут"
           @click="() => navigateTo('/track/create')"
         />
-
+        <feature-upload-track-gpx />
         <widget-my-tracks/>
       </div>
     </template>
