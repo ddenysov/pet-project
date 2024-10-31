@@ -3,6 +3,10 @@ services:
         autowire: true
         autoconfigure: true
 
+    Track\Application\Query\Port\TrackQueryBuilder:
+        class: Common\Infrastructure\QueryBuilder\Doctrine\QueryBuilder
+        public: true
+
     Track\Application\Handlers\Query\HealthCheckQueryHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Handlers\Query\HealthCheckQuery' }

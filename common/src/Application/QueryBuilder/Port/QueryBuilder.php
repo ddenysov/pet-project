@@ -2,13 +2,17 @@
 
 namespace Common\Application\QueryBuilder\Port;
 
+/**
+ * Query builder abstraction
+ * Should return array instead of DTO to improve performance
+ */
 interface QueryBuilder
 {
     /**
      * @param string $name
      * @return $this
      */
-    public function table(string $name): static;
+    public function from(string $name): static;
 
     /**
      * @return array
@@ -40,4 +44,16 @@ interface QueryBuilder
      * @return $this
      */
     public function orderBy(string $column, string $direction = 'asc'): static;
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function limit(int $value): static;
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function offset(int $value): static;
 }

@@ -23,7 +23,7 @@ class QueryBuilder implements QueryBuilderPort
      * @param string $name
      * @return $this
      */
-    public function table(string $name): static
+    public function from(string $name): static
     {
         $this->parameters = [];
         $this->queryBuilder = $this->entityManager->getConnection()
@@ -93,8 +93,25 @@ class QueryBuilder implements QueryBuilderPort
         return $this->where('id', '=', $id)->first();
     }
 
-    public function limit()
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function limit(int $value): static
     {
+        $this->queryBuilder->setMaxResults($value);
 
+        return $this;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function offset(int $value): static
+    {
+        $this->queryBuilder->setFirstResult($value);
+
+        return $this;
     }
 }

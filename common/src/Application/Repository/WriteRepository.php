@@ -8,10 +8,7 @@ use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Uuid;
 use Track\Domain\Entity\Track;
 
-/**
- * @deprecated use write repository
- */
-class PersistenceRepository
+abstract class WriteRepository
 {
     public function __construct(
         protected EventStore $eventStore,
