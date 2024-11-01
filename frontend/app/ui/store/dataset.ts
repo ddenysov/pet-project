@@ -11,33 +11,43 @@ export const useDatasetStore = defineStore('dataset', {
      */
     state: (): any => {
         return {
-            data: null,
-            page: null,
-            status: null,
+            track: {
+                status: 'success',
+                data: [],
+            }
         }
     },
+
     /**
      * Actions
      */
     actions: {
+        /**
+         * Is loaded
+         * @param name
+         */
+        status(name: string) {
+            return this[name]?.status;
+        },
+
         async load(name: string): Promise<void> {
-            const {getAsync} = useApi();
-
-            console.log('LOAD');
-
-            const {data, status} = await useAsyncData('/api/track/list', async () => {
-                const { data, page } = await $fetch('/api/track/list');
+            const {get} = useApi();
+            const {data, status} = useAsyncData('/api/track/list', async () => {
+                const { data, page, records } = await get('/api/track/list');
 
                 this.$patch({
-                    data,
-                    page,
+                    [name]: {
+                        data,
+                        page,
+                        records,
+                    }
                 })
 
                 return data;
             })
 
             this.$patch({
-                status: status,
+                [name]: { status },
             })
         },
     },
