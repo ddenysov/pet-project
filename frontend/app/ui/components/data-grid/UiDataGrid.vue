@@ -29,9 +29,6 @@ store.init(props.name, props.dataset);
   >
     <template #list="slotProps">
       <ui-grid>
-
-
-
         <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="3">
           <slot :item="item" />
         </ui-col>

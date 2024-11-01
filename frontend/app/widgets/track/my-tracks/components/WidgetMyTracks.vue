@@ -1,6 +1,7 @@
 <template>
   <div class="card ui-ride-list">
-    <DataView paginator :rows="5" :value="products" :layout="layout">
+    {{ status }}
+    <DataView v-if="data" paginator :rows="5" :value="data.data" :layout="layout">
       <template #list="slotProps">
         <ui-panel color="dark" class="my-2">
           <div v-for="(item, index) in slotProps.items" :key="index">
@@ -11,7 +12,7 @@
                 </ui-flex>
                 <ui-flex :gap="2" :grow="1" direction="column" class="px-2">
                   <ui-flex>
-                    Назва треку
+                    {{ item.name }}
                   </ui-flex>
                   <ui-flex>
                     Довжина: 95 км
@@ -37,7 +38,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
+import {useApi} from "~/app/shared/api/composables/api";
 const itemRefs = ref([]);
 
 const setItemRef = (el, index) => {
@@ -67,6 +69,19 @@ const items = ref([
 const toggle = (index, event) => {
   itemRefs.value[index].toggle(event);
 };
+
+const api = useApi();
+
+const myTracks = ref([]);
+const { data, status } = api.getAsync('/api/track/list');
+console.log('res.data');
+console.log(data);
+myTracks.value = data.data;
+
+
+console.log('myTracks.value');
+console.log(myTracks);
+
 const products = ref([
   {
     id: '1000',

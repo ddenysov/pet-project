@@ -13,16 +13,14 @@ export function useApi () {
          * Get request
          * @param resource
          */
-        async getAsync (resource: string) {
-            const { data } = await useFetch(
+        getAsync (resource: string) {
+            return useFetch(
                 resource,
                 {
                     method: 'GET',
                     headers,
                 },
             );
-
-            return data.value;
         },
 
         /**
