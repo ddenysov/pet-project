@@ -19,7 +19,23 @@ class TrackListController extends Controller
     public function __invoke(): JsonResponse
     {
         $result = $this->queryBus->execute(new TrackListQuery());
+        $data   = array_map(function ($value) {
+            unset($value['path']);
 
-        return new JsonResponse($result);
+            return $value;
+        }, $result);
+
+        return new JsonResponse([
+            'data'    => $data,
+            'page'    => [
+                'current' => 1,
+                'total'   => 20,
+                'size'    => 5,
+            ],
+            'records' => [
+                'filtered' => 50,
+                'total'    => 100,
+            ],
+        ]);
     }
 }

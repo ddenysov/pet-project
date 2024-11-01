@@ -25,7 +25,7 @@ class TrackListQueryHandler
     public function __invoke(TrackListQuery $query): array
     {
         return $this->queryBuilder->from('track')
-            ->limit($query->getPage())
+            ->limit($query->getPageSize())
             ->offset(($query->getPage() - 1) * $query->getPageSize())
             ->get();
     }
