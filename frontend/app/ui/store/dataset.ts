@@ -26,14 +26,14 @@ export const useDatasetStore = defineStore('dataset', {
             console.log('LOAD');
 
             const {data, status} = await useAsyncData('/api/track/list', async () => {
-                const res = await $fetch('/api/track/list');
+                const { data, page } = await $fetch('/api/track/list');
 
                 this.$patch({
-                    data: res.data,
-                    page: res.page,
+                    data,
+                    page,
                 })
 
-                return res.data;
+                return data;
             })
 
             this.$patch({
