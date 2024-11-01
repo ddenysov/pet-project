@@ -1,6 +1,8 @@
 <template>
   <div class="card ui-ride-list">
     {{ status }}
+    {{ myStatus }}
+    {{ store.status }}
     <DataView v-if="data" paginator :rows="5" :value="data.data" :layout="layout">
       <template #list="slotProps">
         <ui-panel color="dark" class="my-2">
@@ -40,6 +42,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {useApi} from "~/app/shared/api/composables/api";
+import {useDatasetStore} from "~/app/ui/store/dataset.ts";
 const itemRefs = ref([]);
 
 const setItemRef = (el, index) => {
@@ -73,10 +76,12 @@ const toggle = (index, event) => {
 const api = useApi();
 
 const myTracks = ref([]);
+let myStatus = ref(null);
 const { data, status } = api.getAsync('/api/track/list');
 console.log('res.data');
 console.log(data);
 myTracks.value = data.data;
+myStatus = status;
 
 
 console.log('myTracks.value');
@@ -199,6 +204,10 @@ const getSeverity = (product) => {
       return null;
   }
 }
+
+const store = useDatasetStore();
+
+store.load('track');
 
 </script>
 
