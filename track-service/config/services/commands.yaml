@@ -3,9 +3,9 @@ services:
         autowire: true
         autoconfigure: true
 
-    Track\Application\Handlers\Command\HealthCheckCommandHandler:
+    Track\Application\Command\HealthCheckCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Handlers\Command\HealthCheckCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Command\HealthCheckCommand' }
 
     Track\Application\Command\CreateTrackCommandHandler:
         tags:

@@ -3,7 +3,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    Track\Application\Handlers\Event\HealthCheckEventHandler:
+    Track\Application\Event\HealthCheckEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 

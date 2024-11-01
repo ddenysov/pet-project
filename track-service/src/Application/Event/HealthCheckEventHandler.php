@@ -2,7 +2,6 @@
 
 namespace Track\Application\Event;
 
-use Iam\Application\Projector\Port\UserProjector;
 use Track\Application\Projector\Port\HealthCheckProjector;
 use Track\Domain\Event\HealthCheckOk;
 

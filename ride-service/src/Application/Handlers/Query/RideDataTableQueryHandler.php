@@ -19,7 +19,7 @@ class RideDataTableQueryHandler
 
     public function __invoke(RideDataTableQuery $query)
     {
-        $rides = $this->queryBuilder->table('ride')->orderBy('created_at', 'desc')->get();
+        $rides = $this->queryBuilder->from('ride')->orderBy('created_at', 'desc')->get();
 
         return RideView::collection($rides, $this->identity);
     }

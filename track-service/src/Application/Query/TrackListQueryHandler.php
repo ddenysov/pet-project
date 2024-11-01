@@ -4,7 +4,6 @@ namespace Track\Application\Query;
 
 use Psr\Log\LoggerInterface;
 use Track\Application\Query\Port\TrackQueryBuilder;
-use Track\Application\Query\Projection\HealthCheck;
 
 class TrackListQueryHandler
 {

@@ -2,7 +2,9 @@
 
 namespace Track\Application\Query;
 
-class TrackListQuery
+use Common\Application\Handlers\Query\Port\Query;
+
+class TrackListQuery implements Query
 {
     public function __construct(
         private ?int $page = 1,

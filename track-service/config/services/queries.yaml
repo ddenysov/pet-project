@@ -4,9 +4,13 @@ services:
         autoconfigure: true
 
     Track\Application\Query\Port\TrackQueryBuilder:
-        class: Common\Infrastructure\QueryBuilder\Doctrine\QueryBuilder
+        class: Track\Infrastructure\Query\Doctrine\TrackQueryBuilder
         public: true
 
-    Track\Application\Handlers\Query\HealthCheckQueryHandler:
+    Track\Application\Query\HealthCheckQueryHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Handlers\Query\HealthCheckQuery' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Query\HealthCheckQuery' }
+
+    Track\Application\Query\TrackListQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Query\TrackListQuery' }
