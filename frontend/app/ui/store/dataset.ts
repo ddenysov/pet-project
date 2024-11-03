@@ -1,54 +1,17 @@
-// stores/counter.js
-import {defineStore} from 'pinia'
-import {useApi} from "~/app/shared/api/composables/api";
-import type {DataSetState} from "~/app/ui/types/data";
 import {useAsyncData} from "#app";
+import {useApi} from "~/app/shared/api/composables/api";
 
+export const useDatasetStore = defineStore('dataset', () => {
+    const {get} = useApi();
+    const dataset = ref([]);
 
-export const useDatasetStore = defineStore('dataset', {
-    /**
-     * State
-     */
-    state: (): any => {
-        return {
-            track: {
-                status: 'success',
-                data: [],
-            }
-        }
-    },
+    const load = async () => {
+        useAsyncData('track', async () => {
+            console.log('LOAD');
+            const { data } = await get('/api/track/list');
+        })
 
-    /**
-     * Actions
-     */
-    actions: {
-        /**
-         * Is loaded
-         * @param name
-         */
-        status(name: string) {
-            return this[name]?.status;
-        },
+    }
 
-        async load(name: string): Promise<void> {
-            const {get} = useApi();
-            const {data, status} = useAsyncData('/api/track/list', async () => {
-                const { data, page, records } = await get('/api/track/list');
-
-                this.$patch({
-                    [name]: {
-                        data,
-                        page,
-                        records,
-                    }
-                })
-
-                return data;
-            })
-
-            this.$patch({
-                [name]: { status },
-            })
-        },
-    },
+    return { dataset, load }
 })

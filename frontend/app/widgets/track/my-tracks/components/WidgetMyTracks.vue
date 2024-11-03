@@ -1,10 +1,7 @@
 <template>
   <div class="card ui-ride-list">
-    {{ store.track.status }}
-
-
-
-    <DataView paginator :rows="5" :value="store.track.data" :layout="layout">
+    {{ data }}
+    <DataView @page="pageClick" paginator :total-records="data?.records.filtered" :lazy="true" :rows="data?.page.size" :value="data?.data" :layout="layout">
       <template #list="slotProps">
         <ui-panel color="dark" class="my-2">
           <div v-for="(item, index) in slotProps.items" :key="index">
@@ -23,7 +20,7 @@
                 </ui-flex>
                 <ui-flex align-items="center">
                   <Button text style="height: 40px" type="button" icon="pi pi-ellipsis-v" @click="(e) => toggle(index, e)" aria-haspopup="true" aria-controls="overlay_menu" />
-                  <Menu :key="index" :ref="el => setItemRef(el, index)" id="overlay_menu" :model="items" :popup="true" />
+                  <Menu :key="index" :ref="el => setItemRef(el, index)" id="overlay_menu" :model="menuItems" :popup="true" />
                 </ui-flex>
               </ui-flex>
             </ui-panel>
@@ -44,14 +41,16 @@
 import {onMounted, ref} from "vue";
 import {useApi} from "~/app/shared/api/composables/api";
 import {useDatasetStore} from "~/app/ui/store/dataset.ts";
+import {useAsyncData} from "#app";
 const itemRefs = ref([]);
+const page = ref(0);
 
 const setItemRef = (el, index) => {
   if (el) {
     itemRefs.value[index] = el;
   }
 };
-const items = ref([
+const menuItems = ref([
   {
     items: [
       {
@@ -75,27 +74,17 @@ const toggle = (index, event) => {
 };
 
 const layout = ref('list');
-const options = ref(['list', 'grid']);
 
-const getSeverity = (product) => {
-  switch (product.inventoryStatus) {
-    case 'INSTOCK':
-      return 'success';
+const {data} = useAsyncData('track', async () => {
+  return await $fetch('/api/track/list?page=' + page.value);
+}, {
+  watch: [page]
+})
 
-    case 'LOWSTOCK':
-      return 'warn';
 
-    case 'OUTOFSTOCK':
-      return 'danger';
-
-    default:
-      return null;
-  }
+const pageClick = (e) => {
+  page.value = e.page;
 }
-
-const store = useDatasetStore();
-
-store.load('track');
 
 </script>
 
