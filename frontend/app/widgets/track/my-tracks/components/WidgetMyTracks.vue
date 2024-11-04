@@ -1,39 +1,6 @@
 <template>
   <div class="card ui-ride-list">
-    {{ data }}
-    <DataView @page="pageClick" paginator :total-records="data?.records.filtered" :lazy="true" :rows="data?.page.size" :value="data?.data" :layout="layout">
-      <template #list="slotProps">
-        <ui-panel color="dark" class="my-2">
-          <div v-for="(item, index) in slotProps.items" :key="index">
-            <ui-panel color="light" class="m-4 p-3">
-              <ui-flex justify-content="between">
-                <ui-flex>
-                  <div class="ui-ride-image" />
-                </ui-flex>
-                <ui-flex :gap="2" :grow="1" direction="column" class="px-2">
-                  <ui-flex>
-                    {{ item.name }}
-                  </ui-flex>
-                  <ui-flex>
-                    Довжина: 95 км
-                  </ui-flex>
-                </ui-flex>
-                <ui-flex align-items="center">
-                  <Button text style="height: 40px" type="button" icon="pi pi-ellipsis-v" @click="(e) => toggle(index, e)" aria-haspopup="true" aria-controls="overlay_menu" />
-                  <Menu :key="index" :ref="el => setItemRef(el, index)" id="overlay_menu" :model="menuItems" :popup="true" />
-                </ui-flex>
-              </ui-flex>
-            </ui-panel>
-          </div>
-        </ui-panel>
-      </template>
-
-      <template #grid="slotProps">
-        <div>
-          Grid
-        </div>
-      </template>
-    </DataView>
+    <ui-dataset />
   </div>
 </template>
 
@@ -68,24 +35,6 @@ const menuItems = ref([
     ]
   }
 ]);
-
-const toggle = (index, event) => {
-  itemRefs.value[index].toggle(event);
-};
-
-const layout = ref('list');
-
-const {data} = useAsyncData('track', async () => {
-  return await $fetch('/api/track/list?page=' + page.value);
-}, {
-  watch: [page]
-})
-
-
-const pageClick = (e) => {
-  page.value = e.page;
-}
-
 </script>
 
 
