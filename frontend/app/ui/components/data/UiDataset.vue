@@ -42,7 +42,7 @@
         <ui-panel color="dark" class="my-2">
           <ui-grid>
             <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="4">
-              <slot :item="item" name="card" />
+              <slot :key="index" :item="item" name="card" />
             </ui-col>
           </ui-grid>
         </ui-panel>
