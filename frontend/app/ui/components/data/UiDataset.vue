@@ -41,7 +41,6 @@
 <script setup>
 import {ref} from "vue";
 import {useAsyncData} from "#app";
-import EntityTrackListItem from "~/app/entity/track/components/EntityTrackListItem.vue";
 
 const page = ref(0);
 const layout = ref('list');
@@ -50,14 +49,14 @@ const {data, status} = useAsyncData('track', async () => {
   return await $fetch('/api/track/list?page=' + page.value);
 }, {
   watch: [page]
-})
+}, { lazy: true })
 
 const skeletonRowsCount = computed(() => {
-  if (data.value.data.length > 0) {
+  if (data.value?.data.length > 0) {
     return data.value?.data.length;
   }
 
-  return data.value?.page.size;
+  return data.value?.page.size ?? 1;
 });
 
 const pageClick = (e) => {
