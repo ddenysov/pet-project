@@ -9,6 +9,15 @@
       :value="data?.data"
       :layout="layout"
     >
+      <template #header>
+        <div class="flex justify-end">
+          <SelectButton v-model="layout" :options="options" :allowEmpty="false">
+            <template #option="{ option }">
+              <i :class="[option === 'list' ? 'pi pi-bars' : 'pi pi-table']" />
+            </template>
+          </SelectButton>
+        </div>
+      </template>
       <template #empty>
         <div v-if="loading">
           <slot :rows="skeletonRowsCount" name="skeleton" />
@@ -30,9 +39,13 @@
       </template>
 
       <template #grid="slotProps">
-        <div>
-          Grid
-        </div>
+        <ui-panel color="dark" class="my-2">
+          <ui-grid>
+            <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="4">
+              <slot :item="item" name="card" />
+            </ui-col>
+          </ui-grid>
+        </ui-panel>
       </template>
     </DataView>
   </div>
@@ -41,15 +54,17 @@
 <script setup>
 import {ref} from "vue";
 import {useAsyncData} from "#app";
+import UiCol from "~/app/ui/components/grid/UiCol.vue";
 
 const page = ref(0);
 const layout = ref('list');
+const options = ref(['list', 'grid']);
 
 const {data, status} = useAsyncData('track', async () => {
   return await $fetch('/api/track/list?page=' + page.value);
 }, {
   watch: [page]
-}, { lazy: true })
+}, {lazy: true})
 
 const skeletonRowsCount = computed(() => {
   if (data.value?.data.length > 0) {

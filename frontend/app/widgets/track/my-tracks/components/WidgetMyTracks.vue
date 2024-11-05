@@ -7,6 +7,13 @@
       <template #row="{ item }">
         <entity-track-list-item :track="item" />
       </template>
+      <template #card="{ item }">
+        <ui-card
+          :title="item.name"
+          subtitle="Довжина 95 км"
+          class="m-3"
+        />
+      </template>
     </ui-dataset>
   </div>
 </template>

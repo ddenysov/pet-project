@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
 import { useClass } from '../../composables/style/class'
-import type { Responsive } from '../../types'
+import type { Responsive } from '../../types/responsive'
 
 type Col = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
