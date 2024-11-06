@@ -53,7 +53,7 @@ const menuItems = ref([
       </ui-flex>
       <ui-flex :gap="2" :grow="1" direction="column" class="px-2">
         <ui-flex>
-          {{ track.name }}
+          <ui-router-link :label="track.name" :to="'/track/details/' + track.id" />
         </ui-flex>
         <ui-flex>
           Довжина: 95 км

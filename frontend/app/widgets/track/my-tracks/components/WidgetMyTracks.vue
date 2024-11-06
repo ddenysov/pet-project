@@ -9,10 +9,12 @@
       </template>
       <template #card="{ item }">
         <ui-card
-          :title="item.name"
           subtitle="Довжина 95 км"
           class="m-3"
         >
+          <template #title>
+            <ui-router-link to="/track/details" :label="item.name" />
+          </template>
           <template #header>
             <div class="m-3" style="height: 200px; background-color: var(--p-surface-300)" />
           </template>
