@@ -6,8 +6,8 @@ export const useDatasetStore = defineStore('dataset', () => {
     const dataset = ref([]);
 
     const load = async () => {
-        useAsyncData('track', async () => {
-            const { data } = await get('/api/track/list');
+        useAsyncData('track', async (id) => {
+            const { data } = await get('/api/track/details/' + id);
         })
     }
 
