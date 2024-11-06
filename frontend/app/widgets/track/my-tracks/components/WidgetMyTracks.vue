@@ -1,6 +1,6 @@
 <template>
   <div class="card ui-ride-list">
-    <ui-dataset>
+    <ui-dataset source="/api/track/list">
       <template #skeleton="{ rows }">
         <entity-track-list-item-skeleton :rows="rows" />
       </template>

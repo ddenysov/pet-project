@@ -51,17 +51,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {ref} from "vue";
 import {useAsyncData} from "#app";
 import UiCol from "~/app/ui/components/grid/UiCol.vue";
+
+interface Props {
+  source: string,
+}
+
+const props = defineProps<Props>();
 
 const page = ref(0);
 const layout = ref('list');
 const options = ref(['list', 'grid']);
 
 const {data, status} = useAsyncData('track', async () => {
-  return await $fetch('/api/track/list?page=' + page.value);
+  return await $fetch(props.source + '?page=' + page.value);
 }, {
   watch: [page]
 }, {lazy: true})
@@ -79,5 +85,7 @@ const pageClick = (e) => {
 }
 
 const loading = computed(() => status.value === 'pending');
+
+
 
 </script>

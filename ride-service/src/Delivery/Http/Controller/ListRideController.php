@@ -24,7 +24,21 @@ class ListRideController extends Controller
     #[Route('/list-ride', name: 'list-ride', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(
         Request $request
-    ) {
-        return new JsonResponse($this->queryBus->execute(new RideDataTableQuery()));
+    )
+    {
+        return new JsonResponse(
+            [
+                'data'    => $this->queryBus->execute(new RideDataTableQuery())['data'],
+                'page'    => [
+                    'current' => 1,
+                    'total'   => 20,
+                    'size'    => 5,
+                ],
+                'records' => [
+                    'filtered' => 50,
+                    'total'    => 100,
+                ],
+            ]
+        );
     }
 }
