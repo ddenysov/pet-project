@@ -7,7 +7,6 @@ const route = useRoute()
 
 <template>
   <div>
-    detaiills
     {{ route.params.id }}
   </div>
 </template>
