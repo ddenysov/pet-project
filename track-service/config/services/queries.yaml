@@ -14,3 +14,7 @@ services:
     Track\Application\Query\TrackListQueryHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Query\TrackListQuery' }
+
+    Track\Application\Query\TrackDetailsQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Track\Application\Query\TrackDetailsQuery' }
