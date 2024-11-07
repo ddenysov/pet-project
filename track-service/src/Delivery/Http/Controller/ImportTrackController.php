@@ -23,6 +23,7 @@ class ImportTrackController extends Controller
     #[Route('/upload', name: 'upload', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(Request $request): JsonResponse
     {
+        dd($this->getIdentity());
         // Получаем загруженный файл
         $file = $request->files->get('demo');
 

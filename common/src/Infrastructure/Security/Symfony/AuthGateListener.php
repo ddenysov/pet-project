@@ -68,6 +68,7 @@ class AuthGateListener
         $token = str_ireplace('Bearer ', '', $bearer);
         $data = $this->decoder->execute($token, 'ololo');
 
+
         $this->identity->setId(Uuid::fromString($data['id']));
     }
 }

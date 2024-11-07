@@ -65,6 +65,11 @@ const onUpload = (event) => {
   })
 }
 
+const onBeforeSend = (event) => {
+  event.xhr.setRequestHeader('OLOLO', 'TROLOLO')
+  console.log(event.xhr);
+}
+
 </script>
 
 <template>
@@ -85,6 +90,7 @@ const onUpload = (event) => {
       :maxFileSize="10000000"
       :file-limit="1"
       @upload="onUpload"
+      @before-send="onBeforeSend"
     >
       <template #empty>
         <span>Drag and drop files to here to upload GPX file.</span>
