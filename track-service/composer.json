@@ -22,6 +22,7 @@
         "paragonie/sodium_compat": "^2.0",
         "phpdocumentor/reflection-docblock": "^5.4",
         "phpstan/phpdoc-parser": "^1.29",
+        "proj4php/proj4php": "^2.0",
         "services/common": "dev-main",
         "symfony/console": "7.1.*",
         "symfony/doctrine-messenger": "7.1.*",

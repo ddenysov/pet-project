@@ -16,7 +16,7 @@ const onUploadButtonClick = () => {
   />
   <ui-dialog title="Завантажити GPX"  style="min-width: 500px" ref="dialog">
     <ui-flex grow="1" direction="column">
-      <ui-image-upload-field />
+      <ui-track-upload-field />
     </ui-flex>
   </ui-dialog>
 </template>

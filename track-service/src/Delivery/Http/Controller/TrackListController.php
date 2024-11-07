@@ -18,7 +18,9 @@ class TrackListController extends Controller
     #[Route('/list', name: 'list', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(): JsonResponse
     {
-        $result = $this->queryBus->execute(new TrackListQuery());
+        $result = $this->queryBus->execute(new TrackListQuery(
+            page: 1
+        ));
         $data   = array_map(function ($value) {
             unset($value['path']);
 
