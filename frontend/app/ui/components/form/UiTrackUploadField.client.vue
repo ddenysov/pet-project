@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useFormStore} from "~/app/ui/store/form";
+import { useAuth } from "~/app/shared/api/composables/auth";
 
 const store = useFormStore();
 
@@ -66,8 +67,9 @@ const onUpload = (event) => {
 }
 
 const onBeforeSend = (event) => {
-  event.xhr.setRequestHeader('OLOLO', 'TROLOLO')
-  console.log(event.xhr);
+  const { getHeader } = useAuth();
+  const header = getHeader();
+  event.xhr.setRequestHeader(header.key, header.value)
 }
 
 </script>

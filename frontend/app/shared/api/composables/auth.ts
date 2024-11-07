@@ -9,5 +9,17 @@ export function useAuth() {
 
             return headers;
         },
+        getHeader () {
+            const res = {
+                key: '',
+                value: '',
+            }
+            if (tokenCookie.value) {
+                res.key = 'Authorization';
+                res.value = `Bearer ` + tokenCookie.value;
+            }
+
+            return res;
+        }
     }
 }

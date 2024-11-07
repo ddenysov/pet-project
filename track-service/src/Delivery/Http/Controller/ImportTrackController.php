@@ -18,28 +18,19 @@ use proj4php\Point;
 class ImportTrackController extends Controller
 {
     /**
+     * @param Request $request
      * @return JsonResponse
      */
     #[Route('/upload', name: 'upload', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(Request $request): JsonResponse
     {
-        dd($this->getIdentity());
         // Получаем загруженный файл
         $file = $request->files->get('demo');
 
         $points = [];
-        // Проверяем, что файл загружен
         if ($file && $file->isValid()) {
-            // Читаем содержимое файла без сохранения на диск
             $content = file_get_contents($file->getPathname());
-
-            // Загружаем содержимое как XML
             $xml = simplexml_load_string($content);
-
-            // Инициализируем массив для хранения точек
-
-
-            // Извлекаем точки из trkpt (track point) элементов
             foreach ($xml->trk->trkseg->trkpt as $trkpt) {
                 //$points[] = [
                 //    'lat' => (string) $trkpt['lat'],
