@@ -1,13 +1,13 @@
 <?php
 
-namespace Track\Application\Repository\Write;
+namespace Track\Application\Repository;
 
 use Common\Application\Repository\WriteRepository;
 use Common\Domain\ValueObject\Uuid;
 use Ride\Infrastructure\Persistence\Doctrine\Entity\EventStore;
 use Track\Domain\Entity\Track;
 
-class TrackWriteRepository extends WriteRepository implements \Track\Domain\Repository\Port\TrackRepository
+class TrackRepository extends WriteRepository implements \Track\Domain\Repository\Port\TrackRepository
 {
     public function find(Uuid $id): Track
     {
