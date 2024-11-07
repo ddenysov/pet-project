@@ -24,21 +24,6 @@
           <ol-source-osm />
         </ol-tile-layer>
 
-        <ol-vector-layer ref="vectorLayer">
-          <ol-source-vector ref="sourceRef">
-            <ol-interaction-draw
-              type="Point"
-              @drawend="drawend"
-            />
-          </ol-source-vector>
-          <ol-style>
-            <ol-style-fill color="rgba(255, 255, 255, 0.2)" />
-            <ol-style-circle color="rgba(255, 255, 255, 0.2)" :radius="0">
-              <ol-style-fill :color="stroke" />
-            </ol-style-circle>
-          </ol-style>
-        </ol-vector-layer>
-
         <ol-vector-layer>
           <ol-source-vector ref="sourceRefRoute">
             <ol-feature>

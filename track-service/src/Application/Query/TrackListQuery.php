@@ -8,7 +8,7 @@ class TrackListQuery implements Query
 {
     public function __construct(
         private ?int $page = 1,
-        private ?int $pageSize = 10,
+        private ?int $pageSize = 5,
         private ?array $filters = [],
         private ?array $sort = ['name' => 'ASC'],
         private ?string $search = null

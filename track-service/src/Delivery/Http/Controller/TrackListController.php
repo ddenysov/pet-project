@@ -3,23 +3,22 @@
 namespace Track\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Track\Application\Command\CreateTrackCommand;
+use Symfony\Component\HttpFoundation\Request;
 use Track\Application\Query\TrackListQuery;
-use Track\Delivery\Http\Request\CreateTrackRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 class TrackListController extends Controller
 {
     /**
+     * @param Request $request
      * @return JsonResponse
      */
     #[Route('/list', name: 'list', methods: ['POST', 'GET'], format: 'json')]
-    public function __invoke(): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $result = $this->queryBus->execute(new TrackListQuery(
-            page: 1
+            page: $request->get('page') + 1
         ));
         $data   = array_map(function ($value) {
             unset($value['path']);
