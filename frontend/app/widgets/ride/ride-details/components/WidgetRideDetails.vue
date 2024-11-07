@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useRideStore} from "~/app/model/ride/store/ride";
+import {useRideStore} from "~/app/entity/ride/store/ride";
 import SidebarSection from "~/app/widgets/ride/ride-details/components/ride-details/SidebarSection.vue";
 import FeatureJoinRide from "~/app/features/ride/components/FeatureJoinRide.vue";
 import FeatureEditRide from "~/app/features/ride/components/FeatureEditRide.vue";

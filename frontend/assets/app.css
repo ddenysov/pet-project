@@ -66,8 +66,18 @@ a {
     background-color: var(--p-green-400)
 }
 
-.ui-ride-list {
+.ui-public-ride-list {
     .p-dataview-header, .p-dataview-paginator-bottom {
         border-style: none !important;
     }
+
+    .ui-panel-dark {
+        border-style: none !important;
+        margin: 0px !important;
+    }
 }
+
+.p-paginator {
+    background: none !important;
+}
+

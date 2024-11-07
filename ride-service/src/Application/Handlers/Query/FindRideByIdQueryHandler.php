@@ -28,7 +28,7 @@ class FindRideByIdQueryHandler
     public function __invoke(FindRideByIdQuery $query): RideView
     {
         $ride = $this->queryBuilder
-            ->table('ride')
+            ->from('ride')
             ->id($query->id);
 
         return new RideView($ride, $this->identity);

@@ -2,10 +2,8 @@
   <widget-ride-details />
 </template>
 <script setup lang="ts">
-import {useRideStore} from "~/app/model/ride/store/ride";
-import UiBreadcrumbs from "~/app/ui/components/breadcrumbs/UiBreadcrumbs.vue";
+import {useRideStore} from "~/app/entity/ride/store/ride";
 import WidgetRideDetails from "~/app/widgets/ride/ride-details/components/WidgetRideDetails.vue";
-import FeatureRideForm from "~/app/features/ride/components/FeatureRideForm.vue";
 
 const route = useRoute()
 const store = useRideStore();

@@ -16,7 +16,7 @@ const computedClass = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-nogutter" :class="computedClass">
+  <div class="grid" :class="computedClass">
     <slot />
   </div>
 </template>

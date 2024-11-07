@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type {Ride} from "~/app/model/ride/types/ride";
-import {useRideStore} from "~/app/model/ride/store/ride";
+import type {Ride} from "~/app/entity/ride/types/ride";
+import {useRideStore} from "~/app/entity/ride/store/ride";
 
 export interface Props {
   ride: Ride,
