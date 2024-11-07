@@ -20,6 +20,8 @@ class TrackListController extends Controller
         $result = $this->queryBus->execute(new TrackListQuery(
             page: $request->get('page') + 1
         ));
+        $total = $this->queryBus->execute(new TrackListQuery(useCount: true));
+
         $data   = array_map(function ($value) {
             unset($value['path']);
 
@@ -29,13 +31,13 @@ class TrackListController extends Controller
         return new JsonResponse([
             'data'    => $data,
             'page'    => [
-                'current' => 1,
+                'current' => $request->get('page'),
                 'total'   => 20,
                 'size'    => 5,
             ],
             'records' => [
-                'filtered' => 50,
-                'total'    => 100,
+                'filtered' => $total,
+                'total'    => $total,
             ],
         ]);
     }

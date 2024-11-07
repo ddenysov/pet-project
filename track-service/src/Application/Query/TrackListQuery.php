@@ -7,12 +7,15 @@ use Common\Application\Handlers\Query\Port\Query;
 class TrackListQuery implements Query
 {
     public function __construct(
-        private ?int $page = 1,
-        private ?int $pageSize = 5,
-        private ?array $filters = [],
-        private ?array $sort = ['name' => 'ASC'],
-        private ?string $search = null
-    ) {}
+        private ?int    $page = 1,
+        private ?int    $pageSize = 5,
+        private ?array  $filters = [],
+        private ?array  $sort = ['name' => 'ASC'],
+        private ?string $search = null,
+        private ?bool   $useCount = false,
+    )
+    {
+    }
 
     public function getPage(): int
     {
@@ -37,5 +40,10 @@ class TrackListQuery implements Query
     public function getSearch(): ?string
     {
         return $this->search;
+    }
+
+    public function getUseCount(): ?bool
+    {
+        return $this->useCount;
     }
 }

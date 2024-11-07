@@ -56,4 +56,9 @@ interface QueryBuilder
      * @return $this
      */
     public function offset(int $value): static;
+
+    /**
+     * @return int
+     */
+    public function count(): int;
 }

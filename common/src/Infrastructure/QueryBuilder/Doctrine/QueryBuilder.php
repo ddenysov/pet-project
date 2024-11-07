@@ -114,4 +114,17 @@ class QueryBuilder implements QueryBuilderPort
 
         return $this;
     }
+
+    /**
+     * @return int
+     * @throws Exception
+     */
+    public function count(): int
+    {
+        return $this->queryBuilder
+            ->select('COUNT(*)')
+            ->setParameters($this->parameters)
+            ->executeQuery()
+            ->fetchOne();
+    }
 }

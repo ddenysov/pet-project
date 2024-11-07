@@ -19,14 +19,15 @@ class TrackListQueryHandler
     }
 
     /**
-     * @param TrackQueryBuilder $query
-     * @return TrackListQueryResult
+     * @param TrackListQuery $query
+     * @return array|int
      */
-    public function __invoke(TrackListQuery $query): array
+    public function __invoke(TrackListQuery $query): array|int
     {
-        return $this->queryBuilder->from('track')
+        $queryBuilder = $this->queryBuilder->from('track')
             ->limit($query->getPageSize())
-            ->offset(($query->getPage() - 1) * $query->getPageSize())
-            ->get();
+            ->offset(($query->getPage() - 1) * $query->getPageSize());
+
+        return $query->getUseCount() ? $queryBuilder->count() : $queryBuilder->get();
     }
 }
