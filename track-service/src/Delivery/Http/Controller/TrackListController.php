@@ -18,7 +18,8 @@ class TrackListController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         $result = $this->queryBus->execute(new TrackListQuery(
-            page: $request->get('page') + 1
+            page: $request->get('page') + 1,
+            pageSize: 12,
         ));
         $total = $this->queryBus->execute(new TrackListQuery(useCount: true));
 
