@@ -41,6 +41,15 @@ services:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
+    Ride\Application\Handlers\Event\TrackCreatedEventHandler:
+        tags:
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
+
+
+    Track\Domain\Event\TrackCreated:
+        class: Ride\Domain\Event\TrackCreated
+        public: true
+
 
     # Ride\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:

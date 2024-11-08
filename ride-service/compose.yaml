@@ -17,6 +17,15 @@ services:
     environment:
       - CONSUMER_CHANNEL=ride
 
+  track-service-consumer:
+    extends:
+      file: ../infrastructure/php/supervisor/compose.yaml
+      service: service-consumer
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - CONSUMER_CHANNEL=track
+
   ride-service-fpm:
     extends:
       file: ../infrastructure/php/php-fpm/compose.yaml

@@ -16,7 +16,7 @@ class Uuid extends ValueObject implements Port\StringValue
      * @param string $uuid
      * @throws InvalidUuidException
      */
-    public function __construct(string $uuid)
+    public function __construct(string $uuid = null)
     {
         if (!UuidAdapter::isValid($uuid)) {
             InvalidUuidException::invalidUuid($uuid);

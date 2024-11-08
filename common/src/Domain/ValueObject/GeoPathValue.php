@@ -8,7 +8,7 @@ class GeoPathValue extends ValueObject implements ArrayValue
 {
     const EARTH_RADIUS = 6371.2;
 
-    public function __construct(protected array $path)
+    public function __construct(protected ?array $path = null)
     {
     }
 

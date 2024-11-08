@@ -3,6 +3,7 @@
 namespace Common\Delivery\Console;
 
 use Common\Application\EventHandler\Port\EventConsumer;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,7 +21,8 @@ abstract class ConsumeEventsCommand extends Command
      * @param EventConsumer $eventConsumer
      */
     public function __construct(
-        private EventConsumer $eventConsumer
+        private EventConsumer $eventConsumer,
+        private LoggerInterface $logger
     ) {
         parent::__construct('ololo');
     }
@@ -43,6 +45,7 @@ abstract class ConsumeEventsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->logger->info('Starting consumer worker');
         $this->eventConsumer->consume($this->getConsumerGroup(), $this->getTopic());
 
         return Command::SUCCESS;

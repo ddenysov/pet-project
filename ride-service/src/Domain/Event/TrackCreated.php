@@ -4,11 +4,10 @@ namespace Ride\Domain\Event;
 
 use Common\Domain\Event\Event;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Track\Domain\ValueObject\CreatorId;
-use Track\Domain\ValueObject\OwnerId;
-use Track\Domain\ValueObject\TrackAccessType;
-use Track\Domain\ValueObject\TrackName;
-use Track\Domain\ValueObject\TrackPath;
+use Ride\Domain\ValueObject\OwnerId;
+use Ride\Domain\ValueObject\TrackAccessType;
+use Ride\Domain\ValueObject\TrackName;
+use Ride\Domain\ValueObject\TrackPath;
 
 class TrackCreated extends Event
 {

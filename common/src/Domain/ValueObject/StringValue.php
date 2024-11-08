@@ -11,7 +11,7 @@ class StringValue extends ValueObject implements Port\StringValue
     /**
      * @throws InvalidStringLengthException
      */
-    public function __construct(string $value)
+    public function __construct(string $value = null)
     {
         if (strlen($value) > $this->getMaxLength()) {
             throw new InvalidStringLengthException();
