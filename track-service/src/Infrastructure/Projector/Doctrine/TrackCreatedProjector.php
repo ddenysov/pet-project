@@ -26,7 +26,8 @@ class TrackCreatedProjector implements \Track\Application\Projector\Port\TrackCr
         $dbEntity->setId(Uuid::fromString($event->getAggregateId()->toString()));
         $dbEntity->setName($event->trackName->toString());
         $dbEntity->setOwnerId(Uuid::fromString($event->ownerId->toString()));
-        $dbEntity->setPath($event->trackPath->toArray());
+        $dbEntity->setPath($event->trackPath->getPath());
+        $dbEntity->setLength($event->trackPath->getLength());
 
         $this->entityManager->persist($dbEntity);
         $this->entityManager->flush();

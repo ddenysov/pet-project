@@ -23,8 +23,14 @@ class GeoPathValue extends ValueObject implements ArrayValue
     public function toArray(): array
     {
         return [
-            'path' => $this->path,
+            'path'   => $this->path,
+            'length' => $this->getLength(),
         ];
+    }
+
+    public function getPath(): array
+    {
+        return $this->path;
     }
 
     /**
@@ -33,9 +39,9 @@ class GeoPathValue extends ValueObject implements ArrayValue
      */
     public static function deserialize(string $value): static
     {
-        $path = json_decode($value, true);
+        $data = json_decode($value, true);
 
-        return new static($path);
+        return new static($data['path']);
     }
 
     /**
@@ -108,7 +114,7 @@ class GeoPathValue extends ValueObject implements ArrayValue
         $lon = ($x / $originShift) * 180.0;
         $lat = ($y / $originShift) * 180.0;
 
-        $latRad = $lat * M_PI / 180.0;
+        $latRad   = $lat * M_PI / 180.0;
         $latFinal = (180.0 / M_PI) * (2 * atan(exp($latRad)) - M_PI / 2.0);
 
         return [$latFinal, $lon];

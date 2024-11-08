@@ -25,6 +25,9 @@ class Track
     #[ORM\Column(type: Types::JSON, options: ['default'=> '[]'])]
     private array $path = [];
 
+    #[ORM\Column(type: Types::FLOAT, options: ['default' => 0])]
+    private string $length;
+
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -63,5 +66,15 @@ class Track
     public function setPath(array $path): void
     {
         $this->path = $path;
+    }
+
+    public function getLength(): string
+    {
+        return $this->length;
+    }
+
+    public function setLength(string $length): void
+    {
+        $this->length = $length;
     }
 }
