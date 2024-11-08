@@ -7,6 +7,7 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 use Track\Domain\Event\HealthCheckOk;
 use Track\Domain\Event\TrackCreated;
+use Track\Domain\Service\TrackLengthCalculator;
 use Track\Domain\ValueObject\CreatorId;
 use Track\Domain\ValueObject\OwnerId;
 use Track\Domain\ValueObject\TrackAccessType;
@@ -38,6 +39,7 @@ class Track extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     {
         $instance     = new static();
         $instance->id = Uuid::create();
+
 
         $event = new TrackCreated(
             $ownerId,

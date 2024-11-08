@@ -16,6 +16,8 @@ class TrackCreated extends Event
     public readonly TrackName       $trackName;
     public readonly TrackAccessType $trackAccessType;
     public readonly TrackPath       $trackPath;
+    public readonly TrackPath       $trackLength;
+
 
     /**
      * @param OwnerId $creatorId
