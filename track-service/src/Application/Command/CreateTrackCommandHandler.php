@@ -30,9 +30,6 @@ class CreateTrackCommandHandler extends CommandHandler
      */
     protected function handle(CreateTrackCommand $command): void
     {
-        $path = new TrackPath($command->path);
-        dd($path->getLength());
-
         $track = Track::create(
             ownerId: new OwnerId($command->ownerId),
             trackName: new TrackName($command->name),
