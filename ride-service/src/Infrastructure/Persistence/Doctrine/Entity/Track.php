@@ -18,4 +18,50 @@ class Track
 
     #[ORM\Column(type: Types::STRING)]
     private string $name;
+
+    #[ORM\Column(type: UuidType::NAME)]
+    private ?Uuid $ownerId = null;
+
+    #[ORM\Column(type: Types::FLOAT, options: ['default' => 0])]
+    private string $length;
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
+
+    public function setId(?Uuid $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getOwnerId(): ?Uuid
+    {
+        return $this->ownerId;
+    }
+
+    public function setOwnerId(?Uuid $ownerId): void
+    {
+        $this->ownerId = $ownerId;
+    }
+
+    public function getLength(): string
+    {
+        return $this->length;
+    }
+
+    public function setLength(string $length): void
+    {
+        $this->length = $length;
+    }
 }
