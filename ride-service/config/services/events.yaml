@@ -16,6 +16,10 @@ services:
         tags:
             - { name: 'event.domain_event', channel: 'ride', transport: 'async' }
 
+    Ride\Domain\Event\TrackCreated:
+        tags:
+            - { name: 'event.domain_event', channel: 'track', transport: 'async', external: 'track.domain.event.track_created' }
+
     # HANDLERS
     Ride\Application\Handlers\Event\HealthCheckEventHandler:
         tags:
@@ -44,12 +48,6 @@ services:
     Ride\Application\Handlers\Event\TrackCreatedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
-
-
-    Track\Domain\Event\TrackCreated:
-        class: Ride\Domain\Event\TrackCreated
-        public: true
-
 
     # Ride\Application\Handlers\Event\UserRegisteredEventHandler:
     #    tags:

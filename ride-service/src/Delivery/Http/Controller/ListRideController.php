@@ -2,6 +2,7 @@
 
 namespace Ride\Delivery\Http\Controller;
 
+use Common\Application\Serializer\Event\EventSerializer;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Ride\Application\Handlers\Command\CreateRideCommand;
 use Ride\Application\Handlers\Query\RideDataTableQuery;
@@ -23,7 +24,7 @@ class ListRideController extends Controller
      */
     #[Route('/list-ride', name: 'list-ride', methods: ['POST', 'GET'], format: 'json')]
     public function __invoke(
-        Request $request
+        Request $request,
     )
     {
         return new JsonResponse(
