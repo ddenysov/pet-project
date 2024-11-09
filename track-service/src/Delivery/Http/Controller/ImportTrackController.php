@@ -50,7 +50,7 @@ class ImportTrackController extends Controller
 
         $this->commandBus->execute(new CreateTrackCommand(
             name: 'Imported Track',
-            ownerId:  Uuid::v4()->toString(),
+            ownerId:  $this->getIdentity()->getId()->toString(),
             accessType: 'private',
             path: $points
         ));

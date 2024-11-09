@@ -28,6 +28,12 @@ class TrackListQueryHandler
             ->limit($query->getPageSize())
             ->offset(($query->getPage() - 1) * $query->getPageSize());
 
+        if ($query->getFilters()) {
+            foreach ($query->getFilters() as $filter) {
+                $queryBuilder->where($filter[0], '=', $filter[1]);
+            }
+        }
+
         return $query->getUseCount() ? $queryBuilder->count() : $queryBuilder->get();
     }
 }

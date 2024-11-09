@@ -3,7 +3,7 @@
     <DataView
       @page="pageClick"
       paginator
-      :total-records="data?.records.filtered"
+      :total-records="data?.records?.filtered"
       :lazy="true"
       :rows="pageSize"
       :value="data?.data"
@@ -59,6 +59,7 @@
 import {defineProps, onMounted, ref} from "vue";
 import {useAsyncData} from "#app";
 import UiCol from "~/app/ui/components/grid/UiCol.vue";
+import {useApi} from "~/app/shared/api/composables/api";
 
 interface Props {
   pageSize?: number,
@@ -81,7 +82,8 @@ const options = ref(['list', 'grid']);
 const headerVisible = computed(() => props.layoutSwitcher)
 
 const {data, status} = useAsyncData('track', async () => {
-  return await $fetch(props.source + '?page=' + page.value);
+  const {get} = useApi();
+  return await get(props.source + '?page=' + page.value);
 }, {
   watch: [page]
 }, {lazy: true})

@@ -22,6 +22,13 @@ async function submit(id: string) {
         :validation="{ required: true }"
       />
 
+      <ui-select-field
+        form="create-ride"
+        label="Трек"
+        name="track"
+        :validation="{ required: true }"
+      />
+
       <ui-date-field
         form="create-ride"
         label="Дата"
