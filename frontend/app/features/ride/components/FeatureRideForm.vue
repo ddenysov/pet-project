@@ -22,33 +22,43 @@ async function submit(id: string) {
         :validation="{ required: true }"
       />
 
-      <ui-select-field
-        form="create-ride"
-        label="Трек"
-        name="track"
-        :validation="{ required: true }"
-      />
+      <ui-grid>
+        <ui-col col="6">
+          <ui-select-field
+            form="create-ride"
+            label="Трек"
+            name="track"
+            :validation="{ required: true }"
+          />
+        </ui-col>
+        <ui-col col="6">
+          <ui-date-field
+            form="create-ride"
+            label="Дата"
+            name="date"
+            :validation="{ required: true }"
+          />
+        </ui-col>
+      </ui-grid>
 
-      <ui-date-field
-        form="create-ride"
-        label="Дата"
-        name="date"
-        :validation="{ required: true }"
-      />
-
-      <ui-time-field
-        form="create-ride"
-        label="час початку"
-        name="time_start"
-        :validation="{ required: true }"
-      />
-
-      <ui-time-field
-        form="create-ride"
-        label="Час закінчення"
-        name="time_end"
-        :validation="{ required: true }"
-      />
+      <ui-grid>
+        <ui-col col="6">
+          <ui-time-field
+            form="create-ride"
+            label="час початку"
+            name="time_start"
+            :validation="{ required: true }"
+          />
+        </ui-col>
+        <ui-col col="6">
+          <ui-time-field
+            form="create-ride"
+            label="Час закінчення"
+            name="time_end"
+            :validation="{ required: true }"
+          />
+        </ui-col>
+      </ui-grid>
 
       <ui-image-upload-field
         form="create-ride"
@@ -57,20 +67,22 @@ async function submit(id: string) {
         :validation="{ required: true }"
       />
 
-      <ui-location-field
-        form="create-ride"
-        label="Місце зустрічі"
-        name="start_location"
-      />
-
-      <ui-location-field
-        form="create-ride"
-        label="Місце фінфшу"
-        name="finish_location"
-      />
-
-      <ToggleButton v-model="lock" onLabel="Закрита" offLabel="Відкрита" onIcon="pi pi-lock"
-                    offIcon="pi pi-lock-open" class="w-36 mb-2" aria-label="Do you confirm" />
+      <ui-grid>
+        <ui-col col="6">
+          <ui-location-field
+            form="create-ride"
+            label="Місце зустрічі"
+            name="start_location"
+          />
+        </ui-col>
+        <ui-col col="6">
+          <ui-location-field
+            form="create-ride"
+            label="Місце фінфшу"
+            name="finish_location"
+          />
+        </ui-col>
+      </ui-grid>
 
       <ui-submit-button
         action="/api/ride/create-ride"
