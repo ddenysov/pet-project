@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Tests\\Domain\\OrganizerCanCreateRide::testCanCreateRide":8},"times":{"Tests\\Domain\\Entity\\UserEntityTest::testCase1":0.001,"Tests\\Domain\\OrganizerCanCreateRide::testCanCreateRide":0.006}}
+{"version":1,"defects":{"Tests\\Domain\\OrganizerCanCreateRide::testCanCreateRide":8},"times":{"Tests\\Domain\\Entity\\UserEntityTest::testCase1":0.001,"Tests\\Domain\\OrganizerCanCreateRide::testCanCreateRide":0.011}}

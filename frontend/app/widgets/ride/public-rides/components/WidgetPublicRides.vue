@@ -1,6 +1,6 @@
 <template>
-  <div class="card ui-public-ride-list">
-    <ui-dataset source="/api/ride/list-ride" name="ride">
+  <div class="card ui-ride-list">
+    <ui-dataset :layout-switcher="false" source="/api/ride/list-ride" name="publicRide" layout="grid">
       <template #card="{ item }">
         <entity-ride-card :ride="item" />
       </template>
@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import EntityTrackListItemSkeleton from "~/app/entity/track/components/EntityTrackListItemSkeleton.vue";
-import EntityTrackListItem from "~/app/entity/track/components/EntityTrackListItem.vue";
 import EntityRideCard from "~/app/entity/ride/components/EntityRideCard.vue";
+
 </script>

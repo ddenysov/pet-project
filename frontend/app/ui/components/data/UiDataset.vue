@@ -78,11 +78,15 @@ const props = withDefaults(defineProps<Props>(), {
 const layout = ref('list');
 const options = ref(['list', 'grid']);
 const skeletonRowsCount = ref(10);
+layout.value = props.layout;
 
 const store = useDatasetStore(props.name, props.source)();
 
 await useAsyncData(props.name, async () => {
+  console.log('load ' + props.name)
   await store.init();
+
+  return store.data;
 }, { lazy: true })
 
 
@@ -90,8 +94,5 @@ const onPageClick = (e: any) => {
   store.setPage(e.page)
 }
 
-onMounted(() => {
-  layout.value = props.layout;
-})
 
 </script>

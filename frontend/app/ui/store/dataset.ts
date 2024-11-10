@@ -3,8 +3,10 @@ import { getActivePinia, defineStore } from 'pinia'
 const registry: any = {};
 
 export const useDatasetStore = (name: string, source: string) => {
+    console.log('Use ' + name);
+
     if (registry[name]) {
-        console.log('ALALALALALA');
+        console.log('Re-Use ' + name);
         return registry[name];
     }
 

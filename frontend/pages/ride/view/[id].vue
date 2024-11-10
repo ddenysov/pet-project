@@ -4,11 +4,18 @@
 <script setup lang="ts">
 import {useRideStore} from "~/app/entity/ride/store/ride";
 import WidgetRideDetails from "~/app/widgets/ride/ride-details/components/WidgetRideDetails.vue";
+import {useAsyncData} from "#app";
 
 const route = useRoute()
 const store = useRideStore();
 
-store.load(route.params.id);
+await useAsyncData('rideDetails', async () => {
+  await store.load(route.params.id);
+
+  return store.ride;
+}, { lazy: true })
+
+
 
 const home = ref({
   icon: 'pi pi-home',

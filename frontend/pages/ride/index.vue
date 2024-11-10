@@ -7,10 +7,8 @@
 <script setup lang="ts">
 import {useToast} from 'primevue/usetoast';
 import {useMessageStore} from "~/app/ui/store/messages";
-import ModelRideCard from "~/app/entity/ride/components/ModelRideCard.vue";
-import FeatureJoinRide from "~/app/features/ride/components/FeatureJoinRide.vue";
-import FeatureEditRide from "~/app/features/ride/components/FeatureEditRide.vue";
 import WidgetPublicRides from "~/app/widgets/ride/public-rides/components/WidgetPublicRides.vue";
+import WidgetMyRides from "~/app/widgets/ride/my-rides/components/WidgetMyRides.vue";
 
 const messageStore = useMessageStore();
 const toast = useToast();
