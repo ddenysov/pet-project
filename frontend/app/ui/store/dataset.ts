@@ -3,10 +3,7 @@ import { getActivePinia, defineStore } from 'pinia'
 const registry: any = {};
 
 export const useDatasetStore = (name: string, source: string) => {
-    console.log('Use ' + name);
-
     if (registry[name]) {
-        console.log('Re-Use ' + name);
         return registry[name];
     }
 
@@ -17,7 +14,7 @@ export const useDatasetStore = (name: string, source: string) => {
 
         const load = async () => {
             loading.value = true;
-            const res = await $fetch(source + '?page=' + page.value)
+            const res:any = await $fetch(source + '?page=' + page.value)
             loading.value = false;
             data.value = res.data;
         }
