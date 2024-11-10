@@ -1,12 +1,11 @@
 <template>
   <div>
     <DataView
-      @page="pageClick"
       paginator
-      :total-records="data?.records?.filtered"
+      :total-records="20"
       :lazy="true"
       :rows="pageSize"
-      :value="data?.data"
+      :value="store.data"
       :layout="layout"
       :pt="{
         header: { style: 'background: none' },
@@ -60,47 +59,33 @@ import {defineProps, onMounted, ref} from "vue";
 import {useAsyncData} from "#app";
 import UiCol from "~/app/ui/components/grid/UiCol.vue";
 import {useApi} from "~/app/shared/api/composables/api";
+import {useDatasetStore} from "~/app/ui/store/dataset";
 
 interface Props {
   pageSize?: number,
   source: string,
   layout?: string,
   layoutSwitcher?: boolean,
+  name: string,
 }
 
-
 const props = withDefaults(defineProps<Props>(), {
-  layout: 'grid',
+  layout: 'list',
   layoutSwitcher: false,
   pageSize: 12,
 })
 
-const page = ref(0);
+const loading = ref(false);
+const skeletonRowsCount = ref(10);
+
+const store = useDatasetStore(props.name, props.source)();
+
+await useAsyncData(props.name, async () => {
+  await store.load();
+}, { lazy: true })
+
 const layout = ref('list');
 const options = ref(['list', 'grid']);
-
-const headerVisible = computed(() => props.layoutSwitcher)
-
-const {data, status} = useAsyncData('track', async () => {
-  const {get} = useApi();
-  return await get(props.source + '?page=' + page.value);
-}, {
-  watch: [page]
-}, {lazy: true})
-
-const skeletonRowsCount = computed(() => {
-  if (data.value?.data.length > 0) {
-    return data.value?.data.length;
-  }
-
-  return data.value?.page.size ?? 1;
-});
-
-const pageClick = (e) => {
-  page.value = e.page;
-}
-
-const loading = computed(() => status.value === 'pending');
 
 onMounted(() => {
   layout.value = props.layout;

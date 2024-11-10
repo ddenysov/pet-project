@@ -1,6 +1,6 @@
 <template>
   <div class="card ui-public-ride-list">
-    <ui-dataset source="/api/ride/list-ride">
+    <ui-dataset source="/api/ride/list-ride" name="ride">
       <template #card="{ item }">
         <entity-ride-card :ride="item" />
       </template>

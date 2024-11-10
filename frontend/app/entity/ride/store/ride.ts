@@ -93,7 +93,6 @@ export const useRideStore = defineStore('ride', {
                 const { post } = useApi();
 
                 const res: any = await post('/api/ride/join-ride/' + id);
-                console.log(res.data);
                 this.setLoading(false);
 
                 return res;

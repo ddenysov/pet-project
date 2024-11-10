@@ -16,7 +16,7 @@ export interface Rows {
 
 export interface Settings {
     [data: string]: {
-        resource: string,
+        page: number,
     }
 }
 

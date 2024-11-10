@@ -4,7 +4,7 @@
       source="/api/track/list"
       :page-size="12"
       layout="list"
-
+      name="track"
     >
       <template #skeleton="{ rows }">
         <entity-track-list-item-skeleton :rows="rows" />

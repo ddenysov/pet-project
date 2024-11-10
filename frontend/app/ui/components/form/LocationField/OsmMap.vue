@@ -32,7 +32,6 @@ const mercatorCoords = latLonToMercator(kievCoords.lat, kievCoords.lon);
 const map = useTemplateRef('mapRef')
 
 onMounted(() => {
-  console.log(map.value);
 })
 
 const center = ref([3386118.8560320227, 6527692.993243565])
@@ -45,10 +44,6 @@ function centerChanged(a: any, b: any) {
 }
 
 const markerCenter = ref([3386118.8560320227, 6527692.993243565])
-
-function click(e: any) {
-  console.log(e);
-}
 
 const markerIcon = '/images/marker.png';
 
