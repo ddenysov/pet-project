@@ -2,6 +2,7 @@
   <div>
     <DataView
       paginator
+      @page="onPageClick"
       :total-records="20"
       :lazy="true"
       :rows="pageSize"
@@ -22,14 +23,14 @@
         </div>
       </template>
       <template #empty>
-        <div v-if="loading">
+        <div v-if="store.loading">
           <slot :rows="skeletonRowsCount" name="skeleton" />
         </div>
       </template>
       <template #list="slotProps">
         <slot name="main">
           <ui-panel color="dark" class="my-2">
-            <div v-if="!loading">
+            <div v-if="!store.loading">
               <div v-for="(item, index) in slotProps.items" :key="index">
                 <slot :item="item" name="row" />
               </div>
@@ -58,7 +59,6 @@
 import {defineProps, onMounted, ref} from "vue";
 import {useAsyncData} from "#app";
 import UiCol from "~/app/ui/components/grid/UiCol.vue";
-import {useApi} from "~/app/shared/api/composables/api";
 import {useDatasetStore} from "~/app/ui/store/dataset";
 
 interface Props {
@@ -75,17 +75,20 @@ const props = withDefaults(defineProps<Props>(), {
   pageSize: 12,
 })
 
-const loading = ref(false);
+const layout = ref('list');
+const options = ref(['list', 'grid']);
 const skeletonRowsCount = ref(10);
 
 const store = useDatasetStore(props.name, props.source)();
 
 await useAsyncData(props.name, async () => {
-  await store.load();
+  await store.init();
 }, { lazy: true })
 
-const layout = ref('list');
-const options = ref(['list', 'grid']);
+
+const onPageClick = (e: any) => {
+  store.setPage(e.page)
+}
 
 onMounted(() => {
   layout.value = props.layout;

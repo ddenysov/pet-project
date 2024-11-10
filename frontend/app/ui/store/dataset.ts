@@ -1,24 +1,46 @@
-import {useAsyncData} from "#app";
-import {useApi} from "~/app/shared/api/composables/api";
+import { getActivePinia, defineStore } from 'pinia'
+
+const registry: any = {};
 
 export const useDatasetStore = (name: string, source: string) => {
-    return defineStore(name + 'Dataset', () => {
-        console.log('SERVEEEER');
+    if (registry[name]) {
+        console.log('ALALALALALA');
+        return registry[name];
+    }
 
+    const store = defineStore(name + 'Dataset', () => {
         const page = ref(0);
         const data = ref([]);
+        const loading = ref(false);
 
         const load = async () => {
-            console.log('LOOOAD');
+            loading.value = true;
             const res = await $fetch(source + '?page=' + page.value)
-
+            loading.value = false;
             data.value = res.data;
+        }
 
-            console.log(res.data);
+        const clear = async () =>{
+            data.value = [];
+        }
+
+        const init = async () => {
+            if (data.value.length === 0) {
+                await load();
+            }
         }
 
         const setPage = (value: number) => page.value = value;
 
-        return { load, data }
+        watch(
+            () => page.value,
+            () => load(),
+        );
+
+        return { load, data, loading, init, setPage, page, clear }
     })
+
+    registry[name] = store;
+
+    return store;
 }
