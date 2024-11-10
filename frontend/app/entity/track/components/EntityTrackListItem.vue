@@ -56,7 +56,7 @@ const menuItems = ref([
           <ui-router-link :label="track.name" :to="'/track/details/' + track.id" />
         </ui-flex>
         <ui-flex>
-          Довжина: 95 км
+          Довжина: {{ track.length }} км
         </ui-flex>
       </ui-flex>
       <ui-flex align-items="center">
