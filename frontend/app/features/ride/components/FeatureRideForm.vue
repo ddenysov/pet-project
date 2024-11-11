@@ -28,7 +28,6 @@ async function submit(id: string) {
             form="create-ride"
             label="Трек"
             name="track"
-            :validation="{ required: true }"
           />
         </ui-col>
         <ui-col col="6">

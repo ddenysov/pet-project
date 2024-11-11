@@ -44,7 +44,6 @@ class CreateRideRequest
     }
 
 
-
     protected function validate(array $data)
     {
         $validator  = Validation::createValidator();
@@ -52,6 +51,7 @@ class CreateRideRequest
             // the keys correspond to the keys in the input array
             'name'            => new Assert\NotBlank(),
             'description'     => new Assert\NotBlank(),
+            'track'           => new Assert\NotBlank(),
             'date'            => [
                 new Assert\NotBlank(),
                 new Assert\DateTime([
@@ -120,19 +120,19 @@ class CreateRideRequest
                 $type = $propertyReflection->getType();
 
                 if ($type !== null) {
-                    $typeName = $type->getName();
+                    $typeName   = $type->getName();
                     $isNullable = $type->allowsNull();
 
                     // Обработка типов данных
                     switch ($typeName) {
                         case 'int':
-                            $value = is_null($value) && $isNullable ? null : (int)$value;
+                            $value = is_null($value) && $isNullable ? null : (int) $value;
                             break;
                         case 'float':
-                            $value = is_null($value) && $isNullable ? null : (float)$value;
+                            $value = is_null($value) && $isNullable ? null : (float) $value;
                             break;
                         case 'string':
-                            $value = is_null($value) && $isNullable ? null : (string)$value;
+                            $value = is_null($value) && $isNullable ? null : (string) $value;
                             break;
                         case 'bool':
                             $value = is_null($value) && $isNullable ? null : filter_var($value, FILTER_VALIDATE_BOOLEAN);
