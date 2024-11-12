@@ -2,10 +2,8 @@
   <div>
     <ClientOnly>
       <div class="mb-2">
-        <ui-button style="margin-left: 5px" @click="cancel" label="Назад" />
-        {{ calculateDistance(selected) }} км
+        {{ calculateDistance(path) }} км
       </div>
-
 
       <ol-map
         ref="mapRef"
@@ -28,7 +26,7 @@
           <ol-source-vector ref="sourceRefRoute">
             <ol-feature>
               <ol-geom-line-string
-                :coordinates="selected"
+                :coordinates="path"
               ></ol-geom-line-string>
               <ol-style>
                 <ol-style-stroke

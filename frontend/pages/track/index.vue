@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import WidgetPublicTracks from "~/app/widgets/track/public-tracks/components/WidgetPublicTracks.vue";
+
 definePageMeta({
   menu: 'track',
 })
@@ -6,10 +8,8 @@ definePageMeta({
 
 <template>
   <div>
-    <ui-map-view
-      :height="300"
-      :marker="true"
-    />
+    <h1>Список Маршрутів</h1>
+    <widget-public-tracks />
   </div>
 </template>
 

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {defineProps, ref} from "vue";
 
 export interface Props {
   track: {},
+  selected?: {},
 }
 
-defineProps<Props>();
+const props =defineProps<Props>();
 
 /**
  * State
@@ -43,10 +44,14 @@ const menuItems = ref([
   }
 ]);
 
+const $emit = defineEmits(['select']);
+
+const color = computed(() => props.track.id === props.selected?.id ? 'var(--p-amber-100)' : 'white');
+
 </script>
 
 <template>
-  <ui-panel color="light" class="m-4 p-3">
+  <ui-panel :style="'cursor: pointer; background-color: ' + color + ' '" color="light" class="m-4 p-3" @click="() => $emit('select', track)">
     <ui-flex justify-content="between">
       <ui-flex>
         <div class="ui-ride-image" />

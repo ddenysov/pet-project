@@ -81,3 +81,6 @@ a {
     background: none !important;
 }
 
+.p-dataview, .p-dataview-header, .p-dataview-paginator-bottom {
+    border: none !important;
+}

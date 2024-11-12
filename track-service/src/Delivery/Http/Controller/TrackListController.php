@@ -19,12 +19,12 @@ class TrackListController extends Controller
     {
         $result = $this->queryBus->execute(new TrackListQuery(
             page: $request->get('page') + 1,
-            pageSize: 12,
+            pageSize: 14,
         ));
         $total = $this->queryBus->execute(new TrackListQuery(useCount: true));
 
         $data   = array_map(function ($value) {
-            unset($value['path']);
+            //unset($value['path']);
 
             return $value;
         }, $result);
