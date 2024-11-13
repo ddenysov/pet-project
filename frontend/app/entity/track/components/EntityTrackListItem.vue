@@ -51,7 +51,7 @@ const color = computed(() => props.track.id === props.selected?.id ? 'var(--p-am
 </script>
 
 <template>
-  <ui-panel :style="'cursor: pointer; background-color: ' + color + ' '" color="light" class="m-4 p-3" @click="() => $emit('select', track)">
+  <ui-panel :style="'cursor: pointer; background-color: ' + color + ' '" color="light" class="widget-track-list-item m-4 p-3" @click="() => $emit('select', track)">
     <ui-flex justify-content="between">
       <ui-flex>
         <div class="ui-ride-image" />
@@ -90,5 +90,9 @@ const color = computed(() => props.track.id === props.selected?.id ? 'var(--p-am
   background-color: var(--p-surface-300);
   width: 70px;
   height: 50px;
+}
+
+.widget-track-list-item:hover {
+  background-color: var(--p-amber-100) !important; /* Задайте нужный цвет фона */
 }
 </style>
