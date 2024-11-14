@@ -49,6 +49,14 @@ watch(
     })
   }
 );
+
+store.$patch({
+  values: {
+    [props.form]: {
+      [props.name]: props.original,
+    },
+  },
+})
 </script>
 
 <template>
