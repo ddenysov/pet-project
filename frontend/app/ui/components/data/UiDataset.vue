@@ -43,13 +43,13 @@
       </template>
 
       <template #grid="slotProps">
-        <ui-panel color="dark" class="my-2">
+        <component :is="wrapperComponent" color="dark">
           <ui-grid>
             <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="3">
               <slot :key="index" :item="item" name="card" />
             </ui-col>
           </ui-grid>
-        </ui-panel>
+        </component>
       </template>
     </DataView>
   </div>
@@ -60,6 +60,7 @@ import {defineProps, onMounted, ref} from "vue";
 import {useAsyncData} from "#app";
 import UiCol from "~/app/ui/components/grid/UiCol.vue";
 import {useDatasetStore} from "~/app/ui/store/dataset";
+import UiPanel from "~/app/ui/components/panel/UiPanel.vue";
 
 interface Props {
   pageSize?: number,
@@ -67,12 +68,14 @@ interface Props {
   layout?: string,
   layoutSwitcher?: boolean,
   name: string,
+  border?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
   layout: 'list',
   layoutSwitcher: false,
   pageSize: 12,
+  border: true,
 })
 
 const layout = ref('list');
@@ -94,5 +97,6 @@ const onPageClick = (e: any) => {
   store.setPage(e.page)
 }
 
+const wrapperComponent = computed(() => props.border ? UiPanel : 'div');
 
 </script>
