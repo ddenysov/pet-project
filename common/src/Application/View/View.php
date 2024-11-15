@@ -48,10 +48,8 @@ abstract readonly class View implements JsonSerializable
      */
     final public static function collection(array $collection, Identity|null $identity = null): array
     {
-        return [
-            'data' => array_map(function (array $item) use($identity) {
-                return new static($item, $identity);
-            }, $collection)
-        ];
+        return array_map(function (array $item) use($identity) {
+            return new static($item, $identity);
+        }, $collection);
     }
 }

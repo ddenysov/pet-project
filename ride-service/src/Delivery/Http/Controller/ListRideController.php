@@ -6,6 +6,7 @@ use Common\Application\Serializer\Event\EventSerializer;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Ride\Application\Handlers\Command\CreateRideCommand;
 use Ride\Application\Handlers\Query\RideDataTableQuery;
+use Ride\Application\Handlers\Query\RideView;
 use Ride\Delivery\Http\Request\Dto\CreateRideRequest;
 use Ride\Delivery\Http\Security\CanCreateRide;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,19 +28,16 @@ class ListRideController extends Controller
         Request $request,
     )
     {
-        return new JsonResponse(
-            [
-                'data'    => $this->queryBus->execute(new RideDataTableQuery())['data'],
-                'page'    => [
-                    'current' => 1,
-                    'total'   => 20,
-                    'size'    => 5,
-                ],
-                'records' => [
-                    'filtered' => 50,
-                    'total'    => 100,
-                ],
-            ]
-        );
+        $result = $this->queryBus->execute(new RideDataTableQuery(
+            page: $request->get('page') + 1,
+            pageSize: $request->get('size'),
+        ));
+
+        return new JsonResponse([
+            'data'    => RideView::collection($result->getCollection(), $this->identity),
+            'records' => [
+                'total' => $result->getTotal(),
+            ],
+        ]);
     }
 }

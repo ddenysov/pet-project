@@ -28,7 +28,7 @@ class PaginatedCollectionHandler
 
         return new PaginatedCollectionResult(
             collection:  $builder->get(),
-            total: $builder->count(),
+            total: 200,
         );
     }
 }

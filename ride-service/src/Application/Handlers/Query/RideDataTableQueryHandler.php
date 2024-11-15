@@ -2,6 +2,8 @@
 
 namespace Ride\Application\Handlers\Query;
 
+use Common\Application\Handlers\Query\Handler\PaginatedCollectionHandler;
+use Common\Application\Handlers\Query\Result\PaginatedCollectionResult;
 use Common\Application\QueryBuilder\Port\QueryBuilder;
 use Common\Delivery\Http\Security\Identity;
 use Psr\Log\LoggerInterface;
@@ -11,16 +13,21 @@ class RideDataTableQueryHandler
 {
     /**
      * @param LoggerInterface $logger
-     * @param RideView $view
+     * @param QueryBuilder $queryBuilder
+     * @param Identity $identity
+     * @param PaginatedCollectionHandler $collectionHandler
      */
-    public function __construct(private LoggerInterface $logger, private QueryBuilder $queryBuilder, private Identity $identity)
+    public function __construct(
+        private LoggerInterface $logger,
+        private QueryBuilder $queryBuilder,
+        private Identity $identity,
+        private PaginatedCollectionHandler $collectionHandler,
+    )
     {
     }
 
-    public function __invoke(RideDataTableQuery $query)
+    public function __invoke(RideDataTableQuery $query): PaginatedCollectionResult
     {
-        $rides = $this->queryBuilder->from('ride')->orderBy('created_at', 'desc')->get();
-
-        return RideView::collection($rides, $this->identity);
+        return $this->collectionHandler->handle($query, $this->queryBuilder, 'ride');
     }
 }
