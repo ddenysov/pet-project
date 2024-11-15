@@ -14,7 +14,7 @@ abstract class Controller
      * @param CommandBus $commandBus
      * @param QueryBus $queryBus
      * @param LoggerInterface $logger
-     * @param Identity $identity
+     * @param Identity|null $identity
      */
     public function __construct(
         protected readonly CommandBus $commandBus,
@@ -25,7 +25,7 @@ abstract class Controller
     }
 
     /**
-     * @return Identity
+     * @return Identity|null
      */
     public function getIdentity(): ?Identity
     {

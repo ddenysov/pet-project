@@ -21,23 +21,11 @@ class TrackListController extends Controller
             page: $request->get('page') + 1,
             pageSize: $request->get('size'),
         ));
-        $total = $this->queryBus->execute(new TrackListQuery(useCount: true));
-
-        $data   = array_map(function ($value) {
-            //unset($value['path']);
-
-            return $value;
-        }, $result);
 
         return new JsonResponse([
-            'data'    => $data,
-            'page'    => [
-                'current' => $request->get('page'),
-                'total'   => 200,
-                'size'    => $request->get('size'),
-            ],
+            'data'    => $result->getCollection(),
             'records' => [
-                'total'    => $total,
+                'total' => $result->getTotal(),
             ],
         ]);
     }

@@ -2,6 +2,9 @@
 
 namespace Track\Application\Query;
 
+use Common\Application\Handlers\Query\Handler\PaginatedCollectionHandler;
+use Common\Application\Handlers\Query\Port\PaginatedCollectionQueryHandler;
+use Common\Application\Handlers\Query\Result\PaginatedCollectionResult;
 use Psr\Log\LoggerInterface;
 use Track\Application\Query\Port\TrackQueryBuilder;
 
@@ -9,31 +12,23 @@ class TrackListQueryHandler
 {
     /**
      * @param LoggerInterface $logger
+     * @param PaginatedCollectionHandler $collectionHandler
      * @param TrackQueryBuilder $queryBuilder
      */
     public function __construct(
         private LoggerInterface $logger,
-        private TrackQueryBuilder $queryBuilder
+        private PaginatedCollectionHandler $collectionHandler,
+        private TrackQueryBuilder $queryBuilder,
     )
     {
     }
 
     /**
      * @param TrackListQuery $query
-     * @return array|int
+     * @return PaginatedCollectionResult
      */
-    public function __invoke(TrackListQuery $query): array|int
+    public function __invoke(TrackListQuery $query): PaginatedCollectionResult
     {
-        $queryBuilder = $this->queryBuilder->from('track')
-            ->limit($query->getPageSize())
-            ->offset(($query->getPage() - 1) * $query->getPageSize());
-
-        if ($query->getFilters()) {
-            foreach ($query->getFilters() as $filter) {
-                $queryBuilder->where($filter[0], '=', $filter[1]);
-            }
-        }
-
-        return $query->getUseCount() ? $queryBuilder->count() : $queryBuilder->get();
+        return $this->collectionHandler->handle($query, $this->queryBuilder, 'track');
     }
 }
