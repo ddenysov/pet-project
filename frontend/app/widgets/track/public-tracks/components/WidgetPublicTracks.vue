@@ -4,7 +4,7 @@
       <ui-col :col="4">
         <ui-dataset
           source="/api/track/list"
-          :page-size="14"
+          :page-size="5"
           layout="list"
           name="track"
         >

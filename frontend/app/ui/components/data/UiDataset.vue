@@ -3,7 +3,7 @@
     <DataView
       paginator
       @page="onPageClick"
-      :total-records="20"
+      :total-records="store.total"
       :lazy="true"
       :rows="pageSize"
       :value="store.data"
@@ -83,10 +83,9 @@ const options = ref(['list', 'grid']);
 const skeletonRowsCount = ref(10);
 layout.value = props.layout;
 
-const store = useDatasetStore(props.name, props.source)();
+const store = useDatasetStore(props.name, props.source, props.pageSize)();
 
 await useAsyncData(props.name, async () => {
-  console.log('load ' + props.name)
   await store.init();
 
   return store.data;

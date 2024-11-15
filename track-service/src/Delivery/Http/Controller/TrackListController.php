@@ -19,7 +19,7 @@ class TrackListController extends Controller
     {
         $result = $this->queryBus->execute(new TrackListQuery(
             page: $request->get('page') + 1,
-            pageSize: 14,
+            pageSize: $request->get('size'),
         ));
         $total = $this->queryBus->execute(new TrackListQuery(useCount: true));
 
@@ -33,11 +33,10 @@ class TrackListController extends Controller
             'data'    => $data,
             'page'    => [
                 'current' => $request->get('page'),
-                'total'   => 20,
-                'size'    => 5,
+                'total'   => 200,
+                'size'    => $request->get('size'),
             ],
             'records' => [
-                'filtered' => $total,
                 'total'    => $total,
             ],
         ]);
