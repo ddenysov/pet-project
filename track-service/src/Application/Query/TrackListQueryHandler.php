@@ -3,7 +3,6 @@
 namespace Track\Application\Query;
 
 use Common\Application\Handlers\Query\Handler\PaginatedCollectionHandler;
-use Common\Application\Handlers\Query\Port\PaginatedCollectionQueryHandler;
 use Common\Application\Handlers\Query\Result\PaginatedCollectionResult;
 use Psr\Log\LoggerInterface;
 use Track\Application\Query\Port\TrackQueryBuilder;

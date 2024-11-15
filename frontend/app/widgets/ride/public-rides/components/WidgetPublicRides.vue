@@ -6,6 +6,7 @@
       source="/api/ride/list-ride"
       name="publicRide"
       layout="grid"
+      :page-size="8"
     >
       <template #card="{ item }">
         <entity-ride-card :ride="item" />

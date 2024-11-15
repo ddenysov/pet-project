@@ -29,4 +29,12 @@ class DateTimeValue extends ValueObject
     {
         return $this->value->format('Y-m-d H:i:s');
     }
+
+    /**
+     * @throws Exception
+     */
+    public static function now()
+    {
+        return new static(new DateTime());
+    }
 }

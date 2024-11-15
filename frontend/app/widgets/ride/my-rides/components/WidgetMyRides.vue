@@ -1,7 +1,12 @@
 <template>
   <div class="card ui-ride-list">
     <ui-button label="Оновити" @click="() => store.load()" />
-    <ui-dataset :layout-switcher="true" source="/api/ride/list-ride" name="ride">
+    <ui-dataset
+      :layout-switcher="false"
+      source="/api/ride/list-ride"
+      name="ride"
+      :page-size="5"
+    >
       <template #skeleton="{ rows }">
         <entity-track-list-item-skeleton :rows="rows" />
       </template>
@@ -28,6 +33,6 @@ import EntityTrackListItemSkeleton from "~/app/entity/track/components/EntityTra
 import EntityTrackListItem from "~/app/entity/track/components/EntityTrackListItem.vue";
 import {useDatasetStore} from "~/app/ui/store/dataset";
 
-const store = useDatasetStore('ride', '/api/ride/list-ride')();
+const store = useDatasetStore('ride', '/api/ride/list-ride', 5)();
 
 </script>

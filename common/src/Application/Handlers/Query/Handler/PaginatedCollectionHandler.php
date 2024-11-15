@@ -16,9 +16,27 @@ class PaginatedCollectionHandler
      */
     public function handle(PaginatedQuery $query, QueryBuilder $queryBuilder, string $table)
     {
-        $builder = $queryBuilder->from($table)
+        $total = $this->createQueryBuilder($query, $queryBuilder, $table)->count();
+        $data = $this->createQueryBuilder($query, $queryBuilder, $table)
             ->limit($query->getPageSize())
-            ->offset(($query->getPage() - 1) * $query->getPageSize());
+            ->offset(($query->getPage() - 1) * $query->getPageSize())
+            ->get();
+
+        return new PaginatedCollectionResult(
+            collection:  $data,
+            total: $total,
+        );
+    }
+
+    /**
+     * @param PaginatedQuery $query
+     * @param QueryBuilder $queryBuilder
+     * @param string $table
+     * @return QueryBuilder
+     */
+    private function createQueryBuilder(PaginatedQuery $query, QueryBuilder $queryBuilder, string $table): QueryBuilder
+    {
+        $builder = $queryBuilder->from($table);
 
         if ($query->getFilters()) {
             foreach ($query->getFilters() as $filter) {
@@ -26,9 +44,6 @@ class PaginatedCollectionHandler
             }
         }
 
-        return new PaginatedCollectionResult(
-            collection:  $builder->get(),
-            total: 200,
-        );
+        return $builder;
     }
 }

@@ -2,7 +2,7 @@
   <div class="card ui-ride-list">
     <ui-dataset
       source="/api/track/list"
-      :page-size="12"
+      :page-size="5"
       layout="list"
       name="track"
     >

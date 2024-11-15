@@ -31,7 +31,9 @@ class RideCreated extends Event implements RideEvent
         private DateTimeValue    $dateTimeEnd,
         private ImageValue       $image,
         private GeoLocationValue $locationStart,
-        private GeoLocationValue $locationFinish
+        private GeoLocationValue $locationFinish,
+        private DateTimeValue    $createdAt,
+        private DateTimeValue    $updatedAt,
     )
     {
         parent::__construct();
@@ -78,5 +80,15 @@ class RideCreated extends Event implements RideEvent
     public function getImage(): ImageValue
     {
         return $this->image;
+    }
+
+    public function getCreatedAt(): DateTimeValue
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): DateTimeValue
+    {
+        return $this->updatedAt;
     }
 }

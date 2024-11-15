@@ -2,7 +2,7 @@ import { getActivePinia, defineStore } from 'pinia'
 
 const registry: any = {};
 
-export const useDatasetStore = (name: string, source: string, pageSize: number) => {
+export const useDatasetStore = (name: string, source?: string) => {
     if (registry[name]) {
         return registry[name];
     }
@@ -12,7 +12,7 @@ export const useDatasetStore = (name: string, source: string, pageSize: number) 
         const data = ref([]);
         const total = ref(0);
         const loading = ref(false);
-        const size = ref(pageSize);
+        const size = ref(5);
 
         const load = async () => {
             loading.value = true;
@@ -26,7 +26,10 @@ export const useDatasetStore = (name: string, source: string, pageSize: number) 
             data.value = [];
         }
 
-        const init = async () => {
+        const init = async ( pageSize?: number) => {
+            if (pageSize) {
+                size.value = pageSize;
+            }
             if (data.value.length === 0) {
                 await load();
             }
@@ -39,7 +42,7 @@ export const useDatasetStore = (name: string, source: string, pageSize: number) 
             () => load(),
         );
 
-        return { load, data, loading, init, setPage, page, clear, total }
+        return { load, data, loading, init, setPage, page, clear, total, size }
     })
 
     registry[name] = store;

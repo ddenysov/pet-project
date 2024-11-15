@@ -64,6 +64,16 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     private GeoLocationValue $locationFinish;
 
     /**
+     * @var DateTimeValue
+     */
+    private DateTimeValue $createdAt;
+
+    /**
+     * @var DateTimeValue
+     */
+    private DateTimeValue $updatedAt;
+
+    /**
      * @var array
      */
     protected array $joinedRiders = [];
@@ -84,6 +94,7 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
 
     /**
      * @throws InvalidUuidException
+     * @throws \Exception
      */
     public static function create(
         OrganizerId      $organizerId,
@@ -109,6 +120,8 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
             image: $image,
             locationStart: $locationStart,
             locationFinish: $locationFinish,
+            createdAt: DateTimeValue::now(),
+            updatedAt: DateTimeValue::now(),
         ));
 
         return $ride;
@@ -213,6 +226,8 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
         $this->image         = $event->getImage();
         $this->dateTimeStart = $event->getDateTimeStart();
         $this->dateTimeEnd   = $event->getDateTimeEnd();
+        $this->createdAt     = $event->getCreatedAt();
+        $this->updatedAt     = $event->getUpdatedAt();
     }
 
     /**

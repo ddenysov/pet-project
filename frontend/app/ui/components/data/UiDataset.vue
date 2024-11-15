@@ -29,7 +29,7 @@
       </template>
       <template #list="slotProps">
         <slot name="main">
-          <ui-panel color="dark" class="my-2">
+          <component :is="wrapperComponent" color="dark">
             <div v-if="!store.loading">
               <div v-for="(item, index) in slotProps.items" :key="index">
                 <slot :item="item" name="row" />
@@ -38,17 +38,32 @@
             <div v-else>
               <slot :rows="skeletonRowsCount" name="skeleton" />
             </div>
-          </ui-panel>
+          </component>
         </slot>
       </template>
 
       <template #grid="slotProps">
         <component :is="wrapperComponent" color="dark">
-          <ui-grid>
-            <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="3">
-              <slot :key="index" :item="item" name="card" />
-            </ui-col>
-          </ui-grid>
+          <div v-if="!store.loading">
+            <ui-grid>
+              <ui-col v-for="(item, index) in slotProps.items" :key="index" :col="3">
+                <slot :key="index" :item="item" name="card" />
+              </ui-col>
+            </ui-grid>
+          </div>
+          <div v-else>
+            <slot :rows="pageSize" name="skeletonCard">
+              <ui-grid>
+                <ui-col v-for="(item) in [1, 2, 3, 4, 5, 6, 7, 8]" :key="item" :col="3">
+                  <div class="m-4">
+                    <Skeleton class="h-10rem" />
+                    <Skeleton class="mt-4 w-5 ml-2 h-2rem" />
+                    <Skeleton class="mt-4 w-10 ml-2" />
+                  </div>
+                </ui-col>
+              </ui-grid>
+            </slot>
+          </div>
         </component>
       </template>
     </DataView>
@@ -83,13 +98,13 @@ const options = ref(['list', 'grid']);
 const skeletonRowsCount = ref(10);
 layout.value = props.layout;
 
-const store = useDatasetStore(props.name, props.source, props.pageSize)();
+const store = useDatasetStore(props.name, props.source)();
 
 await useAsyncData(props.name, async () => {
-  await store.init();
+  await store.init(props.pageSize);
 
   return store.data;
-}, { lazy: true })
+}, {lazy: true})
 
 
 const onPageClick = (e: any) => {
