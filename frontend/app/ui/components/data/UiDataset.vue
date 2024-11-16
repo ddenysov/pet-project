@@ -105,8 +105,8 @@ const store = useDatasetStore(props.name, props.source)();
 await useAsyncData(props.name, async () => {
   await store.init({
     pageSize: props.pageSize,
-    defaultSortOrderBy: props.defaultOrderBy,
-    defaultSortOrderDir: props.defaultOrderDir,
+    sortOrderBy: props.defaultOrderBy,
+    sortOrderDir: props.defaultOrderDir,
   });
 
   return store.data;

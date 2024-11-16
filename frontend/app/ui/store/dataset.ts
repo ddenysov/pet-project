@@ -13,6 +13,8 @@ export const useDatasetStore = (name: string, source?: string) => {
         const total = ref(0);
         const loading = ref(false);
         const size = ref(5);
+        const defaultSortOrderBy = ref(null);
+        const defaultSortOrderDir = ref(null);
 
         const load = async () => {
             loading.value = true;
@@ -26,9 +28,15 @@ export const useDatasetStore = (name: string, source?: string) => {
             data.value = [];
         }
 
-        const init = async ( { pageSize } ) => {
+        const init = async ( { pageSize, sortOrderBy, sortOrderDir } ) => {
             if (pageSize) {
                 size.value = pageSize;
+            }
+            if (defaultSortOrderBy) {
+                defaultSortOrderBy.value = sortOrderBy;
+            }
+            if (defaultSortOrderDir) {
+                defaultSortOrderDir.value = sortOrderDir;
             }
             if (data.value.length === 0) {
                 await load();
