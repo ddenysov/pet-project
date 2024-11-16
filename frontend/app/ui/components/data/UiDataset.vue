@@ -84,6 +84,8 @@ interface Props {
   layoutSwitcher?: boolean,
   name: string,
   border?: boolean,
+  defaultOrderBy: string,
+  defaultOrderDir: string,
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -101,7 +103,11 @@ layout.value = props.layout;
 const store = useDatasetStore(props.name, props.source)();
 
 await useAsyncData(props.name, async () => {
-  await store.init(props.pageSize);
+  await store.init({
+    pageSize: props.pageSize,
+    defaultSortOrderBy: props.defaultOrderBy,
+    defaultSortOrderDir: props.defaultOrderDir,
+  });
 
   return store.data;
 }, {lazy: true})

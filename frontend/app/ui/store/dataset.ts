@@ -26,7 +26,7 @@ export const useDatasetStore = (name: string, source?: string) => {
             data.value = [];
         }
 
-        const init = async ( pageSize?: number) => {
+        const init = async ( { pageSize } ) => {
             if (pageSize) {
                 size.value = pageSize;
             }
