@@ -33,7 +33,6 @@ class ListRideController extends Controller
             pageSize: $request->get('size'),
             orderBy: $request->get('orderBy'),
             orderDir: $request->get('orderDir'),
-
         ));
 
         return new JsonResponse([
