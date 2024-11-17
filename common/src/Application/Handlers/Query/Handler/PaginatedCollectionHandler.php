@@ -17,13 +17,16 @@ class PaginatedCollectionHandler
     public function handle(PaginatedQuery $query, QueryBuilder $queryBuilder, string $table)
     {
         $total = $this->createQueryBuilder($query, $queryBuilder, $table)->count();
-        $data = $this->createQueryBuilder($query, $queryBuilder, $table)
+        $dbQuery = $this->createQueryBuilder($query, $queryBuilder, $table)
             ->limit($query->getPageSize())
-            ->offset(($query->getPage() - 1) * $query->getPageSize())
-            ->get();
+            ->offset(($query->getPage() - 1) * $query->getPageSize());
+
+        if ($query->getOrderBy()) {
+            $dbQuery->orderBy($query->getOrderBy(), $query->getOrderDir());
+        }
 
         return new PaginatedCollectionResult(
-            collection:  $data,
+            collection:  $dbQuery->get(),
             total: $total,
         );
     }

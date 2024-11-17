@@ -31,6 +31,9 @@ class ListRideController extends Controller
         $result = $this->queryBus->execute(new RideDataTableQuery(
             page: $request->get('page') + 1,
             pageSize: $request->get('size'),
+            orderBy: $request->get('orderBy'),
+            orderDir: $request->get('orderDir'),
+
         ));
 
         return new JsonResponse([

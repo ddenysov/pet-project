@@ -8,7 +8,8 @@ class PaginatedQuery extends Query
         private ?int    $page = 1,
         private ?int    $pageSize = 5,
         private ?array  $filters = [],
-        private ?array  $sort = ['name' => 'ASC'],
+        private ?string $orderBy = null,
+        private ?string $orderDir = 'asc',
         private ?string $search = null,
         private ?bool   $useCount = false,
     )
@@ -30,9 +31,14 @@ class PaginatedQuery extends Query
         return $this->filters;
     }
 
-    public function getSort(): array
+    public function getOrderBy(): ?string
     {
-        return $this->sort;
+        return $this->orderBy;
+    }
+
+    public function getOrderDir(): ?string
+    {
+        return $this->orderDir;
     }
 
     public function getSearch(): ?string

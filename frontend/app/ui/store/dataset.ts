@@ -13,12 +13,25 @@ export const useDatasetStore = (name: string, source?: string) => {
         const total = ref(0);
         const loading = ref(false);
         const size = ref(5);
-        const defaultSortOrderBy = ref(null);
-        const defaultSortOrderDir = ref(null);
+        const sortOrderBy = ref(null);
+        const sortOrderDir = ref(null);
+
+        function objectToQueryString(params) {
+            return Object.keys(params)
+                .filter(key => !!params[key])
+                .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+                .join('&');
+        }
 
         const load = async () => {
+            const query = objectToQueryString({
+                page: page.value,
+                size: size.value,
+                orderBy: sortOrderBy.value ?? '',
+                orderDir: sortOrderDir.value ?? '',
+            })
             loading.value = true;
-            const res:any = await $fetch(source + '?page=' + page.value + '&size=' + size.value);
+            const res:any = await $fetch(source + '?' + query);
             loading.value = false;
             data.value = res.data;
             total.value = res.records.total;
@@ -28,15 +41,15 @@ export const useDatasetStore = (name: string, source?: string) => {
             data.value = [];
         }
 
-        const init = async ( { pageSize, sortOrderBy, sortOrderDir } ) => {
+        const init = async ( { pageSize, defaultSortOrderBy, defaultSortOrderDir } ) => {
             if (pageSize) {
                 size.value = pageSize;
             }
             if (defaultSortOrderBy) {
-                defaultSortOrderBy.value = sortOrderBy;
+                sortOrderBy.value = defaultSortOrderBy;
             }
             if (defaultSortOrderDir) {
-                defaultSortOrderDir.value = sortOrderDir;
+                sortOrderDir.value = defaultSortOrderDir;
             }
             if (data.value.length === 0) {
                 await load();
@@ -50,7 +63,7 @@ export const useDatasetStore = (name: string, source?: string) => {
             () => load(),
         );
 
-        return { load, data, loading, init, setPage, page, clear, total, size }
+        return { load, data, loading, init, setPage, page, clear, total, size, sortOrderBy, sortOrderDir }
     })
 
     registry[name] = store;
