@@ -39,6 +39,16 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     private StringValue $description;
 
     /**
+     * @var StringValue
+     */
+    private StringValue $rules;
+
+    /**
+     * @var StringValue
+     */
+    private StringValue $equip;
+
+    /**
      * @var DateTimeValue
      */
     private DateTimeValue $dateTimeStart;
