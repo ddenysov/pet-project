@@ -12,7 +12,7 @@ const { ride } = useRideStore();
     <div class="col">
       <ui-flex gap="4" direction="column"  >
         <ui-flex class="bg-yellow-200 preview-image-container">
-          <div class="container">
+          <div class="container rounded border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900" >
             <img :src="ride.image_url" alt="Image">
           </div>
         </ui-flex>
