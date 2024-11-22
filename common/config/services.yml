@@ -108,3 +108,6 @@ services:
 
   Common\Application\Broadcaster\Port\Broadcaster:
     class: Common\Infrastructure\Broadcaster\Mercure\Broadcaster
+
+  Common\Application\Client\Port\PrivateClient:
+    class:  Common\Infrastructure\Client\Http\Guzzle\Client

@@ -3,11 +3,17 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/common/src" isTestSource="false" packagePrefix="Common\" />
+      <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="false" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/src" isTestSource="false" packagePrefix="Iam\" />
       <sourceFolder url="file://$MODULE_DIR$/template-service/src" isTestSource="false" packagePrefix="Template\" />
       <sourceFolder url="file://$MODULE_DIR$/gateway-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/user-service/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway-service/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/iam-service/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/user-service/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
@@ -205,6 +211,14 @@
       <excludeFolder url="file://$MODULE_DIR$/iam-service/vendor/nelmio/cors-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/common/vendor/kwn/php-rdkafka-stubs" />
       <excludeFolder url="file://$MODULE_DIR$/iam-service/vendor/kwn/php-rdkafka-stubs" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/common/vendor/symfony/deprecation-contracts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

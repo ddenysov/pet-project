@@ -294,6 +294,14 @@
       <path value="$PROJECT_DIR$/iam-service/vendor/nelmio/cors-bundle" />
       <path value="$PROJECT_DIR$/iam-service/vendor/kwn/php-rdkafka-stubs" />
       <path value="$PROJECT_DIR$/common/vendor/kwn/php-rdkafka-stubs" />
+      <path value="$PROJECT_DIR$/common/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/common/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/common/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/common/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/common/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/common/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/common/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/common/vendor/psr/http-message" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
