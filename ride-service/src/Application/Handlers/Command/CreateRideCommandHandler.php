@@ -33,6 +33,8 @@ final class CreateRideCommandHandler extends CommandHandler
      */
     protected function handle(CreateRideCommand $command): void
     {
+        // get track by id
+
         $ride = Ride::create(
             organizerId: new OrganizerId($command->organizerId),
             name: new StringValue($command->name),
