@@ -33,7 +33,8 @@ final class CreateRideCommandHandler extends CommandHandler
      */
     protected function handle(CreateRideCommand $command): void
     {
-        // get track by id
+        // покатушка создана
+        // пользователь создал покатушку
 
         $ride = Ride::create(
             organizerId: new OrganizerId($command->organizerId),
