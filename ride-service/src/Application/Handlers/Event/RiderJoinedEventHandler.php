@@ -10,7 +10,6 @@ final readonly class RiderJoinedEventHandler
 {
     /**
      * @param RiderJoinedProjector $projector
-     * @param SsePublisher $ssePublisher
      */
     public function __construct(
         private RiderJoinedProjector $projector,
