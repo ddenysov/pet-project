@@ -1,6 +1,6 @@
 <?php
 
-namespace Ride\Application\Handlers\Query;
+namespace Ride\Application\Query;
 
 use Common\Application\QueryBuilder\Port\QueryBuilder;
 use Common\Delivery\Http\Security\Identity;

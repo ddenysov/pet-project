@@ -3,17 +3,17 @@ services:
         autowire: true
         autoconfigure: true
 
-    Ride\Application\Handlers\Query\HealthCheckQueryHandler:
+    Ride\Application\Query\HealthCheckQueryHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\HealthCheckQuery' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Query\HealthCheckQuery' }
 
-    Ride\Application\Handlers\Query\RideDataTableQueryHandler:
+    Ride\Application\Query\RideDataTableQueryHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\RideDataTableQuery' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Query\RideDataTableQuery' }
 
-    Ride\Application\Handlers\Query\FindRideByIdQueryHandler:
+    Ride\Application\Query\FindRideByIdQueryHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Query\FindRideByIdQuery' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Query\FindRideByIdQuery' }
 
 
 

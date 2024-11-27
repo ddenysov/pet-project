@@ -1,6 +1,6 @@
 <?php
 
-namespace Ride\Application\Handlers\Event;
+namespace Ride\Application\Event;
 
 use Common\Application\EventStore\Port\SsePublisher;
 use Ride\Application\Projector\Port\RiderJoinedProjector;

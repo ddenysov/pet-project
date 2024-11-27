@@ -1,13 +1,12 @@
 <?php
 
-namespace Ride\Application\Handlers\Query;
+namespace Ride\Application\Query;
 
 use Common\Application\Handlers\Query\Handler\PaginatedCollectionHandler;
 use Common\Application\Handlers\Query\Result\PaginatedCollectionResult;
 use Common\Application\QueryBuilder\Port\QueryBuilder;
 use Common\Delivery\Http\Security\Identity;
 use Psr\Log\LoggerInterface;
-use Ride\Application\Handlers\Query\Projection\HealthCheck;
 
 class RideDataTableQueryHandler
 {

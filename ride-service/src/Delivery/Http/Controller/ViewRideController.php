@@ -3,7 +3,7 @@
 namespace Ride\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Ride\Application\Handlers\Query\FindRideByIdQuery;
+use Ride\Application\Query\FindRideByIdQuery;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

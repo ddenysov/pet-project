@@ -1,6 +1,6 @@
 <?php
 
-namespace Ride\Application\Handlers\Query\Projection;
+namespace Ride\Application\Query\Projection;
 
 class HealthCheck
 {

@@ -4,7 +4,7 @@ namespace Ride\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
 use Ride\Application\Command\UpdateRideCommand;
-use Ride\Application\Handlers\Query\FindRideByIdQuery;
+use Ride\Application\Query\FindRideByIdQuery;
 use Ride\Delivery\Http\Request\Dto\UpdatedRideRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;

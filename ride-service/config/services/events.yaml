@@ -21,38 +21,38 @@ services:
             - { name: 'event.domain_event', channel: 'track', transport: 'async', external: 'track.domain.event.track_created' }
 
     # HANDLERS
-    Ride\Application\Handlers\Event\HealthCheckEventHandler:
+    Ride\Application\Event\HealthCheckEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    Ride\Application\Handlers\Event\RideCreatedEventHandler:
+    Ride\Application\Event\RideCreatedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    Ride\Application\Handlers\Event\RideUpdatedEventHandler:
+    Ride\Application\Event\RideUpdatedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    Ride\Application\Handlers\Event\RiderJoinedEventHandler:
+    Ride\Application\Event\RiderJoinedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    Ride\Application\Handlers\Event\RiderJoinRequestedEventHandler:
+    Ride\Application\Event\RiderJoinRequestedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    Ride\Application\Handlers\Event\RiderJoinAcceptedEventHandler:
+    Ride\Application\Event\RiderJoinAcceptedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    Ride\Application\Handlers\Event\TrackCreatedEventHandler:
+    Ride\Application\Event\TrackCreatedEventHandler:
         tags:
             - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    # Ride\Application\Handlers\Event\UserRegisteredEventHandler:
+    # Ride\Application\Event\UserRegisteredEventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }
 
-    # Ride\Application\Handlers\Event\UserPasswordRequestedEventHandler:
+    # Ride\Application\Event\UserPasswordRequestedEventHandler:
     #    tags:
     #        - { name: 'messenger.message_handler', bus: 'messenger.bus.default' }

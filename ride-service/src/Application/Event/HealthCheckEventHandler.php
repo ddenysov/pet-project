@@ -1,6 +1,6 @@
 <?php
 
-namespace Ride\Application\Handlers\Event;
+namespace Ride\Application\Event;
 
 use Ride\Application\Projector\Port\HealthCheckProjector;
 use Ride\Domain\Event\HealthCheckOk;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ride\Application\Handlers\Query;
+namespace Ride\Application\Query;
 
 use Psr\Log\LoggerInterface;
-use Ride\Application\Handlers\Query\Projection\HealthCheck;
+use Ride\Application\Query\Projection\HealthCheck;
 
 class HealthCheckQueryHandler
 {
