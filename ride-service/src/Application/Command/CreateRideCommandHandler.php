@@ -1,14 +1,14 @@
 <?php
 
-namespace Ride\Application\Handlers\Command;
+namespace Ride\Application\Command;
 
 use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\Handlers\Command\CommandHandler;
 use Common\Domain\ValueObject\DateTimeValue;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
-use Common\Domain\ValueObject\ImageValue;
 use Common\Domain\ValueObject\GeoLocationValue;
+use Common\Domain\ValueObject\ImageValue;
 use Common\Domain\ValueObject\StringValue;
 use Psr\Log\LoggerInterface;
 use Ride\Domain\Entity\Ride;
@@ -33,9 +33,6 @@ final class CreateRideCommandHandler extends CommandHandler
      */
     protected function handle(CreateRideCommand $command): void
     {
-        // покатушка создана
-        // пользователь создал покатушку
-
         $ride = Ride::create(
             organizerId: new OrganizerId($command->organizerId),
             name: new StringValue($command->name),

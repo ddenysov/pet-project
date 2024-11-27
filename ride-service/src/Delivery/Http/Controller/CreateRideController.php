@@ -3,7 +3,7 @@
 namespace Ride\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Ride\Application\Handlers\Command\CreateRideCommand;
+use Ride\Application\Command\CreateRideCommand;
 use Ride\Delivery\Http\Request\CreateRideRequest;
 use Ride\Delivery\Http\Security\CanCreateRide;
 use Symfony\Component\HttpFoundation\JsonResponse;

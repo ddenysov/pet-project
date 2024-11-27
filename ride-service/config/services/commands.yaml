@@ -3,29 +3,29 @@ services:
         autowire: true
         autoconfigure: true
 
-    Ride\Application\Handlers\Command\HealthCheckCommandHandler:
+    Ride\Application\Command\HealthCheckCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\HealthCheckCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Command\HealthCheckCommand' }
 
 
-    Ride\Application\Handlers\Command\CreateRideCommandHandler:
+    Ride\Application\Command\CreateRideCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\CreateRideCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Command\CreateRideCommand' }
 
-    Ride\Application\Handlers\Command\UpdateRideCommandHandler:
+    Ride\Application\Command\UpdateRideCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\UpdateRideCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Command\UpdateRideCommand' }
 
-    Ride\Application\Handlers\Command\JoinRideCommandHandler:
+    Ride\Application\Command\JoinRideCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\JoinRideCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Command\JoinRideCommand' }
 
 
-    Ride\Application\Handlers\Command\RequestJoinRideCommandHandler:
+    Ride\Application\Command\RequestJoinRideCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\RequestJoinRideCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Command\RequestJoinRideCommand' }
 
-    Ride\Application\Handlers\Command\AcceptJoinRideCommandHandler:
+    Ride\Application\Command\AcceptJoinRideCommandHandler:
         tags:
-            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Handlers\Command\AcceptJoinRideCommand' }
+            - { name: 'messenger.message_handler', bus: 'messenger.bus.default', handles: 'Ride\Application\Command\AcceptJoinRideCommand' }
 

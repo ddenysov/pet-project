@@ -1,6 +1,6 @@
 <?php
 
-namespace Ride\Application\Handlers\Command;
+namespace Ride\Application\Command;
 
 use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\Handlers\Command\CommandHandler;
@@ -12,7 +12,7 @@ use Ride\Domain\ValueObject\RideId;
 use Ride\Domain\ValueObject\RiderId;
 
 
-final class AcceptJoinRideCommandHandler extends CommandHandler
+final class JoinRideCommandHandler extends CommandHandler
 {
     public function __construct(
         ServiceContainer $container,
@@ -23,14 +23,14 @@ final class AcceptJoinRideCommandHandler extends CommandHandler
     }
 
     /**
-     * @param AcceptJoinRideCommand $command
+     * @param JoinRideCommand $command
      * @throws AccessDeniedException
      * @throws InvalidUuidException
      */
-    protected function handle(AcceptJoinRideCommand $command): void
+    protected function handle(JoinRideCommand $command): void
     {
         $ride = $this->repository->find(new RideId($command->rideId));
-        $ride->acceptRiderRequest(
+        $ride->requestToJoin(
             riderId: new RiderId($command->riderId),
         );
 

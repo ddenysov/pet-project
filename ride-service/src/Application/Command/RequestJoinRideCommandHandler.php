@@ -1,6 +1,6 @@
 <?php
 
-namespace Ride\Application\Handlers\Command;
+namespace Ride\Application\Command;
 
 use Common\Application\Container\Port\ServiceContainer;
 use Common\Application\Handlers\Command\CommandHandler;

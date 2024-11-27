@@ -3,12 +3,12 @@
 namespace Ride\Delivery\Http\Controller;
 
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Ride\Application\Handlers\Command\UpdateRideCommand;
+use Ride\Application\Command\UpdateRideCommand;
 use Ride\Application\Handlers\Query\FindRideByIdQuery;
 use Ride\Delivery\Http\Request\Dto\UpdatedRideRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 class UpdateRideController extends Controller

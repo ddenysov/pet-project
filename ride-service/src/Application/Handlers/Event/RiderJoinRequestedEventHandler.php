@@ -4,7 +4,7 @@ namespace Ride\Application\Handlers\Event;
 
 use Common\Application\Broadcaster\Port\Broadcaster;
 use Common\Application\Bus\Port\CommandBus;
-use Ride\Application\Handlers\Command\AcceptJoinRideCommand;
+use Ride\Application\Command\AcceptJoinRideCommand;
 use Ride\Domain\Event\RiderRequestedJoinToRide;
 use Ride\Infrastructure\Projector\Doctrine\RideJoinRequestedProjector;
 

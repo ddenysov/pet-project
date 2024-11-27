@@ -2,16 +2,11 @@
 
 namespace Ride\Delivery\Http\Controller;
 
-use Common\Application\Bus\Port\CommandBus;
-use Common\Application\Bus\Port\QueryBus;
 use Common\Infrastructure\Delivery\Symfony\Http\Controller;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
-use Ride\Application\Handlers\Command\HealthCheckCommand;
-use Ride\Application\Handlers\Query\HealthCheckQuery;
 
 
 class HealthCheckController extends Controller

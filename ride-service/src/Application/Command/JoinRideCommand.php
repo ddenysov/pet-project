@@ -1,10 +1,10 @@
 <?php
 
-namespace Ride\Application\Handlers\Command;
+namespace Ride\Application\Command;
 
 use Common\Application\Handlers\Command\Command;
 
-class AcceptJoinRideCommand extends Command
+class JoinRideCommand extends Command
 {
     public function __construct(
         public string $rideId,

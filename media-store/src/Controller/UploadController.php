@@ -4,12 +4,10 @@ namespace App\Controller;
 
 use Aws\S3\S3Client;
 use Exception;
-use Ride\Application\Handlers\Command\CreateRideCommand;
 use Ride\Delivery\Http\Request\Dto\CreateRideRequest;
 use Ride\Delivery\Http\Security\CanCreateRide;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
