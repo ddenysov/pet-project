@@ -4,12 +4,8 @@ namespace Ride\Infrastructure\Projector\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Ride\Application\Projector\Port\RiderJoinedProjector;
 use Ride\Application\Projector\Port\RiderRequestAcceptedJoinToRideProjector;
-use Ride\Application\Projector\Port\RiderRequestedJoinToRideProjector;
-use Ride\Domain\Event\RiderJoinedToRide;
 use Ride\Domain\Event\RiderRequestAcceptedJoinToRide;
-use Ride\Domain\Event\RiderRequestedJoinToRide;
 use Ride\Infrastructure\Persistence\Doctrine\Entity\Ride;
 use Symfony\Component\Uid\Uuid;
 
