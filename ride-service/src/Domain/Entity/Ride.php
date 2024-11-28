@@ -5,12 +5,11 @@ namespace Ride\Domain\Entity;
 use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\DateTimeValue;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\ImageValue;
 use Common\Domain\ValueObject\GeoLocationValue;
 use Common\Domain\ValueObject\StringValue;
+use Common\Domain\ValueObject\TextValue;
 use Ride\Domain\Event\RideCreated;
-use Ride\Domain\Event\RiderJoinedToRide;
 use Ride\Domain\Event\RiderRequestAcceptedJoinToRide;
 use Ride\Domain\Event\RiderRequestedJoinToRide;
 use Ride\Domain\Event\RideUpdated;
@@ -18,8 +17,14 @@ use Ride\Domain\Exception\AccessDeniedException;
 use Ride\Domain\Exception\RiderAlreadyJoinedTheRideException;
 use Ride\Domain\Exception\RiderAlreadyRequestedJoinTheRideException;
 use Ride\Domain\ValueObject\OrganizerId;
+use Ride\Domain\ValueObject\RideAccess;
+use Ride\Domain\ValueObject\RideBikeType;
 use Ride\Domain\ValueObject\RideId;
+use Ride\Domain\ValueObject\RideRegistrationType;
 use Ride\Domain\ValueObject\RiderId;
+use Ride\Domain\ValueObject\RideStatus;
+use Ride\Domain\ValueObject\RideSurface;
+use Ride\Domain\ValueObject\TrackId;
 
 class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
 {
@@ -29,24 +34,59 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     private StringValue $name;
 
     /**
+     * @var TextValue
+     */
+    private TextValue $description;
+
+    /**
+     * @var TextValue
+     */
+    private TextValue $rules;
+
+    /**
+     * @var TextValue
+     */
+    private TextValue $equip;
+
+    /**
+     * @var TextValue
+     */
+    private TextValue $locationStartDescription;
+
+    /**
      * @var OrganizerId
      */
     private OrganizerId $organizerId;
 
     /**
-     * @var StringValue
+     * @var TrackId
      */
-    private StringValue $description;
+    private TrackId $trackId;
 
     /**
-     * @var StringValue
+     * @var RideStatus
      */
-    private StringValue $rules;
+    private RideStatus $status;
 
     /**
-     * @var StringValue
+     * @var RideAccess
      */
-    private StringValue $equip;
+    private RideAccess $access;
+
+    /**
+     * @var RideBikeType
+     */
+    private RideBikeType $bikeType;
+
+    /**
+     * @var RideSurface
+     */
+    private RideSurface $surface;
+
+    /**
+     * @var RideRegistrationType
+     */
+    private RideRegistrationType $registrationType;
 
     /**
      * @var DateTimeValue
