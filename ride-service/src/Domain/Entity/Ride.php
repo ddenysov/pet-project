@@ -148,13 +148,14 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public static function create(
         OrganizerId      $organizerId,
-        StringValue      $name,
-        StringValue      $description,
+        TextValue      $name,
+        TextValue      $description,
+        TextValue      $rules,
         DateTimeValue    $dateTimeStart,
         DateTimeValue    $dateTimeEnd,
         ImageValue       $image,
         GeoLocationValue $locationStart,
-        GeoLocationValue $locationFinish
+        GeoLocationValue $locationFinish,
     ): Ride
     {
         $rideId = RideId::create();
