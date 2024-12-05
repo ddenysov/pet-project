@@ -49,11 +49,6 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     private TextValue $equip;
 
     /**
-     * @var TextValue
-     */
-    private TextValue $locationStartDescription;
-
-    /**
      * @var OrganizerId
      */
     private OrganizerId $organizerId;

@@ -22,6 +22,15 @@ class CreateRideRequest
     public string $name;
 
     public string $description;
+    public string $rules;
+    public string $equip;
+    public string $rideAccess;
+    public string $bikeType;
+    public string $surface;
+    public string $registrationType;
+    public string $image;
+    public string $startDescription;
+    public string $finishDescription;
 
     public DateTimeInterface $date;
 
