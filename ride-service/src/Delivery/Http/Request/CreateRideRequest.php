@@ -21,28 +21,21 @@ class CreateRideRequest
 
     public string $name;
 
-    public string $description;
-    public string $rules;
-    public string $equip;
-    public string $rideAccess;
-    public string $bikeType;
-    public string $surface;
-    public string $registrationType;
-    public string $image;
-    public string $startDescription;
-    public string $finishDescription;
-
+    public string            $description;
+    public string            $rules;
+    public string            $equip;
+    public string            $rideAccess;
+    public string            $bikeType;
+    public string            $surface;
+    public string            $registrationType;
+    public string            $image;
+    public string            $startDescription;
+    public string            $finishDescription;
     public DateTimeInterface $date;
-
     public DateTimeInterface $time_start;
-
     public DateTimeInterface $time_end;
-
-    public string $image;
-
-    public array $start_location;
-
-    public array $finish_location;
+    public array             $start_location;
+    public array             $finish_location;
 
     public function __construct(RequestStack $requestStack)
     {
