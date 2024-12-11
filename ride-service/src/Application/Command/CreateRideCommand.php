@@ -20,12 +20,11 @@ class CreateRideCommand extends Command
         public string            $image,
         public array             $locationStart,
         public array             $locationFinish,
-        public string            $surface,
-        public string            $bikeType,
+        public string            $surfaceDirt,
+        public array             $bikeType,
         public string            $difficulty,
         public string            $access,
         public string            $registrationType,
-        public string            $status,
     )
     {
     }
