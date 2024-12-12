@@ -310,8 +310,8 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/iam-service/phpunit.xml" custom_loader_path="$PROJECT_DIR$/iam-service/vendor/autoload.php" use_configuration_file="true" />
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/common/phpunit.xml" custom_loader_path="$PROJECT_DIR$/common/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/iam-service/phpunit.xml" custom_loader_path="$PROJECT_DIR$/iam-service/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/ride-service/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/ride-service/vendor/autoload.php" phpunit_phar_path="" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">

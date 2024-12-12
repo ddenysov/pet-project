@@ -19,9 +19,13 @@ use Ride\Domain\Exception\RiderAlreadyRequestedJoinTheRideException;
 use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideAccess;
 use Ride\Domain\ValueObject\RideBikeType;
+use Ride\Domain\ValueObject\RideDescription;
+use Ride\Domain\ValueObject\RideEquip;
 use Ride\Domain\ValueObject\RideId;
+use Ride\Domain\ValueObject\RideName;
 use Ride\Domain\ValueObject\RideRegistrationType;
 use Ride\Domain\ValueObject\RiderId;
+use Ride\Domain\ValueObject\RideRules;
 use Ride\Domain\ValueObject\RideStatus;
 use Ride\Domain\ValueObject\RideSurface;
 use Ride\Domain\ValueObject\TrackId;
@@ -39,14 +43,14 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
     private TextValue $description;
 
     /**
-     * @var TextValue
+     * @var RideRules
      */
-    private TextValue $rules;
+    private RideRules $rules;
 
     /**
-     * @var TextValue
+     * @var RideEquip
      */
-    private TextValue $equip;
+    private RideEquip $equip;
 
     /**
      * @var OrganizerId
@@ -143,9 +147,9 @@ class Ride extends Aggregate implements \Common\Domain\Entity\Port\Aggregate
      */
     public static function create(
         OrganizerId      $organizerId,
-        TextValue      $name,
-        TextValue      $description,
-        TextValue      $rules,
+        RideName         $name,
+        RideDescription  $description,
+        RideRules        $rules,
         DateTimeValue    $dateTimeStart,
         DateTimeValue    $dateTimeEnd,
         ImageValue       $image,
