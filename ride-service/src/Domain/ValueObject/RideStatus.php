@@ -6,11 +6,11 @@ use Common\Domain\ValueObject\Uuid;
 
 final class RideStatus
 {
-    private const string DRAFT     = 'draft';
-    private const string PUBLISHED = 'published';
-    private const string COMPLETED = 'completed';
+    private const  DRAFT     = 'draft';
+    private const  PUBLISHED = 'published';
+    private const  COMPLETED = 'completed';
 
-    private const array ALLOWED_STATUSES = [
+    private const ALLOWED_STATUSES = [
         self::DRAFT,
         self::PUBLISHED,
         self::COMPLETED,
