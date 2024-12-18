@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Domain\\Entity\\RideTest::testCase1":0.003}}
+{"version":1,"defects":{"Domain\\Entity\\RideTest::testCase1":7},"times":{"Domain\\Entity\\RideTest::testCase1":0.008,"Application\\Command\\RideCreatedCommandHandlerTest::testCase1":0.003}}
