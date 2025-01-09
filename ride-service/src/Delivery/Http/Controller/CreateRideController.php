@@ -36,7 +36,6 @@ class CreateRideController extends Controller
             difficulty: 'medium',
             access: 'public',
             registrationType: 'open',
-
         ));
 
         return new JsonResponse([

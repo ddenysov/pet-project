@@ -8,7 +8,15 @@ use Common\Domain\Event\Port\EventCollection;
 
 interface Aggregate extends Entity
 {
+    /**
+     * @return array
+     */
     public function releaseEvents(): array;
+
+    /**
+     * @return array
+     */
+    public function uncommittedEvents(): array;
 
     /**
      * @param Event $event

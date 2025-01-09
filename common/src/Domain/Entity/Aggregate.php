@@ -28,6 +28,11 @@ abstract class Aggregate extends Entity implements Port\Aggregate
         return $events;
     }
 
+    public function uncommittedEvents(): array
+    {
+        return $this->events;
+    }
+
     /**
      * @param Event $event
      * @return void

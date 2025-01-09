@@ -2,16 +2,13 @@
 
 namespace Common\Application\EventStore;
 
-use Common\Application\Outbox\Port\Outbox;
+use Common\Application\Bus\Port\EventBus;
 use Common\Domain\Event\Event;
-use Psr\Log\LoggerInterface;
 
 abstract class EventStore implements Port\EventStore
 {
     public function __construct(
-        private Outbox $outbox,
-        private EventRouter $eventRouter,
-        private LoggerInterface $logger,
+        private EventBus $eventBus,
     )
     {
 
@@ -24,20 +21,14 @@ abstract class EventStore implements Port\EventStore
     final public function append(Event $event): Port\EventStore
     {
         $this->save($event);
-        $this->publish($event);
+        $this->eventBus->dispatch($event);
 
         return $this;
     }
 
-    protected function publish(Event $event): void
-    {
-        $strategy = $this->eventRouter->getTransportStrategy($event);
-        $strategy->handle($event);
-    }
-
     /**
      * @param Event $event
-     * @return mixed
+     * @return void
      */
     abstract protected function save(Event $event): void;
 }

@@ -2,15 +2,13 @@
 
 namespace Ride\Application\Command;
 
-use Common\Application\Container\Port\ServiceContainer;
+use Common\Application\Bus\Port\EventBus;
 use Common\Application\Handlers\Command\CommandHandler;
 use Common\Domain\ValueObject\DateTimeValue;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Exception\String\InvalidStringLengthException;
 use Common\Domain\ValueObject\GeoLocationValue;
 use Common\Domain\ValueObject\ImageValue;
-use Common\Domain\ValueObject\StringValue;
-use Common\Domain\ValueObject\TextValue;
 use Psr\Log\LoggerInterface;
 use Ride\Domain\Entity\Ride;
 use Ride\Domain\Repository\Port\RideRepository;
@@ -22,13 +20,15 @@ use Ride\Domain\ValueObject\RideRules;
 
 final class CreateRideCommandHandler extends CommandHandler
 {
+    /**
+     * @param EventBus $eventBus
+     * @param RideRepository $repository
+     */
     public function __construct(
-        ServiceContainer       $container,
-        LoggerInterface        $logger,
-        private RideRepository $repository,
+        private readonly EventBus       $eventBus,
+        private readonly RideRepository $repository,
     )
     {
-        parent::__construct($container, $logger);
     }
 
     /**
@@ -50,6 +50,6 @@ final class CreateRideCommandHandler extends CommandHandler
             locationFinish: GeoLocationValue::fromArray($command->locationFinish),
         );
 
-        $this->repository->save($ride);
+        $events = $this->repository->save($ride);
     }
 }

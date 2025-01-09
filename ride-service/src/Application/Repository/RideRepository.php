@@ -21,8 +21,6 @@ class RideRepository extends PersistenceRepository implements \Ride\Domain\Repos
     {
         $events = $entity->releaseEvents();
 
-        //dd($events);
-
         foreach ($events as $event) {
             $this->eventStore->append($event);
         }

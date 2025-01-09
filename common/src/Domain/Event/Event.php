@@ -11,11 +11,16 @@ abstract class Event implements Port\Event
     use ObjectToArray;
 
     /**
+     * Uniq event identifier
+     * - help with deduplication
+     * - tracing
+     * - uniq in event store
      * @var Uuid
      */
-    public Uuid $eventId;
+    public Uuid $id;
 
     /**
+     * Aggregate produced this event
      * @var Uuid
      */
     public Uuid $aggregateId;
@@ -25,21 +30,15 @@ abstract class Event implements Port\Event
      */
     public function __construct()
     {
-        $this->eventId = Uuid::create();
-    }
-
-    public function getEventId(): Uuid
-    {
-        return $this->eventId;
+        $this->id = Uuid::create();
     }
 
     /**
-     * @param Uuid $id
-     * @return void
+     * @return Uuid
      */
-    public function setEventId(Uuid $id): void
+    public function getId(): Uuid
     {
-        $this->eventId = $id;
+        return $this->id;
     }
 
     /**
@@ -58,6 +57,7 @@ abstract class Event implements Port\Event
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function toArray(): array
     {
@@ -66,6 +66,7 @@ abstract class Event implements Port\Event
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function payload(): array
     {
@@ -74,6 +75,9 @@ abstract class Event implements Port\Event
         }, ARRAY_FILTER_USE_KEY);
     }
 
+    /**
+     * @return Uuid
+     */
     public function getAggregateId(): Uuid
     {
         return $this->aggregateId;
@@ -95,7 +99,7 @@ abstract class Event implements Port\Event
      * @param string $className
      * @return bool
      */
-    public function isA(string $className)
+    public function isA(string $className): bool
     {
         return get_class($this) === $className;
     }
