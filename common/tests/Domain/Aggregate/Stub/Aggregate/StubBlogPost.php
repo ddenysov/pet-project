@@ -3,18 +3,39 @@
 namespace Tests\Domain\Aggregate\Stub\Aggregate;
 
 use Common\Domain\Entity\Aggregate;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogId;
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Tests\Domain\Aggregate\Stub\Event\StubBlogPostCreatedEvent;
 
 class StubBlogPost extends Aggregate
 {
-    public static function create(StubBlogId $id): self
+    protected StubBlogTitle $title;
+
+    protected StubBlogDescription $description;
+
+    public function getTitle(): StubBlogTitle
     {
-        return (new self($id))->recordThat(new StubBlogPostCreatedEvent());
+        return $this->title;
     }
 
-    public function onStubBlogPostCreatedEvent(StubBlogPostCreatedEvent $event)
+    public function getDescription(): StubBlogDescription
     {
+        return $this->description;
+    }
 
+    /**
+     * @throws InvalidUuidException
+     */
+    public static function create(StubBlogId $id, StubBlogTitle $title, StubBlogDescription $description): self
+    {
+        return (new self($id))->recordThat(new StubBlogPostCreatedEvent(
+            title: $title,
+            description: $description
+        ));
+    }
+
+    public function onStubBlogPostCreatedEvent(StubBlogPostCreatedEvent $event): void
+    {
+        $this->title = $event->getTitle();
+        $this->description = $event->getDescription();
     }
 }

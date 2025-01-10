@@ -5,8 +5,10 @@ namespace Tests\Domain\Aggregate;
 
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use PHPUnit\Framework\TestCase;
+use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogDescription;
 use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogPost;
 use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogId;
+use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogTitle;
 
 final class AggregateTest extends TestCase
 {
@@ -15,7 +17,11 @@ final class AggregateTest extends TestCase
      */
     public function testCase1(): void
     {
-        $blogPost = StubBlogPost::create(StubBlogId::create());
+        $blogPost = StubBlogPost::create(
+            StubBlogId::create(),
+            new StubBlogTitle('Blog Title'),
+            new StubBlogDescription('Blog Description'),
+        );
         $events = $blogPost->releaseEvents();
 
         dd($events);
