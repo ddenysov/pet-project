@@ -11,15 +11,13 @@ use Common\Domain\ValueObject\Uuid;
 abstract class Aggregate extends Entity implements Port\Aggregate
 {
     /**
-     * @var array
+     * @var EventStream
      */
-    protected array $events = [];
+    protected EventStream $events;
 
     /**
-     * @var array
+     * @return array|EventStream
      */
-    protected static array $subscribers = [];
-
     public function releaseEvents(): array
     {
         $events = $this->events;

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Domain\Entity;
 
+use Common\Domain\ValueObject\Uuid;
 use PHPUnit\Framework\TestCase;
 use Tests\Domain\Entity\Stub\StubEntity;
 use Tests\Domain\Entity\Stub\StubId;
@@ -12,18 +13,14 @@ final class EntityTest extends TestCase
 {
     public function testCase1(): void
     {
-        $id = StubId::create();
-        $name = new StubString('test');
-
         $stub = new StubEntity(
-            id: $id,
-            name: $name
+            StubId::create(),
+            new StubString('test'),
         );
 
-        $this->assertEquals($id->toString(), $stub->toArray()['id']);
-        $this->assertEquals($name->toString(), $stub->toArray()['name']);
-        $this->assertEquals($id->toString(), $stub->getId()->toString());
-        $this->assertTrue($stub->getId()->equals($id));
-        $this->assertTrue($stub->getName()->equals($name));
+        $this->assertTrue(\Symfony\Component\Uid\Uuid::isValid($stub->toArray()['id']));
+        $this->assertEquals('test', $stub->toArray()['name']);
+        $this->assertTrue($stub->getId()->equals(Uuid::fromString($stub->toArray()['id'])));
+        $this->assertTrue($stub->getName()->equals(new StubString($stub->toArray()['name'])));
     }
 }

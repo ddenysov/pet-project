@@ -4,29 +4,30 @@ namespace Common\Domain\Entity;
 
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
+use Common\Domain\ValueObject\ValueObject;
+use Common\Utils\Serialize\Trait\ObjectToArray;
 
+/**
+ * Entity simple object. There are no EventSourcing stuff like sending events etc
+ */
 abstract class Entity implements Port\Entity
 {
+    use ObjectToArray;
+
     /**
      * @var Uuid
      */
-    protected $id;
+    protected Uuid $id;
 
-    final protected function __construct()
-    {
-    }
-
+    /**
+     * Convert aggregate to array
+     * Q: Do I need to implement serialize method ?
+     * @return array
+     * @throws \Exception
+     */
     final public function toArray(): array
     {
-        return [
-            'id' => $this->getId()->toString(),
-            ...$this->serialize(),
-        ];
-    }
-
-    protected function serialize(): array
-    {
-        return [];
+        return $this->propertiesToArray();
     }
 
     /**
@@ -35,14 +36,5 @@ abstract class Entity implements Port\Entity
     public function getId(): Uuid
     {
         return $this->id;
-    }
-
-    /**
-     * @param Uuid $id
-     * @return void
-     */
-    public function setId(Uuid $id): void
-    {
-        $this->id = $id;
     }
 }

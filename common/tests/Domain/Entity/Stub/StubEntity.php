@@ -7,26 +7,25 @@ use Common\Domain\ValueObject\Uuid;
 
 class StubEntity extends Entity
 {
-    public function __construct(
-        private StubId $id,
-        private StubString $name
-    ) {
-    }
+    /**
+     * @var StubString
+     */
+    protected StubString $name;
 
-    public function getId(): StubId
+    /**
+     * @param StubId $id
+     * @param StubString $name
+     */
+    public function __construct(StubId $id, StubString $name)
     {
-        return $this->id;
+        $this->id = $id;
+        $this->name = $name;
     }
-
+    /**
+     * @return StubString
+     */
     public function getName(): StubString
     {
         return $this->name;
-    }
-
-    protected function serialize(): array
-    {
-        return [
-            'name' => $this->name->toString(),
-        ];
     }
 }

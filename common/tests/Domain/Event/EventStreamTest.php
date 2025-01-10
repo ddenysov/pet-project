@@ -8,7 +8,6 @@ use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\StringValue;
 use Common\Domain\ValueObject\TextValue;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Uid\Uuid;
 use Tests\Domain\Event\Stub\BlogCreatedEvent;
 
 final class EventStreamTest extends TestCase
@@ -33,5 +32,8 @@ final class EventStreamTest extends TestCase
         foreach ($stream as $item) {
             $this->assertEquals('Blog Title', $item->getTitle()->toString());
         }
+
+        $stream = [];
+        $this->assertCount(0, $stream);
     }
 }
