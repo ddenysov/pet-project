@@ -2,7 +2,7 @@
 
 namespace Common\Domain\Entity\Port;
 
-use Common\Domain\Event\EventStream;
+use Common\Domain\Event\Port\EventStream;
 use Common\Domain\Event\Port\Event;
 use Common\Domain\Event\Port\EventCollection;
 
@@ -11,7 +11,7 @@ interface Aggregate extends Entity
     /**
      * @return array
      */
-    public function releaseEvents(): array;
+    public function releaseEvents(): EventStream;
 
     /**
      * @return array
@@ -22,7 +22,7 @@ interface Aggregate extends Entity
      * @param Event $event
      * @return void
      */
-    public function recordThat(Event $event): void;
+    public function recordThat(Event $event): static;
 
     /**
      * @param EventStream $events

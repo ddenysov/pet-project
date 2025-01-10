@@ -1,0 +1,7 @@
+- Domain
+  - Entity
+    - Does not produce events
+    - Can save start immediately
+  - Aggregate 
+    - Produce events
+    - Save state only on apply method

@@ -3,9 +3,8 @@
 namespace Common\Domain\Entity;
 
 
-use Common\Domain\Event\EventStream;
+use Common\Domain\Event\Port\EventStream;
 use Common\Domain\Event\Port\Event;
-use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 
 abstract class Aggregate extends Entity implements Port\Aggregate
@@ -16,12 +15,21 @@ abstract class Aggregate extends Entity implements Port\Aggregate
     protected EventStream $events;
 
     /**
+     * @param Uuid $id
+     */
+    final protected function __construct(Uuid $id)
+    {
+        $this->id = $id;
+        $this->events = new \Common\Domain\Event\EventStream();
+    }
+
+    /**
      * @return array|EventStream
      */
-    public function releaseEvents(): array
+    public function releaseEvents(): EventStream
     {
         $events = $this->events;
-        $this->events = [];
+        $this->events = new \Common\Domain\Event\EventStream();
 
         return $events;
     }
@@ -35,13 +43,15 @@ abstract class Aggregate extends Entity implements Port\Aggregate
      * @param Event $event
      * @return void
      */
-    public function recordThat(Event $event): void
+    public function recordThat(Event $event): static
     {
         if ($this->getId()) {
             $event->setAggregateId($this->getId());
         }
         $this->apply($event);
         $this->events[] = $event;
+
+        return $this;
     }
 
     /**
