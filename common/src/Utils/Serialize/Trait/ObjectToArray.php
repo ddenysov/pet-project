@@ -32,6 +32,8 @@ trait ObjectToArray
                 $propsArray[$prop->getName()] = $value->toString();
             } elseif ($value instanceof SerializableValue) {
                 $propsArray[$prop->getName()] = $value->serialize();
+            } elseif (is_scalar($value)) {
+                $propsArray[$prop->getName()] = $value;
             }
         }
 

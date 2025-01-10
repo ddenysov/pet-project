@@ -22,10 +22,13 @@ final class EventTest extends TestCase
             new StringValue('Blog Title'),
             new TextValue('Blog Description'),
         );
+        $event->setAggregateId(\Common\Domain\ValueObject\Uuid::create());
 
         $array = $event->toArray();
         $this->assertTrue(isset($array['id']));
         $this->assertTrue(Uuid::isValid(($array['id'])));
+        $this->assertTrue(isset($array['aggregateId']));
+        $this->assertTrue(Uuid::isValid(($array['aggregateId'])));
         $this->assertEquals('Blog Title', $event->getTitle()->toString());
         $this->assertEquals('Blog Title', $array['title']);
         $this->assertEquals('Blog Description', $event->getDescription()->toString());

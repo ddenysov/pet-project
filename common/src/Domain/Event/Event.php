@@ -42,37 +42,12 @@ abstract class Event implements Port\Event
     }
 
     /**
-     * @return string
-     */
-    public static function getEventName(): string
-    {
-        $name = static::class;
-        $parts = explode('\\', $name);
-        $parts = array_map(function ($input) {
-            return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
-        }, $parts);
-
-        return implode('.', $parts);
-    }
-
-    /**
      * @return array
      * @throws \Exception
      */
     public function toArray(): array
     {
         return $this->propertiesToArray();
-    }
-
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    public function payload(): array
-    {
-        return array_filter($this->toArray(), function (string $key) {
-            return !in_array($key, ['id', 'aggregateId']);
-        }, ARRAY_FILTER_USE_KEY);
     }
 
     /**
@@ -86,21 +61,5 @@ abstract class Event implements Port\Event
     public function setAggregateId(Uuid $id): void
     {
         $this->aggregateId = $id;
-    }
-
-    public static function fromArray(array $payload): static
-    {
-        foreach ($payload as $key => $value) {
-
-        }
-    }
-
-    /**
-     * @param string $className
-     * @return bool
-     */
-    public function isA(string $className): bool
-    {
-        return get_class($this) === $className;
     }
 }
