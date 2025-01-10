@@ -41,5 +41,7 @@ final class AggregateTest extends TestCase
         $this->assertEquals('Blog Title', $events[0]->getTitle()->toString());
         $this->assertEquals('Blog Description', $events[0]->getDescription()->toString());
 
+        $this->assertEquals('Blog Title', $blogPost->getTitle()->toString());
+        $this->assertEquals('Blog Description', $blogPost->getDescription()->toString());
     }
 }

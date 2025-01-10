@@ -13,7 +13,7 @@ final class PasswordTest extends TestCase
 {
     public function testCase1(): void
     {
-        $value = new PasswordValue('some value');
+        $value = new PasswordValue('some value', true);
         $this->assertTrue($value->check('some value'));
         $this->assertFalse($value->check('wrong'));
     }
