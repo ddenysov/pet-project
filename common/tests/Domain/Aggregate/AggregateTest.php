@@ -9,6 +9,7 @@ use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogDescription;
 use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogPost;
 use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogId;
 use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogTitle;
+use Tests\Domain\Aggregate\Stub\Event\StubBlogPostCreatedEvent;
 
 final class AggregateTest extends TestCase
 {
@@ -17,15 +18,28 @@ final class AggregateTest extends TestCase
      */
     public function testCase1(): void
     {
+        // Create a new StubBlogPost aggregate.
+        // The factory method 'create' likely handles the internal creation logic and event recording.
         $blogPost = StubBlogPost::create(
-            StubBlogId::create(),
-            new StubBlogTitle('Blog Title'),
-            new StubBlogDescription('Blog Description'),
+            StubBlogId::create(), // Creates a new StubBlogId, likely using a UUID.
+            new StubBlogTitle('Blog Title'), // Creates a new StubBlogTitle value object.
+            new StubBlogDescription('Blog Description'), // Creates a new StubBlogDescription value object.
         );
+
+        // Release the accumulated events from the aggregate.
+        // This typically returns an array of Domain Events that represent the changes made to the aggregate.
         $events = $blogPost->releaseEvents();
 
-        dd($events);
+        // Example of more meaningful assertions:
+        // Check that one event was released.
+        $this->assertCount(1, $events);
 
-        $this->assertTrue(true);
+        // Check that the event is of the expected type (replace with your actual event class).
+        $this->assertInstanceOf(StubBlogPostCreatedEvent::class, $events[0]);
+
+        // Check the data within the event (e.g., title, description).
+        $this->assertEquals('Blog Title', $events[0]->getTitle()->toString());
+        $this->assertEquals('Blog Description', $events[0]->getDescription()->toString());
+
     }
 }
