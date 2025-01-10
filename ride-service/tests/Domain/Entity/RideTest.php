@@ -35,7 +35,7 @@ final class RideTest extends TestCase
 
         $events = $ride->releaseEvents();
 
-        $this->assertTrue(count($events) === 1);
+        $this->assertCount(1, $events);
         $this->assertEquals('Test Name', $ride->getName()->toString());
     }
 }
