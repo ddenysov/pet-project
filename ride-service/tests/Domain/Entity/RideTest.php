@@ -13,9 +13,6 @@ use Ride\Domain\ValueObject\OrganizerId;
 use Ride\Domain\ValueObject\RideDescription;
 use Ride\Domain\ValueObject\RideName;
 use Ride\Domain\ValueObject\RideRules;
-use Tests\Domain\Entity\Stub\StubEntity;
-use Tests\Domain\Entity\Stub\StubId;
-use Tests\Domain\Entity\Stub\StubString;
 
 final class RideTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domain\Aggregate\Stub\Aggregate;
+namespace Tests\Mock\Domain\ValueObject;
 
 use Common\Domain\ValueObject\TextValue;
 

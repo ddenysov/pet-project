@@ -1,10 +1,13 @@
 <?php
 
-namespace Tests\Domain\Aggregate\Stub\Aggregate;
+namespace Tests\Mock\Domain\Aggregate;
 
 use Common\Domain\Entity\Aggregate;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Tests\Domain\Aggregate\Stub\Event\StubBlogPostCreatedEvent;
+use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
+use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogId;
+use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 class StubBlogPost extends Aggregate
 {

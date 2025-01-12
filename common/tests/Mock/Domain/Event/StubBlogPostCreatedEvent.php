@@ -1,10 +1,12 @@
 <?php
 
-namespace Tests\Domain\Aggregate\Stub\Event;
+namespace Tests\Mock\Domain\Event;
 
 use Common\Domain\Event\Event;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogDescription;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogTitle;
+use Common\Domain\ValueObject\Exception\InvalidUuidException;
+use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogTitle;
+
 
 class StubBlogPostCreatedEvent extends Event
 {
@@ -15,9 +17,11 @@ class StubBlogPostCreatedEvent extends Event
     /**
      * @param StubBlogTitle $title
      * @param StubBlogDescription $description
+     * @throws InvalidUuidException
      */
     public function __construct(StubBlogTitle $title, StubBlogDescription $description)
     {
+        parent::__construct();
         $this->title       = $title;
         $this->description = $description;
     }

@@ -1,28 +1,30 @@
 <?php
 declare(strict_types=1);
 
-namespace Domain\Event;
+namespace Tests\Domain\Event;
 
 use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Common\Domain\ValueObject\StringValue;
-use Common\Domain\ValueObject\TextValue;
+use Common\Domain\ValueObject\Uuid;
+use Exception;
 use PHPUnit\Framework\TestCase;
-use Tests\Domain\Event\Stub\BlogCreatedEvent;
+use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
+use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 final class EventStreamTest extends TestCase
 {
     /**
      * @throws InvalidUuidException
-     * @throws \Exception
+     * @throws Exception
      */
     public function testCase1(): void
     {
-        $event = new BlogCreatedEvent(
-            new StringValue('Blog Title'),
-            new TextValue('Blog Description'),
+        $event = new StubBlogPostCreatedEvent(
+            new StubBlogTitle('Blog Title'),
+            new StubBlogDescription('Blog Description'),
         );
-        $event->setAggregateId(\Common\Domain\ValueObject\Uuid::create());
+        $event->setAggregateId(Uuid::create());
         $stream = new EventStream();
         $stream[] = $event;
 

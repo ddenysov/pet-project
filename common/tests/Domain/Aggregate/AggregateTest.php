@@ -5,11 +5,11 @@ namespace Tests\Domain\Aggregate;
 
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use PHPUnit\Framework\TestCase;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogDescription;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogPost;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogId;
-use Tests\Domain\Aggregate\Stub\Aggregate\StubBlogTitle;
-use Tests\Domain\Aggregate\Stub\Event\StubBlogPostCreatedEvent;
+use Tests\Mock\Domain\Aggregate\StubBlogPost;
+use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
+use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogId;
+use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 final class AggregateTest extends TestCase
 {

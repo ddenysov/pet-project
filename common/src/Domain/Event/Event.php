@@ -2,6 +2,7 @@
 
 namespace Common\Domain\Event;
 
+use Common\Domain\Exception\InvalidEventException;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
 use Common\Utils\Serialize\Trait\ObjectToArray;
@@ -47,6 +48,12 @@ abstract class Event implements Port\Event
      */
     public function toArray(): array
     {
+        if (!isset($this->id)) {
+            throw new InvalidEventException('Event id is missing');
+        }
+        if (!isset($this->aggregateId)) {
+            throw new InvalidEventException('Event aggregate id is missing');
+        }
         return $this->propertiesToArray();
     }
 

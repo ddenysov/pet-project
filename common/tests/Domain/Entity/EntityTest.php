@@ -5,9 +5,9 @@ namespace Tests\Domain\Entity;
 
 use Common\Domain\ValueObject\Uuid;
 use PHPUnit\Framework\TestCase;
-use Tests\Domain\Entity\Stub\StubEntity;
-use Tests\Domain\Entity\Stub\StubId;
-use Tests\Domain\Entity\Stub\StubString;
+use Tests\Mock\Domain\Entity\StubEntity;
+use Tests\Mock\Domain\Entity\StubId;
+use Tests\Mock\Domain\Entity\StubString;
 
 final class EntityTest extends TestCase
 {

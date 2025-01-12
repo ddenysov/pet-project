@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Tests\Domain\Event;
 
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
-use Common\Domain\ValueObject\StringValue;
-use Common\Domain\ValueObject\TextValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
-use Tests\Domain\Event\Stub\BlogCreatedEvent;
+use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
+use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 final class EventTest extends TestCase
 {
@@ -18,13 +18,16 @@ final class EventTest extends TestCase
      */
     public function testCase1(): void
     {
-        $event = new BlogCreatedEvent(
-            new StringValue('Blog Title'),
-            new TextValue('Blog Description'),
+        $event = new StubBlogPostCreatedEvent(
+            new StubBlogTitle('Blog Title'),
+            new StubBlogDescription('Blog Description'),
         );
         $event->setAggregateId(\Common\Domain\ValueObject\Uuid::create());
 
         $array = $event->toArray();
+
+        //dd($array);
+
         $this->assertTrue(isset($array['id']));
         $this->assertTrue(Uuid::isValid(($array['id'])));
         $this->assertTrue(isset($array['aggregateId']));

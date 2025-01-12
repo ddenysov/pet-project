@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domain\Entity\Stub;
+namespace Tests\Mock\Domain\Entity;
 
 use Common\Domain\ValueObject\Uuid;
 
