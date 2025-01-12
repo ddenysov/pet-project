@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Mock\Application\Command\StubCreateBlogPostCommand;
 use Tests\Mock\Application\Command\StubCreateBlogPostCommandHandler;
+use Tests\Mock\Domain\Aggregate\StubBlogPost;
 use Tests\Mock\Domain\Repository\StubBlogPostRepository;
 
 final class CommandHandlerTest extends TestCase
@@ -18,9 +19,17 @@ final class CommandHandlerTest extends TestCase
      */
     public function testCase1(): void
     {
+        $repository = $this->getMockBuilder(StubBlogPostRepository::class)
+            ->onlyMethods(['save'])
+            ->getMock();
+
+        // Настраиваем ожидание на вызов метода save
+        $repository->expects($this->once())
+            ->method('save')
+            ->with($this->isInstanceOf(StubBlogPost::class));
         // ADD EVENT BUS
         $commandHandler = new StubCreateBlogPostCommandHandler(
-            new StubBlogPostRepository(),
+            $repository,
         );
         $commandHandler->handle(new StubCreateBlogPostCommand(
             title: 'Blog Post Title',
