@@ -14,8 +14,10 @@ class StubCreateBlogPostCommandHandler
     /**
      * @param StubBlogPostRepository $repository
      */
-    public function __construct(private readonly StubBlogPostRepository $repository)
-    {
+    public function __construct(
+        private readonly StubBlogPostRepository $repository,
+
+    ) {
     }
 
     /**
@@ -33,7 +35,10 @@ class StubCreateBlogPostCommandHandler
 
         // Release the accumulated events from the aggregate.
         // This typically returns an array of Domain Events that represent the changes made to the aggregate.
-        $events = $blogPost->releaseEvents();
-        $this->repository->save($blogPost);
+        $events = $this->repository->save($blogPost);
+
+        foreach ($events as $event) {
+
+        }
     }
 }
