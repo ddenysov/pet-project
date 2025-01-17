@@ -6,14 +6,22 @@ use Override;
 
 class Message implements Port\Message
 {
-    private string $status = 'new';
+    private \DateTime $createdAt;
 
     /**
      * @param string $id
      * @param array $payload
+     * @param string $status
+     * @param \DateTime|null $createdAt
      */
-    public function __construct(private string $id, private array $payload)
+    public function __construct(
+        private string $id,
+        private array $payload,
+        private string $status = 'new',
+        \DateTime $createdAt = null,
+    )
     {
+        $this->createdAt = $createdAt ?? new \DateTime();
     }
 
     public function getId(): string
@@ -28,7 +36,7 @@ class Message implements Port\Message
 
     #[Override] public function markDone(): void
     {
-        $this->status = 'completed';
+        $this->status = 'done';
     }
 
     /**
@@ -37,5 +45,13 @@ class Message implements Port\Message
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    #[\Override] public function getCreateAt(): \DateTime
+    {
+        return $this->createdAt;
     }
 }

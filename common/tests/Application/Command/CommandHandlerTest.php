@@ -22,7 +22,7 @@ final class CommandHandlerTest extends TestCase
         // ADD EVENT BUS
         $commandHandler = new StubCreateBlogPostCommandHandler(
             new StubBlogPostRepository(),
-            new Outbox(),
+            new InboxMessageStorage(),
         );
         $commandHandler->handle(new StubCreateBlogPostCommand(
             title: 'Blog Post Title',

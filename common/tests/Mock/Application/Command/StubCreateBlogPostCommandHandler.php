@@ -6,7 +6,6 @@ use Common\Application\Broker\Message;
 use Common\Application\Broker\Port\OutboxMessageStorage;
 use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\Event\Event;
-use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Tests\Mock\Domain\Aggregate\StubBlogPost;
 use Tests\Mock\Domain\Repository\Port\StubBlogPostRepository;
