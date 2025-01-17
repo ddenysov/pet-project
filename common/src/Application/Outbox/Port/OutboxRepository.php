@@ -9,6 +9,7 @@ interface OutboxRepository
 {
     /**
      * @param Uuid $eventId
+     * @param string $name
      * @param array $payload
      * @return void
      */

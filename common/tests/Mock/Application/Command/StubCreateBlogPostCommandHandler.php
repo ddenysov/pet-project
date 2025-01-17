@@ -2,6 +2,7 @@
 
 namespace Tests\Mock\Application\Command;
 
+use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Tests\Mock\Domain\Aggregate\StubBlogPost;
 use Tests\Mock\Domain\Repository\Port\StubBlogPostRepository;
@@ -13,9 +14,11 @@ class StubCreateBlogPostCommandHandler
 {
     /**
      * @param StubBlogPostRepository $repository
+     * @param Outbox $outbox
      */
     public function __construct(
         private readonly StubBlogPostRepository $repository,
+        private readonly Outbox $outbox,
 
     ) {
     }
@@ -38,7 +41,7 @@ class StubCreateBlogPostCommandHandler
         $events = $this->repository->save($blogPost);
 
         foreach ($events as $event) {
-
+            $this->outbox->save($event);
         }
     }
 }
