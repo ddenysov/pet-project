@@ -2,7 +2,11 @@
 
 namespace Tests\Mock\Application\Command;
 
+use Common\Application\Broker\Message;
+use Common\Application\Broker\Port\OutboxMessageStorage;
 use Common\Application\Outbox\Port\Outbox;
+use Common\Domain\Event\Event;
+use Common\Domain\Event\EventStream;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Tests\Mock\Domain\Aggregate\StubBlogPost;
 use Tests\Mock\Domain\Repository\Port\StubBlogPostRepository;
@@ -18,13 +22,13 @@ class StubCreateBlogPostCommandHandler
      */
     public function __construct(
         private readonly StubBlogPostRepository $repository,
-        private readonly Outbox $outbox,
-
+        private readonly OutboxMessageStorage $messageStorage,
     ) {
     }
 
     /**
      * @throws InvalidUuidException
+     * @throws \Exception
      */
     public function handle(StubCreateBlogPostCommand $command): void
     {
@@ -38,10 +42,16 @@ class StubCreateBlogPostCommandHandler
 
         // Release the accumulated events from the aggregate.
         // This typically returns an array of Domain Events that represent the changes made to the aggregate.
+        /**
+         * @var Event[] $events
+         */
         $events = $this->repository->save($blogPost);
 
         foreach ($events as $event) {
-            $this->outbox->save($event);
+            $this->messageStorage->store(new Message(
+                $event->getId()->toString(),
+                $event->toArray(),
+            ));
         }
     }
 }
