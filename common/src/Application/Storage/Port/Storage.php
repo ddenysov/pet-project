@@ -6,4 +6,5 @@ interface Storage
 {
     public function find(string $id): array;
     public function store(array $data): void;
+    public function getLast(int $number): array;
 }

@@ -3,10 +3,11 @@
 namespace Common\Application\Broker;
 
 use Common\Application\Broker\Port\Message;
-use Common\Application\Broker\Port\MessageBuffer;
+use Common\Application\Broker\Port\MessageBuffer as MessageBufferPort;
 use Common\Application\Storage\Port\Storage;
+use Override;
 
-class InboxMessageStorage implements \Common\Application\Broker\Port\InboxMessageStorage
+class InboxMessageStorage implements Port\InboxMessageStorage
 {
     private Storage $storage;
 
@@ -18,7 +19,7 @@ class InboxMessageStorage implements \Common\Application\Broker\Port\InboxMessag
         $this->storage = $storage;
     }
 
-    #[\Override] public function find(string $id): Message
+    #[Override] public function find(string $id): Message
     {
         $data = $this->storage->find($id);
 
@@ -30,7 +31,7 @@ class InboxMessageStorage implements \Common\Application\Broker\Port\InboxMessag
         );
     }
 
-    #[\Override] public function store(Message $message): void
+    #[Override] public function store(Message $message): void
     {
         $this->storage->store([
             'id' => $message->getId(),
@@ -40,8 +41,8 @@ class InboxMessageStorage implements \Common\Application\Broker\Port\InboxMessag
         ]);
     }
 
-    #[\Override] public function get(): MessageBuffer
+    #[Override] public function getLast(int $number): MessageBufferPort
     {
-        // TODO: Implement get() method.
+        return new MessageBuffer($this->storage->getLast($number));
     }
 }

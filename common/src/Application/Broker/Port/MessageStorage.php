@@ -6,5 +6,5 @@ interface MessageStorage
 {
     public function find(string $id): Message;
     public function store(Message $message): void;
-    public function get(): MessageBuffer;
+    public function getLast(int $number): MessageBuffer;
 }
