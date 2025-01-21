@@ -2,7 +2,9 @@
 
 namespace Common\Domain\Event\Port;
 
-interface EventStream extends \Iterator, \ArrayAccess
+use Common\Utils\Collection\Port\Collection;
+
+interface EventStream extends Collection
 {
 
 }

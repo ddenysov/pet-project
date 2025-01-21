@@ -2,7 +2,9 @@
 
 namespace Common\Application\Broker\Port;
 
-interface MessageCollection extends \Iterator, \ArrayAccess
+use Common\Utils\Collection\Port\Collection;
+
+interface MessageCollection extends Collection
 {
 
 }
