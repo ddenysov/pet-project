@@ -11,7 +11,8 @@ interface MessageBroker
     public function publish(Message $message): void;
 
     /**
+     * @param MessageChannel $channel
      * @return Message
      */
-    public function consume(): Message;
+    public function consume(MessageChannel $channel): Message;
 }

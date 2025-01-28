@@ -17,7 +17,7 @@ class Message implements Port\Message
     public function __construct(
         private string $id,
         private array $payload,
-        private string $status = 'new',
+        private string $status = 'pending',
         \DateTime $createdAt = null,
     )
     {
@@ -34,9 +34,9 @@ class Message implements Port\Message
         return $this->payload;
     }
 
-    #[Override] public function markDone(): void
+    #[Override] public function complete(): void
     {
-        $this->status = 'done';
+        $this->status = 'complete';
     }
 
     /**
