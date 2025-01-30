@@ -54,10 +54,10 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
         if ($this->filterPending) {
             $this->filterPending = false; // сбрасываем флаг, чтобы при следующем get() вернулись все сообщения
             $filtered = array_filter($this->messages, fn($msg) => $msg->getStatus() === 'pending');
-            return new MessageCollectionImpl($filtered);
+            return new MessageCollectionImpl(array_values($filtered));
         }
 
-        return new MessageCollectionImpl($this->messages);
+        return new MessageCollectionImpl(array_map(function($value) { return $value; }, $this->messages));
     }
 
     /**

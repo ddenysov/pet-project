@@ -40,6 +40,17 @@ final class CommandHandlerTest extends TestCase
             description: 'Blog Post Description'
         ));
         $this->assertTrue(true);
-        dd($eventRepository->stream($uuid));
+
+        $actualEvents = $eventRepository->stream($uuid);
+
+        $this->assertTrue($uuid->equals($actualEvents[0]->getAggregateId()));
+        $this->assertEquals('Blog Post Title', $actualEvents[0]->getTitle()->toString());
+        $this->assertEquals('Blog Post Description', $actualEvents[0]->getDescription()->toString());
+
+        $messages = $messageRepository->pending()->get();
+        $this->assertEquals($actualEvents[0]->getId()->toString(), $messages[0]->getPayload()['id']);
+        $this->assertEquals($uuid->toString(), $messages[0]->getPayload()['aggregateId']);
+        $this->assertEquals('Blog Post Title', $messages[0]->getPayload()['title']);
+        $this->assertEquals('Blog Post Description', $messages[0]->getPayload()['description']);
     }
 }
