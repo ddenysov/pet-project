@@ -2,8 +2,12 @@
 
 namespace Common\Utils\Collection;
 
-class Collection implements \Iterator, \ArrayAccess
+use Common\Domain\Event\Port\Event;
+use InvalidArgumentException;
+
+abstract class Collection implements \Iterator, \ArrayAccess
 {
+
     /**
      * @var array
      */
@@ -14,13 +18,18 @@ class Collection implements \Iterator, \ArrayAccess
      */
     private int $position = 0;
 
+    public function __construct(array $collection = [])
+    {
+        $this->container = $collection;
+    }
+
     /**
      * @param $offset
      * @param $value
      * @return void
      */
     public function offsetSet($offset, $value): void {
-        if (!$value instanceof Port\Event) {
+        if (!$this->offsetCheck($value)) {
             throw new InvalidArgumentException("Value must implement the Event interface.");
         }
 
@@ -30,6 +39,8 @@ class Collection implements \Iterator, \ArrayAccess
             $this->container[$offset] = $value;
         }
     }
+
+    abstract public function offsetCheck(mixed $value): bool;
 
     /**
      * @param $offset

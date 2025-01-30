@@ -4,8 +4,10 @@ namespace Tests\Mock\Application\Command;
 
 use Common\Application\Broker\Message;
 use Common\Application\Broker\Port\OutboxMessageStorage;
+use Common\Application\EventStore\Port\EventStore;
 use Common\Application\Outbox\Port\Outbox;
 use Common\Domain\Event\Event;
+use Common\Domain\Event\Port\EventStream;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Tests\Mock\Domain\Aggregate\StubBlogPost;
 use Tests\Mock\Domain\Repository\Port\StubBlogPostRepository;
@@ -17,11 +19,11 @@ class StubCreateBlogPostCommandHandler
 {
     /**
      * @param StubBlogPostRepository $repository
-     * @param Outbox $outbox
+     * @param EventStore $eventStore
      */
     public function __construct(
         private readonly StubBlogPostRepository $repository,
-        private readonly OutboxMessageStorage $messageStorage,
+        private readonly EventStore $eventStore,
     ) {
     }
 
@@ -34,23 +36,13 @@ class StubCreateBlogPostCommandHandler
         // Create a new StubBlogPost aggregate.
         // The factory method 'create' likely handles the internal creation logic and event recording.
         $blogPost = StubBlogPost::create(
-            StubBlogId::create(), // Creates a new StubBlogId, likely using a UUID.
-            new StubBlogTitle('Blog Title'), // Creates a new StubBlogTitle value object.
-            new StubBlogDescription('Blog Description'), // Creates a new StubBlogDescription value object.
+            new StubBlogId($command->id), // Creates a new StubBlogId, likely using a UUID.
+            new StubBlogTitle($command->title), // Creates a new StubBlogTitle value object.
+            new StubBlogDescription($command->description), // Creates a new StubBlogDescription value object.
         );
 
         // Release the accumulated events from the aggregate.
         // This typically returns an array of Domain Events that represent the changes made to the aggregate.
-        /**
-         * @var Event[] $events
-         */
-        $events = $this->repository->save($blogPost);
-
-        foreach ($events as $event) {
-            $this->messageStorage->store(new Message(
-                $event->getId()->toString(),
-                $event->toArray(),
-            ));
-        }
+        $this->eventStore->append($blogPost->releaseEvents());
     }
 }

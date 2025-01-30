@@ -45,4 +45,12 @@ abstract class ValueObject implements \Common\Domain\ValueObject\Port\StringValu
     {
         return $this->toString();
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
 }
