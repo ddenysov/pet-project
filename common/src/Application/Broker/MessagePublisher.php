@@ -11,7 +11,7 @@ class MessagePublisher
     {
     }
 
-    public function send(int $number = 10): void
+    public function publish(int $number = 10): void
     {
         while (true) {
             /**
@@ -19,9 +19,14 @@ class MessagePublisher
              */
             $messages = $this->repository->pending()->limit($number)->get();
             foreach ($messages as $message) {
-                $this->broker->publish($message);
-                $message->complete();
-                $this->repository->save($message);
+                $this->repository->startTransaction();
+                try {
+                    $this->repository->complete($message);
+                    $this->broker->publish($message);
+                    $this->repository->commit();
+                } catch (\Throwable $exception) {
+                    $this->repository->rollback();
+                }
             }
             sleep(1);
         }

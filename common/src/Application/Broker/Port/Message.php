@@ -9,4 +9,6 @@ interface Message
     public function complete(): void;
     public function getStatus(): string;
     public function getCreateAt(): \DateTime;
+
+    public function getChannel(): MessageChannel;
 }

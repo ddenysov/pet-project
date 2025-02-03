@@ -2,6 +2,7 @@
 
 namespace Common\Application\Broker;
 
+use Common\Application\Broker\Port\MessageChannel;
 use Override;
 
 class Message implements Port\Message
@@ -53,5 +54,10 @@ class Message implements Port\Message
     #[\Override] public function getCreateAt(): \DateTime
     {
         return $this->createdAt;
+    }
+
+    #[\Override] public function getChannel(): MessageChannel
+    {
+        return new MessageCha;
     }
 }
