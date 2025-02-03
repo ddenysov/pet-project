@@ -2,18 +2,28 @@
 
 namespace Common\Application\Broker;
 
-use Common\Application\Broker\Port\MessageRepository;
-use Common\Application\Broker\Port\Message;
+use Common\Application\Broker\Port\MessageBroker;
+use Common\Application\Broker\Port\MessageOutboxRepository;
 
-class MessagePublisher implements Port\MessagePublisher
+class MessagePublisher
 {
-
-    public function __construct(private MessageRepository $repository)
+    public function __construct(private MessageOutboxRepository $repository, private MessageBroker $broker)
     {
     }
 
-    #[Override] public function publish(Message $message): void
+    public function send(int $number = 10): void
     {
-        $this->repository->save($message);
+        while (true) {
+            /**
+             * @var Message[] $messages
+             */
+            $messages = $this->repository->pending()->limit($number)->get();
+            foreach ($messages as $message) {
+                $this->broker->publish($message);
+                $message->complete();
+                $this->repository->save($message);
+            }
+            sleep(1);
+        }
     }
 }

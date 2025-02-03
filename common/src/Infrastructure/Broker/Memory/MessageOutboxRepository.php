@@ -114,4 +114,15 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
             $this->inTransaction = false;
         }
     }
+
+    #[\Override] public function limit(int $number): static
+    {
+        return $this;
+    }
+
+    #[\Override] public function offset(int $number): static
+    {
+        return $this;
+    }
+
 }

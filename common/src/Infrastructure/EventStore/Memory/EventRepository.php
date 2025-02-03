@@ -80,4 +80,16 @@ class EventRepository implements \Common\Application\EventStore\Port\EventReposi
             $this->inTransaction = false;
         }
     }
+
+    #[\Override] public function limit(int $number): static
+    {
+        return $this;
+    }
+
+    #[\Override] public function offset(int $number): static
+    {
+        return $this;
+    }
+
+
 }

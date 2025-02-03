@@ -6,7 +6,7 @@ use Common\Application\Broker\Port\InboxMessageRepository;
 use Common\Application\Broker\Port\MessageBroker;
 use Common\Application\Broker\Port\MessageChannel;
 
-class MessageReceiver implements \Common\Application\Broker\Port\MessageConsumer
+class MessageConsumer implements \Common\Application\Broker\Port\MessageConsumer
 {
     /**
      * @param MessageBroker $broker
