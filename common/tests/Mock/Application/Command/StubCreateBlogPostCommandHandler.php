@@ -2,15 +2,9 @@
 
 namespace Tests\Mock\Application\Command;
 
-use Common\Application\Broker\Message;
-use Common\Application\Broker\Port\OutboxMessageStorage;
 use Common\Application\EventStore\Port\EventStore;
-use Common\Application\Outbox\Port\Outbox;
-use Common\Domain\Event\Event;
-use Common\Domain\Event\Port\EventStream;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Tests\Mock\Domain\Aggregate\StubBlogPost;
-use Tests\Mock\Domain\Repository\Port\StubBlogPostRepository;
 use Tests\Mock\Domain\ValueObject\StubBlogDescription;
 use Tests\Mock\Domain\ValueObject\StubBlogId;
 use Tests\Mock\Domain\ValueObject\StubBlogTitle;
@@ -18,11 +12,9 @@ use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 class StubCreateBlogPostCommandHandler
 {
     /**
-     * @param StubBlogPostRepository $repository
      * @param EventStore $eventStore
      */
     public function __construct(
-        private readonly StubBlogPostRepository $repository,
         private readonly EventStore $eventStore,
     ) {
     }

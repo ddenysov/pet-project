@@ -26,7 +26,6 @@ final class CommandHandlerTest extends TestCase
         $messageRepository = new MessageOutboxRepository();
         // ADD EVENT BUS
         $commandHandler = new StubCreateBlogPostCommandHandler(
-            new StubBlogPostRepository(),
             new EventStore(
                 $messageRepository,
                 $eventRepository,
