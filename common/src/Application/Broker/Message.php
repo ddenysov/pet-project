@@ -58,6 +58,6 @@ class Message implements Port\Message
 
     #[\Override] public function getChannel(): MessageChannel
     {
-        return new MessageCha;
+        return new \Common\Application\Broker\MessageChannel();
     }
 }

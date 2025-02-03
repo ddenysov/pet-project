@@ -5,7 +5,7 @@ namespace Common\Application\Broker;
 class MessageChannel implements Port\MessageChannel
 {
 
-    public function __construct(private string $name, private array $settings)
+    public function __construct(private string $name = 'default', private array $settings = [])
     {
     }
 

@@ -44,12 +44,6 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
         $this->messages[$message->getId()] = $message;
     }
 
-    #[\Override] public function complete(Message $message): void
-    {
-        $message->complete();
-        $this->save($message);
-    }
-
     /**
      * Получение коллекции сообщений.
      * Если установлен фильтр по pending — возвращаем только такие.

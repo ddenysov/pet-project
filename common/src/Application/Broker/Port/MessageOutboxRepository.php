@@ -14,8 +14,6 @@ interface MessageOutboxRepository extends HasTransactions, HasOffsets
      */
     public function save(Message $message): void;
 
-    public function complete(Message $message): void;
-
     /**
      * @return MessageCollection
      */

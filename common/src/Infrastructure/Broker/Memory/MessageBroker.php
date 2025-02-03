@@ -29,7 +29,7 @@ class MessageBroker implements MessageBrokerPort
     {
         // Предполагаем, что объект Message имеет метод getChannel(), который возвращает MessageChannel
         $channel = $message->getChannel();
-        $channelKey = spl_object_hash($channel);
+        $channelKey = md5($channel->getName());
 
         if (!isset($this->queues[$channelKey])) {
             $this->queues[$channelKey] = [];
@@ -47,7 +47,7 @@ class MessageBroker implements MessageBrokerPort
      */
     public function consume(MessageChannel $channel): Message
     {
-        $channelKey = spl_object_hash($channel);
+        $channelKey = md5($channel->getName());
 
         if (empty($this->queues[$channelKey])) {
             throw new \RuntimeException('В канале отсутствуют сообщения для обработки.');
