@@ -9,26 +9,25 @@ use Tests\Mock\Domain\ValueObject\StubBlogId;
 use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 
-class StubBlogPostCreatedEvent extends Event
+class StubBlogPostEditedEvent extends Event
 {
     protected StubBlogTitle $title;
 
     protected StubBlogDescription $description;
 
     /**
-     * @param StubBlogId|null $id
-     * @param StubBlogTitle|null $title
-     * @param StubBlogDescription|null $description
+     * @param StubBlogTitle $title
+     * @param StubBlogDescription $description
      * @throws InvalidUuidException
      */
     public function __construct(
-        StubBlogId $id = null,
-        StubBlogTitle $title = null,
-        StubBlogDescription $description = null
+        StubBlogId $id,
+        StubBlogTitle $title,
+        StubBlogDescription $description
     )
     {
         parent::__construct();
-        $this->aggregateId = $id ?? StubBlogId::create();
+        $this->aggregateId = $id;
         $this->title       = $title;
         $this->description = $description;
     }

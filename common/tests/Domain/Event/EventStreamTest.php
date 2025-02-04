@@ -10,6 +10,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
 use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogId;
 use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 final class EventStreamTest extends TestCase
@@ -21,6 +22,7 @@ final class EventStreamTest extends TestCase
     public function testCase1(): void
     {
         $event = new StubBlogPostCreatedEvent(
+            StubBlogId::create(),
             new StubBlogTitle('Blog Title'),
             new StubBlogDescription('Blog Description'),
         );

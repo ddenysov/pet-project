@@ -11,13 +11,17 @@ class Message implements Port\Message
 
     /**
      * @param string $id
+     * @param string $name
      * @param array $payload
+     * @param MessageChannel $channel
      * @param string $status
      * @param \DateTime|null $createdAt
      */
     public function __construct(
         private string $id,
+        private string $name,
         private array $payload,
+        private MessageChannel $channel,
         private string $status = 'pending',
         \DateTime $createdAt = null,
     )
@@ -28,6 +32,11 @@ class Message implements Port\Message
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getPayload(): array
@@ -58,6 +67,6 @@ class Message implements Port\Message
 
     #[\Override] public function getChannel(): MessageChannel
     {
-        return new \Common\Application\Broker\MessageChannel();
+        return $this->channel;
     }
 }

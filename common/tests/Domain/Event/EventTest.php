@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
 use Tests\Mock\Domain\ValueObject\StubBlogDescription;
+use Tests\Mock\Domain\ValueObject\StubBlogId;
 use Tests\Mock\Domain\ValueObject\StubBlogTitle;
 
 final class EventTest extends TestCase
@@ -19,6 +20,7 @@ final class EventTest extends TestCase
     public function testCase1(): void
     {
         $event = new StubBlogPostCreatedEvent(
+            StubBlogId::create(),
             new StubBlogTitle('Blog Title'),
             new StubBlogDescription('Blog Description'),
         );

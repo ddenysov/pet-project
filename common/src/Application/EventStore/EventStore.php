@@ -3,6 +3,7 @@
 namespace Common\Application\EventStore;
 
 use Common\Application\Broker\Message;
+use Common\Application\Broker\MessageChannel;
 use Common\Application\Broker\Port\MessageOutboxRepository;
 use Common\Application\EventStore\Port\EventRepository;
 use Common\Domain\Event\Port\Event;
@@ -34,7 +35,13 @@ class EventStore implements Port\EventStore
         try {
             foreach ($events as $event) {
                 $this->eventRepository->append($event);
-                $this->outboxRepository->save(new Message($event->getId()->toString(), $event->toArray()));
+                $this->outboxRepository->save(
+                    new Message(
+                        $event->getId()->toString(),
+                        'some-event',
+                        $event->toArray(),
+                        new MessageChannel(),
+                    ));
             }
 
         } catch (\Throwable $exception) {

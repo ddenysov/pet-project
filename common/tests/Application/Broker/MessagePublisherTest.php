@@ -16,8 +16,12 @@ final class MessagePublisherTest extends TestCase
     public function testCase1(): void
     {
         $messageRepository = new MessageOutboxRepository();
-        $messageRepository->save(new Message(Uuid::create()->toString(), ['key' => 'value']));
-
+        $messageRepository->save(new Message(
+            Uuid::create()->toString(),
+            'some-message',
+            ['key' => 'value'],
+            new MessageChannel('some-channel'),
+        ));
 
         $messageBroker = new MessageBroker();
         $publisher = new MessagePublisher($messageRepository, $messageBroker);
@@ -26,7 +30,7 @@ final class MessagePublisherTest extends TestCase
             return true;
         });
 
-        $message = $messageBroker->consume(new MessageChannel());
+        $message = $messageBroker->consume(new MessageChannel('some-channel'));
         $this->assertEquals('value', $message->getPayload()['key']);
         $message = $messageRepository->find($message->getId());
         $this->assertEquals('complete', $message->getStatus());
