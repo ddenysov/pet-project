@@ -5,6 +5,7 @@ namespace Common\Application\EventStore;
 use Common\Application\Broker\Message;
 use Common\Application\Broker\MessageChannel;
 use Common\Application\Broker\Port\MessageOutboxRepository;
+use Common\Application\Broker\Transformer\EventToMessageTransformer;
 use Common\Application\EventStore\Port\EventRepository;
 use Common\Domain\Event\Port\Event;
 use Common\Domain\Event\Port\EventStream;
@@ -12,9 +13,15 @@ use Common\Domain\ValueObject\Uuid;
 
 class EventStore implements Port\EventStore
 {
+    /**
+     * @param MessageOutboxRepository $outboxRepository
+     * @param EventRepository $eventRepository
+     * @param EventToMessageTransformer $transformer
+     */
     public function __construct(
-        private MessageOutboxRepository $outboxRepository,
-        private EventRepository $eventRepository,
+        private MessageOutboxRepository   $outboxRepository,
+        private EventRepository           $eventRepository,
+        private EventToMessageTransformer $transformer,
     )
     {
 
@@ -35,13 +42,10 @@ class EventStore implements Port\EventStore
         try {
             foreach ($events as $event) {
                 $this->eventRepository->append($event);
-                $this->outboxRepository->save(
-                    new Message(
-                        $event->getId()->toString(),
-                        'some-event',
-                        $event->toArray(),
-                        new MessageChannel(),
-                    ));
+                $messages = $this->transformer->transform($event);
+                foreach ($messages as $message) {
+                    $this->outboxRepository->save($message);
+                };
             }
 
         } catch (\Throwable $exception) {
