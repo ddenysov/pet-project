@@ -5,11 +5,14 @@ namespace Common\Infrastructure\Broker\Doctrine;
 use Common\Application\Broker\MessageChannel;
 use Common\Application\Broker\Port\Message;
 use Common\Application\Broker\MessageCollection;
-use Common\Domain\ValueObject\Uuid;
 use Doctrine\DBAL\Connection;
 
 class MessageOutboxRepository implements \Common\Application\Broker\Port\MessageOutboxRepository
 {
+    const TABLE = 'message_outbox';
+
+    protected static $created = [];
+
     private Connection $connection;
     private int        $limit  = 10;
     private int        $offset = 0;
@@ -30,19 +33,21 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
             'channel'  => $message->getChannel()->getName(),
         ];
 
-        if ($message->getCreateAt()) {
+        if ($message->getCreateAt() || in_array($message->getId(), self::$created)) {
             $data['created_at'] = $message->getCreateAt()->format('Y-m-d H:i:s');
-            $this->connection->update('message_outbox', $data, ['id' => $message->getId()]);
+            $this->connection->update(self::TABLE, $data, ['id' => $message->getId()]);
         } else {
             $data['created_at'] = date('Y-m-d H:i:s');
-            $this->connection->insert('message_outbox', $data);
+            $this->connection->insert(self::TABLE, $data);
         }
+
+        self::$created[] = $message->getId();
     }
 
     public function get(): MessageCollection
     {
         $messages = $this->connection->fetchAllAssociative(
-            'SELECT * FROM message_outbox LIMIT :limit OFFSET :offset',
+            'SELECT * FROM ' . self::TABLE . ' LIMIT :limit OFFSET :offset',
             ['limit' => $this->limit, 'offset' => $this->offset]
         );
 
@@ -62,7 +67,7 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
     public function find(string $id): Message
     {
         $message = $this->connection->fetchAssociative(
-            'SELECT * FROM message_outbox WHERE id = :id',
+            'SELECT * FROM ' . self::TABLE . ' WHERE id = :id',
             ['id' => $id]
         );
 
@@ -82,7 +87,7 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
     public function pending(): self
     {
         $this->connection->executeQuery(
-            'SELECT * FROM message_outbox WHERE status = :status',
+            'SELECT * FROM ' . self::TABLE . ' WHERE status = :status',
             ['status' => 'pending']
         );
 
