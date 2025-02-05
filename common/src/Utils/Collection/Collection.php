@@ -2,7 +2,6 @@
 
 namespace Common\Utils\Collection;
 
-use Common\Domain\Event\Port\Event;
 use InvalidArgumentException;
 
 abstract class Collection implements \Iterator, \ArrayAccess
@@ -20,7 +19,10 @@ abstract class Collection implements \Iterator, \ArrayAccess
 
     public function __construct(array $collection = [])
     {
-        $this->container = $collection;
+        $class = $this->getClass();
+        $this->container = array_map(function ($value) use ($class) {
+            return new $class(...$value);
+        }, $collection);
     }
 
     /**
@@ -40,7 +42,12 @@ abstract class Collection implements \Iterator, \ArrayAccess
         }
     }
 
-    abstract public function offsetCheck(mixed $value): bool;
+    abstract protected function getClass(): string;
+
+    public function offsetCheck(mixed $value): bool
+    {
+        return is_a($value, $this->getClass(), true);
+    }
 
     /**
      * @param $offset
