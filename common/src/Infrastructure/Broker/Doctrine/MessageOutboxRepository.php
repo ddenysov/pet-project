@@ -13,6 +13,8 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
 
     protected static $created = [];
 
+    protected array $where = [];
+
     private Connection $connection;
     private int        $limit  = 10;
     private int        $offset = 0;
@@ -46,10 +48,29 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
 
     public function get(): MessageCollection
     {
-        $messages = $this->connection->fetchAllAssociative(
-            'SELECT * FROM ' . self::TABLE . ' LIMIT :limit OFFSET :offset',
-            ['limit' => $this->limit, 'offset' => $this->offset]
-        );
+        if (!empty($this->where)) {
+            $whereClauses = [];
+            foreach ($this->where as $condition) {
+                foreach ($condition as $key => $value) {
+                    if (is_numeric($value)) {
+                        $whereClauses[] = "$key = $value";
+                    } else {
+                        $whereClauses[] = "$key = '$value'";
+                    }
+                }
+            }
+            $messages = $this->connection->fetchAllAssociative(
+                'SELECT * FROM ' . self::TABLE . ' WHERE ' . implode(' AND ', $whereClauses) .' LIMIT :limit OFFSET :offset',
+                ['limit' => $this->limit, 'offset' => $this->offset]
+            );
+        } else {
+            $messages = $this->connection->fetchAllAssociative(
+                'SELECT * FROM ' . self::TABLE . ' LIMIT :limit OFFSET :offset',
+                ['limit' => $this->limit, 'offset' => $this->offset]
+            );
+        }
+
+        $this->where[] = [];
 
         return new MessageCollection(array_map(function ($value) {
             return [
@@ -86,10 +107,7 @@ class MessageOutboxRepository implements \Common\Application\Broker\Port\Message
 
     public function pending(): self
     {
-        $this->connection->executeQuery(
-            'SELECT * FROM ' . self::TABLE . ' WHERE status = :status',
-            ['status' => 'pending']
-        );
+        $this->where[] = ['status' => 'pending'];
 
         return $this;
     }

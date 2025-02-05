@@ -2,6 +2,7 @@
 
 namespace Common\Utils\Collection;
 
+use Common\Application\Broker\Message;
 use InvalidArgumentException;
 
 abstract class Collection implements \Iterator, \ArrayAccess
@@ -21,6 +22,9 @@ abstract class Collection implements \Iterator, \ArrayAccess
     {
         $class = $this->getClass();
         $this->container = array_map(function ($value) use ($class) {
+            if ($this->offsetCheck($value)) {
+                return $value;
+            }
             return new $class(...$value);
         }, $collection);
     }

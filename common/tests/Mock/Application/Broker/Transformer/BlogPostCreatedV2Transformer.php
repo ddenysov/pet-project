@@ -21,6 +21,7 @@ class BlogPostCreatedV2Transformer implements MessageTransformer
     #[\Override] public function transform(Event $event): Message
     {
         return new Message(
+            null,
             $event->getId()->toString(),
             'blog-post-created-v2',
             $event->toArray() + ['version' => 2],

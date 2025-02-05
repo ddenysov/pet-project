@@ -17,7 +17,7 @@ class Message implements Port\Message
      * @param \DateTime|null $createdAt
      */
     public function __construct(
-        private string $id,
+        private ?string $id,
         private string $event_id,
         private string $name,
         private array $payload,
@@ -28,7 +28,7 @@ class Message implements Port\Message
     {
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }

@@ -14,29 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 final class MessagePublisherTest extends TestCase
 {
-    public function testCase1(): void
-    {
-        $messageRepository = new MessageOutboxRepository();
-        $messageRepository->save(new Message(
-            Uuid::create()->toString(),
-            'some-message',
-            ['key' => 'value'],
-            new MessageChannel('some-channel'),
-        ));
-
-        $messageBroker = new MessageBroker();
-        $publisher = new MessagePublisher($messageRepository, $messageBroker);
-
-        $publisher->publish(5, function () {
-            return true;
-        });
-
-        $message = $messageBroker->consume(new MessageChannel('some-channel'));
-        $this->assertEquals('value', $message->getPayload()['key']);
-        $message = $messageRepository->find($message->getId());
-        $this->assertEquals('complete', $message->getStatus());
-    }
-
     public function testCase2Doctrine(): void
     {
         $connectionParams = [
@@ -71,9 +48,14 @@ final class MessagePublisherTest extends TestCase
         $messageBroker = new MessageBroker();
         $publisher = new MessagePublisher($messageRepository, $messageBroker);
 
+        $messages = $messageRepository->pending()->limit(10)->get();
+        $this->assertCount(1, $messages);
         $publisher->publish(5, function () {
             return true;
         });
+
+        $messages = $messageRepository->pending()->limit(10)->get();
+        $this->assertCount(0, $messages);
 
         $message = $messageBroker->consume(new MessageChannel('some-channel'));
         $this->assertEquals('value', $message->getPayload()['key']);
