@@ -41,6 +41,7 @@ class EventStore implements Port\EventStore
         $this->eventRepository->startTransaction();
         try {
             foreach ($events as $event) {
+                // !! ВОТ ТУТ МОЖЕТ БЫТЬ КОНФЛИКТ
                 $this->eventRepository->append($event);
                 $messages = $this->transformer->transform($event);
                 foreach ($messages as $message) {
