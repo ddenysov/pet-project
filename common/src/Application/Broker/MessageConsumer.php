@@ -10,11 +10,9 @@ class MessageConsumer implements \Common\Application\Broker\Port\MessageConsumer
 {
     /**
      * @param MessageBroker $broker
-     * @param InboxMessageStorage $storage
      */
     public function __construct(
         private MessageBroker $broker,
-        private InboxMessageRepository $repository,
     ) {
     }
 
@@ -26,11 +24,7 @@ class MessageConsumer implements \Common\Application\Broker\Port\MessageConsumer
     {
         // consume WHAT ? Topic / partition
         while ($message = $this->broker->consume($channel)) {
-            if (!$this->repository->find($message->getId())) {
-                $this->repository->save($message);
-            }
-            // deserialize
-            // publish
+
         }
     }
 }

@@ -4,11 +4,11 @@ namespace Tests\Mock\Application\Broker\Transformer;
 
 use Common\Application\Broker\Message;
 use Common\Application\Broker\MessageChannel;
-use Common\Application\Broker\Transformer\Port\MessageTransformer;
+use Common\Application\Broker\Transformer\Port\EventToMessageTransformer;
 use Common\Domain\Event\Event;
 use Tests\Mock\Domain\Event\StubBlogPostCreatedEvent;
 
-class BlogPostCreatedV1Transformer implements MessageTransformer
+class BlogPostCreatedV1Transformer implements EventToMessageTransformer
 {
     #[\Override] public function supports(Event $event): bool
     {

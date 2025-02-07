@@ -7,6 +7,7 @@ use Common\Application\Broker\Message;
 use Common\Application\Broker\MessageChannel;
 use Common\Application\Broker\MessagePublisher;
 use Common\Application\Broker\Transformer\EventToMessageTransformer;
+use Common\Application\Broker\Transformer\EventToMessageTransformerFactory;
 use Common\Application\Broker\Transformer\TransformerRegistry;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
@@ -28,11 +29,11 @@ final class MessageTransformerTest extends TestCase
      */
     public function testCase1(): void
     {
-        $transformerRegistry = new TransformerRegistry();
-        $transformerRegistry->register(new BlogPostCreatedV1Transformer());
-        $transformerRegistry->register(new BlogPostCreatedV2Transformer());
-        $transformerRegistry->register(new BlogPostEditedV1Transformer());
-        $messageTransformer = new EventToMessageTransformer($transformerRegistry);
+        $messageTransformer = new EventToMessageTransformerFactory();
+        $messageTransformer->registerTransformer(new BlogPostCreatedV1Transformer());
+        $messageTransformer->registerTransformer(new BlogPostCreatedV2Transformer());
+        $messageTransformer->registerTransformer(new BlogPostEditedV1Transformer());
+
         $messages = $messageTransformer->transform(new StubBlogPostCreatedEvent(
             id: StubBlogId::create(),
             title: new StubBlogTitle('Blog Post Title'),
