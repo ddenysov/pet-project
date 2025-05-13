@@ -8,6 +8,7 @@ use Common\Application\Broker\MessageChannel;
 use Common\Application\Broker\MessagePublisher;
 use Common\Application\Broker\Transformer\EventToMessageTransformer;
 use Common\Application\Broker\Transformer\EventToMessageTransformerFactory;
+use Common\Application\Broker\Transformer\MessageToEventTransformerFactory;
 use Common\Application\Broker\Transformer\TransformerRegistry;
 use Common\Domain\ValueObject\Exception\InvalidUuidException;
 use Common\Domain\ValueObject\Uuid;
@@ -27,7 +28,7 @@ final class MessageTransformerTest extends TestCase
     /**
      * @throws InvalidUuidException
      */
-    public function testCase1(): void
+    public function testEventToMessage(): void
     {
         $messageTransformer = new EventToMessageTransformerFactory();
         $messageTransformer->registerTransformer(new BlogPostCreatedV1Transformer());
@@ -54,5 +55,10 @@ final class MessageTransformerTest extends TestCase
         $this->assertEquals(2, $messages[1]->getPayload()['version']);
         $this->assertEquals('blog-post-created-v2', $messages[1]->getName());
         $this->assertEquals('blog-post', $messages[1]->getChannel()->getName());
+    }
+
+    public function testMessageToEvent()
+    {
+        $transformer = new MessageToEventTransformerFactory();
     }
 }
