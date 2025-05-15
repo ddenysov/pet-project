@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql;
+namespace Zinc\Core\DataStore\Adapter\PDO;
 
 use Zinc\Core\DataStore\{Criteria, CompositeCriteria};
-use Zinc\Core\DataStore\Adapter\Sql\Dialect\Dialect;
+use Zinc\Core\DataStore\Adapter\PDO\Dialect\Dialect;
 
 /**
  * Compile Criteria tree to SQL WHERE clause with bind params.

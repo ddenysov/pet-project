@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql\Dialect;
+namespace Zinc\Core\DataStore\Adapter\PDO\Dialect;
 
-final class SqliteDialect implements Dialect
+final class PostgresDialect implements Dialect
 {
-    public function name(): string { return 'sqlite'; }
+    public function name(): string { return 'pgsql'; }
 
     public function quote(string $identifier): string
     {
@@ -14,6 +14,6 @@ final class SqliteDialect implements Dialect
 
     public function regexOperator(): ?string
     {
-        return null;
+        return '~';
     }
 }

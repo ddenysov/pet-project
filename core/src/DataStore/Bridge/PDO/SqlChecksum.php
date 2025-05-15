@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql;
+namespace Zinc\Core\DataStore\Adapter\PDO;
 
 /**
  * Calculate stable checksum for SQL migration to detect changes.
@@ -12,6 +12,7 @@ final class SqlChecksum
     {
         $clean = preg_replace('/--.*?(\r?\n)|\/\*.*?\*\//s', '', $sql);
         $clean = preg_replace('/\s+/', ' ', trim($clean));
+
         return hash('sha256', $clean);
     }
 }

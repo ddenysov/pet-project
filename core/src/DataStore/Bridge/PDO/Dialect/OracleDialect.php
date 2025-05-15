@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql\Dialect;
+namespace Zinc\Core\DataStore\Adapter\PDO\Dialect;
 
 final class OracleDialect implements Dialect
 {

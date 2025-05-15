@@ -1,0 +1,17 @@
+<?php
+declare(strict_types=1);
+
+namespace Zinc\Core\Command;
+
+/**
+ * Handles a single Command instance.
+ *
+ * @template C of Command
+ */
+interface CommandHandler
+{
+    /**
+     * @param C $command
+     */
+    public function __invoke(Command $command): mixed;
+}

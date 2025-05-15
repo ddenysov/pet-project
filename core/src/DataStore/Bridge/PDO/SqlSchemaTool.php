@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql;
+namespace Zinc\Core\DataStore\Adapter\PDO;
 
 use PDO;
-use Zinc\Core\DataStore\Adapter\Sql\Dialect\Dialect;
+use Zinc\Core\DataStore\Adapter\PDO\Dialect\Dialect;
 
 /**
  * Forward‑only SQL migration runner (very lightweight).

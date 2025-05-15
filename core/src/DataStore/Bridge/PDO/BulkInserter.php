@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql;
+namespace Zinc\Core\DataStore\Adapter\PDO;
 
-use Zinc\Core\DataStore\Adapter\Sql\Dialect\Dialect;
+use Zinc\Core\DataStore\Adapter\PDO\Dialect\Dialect;
 
 /**
  * Insert many rows efficiently using multi‑value syntax.
@@ -22,7 +22,7 @@ final class BulkInserter
 
         $valuesPlaceholder = '(' . implode(',', array_fill(0,count($cols),'?')) . ')';
         $sql = sprintf(
-            'INSERT INTO %s (%s) VALUES %s',
+            'INSERT INTO %s (%s) VALUES (%s)',
             $this->store->q($table),
             implode(',', array_map([$this->store,'q'],$cols)),
             implode(',', array_fill(0, count($rows), $valuesPlaceholder))

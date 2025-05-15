@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\Sql;
+namespace Zinc\Core\DataStore\Adapter\PDO;
 
 use PDO;
 use PDOStatement;
 use Zinc\Core\DataStore\{DataStore, Criteria, QueryOptions};
-use Zinc\Core\DataStore\Adapter\Sql\Dialect\Dialect;
+use Zinc\Core\DataStore\Adapter\PDO\Dialect\Dialect;
 use Zinc\Core\DataStore\Exception\DataStoreException;
 
 /**
@@ -105,8 +105,8 @@ final class PdoDataStore implements DataStore
 
     /*-------------------- Helpers --------------------*/
 
-    private function q(string $id): string { return $this->dialect->quote($id);}
-    private function exec(string $sql, array $params=[]): PDOStatement
+    public function q(string $id): string { return $this->dialect->quote($id);}
+    public function exec(string $sql, array $params=[]): PDOStatement
     {
         $stmt = $this->stmtCache->prepare($this->pdo, $sql);
         foreach ($params as $k=>$v) $stmt->bindValue(is_int($k)?$k+1:$k, $v);
