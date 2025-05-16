@@ -9,4 +9,6 @@ namespace Zinc\Core\Command;
 interface Command
 {
     // Intentionally empty.
+
+    public function toArray(): array;
 }

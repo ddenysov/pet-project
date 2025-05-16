@@ -11,7 +11,7 @@ use Zinc\Core\DataStore\QueryOptions;
  * Very simple in-memory implementation of the DataStore contract.
  * ⚠️ NOT thread-safe and intended only for tests or prototyping.
  */
-final class InMemoryDataStore implements DataStore
+class InMemoryDataStore implements DataStore
 {
     /** @var array<string, array<int, array>> Collections indexed by name */
     private array $collections = [];

@@ -13,4 +13,11 @@ final class DummyCommand implements Command
     public function __construct(
         public readonly string $payload = 'test-payload'
     ) {}
+
+    #[\Override] public function toArray(): array
+    {
+        return [
+            'payload' => $this->payload,
+        ];
+    }
 }

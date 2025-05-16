@@ -24,7 +24,8 @@ final class DummyCommandHandler implements CommandHandler
         ++self::$invocations;
         $this->lastCommand = $command;
 
-        // Return any value you might want to assert on.
-        return 'handled';
+        // SOME OPERATION
+
+        return [];
     }
 }

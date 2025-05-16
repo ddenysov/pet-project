@@ -7,5 +7,8 @@
             "Zinc\\Core\\": "src/",
             "Tests\\": "tests/"
         }
+    },
+    "require": {
+        "psr/log": "^3.0"
     }
 }
