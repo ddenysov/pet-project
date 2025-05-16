@@ -10,14 +10,14 @@ abstract class AbstractCommandHandlerMiddleware implements CommandHandlerMiddlew
 {
     #[\Override] final public function handle(C $command, callable $next): mixed
     {
-        $this->before($command);
+        $command = $this->before($command);
 
         return  $this->after($command, $next($command));
     }
 
     public function before(C $command)
     {
-
+        return $command;
     }
 
     public function after(C $command, mixed $result): mixed
