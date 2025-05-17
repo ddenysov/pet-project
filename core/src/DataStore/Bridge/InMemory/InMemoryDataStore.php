@@ -93,7 +93,7 @@ class InMemoryDataStore implements DataStore
         return $results;
     }
 
-    public function findOne(string $collection, Criteria $criteria): ?array
+    public function findOne(string $collection, Criteria $criteria, ?QueryOptions $options = null): ?array
     {
         foreach ($this->collections[$collection] ?? [] as $row) {
             if ($this->matches($criteria, $row)) {

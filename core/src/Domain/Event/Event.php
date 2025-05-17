@@ -1,6 +1,6 @@
 <?php
 
-namespace Zinc\Core\Event;
+namespace Zinc\Core\Domain\Event;
 
 use Zinc\Core\Support\Array\AsArray;
 

@@ -8,12 +8,6 @@ namespace Zinc\Core\DataStore;
  */
 final class QueryOptions
 {
-    /**
-     * @param array<string, 'ASC'|'DESC'> $sort
-     * @param int<0,max>|null             $limit
-     * @param int<0,max>|null             $offset
-     * @param array<string>|null          $select
-     */
     public function __construct(
         public readonly array $sort = [],
         public readonly ?int  $limit = null,
@@ -40,5 +34,25 @@ final class QueryOptions
     public function withSelect(array $fields): self
     {
         return new self($this->sort, $this->limit, $this->offset, $fields);
+    }
+
+    public function getSort(): array
+    {
+        return $this->sort;
+    }
+
+    public function getLimit(): ?int
+    {
+        return $this->limit;
+    }
+
+    public function getOffset(): ?int
+    {
+        return $this->offset;
+    }
+
+    public function getSelect(): ?array
+    {
+        return $this->select;
     }
 }

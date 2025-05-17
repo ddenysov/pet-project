@@ -14,10 +14,17 @@ use Zinc\Core\Command\Middleware\EventBusMiddleware;
 use Zinc\Core\Command\Middleware\EventStoreMiddleware;
 use Zinc\Core\Command\Middleware\OutboxMiddleware;
 use Zinc\Core\Command\Middleware\Proxy\MiddlewareResultLoggingProxy;
+use Zinc\Core\Command\Middleware\Proxy\MiddlewareStartLoggingProxy;
+use Zinc\Core\Command\Middleware\RetryMiddleware;
 use Zinc\Core\Command\Middleware\TransactionalMiddleware;
 use Zinc\Core\Command\Proxy\CommandHandler\LoggerProxy;
 use Zinc\Core\DataStore\Bridge\InMemory\InMemoryDataStore;
+use Zinc\Core\Domain\Value\Uuid;
+use Zinc\Core\Event\Bridge\InMemory\InMemoryEventBus;
+use Zinc\Core\Event\EventStore;
+use Zinc\Core\Event\Repository\EventStoreRepository;
 use Zinc\Core\Logging\Bridge\Print\PrintLogger;
+use Zinc\Core\Message\Outbox\Outbox;
 
 class CommandHandlerTest extends TestCase
 {
@@ -26,7 +33,9 @@ class CommandHandlerTest extends TestCase
      */
     public function testName()
     {
-        $command = new DummyCommand();
+
+
+        $command = new DummyCommand(Uuid::create()->toString());
         $logger = new PrintLogger();
         $mockDataStore = $this->createMock(InMemoryDataStore::class);
 
@@ -38,16 +47,17 @@ class CommandHandlerTest extends TestCase
                 return $fn(); // Call the actual handler inside the transaction
             });
 
-        $handler = new MiddlewareCommandHandlerDecorator(
-            new LoggerProxy(new DummyCommandHandler(), $logger, 'Handle Dummy Command'),
-            new MiddlewareResultLoggingProxy(new TransactionalMiddleware(
-                $mockDataStore,
-                new MiddlewareResultLoggingProxy(new EventStoreMiddleware(), $logger, 'Saving to event store'),
-                new MiddlewareResultLoggingProxy(new OutboxMiddleware(), $logger, 'Saving to outbox'),
-            ), $logger, 'Transaction Middleware'),
-            new MiddlewareResultLoggingProxy(new EventBusMiddleware(), $logger, 'Publishing to Event Bus'),
+        $eventStore = new EventStore($mockDataStore);
+        $repository = new EventStoreRepository($eventStore);
+        $outbox = new Outbox($mockDataStore);
+        $eventBus = new InMemoryEventBus();
 
+        $handler = new DummyCommandHandler(
+            $repository,
+            $outbox,
+            $eventBus,
         );
+
         $bus = new InMemoryCommandBus();
         $bus->register(DummyCommand::class, $handler);
         $bus->dispatch($command);

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Zinc\Core\Command;
 
+use Zinc\Core\Domain\Event\EventStream;
+
 /**
  * Handles a single Command instance.
  *
@@ -11,7 +13,8 @@ namespace Zinc\Core\Command;
 interface CommandHandler
 {
     /**
-     * @param C $command
+     * @param Command $command
+     * @return EventStream
      */
-    public function __invoke(Command $command): mixed;
+    public function __invoke(Command $command): EventStream;
 }

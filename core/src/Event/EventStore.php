@@ -1,8 +1,41 @@
 <?php
+declare(strict_types=1);
 
 namespace Zinc\Core\Event;
 
-interface EventStore
+use Zinc\Core\DataStore\Criteria;
+use Zinc\Core\DataStore\DataStore;
+use Zinc\Core\DataStore\QueryOptions;
+use Zinc\Core\Domain\Event\EventStream;
+use Zinc\Core\Domain\Value\Uuid;
+
+class EventStore
 {
-    public function append(EventStream $stream): void;
+
+    public function __construct(private DataStore $dataStore)
+    {
+    }
+
+    public function append(EventStream $stream)
+    {
+    }
+
+    public function getStreamRevision(Uuid $streamId): int
+    {
+        $record = $this->dataStore->findOne(
+            'events',
+            new Criteria('stream_id', Criteria::OP_EQ, $streamId->toString()),
+            new QueryOptions([['revision' => 'DESC']])
+        );
+
+        return $record['revision'] ?? 0;
+    }
+
+    /**
+     * @return DataStore
+     */
+    public function getDataStore(): DataStore
+    {
+        return $this->dataStore;
+    }
 }

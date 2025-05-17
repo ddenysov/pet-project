@@ -3,15 +3,18 @@ declare(strict_types=1);
 
 namespace Tests\Stub;
 
+use Zinc\Core\Command\AbstractCommandHandler;
 use Zinc\Core\Command\Command;
 use Zinc\Core\Command\CommandHandler;
+use Zinc\Core\Domain\Event\EventStream;
+use Zinc\Core\Domain\Value\Uuid;
 
 /**
  * Dummy handler that records calls for assertions.
  *
  * @implements CommandHandler<DummyCommand>
  */
-final class DummyCommandHandler implements CommandHandler
+final class DummyCommandHandler extends AbstractCommandHandler implements CommandHandler
 {
     /** Number of times the handler was invoked. */
     public static int $invocations = 0;
@@ -19,13 +22,13 @@ final class DummyCommandHandler implements CommandHandler
     /** Last command instance passed to the handler. */
     public ?Command $lastCommand = null;
 
-    public function __invoke(Command $command): mixed
+    public function __invoke(Command|DummyCommand $command): EventStream
     {
         ++self::$invocations;
         $this->lastCommand = $command;
 
-        // SOME OPERATION
+        $root = StubAggregate::create(Uuid::fromString($command->id));
 
-        return [];
+        return $this->persist($root);
     }
 }

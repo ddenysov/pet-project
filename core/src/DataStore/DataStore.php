@@ -19,7 +19,7 @@ interface DataStore
     /** @return iterable<array> */
     public function find(string $collection, Criteria $criteria, ?QueryOptions $options = null): iterable;
 
-    public function findOne(string $collection, Criteria $criteria): ?array;
+    public function findOne(string $collection, Criteria $criteria, ?QueryOptions $options = null): ?array;
 
     public function transactional(callable $fn): mixed;
 
