@@ -12,9 +12,5 @@ use Zinc\Core\Domain\Event\EventStream;
  */
 interface CommandHandler
 {
-    /**
-     * @param Command $command
-     * @return EventStream
-     */
-    public function __invoke(Command $command): EventStream;
+
 }

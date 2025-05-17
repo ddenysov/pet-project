@@ -8,16 +8,21 @@ use Zinc\Core\DataStore\DataStore;
 use Zinc\Core\DataStore\QueryOptions;
 use Zinc\Core\Domain\Event\EventStream;
 use Zinc\Core\Domain\Value\Uuid;
+use Zinc\Core\Message\Outbox\Outbox;
 
 class EventStore
 {
 
-    public function __construct(private DataStore $dataStore)
-    {
+    public function __construct(
+        private DataStore $dataStore,
+    ) {
     }
 
     public function append(EventStream $stream)
     {
+        foreach ($stream as $event) {
+
+        }
     }
 
     public function getStreamRevision(Uuid $streamId): int
@@ -29,13 +34,5 @@ class EventStore
         );
 
         return $record['revision'] ?? 0;
-    }
-
-    /**
-     * @return DataStore
-     */
-    public function getDataStore(): DataStore
-    {
-        return $this->dataStore;
     }
 }

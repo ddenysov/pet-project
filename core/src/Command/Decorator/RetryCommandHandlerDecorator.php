@@ -34,17 +34,19 @@ final readonly class RetryCommandHandlerDecorator implements CommandHandler
 
     /**
      * @param Command $command
-     * @return EventStream
+     * @return void
      * @throws Throwable
      */
-    public function __invoke(Command $command): EventStream
+    public function __invoke(Command $command): void
     {
         $attempt = 0;
         $delay   = $this->initialDelayMs;
 
         while (true) {
             try {
-                return ($this->inner)($command);
+                ($this->inner)($command);
+
+                return;
             } catch (Throwable $e) {
                 $attempt++;
 

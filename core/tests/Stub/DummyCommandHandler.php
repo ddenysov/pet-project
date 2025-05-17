@@ -12,7 +12,6 @@ use Zinc\Core\Domain\Value\Uuid;
 /**
  * Dummy handler that records calls for assertions.
  *
- * @implements CommandHandler<DummyCommand>
  */
 final class DummyCommandHandler extends AbstractCommandHandler implements CommandHandler
 {
@@ -22,13 +21,12 @@ final class DummyCommandHandler extends AbstractCommandHandler implements Comman
     /** Last command instance passed to the handler. */
     public ?Command $lastCommand = null;
 
-    public function __invoke(Command|DummyCommand $command): EventStream
+    public function __invoke(DummyCommand $command): void
     {
         ++self::$invocations;
         $this->lastCommand = $command;
 
         $root = StubAggregate::create(Uuid::fromString($command->id));
-
-        return $this->persist($root);
+        $this->persist($root);
     }
 }

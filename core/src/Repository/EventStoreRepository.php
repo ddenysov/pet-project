@@ -1,16 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Zinc\Core\Event\Repository;
+namespace Zinc\Core\Repository;
 
 use Zinc\Core\DataStore\DataStore;
 use Zinc\Core\Domain\Event\EventStream;
+use Zinc\Core\Domain\Repository\Repository;
 use Zinc\Core\Domain\Root\Aggregate;
 use Zinc\Core\Domain\Value\Uuid;
 use Zinc\Core\Event\EventStore;
 use Zinc\Core\Event\Exception\ConcurrencyException;
 
-class EventStoreRepository
+class EventStoreRepository implements Repository
 {
     public function __construct(private EventStore $store)
     {
