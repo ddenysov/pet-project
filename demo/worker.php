@@ -2,22 +2,19 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Denysov\Demo\Container\ContainerFactory;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
 use Spiral\RoadRunner\Worker;
 use Spiral\RoadRunner\Http\PSR7Worker;
-use VideoValidator\ConfigLoader;
-use VideoValidator\FFprobe;
-use VideoValidator\FileInfo;
-use VideoValidator\RuleFactory;
-use VideoValidator\VideoValidator;
 
 $worker = Worker::create();
 
 $factory = new Psr17Factory();
 
 $psr7 = new PSR7Worker($worker, $factory, $factory, $factory);
+$container = ContainerFactory::create();
 
 while (true) {
     try {
@@ -25,7 +22,7 @@ while (true) {
         if ($request === null) {
             break;
         }
-    } catch (\Throwable $e) {
+    } catch (Throwable $e) {
         $psr7->respond(new Response(400));
         continue;
     }
@@ -37,7 +34,7 @@ while (true) {
             ],
             JSON_PRETTY_PRINT
         )));
-    } catch (\Throwable $e) {
+    } catch (Throwable $e) {
         $psr7->respond(new Response(500, [], $e->getMessage()));
         $psr7->getWorker()->error((string) $e);
     }

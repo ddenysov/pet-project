@@ -15,12 +15,13 @@
       <sourceFolder url="file://$MODULE_DIR$/user-service/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/ride-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/core/src" isTestSource="false" packagePrefix="Zinc\Core" />
+      <sourceFolder url="file://$MODULE_DIR$/demo/src" isTestSource="false" packagePrefix="Denysov\Demo" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/nikic/php-parser" />
