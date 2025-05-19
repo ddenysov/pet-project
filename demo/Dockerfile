@@ -5,8 +5,6 @@ FROM php:8.3-alpine
 RUN --mount=type=bind,from=mlocati/php-extension-installer:2,source=/usr/bin/install-php-extensions,target=/usr/local/bin/install-php-extensions \
      install-php-extensions @composer-2 opcache zip intl sockets protobuf
 
-RUN apk add --no-cache ffmpeg
-
 COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 
 EXPOSE 8080/tcp

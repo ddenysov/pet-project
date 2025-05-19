@@ -31,40 +31,9 @@ while (true) {
     }
 
     try {
-        $startMem  = memory_get_usage();
-        $startPeak = memory_get_peak_usage(true);
-        $start     = microtime(true);
-
-        $url = '';
-
-        $validator = new VideoValidator(
-            new FFprobe(),
-            new FileInfo(),
-            new RuleFactory(),
-            new ConfigLoader(),
-        );
-
-        $errors = [];
-        foreach ($validator->validate($url, 'config/video_rules.php') as $v) {
-            $errors[] = $v->message;
-        }
-
-        $end     = microtime(true);
-        $endMem  = memory_get_usage();
-        $endPeak = memory_get_peak_usage(true);
-
-
         $psr7->respond(new Response(200, [], json_encode(
             [
-                'errors' => $errors,
-                'debug'  => [
-                    'profile' => sprintf(
-                        "Δ mem: %.2f MB   peak: %.2f MB   time: %.2f ms",
-                        ($endMem - $startMem) / 1048576,
-                        $endPeak / 1048576,
-                        ($end - $start) * 1000
-                    ),
-                ],
+                'status' => 'ok',
             ],
             JSON_PRETTY_PRINT
         )));
