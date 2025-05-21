@@ -23,11 +23,7 @@ $client      = new HttpClient();
 $httpFactory = new HttpFoundationFactory();
 
 /** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
-
-
-
-new SymfonyHttpKernel('local', false);
-
+$kernel  = new SymfonyHttpKernel('local', true);
 while (true) {
 
     try {
@@ -41,20 +37,10 @@ while (true) {
     }
 
     try {
-        $container   = SymfonyContainerFactory::create();
-        $kernel = $container->get('kernel');
         $symfonyRequest = $httpFactory->createRequest($request);
-
-        // обработка ядром
         $symfonyResponse = $kernel->handle($symfonyRequest);
 
-
-        $psr7->respond(new Response(200, [], json_encode(
-            [
-                'status' => 'ok',
-            ],
-            JSON_PRETTY_PRINT
-        )));
+        $psr7->respond(new Response($symfonyResponse->getStatusCode(), $symfonyResponse->headers->all(), $symfonyResponse->getContent()));
     } catch (Throwable $e) {
         $psr7->respond(new Response(500, [], $e->getMessage()));
         $psr7->getWorker()->error((string) $e);

@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace Denysov\Demo\Delivery\Http;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class IndexController
 {
-    public function index()
+    public function __invoke()
     {
-        return ['ololo' => 'trololo'];
+        return new JsonResponse(['framework' => 'symfony']);
     }
 }

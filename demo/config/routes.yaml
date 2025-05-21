@@ -1,0 +1,4 @@
+hello:
+  path: /
+  controller: Denysov\Demo\Delivery\Http\IndexController
+  defaults: { name: world }

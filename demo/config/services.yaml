@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Denysov\Demo\:
+    resource: '../src/*'
+    exclude: '../src/{Entity,Tests}'
