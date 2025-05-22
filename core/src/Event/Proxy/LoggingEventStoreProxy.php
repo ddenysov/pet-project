@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Event\Proxy;
@@ -13,9 +14,7 @@ class LoggingEventStoreProxy extends EventStore
     public function __construct(
         private readonly EventStore $inner,
         private readonly LogManager $logger,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @throws \Throwable
@@ -28,7 +27,8 @@ class LoggingEventStoreProxy extends EventStore
         );
     }
 
-    #[\Override] public function getStreamRevision(Uuid $streamId): int
+    #[\Override]
+    public function getStreamRevision(Uuid $streamId): int
     {
         return $this->inner->getStreamRevision($streamId);
     }

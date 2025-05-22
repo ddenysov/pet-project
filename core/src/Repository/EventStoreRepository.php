@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Repository;
@@ -13,9 +14,7 @@ use Zinc\Core\Event\Exception\ConcurrencyException;
 
 class EventStoreRepository implements Repository
 {
-    public function __construct(private EventStore $store)
-    {
-    }
+    public function __construct(private EventStore $store) {}
 
     /**
      * @throws ConcurrencyException
@@ -35,14 +34,8 @@ class EventStoreRepository implements Repository
         return $events;
     }
 
-    public function find(Uuid $id)
-    {
+    public function find(Uuid $id): void {}
 
-    }
-
-    /**
-     * @return DataStore
-     */
     public function getDataStore(): DataStore
     {
         return $this->store->getDataStore();

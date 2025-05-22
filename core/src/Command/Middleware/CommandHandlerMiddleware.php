@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zinc\Core\Command\Middleware;
 
 use Zinc\Core\Command\Command;

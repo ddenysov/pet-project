@@ -1,26 +1,19 @@
 <?php
 
-namespace Zinc\Core\Support\Collection;
+declare(strict_types=1);
 
-use InvalidArgumentException;
+namespace Zinc\Core\Support\Collection;
 
 abstract class AbstractCollection implements \Iterator, \ArrayAccess, Collection, \Countable
 {
-
-    /**
-     * @var array
-     */
     private array $container = [];
 
-    /**
-     * @var int
-     */
     private int $position = 0;
 
     public function __construct(array $collection = [])
     {
         $class = $this->getClass();
-        $this->container = array_map(function ($value) use ($class) {
+        $this->container = \array_map(function ($value) use ($class) {
             if ($this->offsetCheck($value)) {
                 return $value;
             }
@@ -28,95 +21,70 @@ abstract class AbstractCollection implements \Iterator, \ArrayAccess, Collection
         }, $collection);
     }
 
-    /**
-     * @param $offset
-     * @param $value
-     * @return void
-     */
-    public function offsetSet($offset, $value): void {
+    public function offsetSet($offset, $value): void
+    {
         if (!$this->offsetCheck($value)) {
-            throw new InvalidArgumentException("Value must implement the Event interface.");
+            throw new \InvalidArgumentException("Value must implement the Event interface.");
         }
 
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
         }
     }
 
-    abstract protected function getClass(): string;
-
     public function offsetCheck(mixed $value): bool
     {
-        return is_a($value, $this->getClass(), true);
+        return \is_a($value, $this->getClass(), true);
     }
 
-    /**
-     * @param $offset
-     * @return mixed
-     */
-    public function offsetGet($offset): mixed {
+    public function offsetGet($offset): mixed
+    {
         return $this->container[$offset] ?? null;
     }
 
-    /**
-     * @param $offset
-     * @return bool
-     */
-    public function offsetExists($offset): bool {
+    public function offsetExists($offset): bool
+    {
         return isset($this->container[$offset]);
     }
 
-    /**
-     * @param $offset
-     * @return void
-     */
     // Удаляет значение по ключу
-    public function offsetUnset($offset): void {
+    public function offsetUnset($offset): void
+    {
         unset($this->container[$offset]);
     }
 
-    /**
-     * @return mixed
-     */
-    public function current(): mixed {
+    public function current(): mixed
+    {
         return $this->container[$this->position];
     }
 
-    /**
-     * @return mixed
-     */
-    public function key(): mixed {
+    public function key(): mixed
+    {
         return $this->position;
     }
 
-    /**
-     * @return void
-     */
-    public function next(): void {
+    public function next(): void
+    {
         ++$this->position;
     }
 
-    /**
-     * @return void
-     */
-    public function rewind(): void {
+    public function rewind(): void
+    {
         $this->position = 0;
     }
 
-    /**
-     * @return bool
-     */
-    public function valid(): bool {
+    public function valid(): bool
+    {
         return isset($this->container[$this->position]);
     }
 
-    /**
-     * @return int
-     */
-    #[\Override] public function count(): int
+    #[\Override]
+    public function count(): int
     {
-        return count($this->container);
+        return \count($this->container);
     }
+
+    abstract protected function getClass(): string;
 }

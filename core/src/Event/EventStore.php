@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Event;
@@ -8,17 +9,14 @@ use Zinc\Core\DataStore\DataStore;
 use Zinc\Core\DataStore\QueryOptions;
 use Zinc\Core\Domain\Event\EventStream;
 use Zinc\Core\Domain\Value\Uuid;
-use Zinc\Core\Message\Outbox\Outbox;
 
 class EventStore
 {
-
     public function __construct(
         private DataStore $dataStore,
-    ) {
-    }
+    ) {}
 
-    public function append(EventStream $stream)
+    public function append(EventStream $stream): void
     {
         foreach ($stream as $event) {
 
@@ -30,7 +28,7 @@ class EventStore
         $record = $this->dataStore->findOne(
             'events',
             new Criteria('stream_id', Criteria::OP_EQ, $streamId->toString()),
-            new QueryOptions([['revision' => 'DESC']])
+            new QueryOptions([['revision' => 'DESC']]),
         );
 
         return $record['revision'] ?? 0;

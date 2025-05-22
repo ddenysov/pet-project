@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Message\Outbox\Proxy;
@@ -12,9 +13,7 @@ class LoggingOutboxProxy extends Outbox
     public function __construct(
         private readonly Outbox $inner,
         private readonly LogManager $logger,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @throws \Throwable

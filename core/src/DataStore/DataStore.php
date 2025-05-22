@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\DataStore;
@@ -16,7 +17,9 @@ interface DataStore
 
     public function delete(string $collection, Criteria $criteria): int;
 
-    /** @return iterable<array> */
+    /**
+     * @return iterable<array>
+     */
     public function find(string $collection, Criteria $criteria, ?QueryOptions $options = null): iterable;
 
     public function findOne(string $collection, Criteria $criteria, ?QueryOptions $options = null): ?array;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Event\Bridge\InMemory;
@@ -41,7 +42,8 @@ final class InMemoryEventBus implements EventBus
         $this->handlers[$commandClass] = $handler;
     }
 
-    #[\Override] public function dispatch(Event $event): void
+    #[\Override]
+    public function dispatch(Event $event): void
     {
         $eventClass = $event::class;
 
@@ -52,7 +54,8 @@ final class InMemoryEventBus implements EventBus
         $this->handlers[$eventClass]($event);
     }
 
-    #[\Override] public function dispatchMany(EventStream $stream): void
+    #[\Override]
+    public function dispatchMany(EventStream $stream): void
     {
         foreach ($stream as $event) {
             $this->dispatch($event);

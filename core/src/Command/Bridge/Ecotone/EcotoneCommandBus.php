@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Bridge\Ecotone;
@@ -15,7 +16,7 @@ final class EcotoneCommandBus extends AbstractCommandBus
 {
     public function __construct(
         private GatewayProxy $gateway,
-        MiddlewareInterface ...$middleware
+        MiddlewareInterface ...$middleware,
     ) {
         parent::__construct(...$middleware);
     }

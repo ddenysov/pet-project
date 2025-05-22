@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zinc\Core\Domain\Repository;
 
 use Zinc\Core\Domain\Event\EventStream;

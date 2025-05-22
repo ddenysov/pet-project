@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zinc\Core\Domain\Entity;
 
 use Zinc\Core\Domain\Value\Uuid;
@@ -10,15 +12,11 @@ use Zinc\Core\Support\Array\AsArray;
  */
 abstract class Entity implements AsArray
 {
-    /**
-     * @var Uuid
-     */
     protected Uuid $id;
 
     /**
      * Convert aggregate to array
      * Q: Do I need to implement serialize method ?
-     * @return array
      * @throws \Exception
      */
     final public function toArray(): array
@@ -26,9 +24,6 @@ abstract class Entity implements AsArray
         return [];
     }
 
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid
     {
         return $this->id;

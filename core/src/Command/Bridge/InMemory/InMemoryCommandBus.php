@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Bridge\InMemory;
 
-use Zinc\Core\Command\AbstractCommandBus;
 use Zinc\Core\Command\Command;
 use Zinc\Core\Command\CommandBus;
 
@@ -40,13 +40,14 @@ final class InMemoryCommandBus implements CommandBus
         $this->handlers[$commandClass] = $handler;
     }
 
-    #[\Override] public function dispatch(Command $command): mixed
+    #[\Override]
+    public function dispatch(Command $command): mixed
     {
         $commandClass = $command::class;
 
         if (!isset($this->handlers[$commandClass])) {
             throw new \RuntimeException(
-                sprintf('No handler registered for command "%s".', $commandClass)
+                \sprintf('No handler registered for command "%s".', $commandClass),
             );
         }
 

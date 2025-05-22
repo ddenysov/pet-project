@@ -1,14 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Middleware;
 
-use Zinc\Core\Command\Command;
 use Zinc\Core\Command\Command as C;
 
 abstract class AbstractCommandHandlerMiddleware implements CommandHandlerMiddleware
 {
-    #[\Override] final public function handle(C $command, callable $next): mixed
+    #[\Override]
+    final public function handle(C $command, callable $next): mixed
     {
         $command = $this->before($command);
 

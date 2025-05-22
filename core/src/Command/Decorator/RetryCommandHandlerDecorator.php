@@ -1,12 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Decorator;
 
-use Throwable;
 use Zinc\Core\Command\Command;
 use Zinc\Core\Command\CommandHandler;
-use Zinc\Core\Domain\Event\EventStream;
 
 /**
  * Decorator that retries an inner CommandHandler up to N times,
@@ -29,13 +28,10 @@ final readonly class RetryCommandHandlerDecorator implements CommandHandler
         private readonly int $maxAttempts = 3,
         private readonly int $initialDelayMs = 100,
         private readonly int $stepMs = 100,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param Command $command
-     * @return void
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function __invoke(Command $command): void
     {
@@ -47,14 +43,14 @@ final readonly class RetryCommandHandlerDecorator implements CommandHandler
                 ($this->inner)($command);
 
                 return;
-            } catch (Throwable $e) {
+            } catch (\Throwable $e) {
                 $attempt++;
 
                 if ($attempt >= $this->maxAttempts) {
                     throw $e;
                 }
 
-                usleep($delay * 1000);
+                \usleep($delay * 1000);
                 $delay += $this->stepMs;
             }
         }

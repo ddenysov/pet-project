@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Logging\Bridge\Print;
@@ -59,7 +60,7 @@ class PrintLogger implements LoggerInterface
     #[\Override]
     public function log($level, $message, array $context = []): void
     {
-        $output = sprintf("%s [%s] %s", date('Y-m-d H:i:s'), strtoupper($level), (string) $message);
-        echo $output . ' ' . json_encode($context) . PHP_EOL;
+        $output = \sprintf("%s [%s] %s", \date('Y-m-d H:i:s'), \strtoupper($level), (string) $message);
+        echo $output . ' ' . \json_encode($context) . PHP_EOL;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\DataStore\Adapter\PDO;
@@ -10,9 +11,9 @@ final class SqlChecksum
 {
     public static function hash(string $sql): string
     {
-        $clean = preg_replace('/--.*?(\r?\n)|\/\*.*?\*\//s', '', $sql);
-        $clean = preg_replace('/\s+/', ' ', trim($clean));
+        $clean = \preg_replace('/--.*?(\r?\n)|\/\*.*?\*\//s', '', $sql);
+        $clean = \preg_replace('/\s+/', ' ', \trim($clean));
 
-        return hash('sha256', $clean);
+        return \hash('sha256', $clean);
     }
 }

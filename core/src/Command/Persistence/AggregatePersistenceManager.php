@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Persistence;
@@ -17,8 +18,7 @@ class AggregatePersistenceManager
         private Outbox $outbox,
         private EventBus $eventBus,
         private DataStore $store,
-    ) {
-    }
+    ) {}
 
     public function persist(Aggregate $aggregate): EventStream
     {

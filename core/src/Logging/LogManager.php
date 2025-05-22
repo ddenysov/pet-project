@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Logging;
@@ -7,10 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class LogManager
 {
-
-    public function __construct(private LoggerInterface $logger)
-    {
-    }
+    public function __construct(private LoggerInterface $logger) {}
 
     public function log(callable $callback, string $message, array $context = []): mixed
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Event\Proxy;
@@ -13,9 +14,7 @@ class LoggingEventBusProxy implements EventBus
     public function __construct(
         private readonly EventBus $inner,
         private readonly LogManager $logger,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @throws \Throwable
@@ -35,11 +34,12 @@ class LoggingEventBusProxy implements EventBus
             'Dispatching event tp event bus',
             [
                 'payload' => $event->toArray(),
-            ]
+            ],
         );
     }
 
-    #[\Override] public function dispatchMany(EventStream $stream): void
+    #[\Override]
+    public function dispatchMany(EventStream $stream): void
     {
         foreach ($stream as $event) {
             $this->dispatch($event);

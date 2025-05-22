@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\DataStore\Bridge\InMemory;
@@ -35,7 +36,7 @@ class InMemoryDataStore implements DataStore
 
         foreach ($this->collections[$collection] ?? [] as $idx => $row) {
             if ($this->matches($criteria, $row)) {
-                $this->collections[$collection][$idx] = array_merge($row, $data);
+                $this->collections[$collection][$idx] = \array_merge($row, $data);
                 $updated = true;
             }
         }
@@ -53,7 +54,7 @@ class InMemoryDataStore implements DataStore
 
         foreach ($this->collections[$collection] ?? [] as $idx => $row) {
             if ($this->matches($criteria, $row)) {
-                $this->collections[$collection][$idx] = array_merge($row, $data);
+                $this->collections[$collection][$idx] = \array_merge($row, $data);
                 ++$count;
             }
         }
@@ -75,7 +76,9 @@ class InMemoryDataStore implements DataStore
         return $count;
     }
 
-    /** @return iterable<array> */
+    /**
+     * @return iterable<array>
+     */
     public function find(string $collection, Criteria $criteria, ?QueryOptions $options = null): iterable
     {
         $results = [];
@@ -146,17 +149,17 @@ class InMemoryDataStore implements DataStore
     private function matches(Criteria $criteria, array $row): bool
     {
         // Preferred: delegated evaluation.
-        if (method_exists($criteria, 'matches')) {
+        if (\method_exists($criteria, 'matches')) {
             /** @phpstan-ignore-next-line */
             return $criteria->matches($row);
         }
 
         // Fallback: basic equality on an associative filter array.
-        if (method_exists($criteria, 'toArray')) {
+        if (\method_exists($criteria, 'toArray')) {
             /** @var array<string, mixed> $filter */
             $filter = $criteria->toArray();
             foreach ($filter as $field => $expectedValue) {
-                if (!array_key_exists($field, $row) || $row[$field] !== $expectedValue) {
+                if (!\array_key_exists($field, $row) || $row[$field] !== $expectedValue) {
                     return false;
                 }
             }
@@ -177,30 +180,30 @@ class InMemoryDataStore implements DataStore
     private function applyOptions(array $rows, QueryOptions $options): array
     {
         // Sorting.
-        if (method_exists($options, 'getSort')) {
+        if (\method_exists($options, 'getSort')) {
             /** @var array<string, string>|null $sort */
             $sort = $options->getSort();
             if ($sort !== null) {
-                foreach (array_reverse($sort) as $field => $dir) {
-                    usort(
+                foreach (\array_reverse($sort) as $field => $dir) {
+                    \usort(
                         $rows,
-                        static fn (array $a, array $b): int =>
-                        strtoupper($dir) === 'DESC'
+                        static fn(array $a, array $b): int =>
+                        \strtoupper($dir) === 'DESC'
                             ? $b[$field] <=> $a[$field]
-                            : $a[$field] <=> $b[$field]
+                            : $a[$field] <=> $b[$field],
                     );
                 }
             }
         }
 
         // Offset.
-        if (method_exists($options, 'getOffset')) {
-            $rows = array_slice($rows, (int) $options->getOffset());
+        if (\method_exists($options, 'getOffset')) {
+            $rows = \array_slice($rows, (int) $options->getOffset());
         }
 
         // Limit.
-        if (method_exists($options, 'getLimit') && ($limit = (int) $options->getLimit()) > 0) {
-            $rows = array_slice($rows, 0, $limit);
+        if (\method_exists($options, 'getLimit') && ($limit = (int) $options->getLimit()) > 0) {
+            $rows = \array_slice($rows, 0, $limit);
         }
 
         return $rows;

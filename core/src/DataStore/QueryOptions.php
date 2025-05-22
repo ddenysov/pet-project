@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\DataStore;
@@ -17,7 +18,7 @@ final class QueryOptions
 
     public function withSort(string $field, string $direction = 'ASC'): self
     {
-        $sort = $this->sort + [$field => strtoupper($direction)];
+        $sort = $this->sort + [$field => \strtoupper($direction)];
         return new self($sort, $this->limit, $this->offset, $this->select);
     }
 

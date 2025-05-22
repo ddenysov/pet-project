@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\DataStore;
-
-use Traversable;
 
 /**
  * Composite filter that groups other criteria by logical AND / OR.
@@ -13,7 +12,9 @@ final class CompositeCriteria implements \IteratorAggregate
     public const TYPE_AND = 'AND';
     public const TYPE_OR  = 'OR';
 
-    /** @param array<Criteria|CompositeCriteria> $parts */
+    /**
+     * @param array<Criteria|CompositeCriteria> $parts
+     */
     private function __construct(
         public readonly string $type,
         public readonly array  $parts,
@@ -29,8 +30,10 @@ final class CompositeCriteria implements \IteratorAggregate
         return new self(self::TYPE_OR, $parts);
     }
 
-    /** @return Traversable<Criteria|CompositeCriteria> */
-    public function getIterator(): Traversable
+    /**
+     * @return \Traversable<Criteria|CompositeCriteria>
+     */
+    public function getIterator(): \Traversable
     {
         yield from $this->parts;
     }

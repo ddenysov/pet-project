@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Middleware\Decorator;
@@ -15,22 +16,20 @@ final class MiddlewareCommandHandlerDecorator implements CommandHandler
     public function __construct(
         private CommandHandler   $coreHandler,
         CommandHandlerMiddleware ...$middlewares,
-    )
-    {
+    ) {
         $this->middlewares = $middlewares;
     }
 
     public function __invoke(Command $command): mixed
     {
         // Строим «луковицу»: последним идёт сам handler
-        $pipeline = array_reduce(
+        $pipeline = \array_reduce(
             $this->middlewares,
 
             // Оборачиваем следующий вызов в текущий middleware
             /** @param callable(Command):mixed $next */
-            fn (callable $next, CommandHandlerMiddleware $mw): callable =>
-            fn (Command $cmd) => $mw->handle($cmd, $next),
-
+            static fn(callable $next, CommandHandlerMiddleware $mw): callable =>
+            static fn(Command $cmd) => $mw->handle($cmd, $next),
             $this->coreHandler,   // ← здесь просто объект-хендлер, а не $this->coreHandler(...)
         );
 

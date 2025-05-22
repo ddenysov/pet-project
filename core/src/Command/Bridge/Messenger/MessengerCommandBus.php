@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Command\Bridge\Messenger;
@@ -15,7 +16,7 @@ final class MessengerCommandBus extends AbstractCommandBus
 {
     public function __construct(
         private MessageBusInterface $messengerBus,
-        MiddlewareInterface ...$middleware
+        MiddlewareInterface ...$middleware,
     ) {
         parent::__construct(...$middleware);
     }

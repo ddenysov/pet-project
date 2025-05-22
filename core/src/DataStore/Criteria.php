@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\DataStore;
@@ -24,13 +25,48 @@ final class Criteria
         public readonly mixed  $value,
     ) {}
 
-    public static function eq(string $f, mixed $v): self  { return new self($f, self::OP_EQ,  $v); }
-    public static function ne(string $f, mixed $v): self  { return new self($f, self::OP_NE,  $v); }
-    public static function gt(string $f, mixed $v): self  { return new self($f, self::OP_GT,  $v); }
-    public static function gte(string $f, mixed $v): self { return new self($f, self::OP_GTE, $v); }
-    public static function lt(string $f, mixed $v): self  { return new self($f, self::OP_LT,  $v); }
-    public static function lte(string $f, mixed $v): self { return new self($f, self::OP_LTE, $v); }
-    public static function in(string $f, array $v): self  { return new self($f, self::OP_IN,  $v); }
-    public static function like(string $f, string $v): self { return new self($f, self::OP_LIKE, $v); }
-    public static function regex(string $f, string $v): self { return new self($f, self::OP_REGEX, $v); }
+    public static function eq(string $f, mixed $v): self
+    {
+        return new self($f, self::OP_EQ, $v);
+    }
+
+    public static function ne(string $f, mixed $v): self
+    {
+        return new self($f, self::OP_NE, $v);
+    }
+
+    public static function gt(string $f, mixed $v): self
+    {
+        return new self($f, self::OP_GT, $v);
+    }
+
+    public static function gte(string $f, mixed $v): self
+    {
+        return new self($f, self::OP_GTE, $v);
+    }
+
+    public static function lt(string $f, mixed $v): self
+    {
+        return new self($f, self::OP_LT, $v);
+    }
+
+    public static function lte(string $f, mixed $v): self
+    {
+        return new self($f, self::OP_LTE, $v);
+    }
+
+    public static function in(string $f, array $v): self
+    {
+        return new self($f, self::OP_IN, $v);
+    }
+
+    public static function like(string $f, string $v): self
+    {
+        return new self($f, self::OP_LIKE, $v);
+    }
+
+    public static function regex(string $f, string $v): self
+    {
+        return new self($f, self::OP_REGEX, $v);
+    }
 }

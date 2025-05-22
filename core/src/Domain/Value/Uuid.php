@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zinc\Core\Domain\Value;
@@ -8,10 +9,7 @@ use Zinc\Core\Support\String\AsString;
 
 class Uuid extends AbstractValue implements AsString
 {
-
-    public function __construct(private string $value)
-    {
-    }
+    public function __construct(private string $value) {}
 
     public static function create(): self
     {
@@ -23,7 +21,8 @@ class Uuid extends AbstractValue implements AsString
         return new self($uuid);
     }
 
-    #[\Override] public function toString(): string
+    #[\Override]
+    public function toString(): string
     {
         return $this->value;
     }
