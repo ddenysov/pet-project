@@ -4,27 +4,28 @@ declare(strict_types=1);
 
 namespace Zinc\Core\Command\Decorator;
 
+use Aws\CommandInterface;
 use Zinc\Core\Command\Command;
 use Zinc\Core\Command\CommandHandler;
+use Zinc\Core\Command\CommandHandlerInterface;
 
 /**
  * Decorator that retries an inner CommandHandler up to N times,
  * increasing the delay before each next attempt (linear-backoff by default).
  *
- * @template C of Command
- * @implements CommandHandler<C>
+ * @template C of CommandInterface
+ * @implements CommandHandlerInterface<C>
  */
 final readonly class RetryCommandHandlerDecorator implements CommandHandler
 {
     /**
-     * @param CommandHandler<C> $inner
-     * @param int               $maxAttempts   How many times to try in total (1 ⇒ no retry).
-     * @param int               $initialDelayMs Delay before 1-й повтор (миллисекунды).
-     * @param int               $stepMs        How much to add к задержке на каждый next retry.
-     *                                          (Для экспоненциальной схемы поменяйте логику внутри цикла.)
+     * @param CommandHandlerInterface<C> $inner
+     * @param int               $maxAttempts
+     * @param int               $initialDelayMs
+     * @param int               $stepMs
      */
     public function __construct(
-        private readonly CommandHandler $inner,
+        private readonly CommandHandlerInterface $inner,
         private readonly int $maxAttempts = 3,
         private readonly int $initialDelayMs = 100,
         private readonly int $stepMs = 100,
@@ -33,7 +34,7 @@ final readonly class RetryCommandHandlerDecorator implements CommandHandler
     /**
      * @throws \Throwable
      */
-    public function __invoke(Command $command): void
+    public function __invoke(CommandInterface $command): void
     {
         $attempt = 0;
         $delay   = $this->initialDelayMs;

@@ -9,4 +9,6 @@ namespace Zinc\Core\Command;
  *
  * @template C of Command
  */
-interface CommandHandler {}
+interface CommandHandlerInterface {
+
+}

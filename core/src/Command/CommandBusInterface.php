@@ -7,7 +7,7 @@ namespace Zinc\Core\Command;
 /**
  * Dispatches Commands to their handlers.
  */
-interface CommandBus
+interface CommandBusInterface
 {
-    public function dispatch(Command $command): mixed;
+    public function dispatch(CommandInterface $command): mixed;
 }

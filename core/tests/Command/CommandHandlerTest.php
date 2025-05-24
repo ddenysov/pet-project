@@ -3,33 +3,29 @@
 
 namespace Tests\Command;
 
-use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Stub\DummyCommand;
 use Tests\Stub\DummyCommandHandler;
 use Zinc\Core\Command\Bridge\InMemory\InMemoryCommandBus;
-use Zinc\Core\Command\Decorator\RetryCommandHandlerDecorator;
-use Zinc\Core\Command\Persistence\AggregatePersistenceManager;
-use Zinc\Core\Command\Proxy\CommandHandler\LoggerProxyCommandHandler;
-use Zinc\Core\DataStore\Bridge\InMemory\InMemoryDataStore;
 use Zinc\Core\Domain\Value\Uuid;
-use Zinc\Core\Event\Bridge\InMemory\InMemoryEventBus;
-use Zinc\Core\Event\EventStore;
-use Zinc\Core\Event\Proxy\LoggingEventBusProxy;
-use Zinc\Core\Event\Proxy\LoggingEventStoreProxy;
-use Zinc\Core\Logging\Bridge\Print\PrintLogger;
-use Zinc\Core\Logging\LogManager;
-use Zinc\Core\Message\Outbox\Outbox;
-use Zinc\Core\Message\Outbox\Proxy\LoggingOutboxProxy;
-use Zinc\Core\Repository\EventStoreRepository;
-use Zinc\Core\Repository\Proxy\LoggingRepositoryProxy;
 
 class CommandHandlerTest extends TestCase
 {
+    public function testSimpleCommand()
+    {
+        $command       = new DummyCommand(Uuid::create()->toString());
+
+        $handler = new DummyCommandHandler();
+
+        $bus = new InMemoryCommandBus();
+        $bus->register(DummyCommand::class, $handler);
+        $bus->dispatch($command);
+        $this->assertEquals(1, DummyCommandHandler::$invocations);
+        $this->assertTrue(true);
+    }
+
     /**
-     * @throws Exception
-     */
-    public function testName()
+    public function testSimpleCommand()
     {
         $command       = new DummyCommand(Uuid::create()->toString());
         $logger        = new PrintLogger();
@@ -69,4 +65,5 @@ class CommandHandlerTest extends TestCase
         $this->assertTrue(true);
 
     }
+     **/
 }

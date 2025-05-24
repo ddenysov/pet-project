@@ -9,4 +9,4 @@ use Zinc\Core\Support\Array\AsArray;
 /**
  * Marker interface for all Commands.
  */
-interface Command extends AsArray {}
+interface CommandInterface extends AsArray {}
