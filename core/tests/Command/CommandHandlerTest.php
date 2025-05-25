@@ -7,13 +7,16 @@ use PHPUnit\Framework\TestCase;
 use Tests\Stub\DummyCommand;
 use Tests\Stub\DummyCommandHandler;
 use Zinc\Core\Command\Bridge\InMemory\InMemoryCommandBus;
-use Zinc\Core\Command\Decorator\EventBusDecorator;
-use Zinc\Core\Command\Decorator\EventStoreDecorator;
-use Zinc\Core\Command\Decorator\RetryDecorator;
+use Zinc\Core\Command\Decorator\CommandHandler\EventBusDecorator;
+use Zinc\Core\Command\Decorator\CommandHandler\EventStoreDecorator;
+use Zinc\Core\Command\Decorator\CommandHandler\RetryDecorator;
 use Zinc\Core\Command\Middleware\EventBusMiddleware;
 use Zinc\Core\Command\Middleware\EventStoreMiddleware;
 use Zinc\Core\Command\Middleware\RetryMiddleware;
+use Zinc\Core\Command\Proxy\CommandHandler\LoggerProxy;
 use Zinc\Core\Domain\Value\Uuid;
+use Zinc\Core\Logging\Bridge\Print\PrintLogger;
+use Zinc\Core\Logging\LogManager;
 
 class CommandHandlerTest extends TestCase
 {
@@ -33,11 +36,12 @@ class CommandHandlerTest extends TestCase
     public function testSimpleCommandSaveToEventStore()
     {
         $command       = new DummyCommand(Uuid::create()->toString());
+        $logManager = new LogManager(new PrintLogger());
 
-        $handler = new DummyCommandHandler();
-        $handler = new EventStoreDecorator($handler);
-        $handler = new RetryDecorator($handler);
-        $handler = new EventBusDecorator($handler);
+        $handler = new LoggerProxy(new DummyCommandHandler(), $logManager);
+        $handler = new LoggerProxy(new EventStoreDecorator($handler), $logManager);
+        $handler = new LoggerProxy(new RetryDecorator($handler), $logManager);
+        $handler = new LoggerProxy(new EventBusDecorator($handler), $logManager);
 
         $bus = new InMemoryCommandBus();
         $bus->register(DummyCommand::class, $handler);

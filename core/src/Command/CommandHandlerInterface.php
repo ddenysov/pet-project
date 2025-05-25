@@ -6,8 +6,6 @@ namespace Zinc\Core\Command;
 
 /**
  * Handles a single Command instance.
- *
- * @template C of Command
  */
 interface CommandHandlerInterface {
 

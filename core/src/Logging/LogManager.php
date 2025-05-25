@@ -6,22 +6,52 @@ namespace Zinc\Core\Logging;
 
 use Psr\Log\LoggerInterface;
 
-class LogManager
+class LogManager implements LoggerInterface
 {
     public function __construct(private LoggerInterface $logger) {}
 
-    public function log(callable $callback, string $message, array $context = []): mixed
+    #[\Override] public function emergency(\Stringable|string $message, array $context = []): void
     {
-        $this->logger->info('START: ' . $message, $context);
-        try {
-            $result = $callback();
-            $this->logger->info('FINISH: ' . $message, $context);
+        // TODO: Implement emergency() method.
+    }
 
-            return $result;
-        } catch (\Throwable $e) {
-            $this->logger->error('ERROR: ' . $message, $context);
+    #[\Override] public function alert(\Stringable|string $message, array $context = []): void
+    {
+        // TODO: Implement alert() method.
+    }
 
-            throw $e;
-        }
+    #[\Override] public function critical(\Stringable|string $message, array $context = []): void
+    {
+        // TODO: Implement critical() method.
+    }
+
+    #[\Override] public function error(\Stringable|string $message, array $context = []): void
+    {
+        // TODO: Implement error() method.
+    }
+
+    #[\Override] public function warning(\Stringable|string $message, array $context = []): void
+    {
+        // TODO: Implement warning() method.
+    }
+
+    #[\Override] public function notice(\Stringable|string $message, array $context = []): void
+    {
+        // TODO: Implement notice() method.
+    }
+
+    #[\Override] public function info(\Stringable|string $message, array $context = []): void
+    {
+        $this->logger->info($message, $context);
+    }
+
+    #[\Override] public function debug(\Stringable|string $message, array $context = []): void
+    {
+        $this->logger->debug($message, $context);
+    }
+
+    #[\Override] public function log($level, \Stringable|string $message, array $context = []): void
+    {
+        $this->logger->log($level, $message, $context);
     }
 }
