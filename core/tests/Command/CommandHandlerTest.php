@@ -7,11 +7,17 @@ use PHPUnit\Framework\TestCase;
 use Tests\Stub\DummyCommand;
 use Tests\Stub\DummyCommandHandler;
 use Zinc\Core\Command\Bridge\InMemory\InMemoryCommandBus;
+use Zinc\Core\Command\Decorator\EventBusDecorator;
+use Zinc\Core\Command\Decorator\EventStoreDecorator;
+use Zinc\Core\Command\Decorator\RetryDecorator;
+use Zinc\Core\Command\Middleware\EventBusMiddleware;
+use Zinc\Core\Command\Middleware\EventStoreMiddleware;
+use Zinc\Core\Command\Middleware\RetryMiddleware;
 use Zinc\Core\Domain\Value\Uuid;
 
 class CommandHandlerTest extends TestCase
 {
-    public function testSimpleCommand()
+    public function SimpleCommand()
     {
         $command       = new DummyCommand(Uuid::create()->toString());
 
@@ -21,6 +27,21 @@ class CommandHandlerTest extends TestCase
         $bus->register(DummyCommand::class, $handler);
         $bus->dispatch($command);
         $this->assertEquals(1, DummyCommandHandler::$invocations);
+        $this->assertTrue(true);
+    }
+
+    public function testSimpleCommandSaveToEventStore()
+    {
+        $command       = new DummyCommand(Uuid::create()->toString());
+
+        $handler = new DummyCommandHandler();
+        $handler = new EventStoreDecorator($handler);
+        $handler = new RetryDecorator($handler);
+        $handler = new EventBusDecorator($handler);
+
+        $bus = new InMemoryCommandBus();
+        $bus->register(DummyCommand::class, $handler);
+        $bus->dispatch($command);
         $this->assertTrue(true);
     }
 

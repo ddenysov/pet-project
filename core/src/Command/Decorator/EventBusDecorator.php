@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\Command\Middleware;
+namespace Zinc\Core\Command\Decorator;
 
 use Zinc\Core\Command\CommandInterface;
 
-class RetryMiddleware
+class EventBusDecorator
 {
     public function __construct(private mixed $inner)
     {
@@ -14,9 +14,9 @@ class RetryMiddleware
 
     public function __invoke(CommandInterface $command)
     {
-        echo 'START RETRY COMMAND' . PHP_EOL;
         $result = $this->inner->__invoke($command);
-        echo 'FINISH RETRY COMMAND' . PHP_EOL;
+        echo 'START EVENT BUS COMMAND' . PHP_EOL;
+        echo 'FINISH EVENT BUS COMMAND' . PHP_EOL;
 
         return $result;
     }

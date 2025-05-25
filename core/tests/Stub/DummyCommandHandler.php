@@ -25,9 +25,11 @@ final class DummyCommandHandler
 
     public function __invoke(DummyCommand $command): EventStream
     {
+        echo 'START HANDLE COMMAND' . PHP_EOL;
         ++self::$invocations;
         $this->lastCommand = $command;
         $root = StubAggregate::create(Uuid::fromString($command->id));
+        echo 'FINISH HANDLE COMMAND' . PHP_EOL;
 
         return $root->releaseEvents();
     }
