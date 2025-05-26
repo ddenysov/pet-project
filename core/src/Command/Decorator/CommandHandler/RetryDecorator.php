@@ -6,6 +6,7 @@ namespace Zinc\Core\Command\Decorator\CommandHandler;
 
 use Zinc\Core\Command\CommandHandlerInterface;
 use Zinc\Core\Command\CommandInterface;
+use Zinc\Core\Logging\Logger;
 
 class RetryDecorator implements CommandHandlerInterface
 {
@@ -33,7 +34,9 @@ class RetryDecorator implements CommandHandlerInterface
 
                 return;
             } catch (\Throwable $e) {
+                Logger::error('Command Handler execution failed.');
                 $attempt++;
+                Logger::info('Increasing attempts to: ' . $attempt);
 
                 if ($attempt >= $this->maxAttempts) {
                     throw $e;
@@ -41,6 +44,8 @@ class RetryDecorator implements CommandHandlerInterface
 
                 \usleep($delay * 1000);
                 $delay += $this->stepMs;
+                Logger::info('Increasing delay to: ' . $delay);
+                Logger::info('Retry Command Handler execution');
             }
         }
     }

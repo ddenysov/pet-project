@@ -6,6 +6,7 @@ namespace Zinc\Core\Command\Decorator\CommandHandler;
 
 use Zinc\Core\Command\CommandHandlerInterface;
 use Zinc\Core\Command\CommandInterface;
+use Zinc\Core\Logging\Logger;
 
 class EventStoreDecorator implements CommandHandlerInterface
 {
@@ -17,11 +18,15 @@ class EventStoreDecorator implements CommandHandlerInterface
 
     public function __invoke(CommandInterface $command)
     {
+        $result = $this->inner->__invoke($command);
+
+        Logger::info('Saving events to Event Store');
         self::$x++;
         if (self::$x < 2) {
+            Logger::error('Events failed to save: Conflict');
             throw new \Exception('Failed');
         }
-        $result = $this->inner->__invoke($command);
+        Logger::info('Events saved');
 
         return $result;
     }

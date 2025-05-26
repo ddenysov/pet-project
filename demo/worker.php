@@ -12,6 +12,8 @@ use Spiral\RoadRunner\Worker;
 use Spiral\RoadRunner\Http\PSR7Worker;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\HttpClient\HttpClient;
+use Zinc\Core\Logging\Bridge\Print\PrintLogger;
+use Zinc\Core\Logging\Logger;
 
 $worker = Worker::create();
 
@@ -21,6 +23,8 @@ $psr7 = new PSR7Worker($worker, $factory, $factory, $factory);
 
 $client      = new HttpClient();
 $httpFactory = new HttpFoundationFactory();
+
+Logger::setLogger(new PrintLogger());
 
 /** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
 $kernel  = new SymfonyHttpKernel('local', true);

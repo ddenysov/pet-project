@@ -7,6 +7,7 @@ use Zinc\Core\Command\CommandHandlerInterface;
 use Zinc\Core\Command\CommandInterface;
 use Zinc\Core\Domain\Event\EventStream;
 use Zinc\Core\Domain\Value\Uuid;
+use Zinc\Core\Logging\Logger;
 
 /**
  * Dummy handler that records calls for assertions.
@@ -22,11 +23,13 @@ final class DummyCommandHandler implements CommandHandlerInterface
 
     public function __invoke(DummyCommand $command): EventStream
     {
-        echo 'START HANDLE COMMAND' . PHP_EOL;
+        Logger::info('Start processing Dummy command');
+
         ++self::$invocations;
         $this->lastCommand = $command;
         $root = StubAggregate::create(Uuid::fromString($command->id));
-        echo 'FINISH HANDLE COMMAND' . PHP_EOL;
+
+        Logger::info('Finishing processing Dummy command');
 
         return $root->releaseEvents();
     }
