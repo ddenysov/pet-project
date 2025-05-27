@@ -21,7 +21,8 @@
     "symfony/psr-http-message-bridge": "^7.2",
     "nyholm/psr7-server": "^1.1",
     "symfony/framework-bundle": "^7.2",
-    "symfony/monolog-bundle": "^3.10"
+    "symfony/monolog-bundle": "^3.10",
+    "symfony/runtime": "^7.2"
   },
   "autoload": {
     "psr-4": {
@@ -31,5 +32,10 @@
   "scripts": {
     "cs:diff": "php-cs-fixer fix --dry-run -v --diff",
     "cs:fix": "php-cs-fixer fix -v"
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/runtime": true
+    }
   }
 }

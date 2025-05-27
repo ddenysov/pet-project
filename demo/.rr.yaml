@@ -5,13 +5,13 @@ server:
 
 http:
   address: 0.0.0.0:8080
-  pool:
-    debug: true
-    num_workers: 4
+#  pool:
+#    debug: true
+#    num_workers: 4
 
-watcher:
-  enabled: true
-  patterns: [".php"]
+#watcher:
+#  enabled: true
+#  patterns: [".php"]
 # do not use development mode in production
 logs:
   level: debug

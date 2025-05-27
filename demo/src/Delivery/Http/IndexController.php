@@ -21,7 +21,7 @@ class IndexController
         return new JsonResponse([
             'framework' => 'symfony',
             'test'      => class_exists(Logger::class),
-            'pwd'       => file_get_contents(getcwd() . '/vendor/services/core/composer.json'),
+            'time'      => rand(1, 24),
         ]);
     }
 }

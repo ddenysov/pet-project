@@ -26,7 +26,7 @@ $httpFactory = new HttpFoundationFactory();
 $e = null;
 try {
     /** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
-    $kernel  = new SymfonyHttpKernel('local', true);
+    $kernel  = new SymfonyHttpKernel('prod', false);
     $kernel->boot();
     $container = $kernel->getContainer();
     $logger = $container->get(\Psr\Log\LoggerInterface::class);
@@ -52,7 +52,6 @@ while (true) {
         if ($e) {
             throw $e;
         }
-        //$logger = $container->get(\Psr\Log\LoggerInterface::class);
         $symfonyRequest = $httpFactory->createRequest($request);
         $symfonyResponse = $kernel->handle($symfonyRequest);
 
