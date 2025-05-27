@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\Domain\Root;
+namespace Zinc\Core\Domain\Aggregate;
 
 use Zinc\Core\Domain\Entity\Entity;
 use Zinc\Core\Domain\Event\Event;
 use Zinc\Core\Domain\Event\EventStream;
 
-abstract class Aggregate extends Entity
+abstract class AbstractAggregateRoot extends Entity
 {
     protected EventStream $events;
 
@@ -20,6 +20,7 @@ abstract class Aggregate extends Entity
     }
 
     /**
+     * @param EventStream $events
      * @return Aggregate
      */
     public static function restore(EventStream $events): static

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Stub;
 
-use Zinc\Core\Domain\Root\Aggregate;
+use Zinc\Core\Domain\Aggregate\Aggregate;
 use Zinc\Core\Domain\Value\Uuid;
 
 class StubAggregate extends Aggregate

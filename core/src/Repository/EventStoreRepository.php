@@ -7,7 +7,7 @@ namespace Zinc\Core\Repository;
 use Zinc\Core\DataStore\DataStore;
 use Zinc\Core\Domain\Event\EventStream;
 use Zinc\Core\Domain\Repository\Repository;
-use Zinc\Core\Domain\Root\Aggregate;
+use Zinc\Core\Domain\Aggregate\Aggregate;
 use Zinc\Core\Domain\Value\Uuid;
 use Zinc\Core\Event\EventStore;
 use Zinc\Core\Event\Exception\ConcurrencyException;

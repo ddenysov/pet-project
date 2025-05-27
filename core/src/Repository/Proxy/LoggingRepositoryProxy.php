@@ -6,7 +6,7 @@ namespace Zinc\Core\Repository\Proxy;
 
 use Zinc\Core\Domain\Event\EventStream;
 use Zinc\Core\Domain\Repository\Repository;
-use Zinc\Core\Domain\Root\Aggregate;
+use Zinc\Core\Domain\Aggregate\Aggregate;
 use Zinc\Core\Logging\LogManager;
 
 class LoggingRepositoryProxy implements Repository

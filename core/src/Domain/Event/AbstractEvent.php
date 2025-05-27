@@ -6,7 +6,7 @@ namespace Zinc\Core\Domain\Event;
 
 use Zinc\Core\Domain\Value\Uuid;
 
-abstract class AbstractEvent implements Event
+abstract class AbstractEvent implements EventInterface
 {
     /**
      * Uniq event identifier
