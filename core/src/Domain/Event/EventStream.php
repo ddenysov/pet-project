@@ -6,7 +6,7 @@ namespace Zinc\Core\Domain\Event;
 
 use Zinc\Core\Support\Collection\AbstractCollection;
 
-class AbstractEventStream extends AbstractCollection implements EventStreamInterface
+class EventStream extends AbstractCollection implements EventStreamInterface
 {
     #[\Override]
     protected function getClass(): string

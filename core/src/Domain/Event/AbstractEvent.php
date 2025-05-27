@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zinc\Core\Domain\Event;
 
 use Zinc\Core\Domain\Value\Uuid;
+use Zinc\Core\Domain\Value\UuidInterface;
 
 abstract class AbstractEvent implements EventInterface
 {
@@ -14,14 +15,19 @@ abstract class AbstractEvent implements EventInterface
      * - tracing
      * - uniq in event store
      */
-    public Uuid $id;
+    public UuidInterface $id;
 
     /**
      * Aggregate produced this event
      */
-    public Uuid $aggregateId;
+    public UuidInterface $aggregateId;
 
-    public function getId(): Uuid
+    public function __construct(UuidInterface $aggregateId)
+    {
+        $this->aggregateId = $aggregateId;
+    }
+
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
@@ -31,7 +37,7 @@ abstract class AbstractEvent implements EventInterface
      */
     public function toArray(): array {}
 
-    public function getAggregateId(): Uuid
+    public function getAggregateId(): UuidInterface
     {
         return $this->aggregateId;
     }

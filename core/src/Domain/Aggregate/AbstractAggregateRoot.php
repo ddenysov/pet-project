@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Zinc\Core\Domain\Aggregate;
 
-use Zinc\Core\Domain\Entity\Entity;
-use Zinc\Core\Domain\Event\Event;
+use Zinc\Core\Domain\Entity\AbstractEntity;
+use Zinc\Core\Domain\Event\EventInterface;
 use Zinc\Core\Domain\Event\EventStream;
+use Zinc\Core\Domain\Event\EventStreamInterface;
 
-abstract class AbstractAggregateRoot extends Entity
+abstract class AbstractAggregateRoot extends AbstractEntity implements AggregateRootInterface
 {
     protected EventStream $events;
 
@@ -21,9 +22,9 @@ abstract class AbstractAggregateRoot extends Entity
 
     /**
      * @param EventStream $events
-     * @return Aggregate
+     * @return AbstractAggregateRoot
      */
-    public static function restore(EventStream $events): static
+    public static function restore(EventStreamInterface $events): static
     {
         $aggregate = new static();
         foreach ($events as $event) {
@@ -33,7 +34,7 @@ abstract class AbstractAggregateRoot extends Entity
         return $aggregate;
     }
 
-    public function releaseEvents(): EventStream
+    public function releaseEvents(): EventStreamInterface
     {
         $events       = $this->events;
         $this->events = new EventStream();
@@ -41,15 +42,16 @@ abstract class AbstractAggregateRoot extends Entity
         return $events;
     }
 
-    public function uncommittedEvents(): EventStream
+    public function uncommittedEvents(): EventStreamInterface
     {
         return $this->events;
     }
 
     /**
-     * @return Aggregate
+     * @param EventInterface $event
+     * @return AbstractAggregateRoot
      */
-    public function recordThat(Event $event): static
+    public function recordThat(EventInterface $event): static
     {
         $this->apply($event);
         $this->events[] = $event;
@@ -60,7 +62,7 @@ abstract class AbstractAggregateRoot extends Entity
     /**
      * @return $this
      */
-    public function apply(Event $event): static
+    public function apply(EventInterface $event): static
     {
         $parts  = \explode('\\', $event::class);
         $method = 'on' . \array_pop($parts);

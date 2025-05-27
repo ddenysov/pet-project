@@ -7,13 +7,13 @@ namespace Zinc\Core\Domain\Value;
 use Symfony\Component\Uid\UuidV4;
 use Zinc\Core\Support\String\AsString;
 
-class Uuid extends AbstractValue implements AsString
+class Uuid extends AbstractValue implements ValueInterface
 {
     public function __construct(private string $value) {}
 
-    public static function create(): self
+    public static function create(): static
     {
-        return new self(UuidV4::v4()->toString());
+        return new static(UuidV4::v4()->toString());
     }
 
     public static function fromString(string $uuid): self
@@ -21,9 +21,13 @@ class Uuid extends AbstractValue implements AsString
         return new self($uuid);
     }
 
-    #[\Override]
     public function toString(): string
     {
         return $this->value;
+    }
+
+    #[\Override] public function toArray(): array
+    {
+        // TODO: Implement toArray() method.
     }
 }

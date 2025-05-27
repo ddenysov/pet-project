@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Zinc\Core\Domain\Entity;
 
 use Zinc\Core\Domain\Value\Uuid;
+use Zinc\Core\Domain\Value\UuidInterface;
 use Zinc\Core\Support\Array\AsArray;
 
 /**
  * Entity simple object. There are no EventSourcing stuff like sending events etc
  */
-abstract class Entity implements AsArray
+abstract class AbstractEntity implements AsArray
 {
-    protected Uuid $id;
+    protected UuidInterface $id;
 
     /**
      * Convert aggregate to array
@@ -24,7 +25,7 @@ abstract class Entity implements AsArray
         return [];
     }
 
-    public function getId(): Uuid
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
