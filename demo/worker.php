@@ -24,7 +24,7 @@ $psr7 = new PSR7Worker($worker, $factory, $factory, $factory);
 $client      = new HttpClient();
 $httpFactory = new HttpFoundationFactory();
 
-Logger::setLogger(new PrintLogger());
+//Logger::setLogger(new PrintLogger());
 
 /** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
 $kernel  = new SymfonyHttpKernel('local', true);
@@ -41,6 +41,7 @@ while (true) {
     }
 
     try {
+        //
         $symfonyRequest = $httpFactory->createRequest($request);
         $symfonyResponse = $kernel->handle($symfonyRequest);
 
