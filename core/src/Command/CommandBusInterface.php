@@ -9,5 +9,5 @@ namespace Zinc\Core\Command;
  */
 interface CommandBusInterface
 {
-    public function dispatch(CommandInterface $command): mixed;
+    public function dispatch(CommandInterface $command): void;
 }

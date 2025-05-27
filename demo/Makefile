@@ -1,5 +1,5 @@
 APP := app
-DC := docker-compose exec
+DC := docker compose exec
 
 start:
 	docker compose up -d --remove-orphans
@@ -10,6 +10,6 @@ stop:
 restart: stop start
 
 ssh:
-	@$(DC) $(APP) bash
+	@$(DC) $(APP) sh
 
 # awqw

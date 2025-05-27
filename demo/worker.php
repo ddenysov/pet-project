@@ -3,7 +3,6 @@
 require __DIR__ . '/vendor/autoload.php';
 
 
-use Denysov\Demo\Container\SymfonyContainerFactory;
 use Denysov\Demo\Container\SymfonyHttpKernel;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -24,10 +23,19 @@ $psr7 = new PSR7Worker($worker, $factory, $factory, $factory);
 $client      = new HttpClient();
 $httpFactory = new HttpFoundationFactory();
 
-//Logger::setLogger(new PrintLogger());
+$e = null;
+try {
+    /** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
+    $kernel  = new SymfonyHttpKernel('local', true);
+    $kernel->boot();
+    $container = $kernel->getContainer();
+    $logger = $container->get(\Psr\Log\LoggerInterface::class);
+    Logger::setLogger($logger);
+} catch (Throwable $exception) {
+    $e = $exception;
+}
 
-/** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
-$kernel  = new SymfonyHttpKernel('local', true);
+
 while (true) {
 
     try {
@@ -41,7 +49,10 @@ while (true) {
     }
 
     try {
-        //
+        if ($e) {
+            throw $e;
+        }
+        //$logger = $container->get(\Psr\Log\LoggerInterface::class);
         $symfonyRequest = $httpFactory->createRequest($request);
         $symfonyResponse = $kernel->handle($symfonyRequest);
 

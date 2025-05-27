@@ -8,3 +8,4 @@ services:
       RR_MAX_REQUESTS: "1000"
     volumes:
       - ./:/app
+      - ../core/:/core

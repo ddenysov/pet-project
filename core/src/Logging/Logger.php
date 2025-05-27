@@ -11,7 +11,7 @@ class Logger
     /** @var LoggerInterface|null */
     private static ?LoggerInterface $logger = null;
 
-    private function __construct() { }
+    public function __construct() { }
 
     public static function setLogger(LoggerInterface $logger): void
     {
