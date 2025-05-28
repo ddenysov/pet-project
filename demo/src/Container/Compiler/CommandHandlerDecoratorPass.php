@@ -48,6 +48,7 @@ class CommandHandlerDecoratorPass implements CompilerPassInterface
 
                 $decoratorDef = new Definition($decoratorClass);
                 $decoratorDef->setDecoratedService($currentId);
+                $decoratorDef->setAutowired(true);
                 $decoratorDef->setArgument('$inner', new Reference($decoratorServiceId . '.inner'));
 
                 $container->setDefinition($decoratorServiceId, $decoratorDef);

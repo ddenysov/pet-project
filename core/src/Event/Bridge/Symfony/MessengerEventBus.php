@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Zinc\Core\Event\Bridge\Symfony;
 
 use Symfony\Component\Messenger\MessageBusInterface;
-use Zinc\Core\Domain\Event\Event;
-use Zinc\Core\Event\EventBus;
+use Zinc\Core\Domain\Event\EventInterface;
+use Zinc\Core\Event\EventBusInterface;
 
-class MessengerEventBus implements EventBus
+class MessengerEventBus implements EventBusInterface
 {
 
     /**
@@ -17,8 +17,8 @@ class MessengerEventBus implements EventBus
     {
     }
 
-    #[\Override] public function dispatch(Event $event): void
+    #[\Override] public function dispatch(EventInterface $event): void
     {
-        // TODO: Implement dispatch() method.
+        $this->bus->dispatch($event);
     }
 }

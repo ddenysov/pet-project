@@ -7,6 +7,7 @@ namespace Zinc\Core\Command\Decorator\CommandHandler;
 use Zinc\Core\Command\CommandHandlerInterface;
 use Zinc\Core\Command\CommandInterface;
 use Zinc\Core\Logging\Logger;
+use function React\Promise\resolve;
 
 class RetryDecorator implements CommandHandlerInterface
 {
@@ -23,16 +24,18 @@ class RetryDecorator implements CommandHandlerInterface
         private readonly int $stepMs = 100,
     ) {}
 
-    public function __invoke(CommandInterface $command): void
+    public function __invoke(CommandInterface $command)
     {
         $attempt = 0;
         $delay   = $this->initialDelayMs;
 
         while (true) {
             try {
-                ($this->inner)($command);
-
-                return;
+                $result = ($this->inner)($command);
+                Logger::info('RESULT', [
+                    'result' => $result,
+                ]);
+                return $result;
             } catch (\Throwable $e) {
                 Logger::error('Command Handler execution failed.');
                 $attempt++;

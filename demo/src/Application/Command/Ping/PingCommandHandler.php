@@ -14,9 +14,13 @@ class PingCommandHandler implements CommandHandlerInterface
     {
         Logger::info('PING HANDLER STARTED');
         $ping = Ping::create(PingId::create());
+        $events = $ping->releaseEvents();
         Logger::info('PING HANDLER FINISHED', [
-            'pingId' => $ping->getId()->toString()
+            'pingId' => $ping->getId()->toString(),
+            'events' => (array) $events,
         ]);
+
+        return $events;
     }
 
 }

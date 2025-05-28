@@ -21,3 +21,6 @@ services:
 
   Zinc\Core\Command\CommandBusInterface:
     class: Zinc\Core\Command\Bridge\Symfony\MessengerCommandBus
+
+  Zinc\Core\Event\EventBusInterface:
+    class: Zinc\Core\Event\Bridge\Symfony\MessengerEventBus
