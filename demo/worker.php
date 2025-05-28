@@ -7,11 +7,11 @@ use Denysov\Demo\Container\SymfonyHttpKernel;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
+use Psr\Log\LoggerInterface;
 use Spiral\RoadRunner\Worker;
 use Spiral\RoadRunner\Http\PSR7Worker;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\HttpClient\HttpClient;
-use Zinc\Core\Logging\Bridge\Print\PrintLogger;
 use Zinc\Core\Logging\Logger;
 
 $worker = Worker::create();
@@ -26,10 +26,10 @@ $httpFactory = new HttpFoundationFactory();
 $e = null;
 try {
     /** @var Symfony\Component\HttpKernel\HttpKernel $kernel */
-    $kernel  = new SymfonyHttpKernel('prod', false);
+    $kernel  = new SymfonyHttpKernel('local', true);
     $kernel->boot();
     $container = $kernel->getContainer();
-    $logger = $container->get(\Psr\Log\LoggerInterface::class);
+    $logger = $container->get(LoggerInterface::class);
     Logger::setLogger($logger);
 } catch (Throwable $exception) {
     $e = $exception;

@@ -12,6 +12,4 @@ class PingId extends Uuid implements UuidInterface
     {
         // TODO: Implement toArray() method.
     }
-
-
 }
