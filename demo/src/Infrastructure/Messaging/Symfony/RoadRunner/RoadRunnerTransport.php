@@ -3,28 +3,65 @@ declare(strict_types=1);
 
 namespace Denysov\Demo\Infrastructure\Messaging\Symfony\RoadRunner;
 
+use Denysov\Demo\Domain\Model\Ping\Event\PingCreated;
+use Spiral\Goridge\RPC\RPC;
+use Spiral\RoadRunner\Jobs\Jobs;
 use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
 use Symfony\Component\Messenger\Transport\TransportInterface;
+use Symfony\Component\Uid\Uuid;
+use Zinc\Core\Logging\Logger;
 
 class RoadRunnerTransport implements TransportInterface
 {
+    private Jobs $jobs;
+
+    public function __construct()
+    {
+        $this->jobs = new Jobs(
+        // Expects RPC connection
+            RPC::create('tcp://127.0.0.1:6001')
+        );
+        Logger::debug('Transport created');
+    }
+
     #[\Override] public function get(): iterable
     {
-        // TODO: Implement get() method.
+        Logger::info('GET MESSAGE');
+
+        return [];
     }
 
     #[\Override] public function ack(Envelope $envelope): void
     {
-        // TODO: Implement ack() method.
+        Logger::info('ACK');
     }
 
     #[\Override] public function reject(Envelope $envelope): void
     {
-        // TODO: Implement reject() method.
+        Logger::info('REJECT');
     }
 
     #[\Override] public function send(Envelope $envelope): Envelope
     {
-        // TODO: Implement send() method.
+        $uuid = (string) Uuid::v4();
+        Logger::info('SEND', [
+            'envelope' => $envelope->all(),
+            'message' => $envelope->getMessage(),
+            'type' => get_class($envelope->getMessage()),
+        ]);
+        $queue = $this->jobs->connect('demo-queue');
+
+        $task = $queue->create(
+            get_class($envelope->getMessage()),
+            payload: \json_encode(['email' => 'dev@null.pipe'])
+        );
+        $queue->dispatch($task);
+
+        Logger::debug('TASK SENT', [
+            'task' => $task,
+        ]);
+
+        return $envelope->with(new TransportMessageIdStamp($uuid));
     }
 }

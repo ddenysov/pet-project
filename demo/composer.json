@@ -22,7 +22,8 @@
     "nyholm/psr7-server": "^1.1",
     "symfony/framework-bundle": "^7.2",
     "symfony/monolog-bundle": "^3.10",
-    "symfony/runtime": "^7.2"
+    "symfony/runtime": "^7.2",
+    "spiral/roadrunner-jobs": "^4.6"
   },
   "autoload": {
     "psr-4": {

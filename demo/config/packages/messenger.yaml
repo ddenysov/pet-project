@@ -1,0 +1,7 @@
+framework:
+  messenger:
+    transports:
+      rr: 'rr://...'
+    routing:
+      # ...
+      'Denysov\Demo\Domain\Model\Ping\Event\PingCreated': [ rr ]

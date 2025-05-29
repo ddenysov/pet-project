@@ -1,18 +1,23 @@
-version: "3"
+version: '3'
+
+rpc:
+  listen: tcp://127.0.0.1:6001
 
 server:
   command: "php worker.php"
+  relay: pipes
 
 http:
-  address: 0.0.0.0:8080
-  pool:
-    debug: true
-    num_workers: 4
+  address: "0.0.0.0:8080"
 
-watcher:
-  enabled: true
-  patterns: [".php"]
-# do not use development mode in production
-logs:
-  level: debug
-  mode: development
+jobs:
+  consume: [ "demo-queue" ]
+  pool:
+    num_workers: 2
+    supervisor:
+      max_worker_memory: 100
+  pipelines:
+    demo-queue:
+      driver: memory
+      config:
+        priority: 10
