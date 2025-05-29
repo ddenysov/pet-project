@@ -59,14 +59,6 @@ class HttpWorker
                 $worker->respond(new Response(400));
                 continue;
             }
-
-            try {
-                Logger::info('Request received');
-                // Handle request and return response.
-                $worker->respond(new Response(200, [], 'Hello RoadRunner!'));
-            } catch (\Throwable $e) {
-                $worker->respond(new Response(500, [], 'Something Went Wrong!'));
-            }
         }
     }
 }
