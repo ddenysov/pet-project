@@ -21,7 +21,7 @@ class IndexController
         return new JsonResponse([
             'framework' => 'symfony',
             'test'      => class_exists(Logger::class),
-            'time'      => rand(1, 24),
+            'time'      => rand(10, 99),
         ]);
     }
 }

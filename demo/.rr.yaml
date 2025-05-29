@@ -9,6 +9,19 @@ server:
 
 http:
   address: "0.0.0.0:8080"
+  pool:
+    allocate_timeout: 10s
+    num_workers: 100
+  # middlewares:
+  #  logger: true
+
+#logs:
+#  mode: development
+#  level: debug
+#  channels:
+#    http:
+#      level: debug
+#      output: http.log
 
 jobs:
   consume: [ "demo-queue" ]

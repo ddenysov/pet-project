@@ -25,7 +25,7 @@ class HttpWorker
 
     public function __construct()
     {
-        $this->kernel  = new SymfonyHttpKernel('local', true);
+        $this->kernel  = new SymfonyHttpKernel('prod', false);
         $this->kernel->boot();
         $this->container = $this->kernel->getContainer();
         $this->httpFactory = new HttpFoundationFactory();
