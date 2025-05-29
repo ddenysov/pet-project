@@ -11,6 +11,8 @@ class PingCreatedEventHandler implements EventHandlerInterface
 {
     public function __invoke(PingCreated $event)
     {
-        Logger::info('####### PROCESSING EVENT #######: ' . $event::class);
+        Logger::info('####### PROCESSING EVENT #######: ' . $event::class, [
+            'id' => $event->getAggregateId()->toString()
+        ]);
     }
 }
