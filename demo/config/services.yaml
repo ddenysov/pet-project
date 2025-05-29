@@ -7,6 +7,9 @@ services:
   Denysov\Demo\Infrastructure\Messaging\Symfony\RoadRunner\RoadRunnerFactory:
     tags: [ messenger.transport_factory ]
 
+  Symfony\Component\Messenger\Transport\Serialization\SerializerInterface:
+    public: true
+
   Psr\Log\LoggerInterface:
     alias: 'monolog.logger'
     public: true

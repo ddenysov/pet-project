@@ -54,7 +54,7 @@ class RoadRunnerTransport implements TransportInterface
 
         $task = $queue->create(
             get_class($envelope->getMessage()),
-            payload: \json_encode(['email' => 'dev@null.pipe'])
+            payload: \json_encode(['event' => get_class($envelope->getMessage())])
         );
         $queue->dispatch($task);
 

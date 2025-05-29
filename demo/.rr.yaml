@@ -22,10 +22,14 @@ http:
 #    http:
 #      level: debug
 #      output: http.log
+watcher:
+  enabled: true
+  patterns: [".php"]
 
 jobs:
   consume: [ "demo-queue" ]
   pool:
+    debug: true
     num_workers: 2
     supervisor:
       max_worker_memory: 100
