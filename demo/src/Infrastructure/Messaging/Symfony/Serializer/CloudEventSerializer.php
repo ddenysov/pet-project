@@ -18,7 +18,6 @@ final class CloudEventSerializer implements MessengerSerializer
      * @param string $source
      */
     public function __construct(
-        private SymfonySerializer $payloadSerializer,
         private string $source = 'urn:service:demo'
     ) {}
 

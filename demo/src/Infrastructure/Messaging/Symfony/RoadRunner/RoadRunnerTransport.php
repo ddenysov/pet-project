@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Denysov\Demo\Infrastructure\Messaging\Symfony\RoadRunner;
 
 use Denysov\Demo\Domain\Model\Ping\Event\PingCreated;
+use Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer\CloudEventSerializer;
 use Spiral\Goridge\RPC\RPC;
 use Spiral\RoadRunner\Jobs\Jobs;
 use Symfony\Component\Messenger\Envelope;
@@ -16,7 +17,7 @@ class RoadRunnerTransport implements TransportInterface
 {
     private Jobs $jobs;
 
-    public function __construct()
+    public function __construct(private CloudEventSerializer $serializer)
     {
         $this->jobs = new Jobs(
         // Expects RPC connection
@@ -51,6 +52,8 @@ class RoadRunnerTransport implements TransportInterface
             'type' => get_class($envelope->getMessage()),
         ]);
         $queue = $this->jobs->connect('demo-queue');
+
+        $payload = $this->serializer->encode($envelope);
 
         $task = $queue->create(
             get_class($envelope->getMessage()),
