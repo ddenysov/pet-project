@@ -42,13 +42,11 @@ class JobsWorker
 
     public function canServe(EnvironmentInterface $env): bool
     {
-        file_put_contents('testB1.txt', $env->getMode());
         return $env->getMode() === Mode::MODE_JOBS;
     }
 
     public function serve(): void
     {
-        file_put_contents('testA1.txt', 'started');
         $consumer = new Consumer();
 
         while ($task = $consumer->waitTask()) {

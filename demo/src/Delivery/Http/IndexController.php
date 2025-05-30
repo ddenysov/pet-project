@@ -6,6 +6,7 @@ namespace Denysov\Demo\Delivery\Http;
 use Denysov\Demo\Application\Command\Ping\PingCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Zinc\Core\Command\Bridge\Symfony\MessengerCommandBus;
 use Zinc\Core\Command\CommandBusInterface;
 use Zinc\Core\Event\EventBus;

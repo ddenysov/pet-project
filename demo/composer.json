@@ -23,7 +23,8 @@
     "symfony/framework-bundle": "^7.2",
     "symfony/monolog-bundle": "^3.10",
     "symfony/runtime": "^7.2",
-    "spiral/roadrunner-jobs": "^4.6"
+    "spiral/roadrunner-jobs": "^4.6",
+    "cloudevents/sdk-php": "^1.2"
   },
   "autoload": {
     "psr-4": {

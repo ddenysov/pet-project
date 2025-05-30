@@ -10,8 +10,9 @@ server:
 http:
   address: "0.0.0.0:8080"
   pool:
-    allocate_timeout: 10s
-    num_workers: 100
+    allocate_timeout: 1000s
+    num_workers: 1
+    debug: true
   # middlewares:
   #  logger: true
 
@@ -30,7 +31,7 @@ jobs:
   consume: [ "demo-queue" ]
   pool:
     debug: true
-    num_workers: 2
+    num_workers: 1
     supervisor:
       max_worker_memory: 100
   pipelines:
