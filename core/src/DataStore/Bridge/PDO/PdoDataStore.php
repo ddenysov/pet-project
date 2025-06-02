@@ -2,36 +2,48 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\PDO;
+namespace Zinc\Core\DataStore\Bridge\PDO;
 
 use PDO;
-use Zinc\Core\DataStore\{DataStore, Criteria, QueryOptions};
-use Zinc\Core\DataStore\Adapter\PDO\Dialect\Dialect;
-use Zinc\Core\DataStore\Exception\DataStoreException;
+use Zinc\Core\DataStore\{Bridge\PDO\Dialect\SqliteDialect,
+    Bridge\PDO\SqlCriteriaCompiler,
+    Bridge\PDO\StatementCache,
+    Criteria,
+    DataStoreInterface,
+    QueryOptions};
+use Zinc\Core\DataStore\Bridge\PDO\Dialect\Dialect;
+use Zinc\Core\Logging\Logger;
 
 /**
  * PDO‑based DataStore implementation.
  */
-final class PdoDataStore implements DataStore
+final class PdoDataStore implements DataStoreInterface
 {
+    private \PDO $pdo;
+
     public function __construct(
-        private \PDO               $pdo,
-        private Dialect           $dialect,
-        private StatementCache    $stmtCache = new StatementCache(),
+        private Dialect             $dialect = new SqliteDialect(),
+        private StatementCache      $stmtCache = new StatementCache(),
         private SqlCriteriaCompiler $compiler = new SqlCriteriaCompiler(),
-    ) {}
+    )
+    {
+        $this->pdo = new \PDO('sqlite:/app/var/demo.db', null, null, [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+        ]);
+    }
 
     /*------------------------- CRUD -------------------------*/
 
     public function insert(string $collection, array $data): mixed
     {
-        $cols = \array_keys($data);
-        $place = \array_map(static fn($c) => ':' . $c, $cols);
+        $cols  = \array_keys($data);
+        $place = \array_map(static fn ($c) => ':' . $c, $cols);
 
         $sql = \sprintf(
             'INSERT INTO %s (%s) VALUES (%s)',
             $this->q($collection),
-            \implode(',', \array_map([$this,'q'], $cols)),
+            \implode(',', \array_map([$this, 'q'], $cols)),
             \implode(',', $place),
         );
         $this->exec($sql, $data);
@@ -46,49 +58,55 @@ final class PdoDataStore implements DataStore
     public function update(string $collection, Criteria $c, array $data): int
     {
         $set = \implode(', ', \array_map(
-            fn($k) => $this->q($k) . ' = :' . $k,
+            fn ($k) => $this->q($k) . ' = :' . $k,
             \array_keys($data),
         ));
-        [$where,$params] = $this->compiler->compile($c, $this->dialect);
+        [$where, $params] = $this->compiler->compile($c, $this->dialect);
         $sql = \sprintf('UPDATE %s SET %s WHERE %s', $this->q($collection), $set, $where);
         return $this->exec($sql, $data + $params)->rowCount();
     }
 
     public function delete(string $collection, Criteria $c): int
     {
-        [$w,$p] = $this->compiler->compile($c, $this->dialect);
+        [$w, $p] = $this->compiler->compile($c, $this->dialect);
         $sql = \sprintf('DELETE FROM %s WHERE %s', $this->q($collection), $w);
         return $this->exec($sql, $p)->rowCount();
     }
 
-    public function find(string $collection, Criteria $c, ?QueryOptions $o = null): iterable
+    public function find(string $collection, ?Criteria $criteria = null, ?QueryOptions $options = null): iterable
     {
-        [$w,$p] = $this->compiler->compile($c, $this->dialect);
-
         $sql = 'SELECT ';
-        $sql .= $o?->select ? \implode(',', \array_map([$this,'q'], $o->select)) : '*';
-        $sql .= ' FROM ' . $this->q($collection) . ' WHERE ' . $w;
+        $sql .= $options?->select ? \implode(',', \array_map([$this, 'q'], $options->select)) : '*';
 
-        if ($o?->sort) {
+        if (is_null($criteria)) {
+            $p = [];
+            $sql .= ' FROM ' . $this->q($collection);
+        } else {
+            [$w, $p] = $this->compiler->compile($criteria, $this->dialect);
+            $sql .= ' FROM ' . $this->q($collection) . ' WHERE ' . $w;
+        }
+
+
+        if ($options?->sort) {
             $order = [];
-            foreach ($o->sort as $f => $dir) {
+            foreach ($options->sort as $f => $dir) {
                 $order[] = $this->q($f) . ' ' . $dir;
             }
             $sql .= ' ORDER BY ' . \implode(',', $order);
         }
-        if ($o?->limit !== null) {
-            $sql .= ' LIMIT ' . $o->limit;
+        if ($options?->limit !== null) {
+            $sql .= ' LIMIT ' . $options->limit;
         }
-        if ($o?->offset !== null) {
-            $sql .= ' OFFSET ' . $o->offset;
+        if ($options?->offset !== null) {
+            $sql .= ' OFFSET ' . $options->offset;
         }
 
-        return $this->exec($sql, $p);
+        return $this->exec($sql, $p)->fetchAll();
     }
 
-    public function findOne(string $collection, Criteria $c): ?array
+    public function findOne(string $collection, Criteria $criteria, ?QueryOptions $options = null): ?array
     {
-        foreach ($this->find($collection, $c, new QueryOptions(limit: 1)) as $row) {
+        foreach ($this->find($collection, $criteria, new QueryOptions(limit: 1)) as $row) {
             return $row;
         }
         return null;

@@ -38,6 +38,7 @@ class RetryDecorator implements CommandHandlerInterface
                 return $result;
             } catch (\Throwable $e) {
                 Logger::error('Command Handler execution failed.');
+                Logger::error($e->getMessage());
                 $attempt++;
                 Logger::info('Increasing attempts to: ' . $attempt);
 

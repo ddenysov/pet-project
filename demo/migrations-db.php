@@ -1,9 +1,7 @@
 <?php
 
 return [
-    'dbname' => 'migrations_docs_example',
-    'user' => 'root',
-    'password' => '',
-    'host' => 'localhost',
-    'driver' => 'pdo_mysql',
+    'driver' => 'pdo_sqlite',
+    'path'   => __DIR__ . '/var/demo.db',
+
 ];

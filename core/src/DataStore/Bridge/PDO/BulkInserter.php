@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\PDO;
+namespace Zinc\Core\DataStore\Bridge\PDO;
 
 /**
  * Insert many rows efficiently using multi‑value syntax.

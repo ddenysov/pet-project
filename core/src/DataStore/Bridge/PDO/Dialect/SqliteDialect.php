@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\PDO\Dialect;
+namespace Zinc\Core\DataStore\Bridge\PDO\Dialect;
 
 final class SqliteDialect implements Dialect
 {

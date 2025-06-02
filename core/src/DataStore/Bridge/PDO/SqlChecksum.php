@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\PDO;
+namespace Zinc\Core\DataStore\Bridge\PDO;
 
 /**
  * Calculate stable checksum for SQL migration to detect changes.

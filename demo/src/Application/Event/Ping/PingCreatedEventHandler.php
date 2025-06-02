@@ -18,10 +18,7 @@ class PingCreatedEventHandler implements EventHandlerInterface
 
     public function __invoke(PingCreated $event)
     {
-        $this->store->insert('ping', [
-            'id' => $event->getAggregateId()->toString()
-        ]);
-        $res = $this->store->find('ping');
+        $res = $this->store->find('event_store');
         Logger::info('####### PROCESSING EVENT #######: ' . $event::class, [
             'id' => $event->getAggregateId()->toString(),
             'res' => $res,

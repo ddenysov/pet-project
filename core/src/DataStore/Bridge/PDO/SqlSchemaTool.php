@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zinc\Core\DataStore\Adapter\PDO;
+namespace Zinc\Core\DataStore\Bridge\PDO;
 
-use Zinc\Core\DataStore\Adapter\PDO\Dialect\Dialect;
+use Zinc\Core\DataStore\Bridge\PDO\Dialect\Dialect;
 
 /**
  * Forward‑only SQL migration runner (very lightweight).
