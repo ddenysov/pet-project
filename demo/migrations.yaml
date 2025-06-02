@@ -1,5 +1,5 @@
 migrations_paths:
-  'Denysov\Demo\Infrastructure\Migrations': 'src/Infrastructure/Migrations'
+  'Denysov\Demo\Infrastructure\Migrations\Doctrine': 'src/Infrastructure/Migrations/Doctrine'
 table_storage:
   table_name: doctrine_migration_versions
 all_or_nothing: true  

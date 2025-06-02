@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Denysov\Demo\Infrastructure\Migrations;
+namespace Denysov\Demo\Infrastructure\Migrations\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
