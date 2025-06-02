@@ -22,6 +22,7 @@
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/iam-service/tests" isTestSource="false" packagePrefix="Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/gateway-service/vendor/nikic/php-parser" />

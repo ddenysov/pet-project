@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer;
 
+use CloudEvents\Serializers\JsonSerializer;
+use CloudEvents\V1\CloudEvent;
 use CloudEvents\V1\CloudEventImmutable;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface as MessengerSerializer;
@@ -14,7 +16,6 @@ use DateTimeImmutable;
 final class CloudEventSerializer implements MessengerSerializer
 {
     /**
-     * @param SymfonySerializer $payloadSerializer
      * @param string $source
      */
     public function __construct(
@@ -27,10 +28,16 @@ final class CloudEventSerializer implements MessengerSerializer
         $message      = $envelope->getMessage();
         $messageClass = $message::class;
 
-        // превращаем объект сообщения в чистый массив
-        $data = $this->payloadSerializer->normalize($message, 'json');
 
-        $event = new CloudEventImmutable();
+        $event = new CloudEvent(
+            id: Uuid::uuid4()->toString(),
+            source: 'TBD', // Можно брать class name или custom type
+            type: $messageClass,
+            data: json_decode(json_encode($message), true),
+            time: (new DateTimeImmutable()),
+            extensions: []
+        );
+        $payload = JsonSerializer::create()->serializeStructured($event);
 
         /**
         // техконтекст из конверта (если есть)
@@ -42,10 +49,8 @@ final class CloudEventSerializer implements MessengerSerializer
         }
          */
 
-        return [
-            'body'    => json_encode($event, JSON_UNESCAPED_UNICODE),
-            'headers' => ['content_type' => 'application/cloudevents+json'],
-        ];
+
+        return json_decode($payload, true);
     }
 
     public function decode(array $encodedEnvelope): Envelope

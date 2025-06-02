@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Denysov\Demo\Infrastructure\Worker;
 
+use CloudEvents\Serializers\JsonDeserializer;
+use CloudEvents\Serializers\JsonSerializer;
 use Denysov\Demo\Container\SymfonyHttpKernel;
 use Denysov\Demo\Domain\Model\Ping\Event\PingCreated;
 use Denysov\Demo\Domain\Model\Ping\PingId;
@@ -51,12 +53,13 @@ class JobsWorker
 
         while ($task = $consumer->waitTask()) {
             try {
-                $payload = json_decode($task->getPayload());
+                $payload = JsonDeserializer::create()->deserializeStructured($task->getPayload());
                 Logger::debug('TASK RECEIVED', [
-                    'id'    => $task->getId(),
-                    'class' => $payload->event,
+                    'id'      => $task->getId(),
+                    'payload' => $payload,
                 ]);
-                $envelope = new Envelope(new PingCreated(PingId::create()));
+                $class = $payload->getType();
+                $envelope = new Envelope(new $class(PingId::create()));
                 $eventBus = $this->container->get('messenger.default_bus');
 
                 Logger::debug('ENVELOPE', [
@@ -65,23 +68,18 @@ class JobsWorker
 
 
                 $acked = false;
-                $ack = function (Envelope $envelope, ?\Throwable $e = null) use (&$acked) {
-                    $acked = true;
+                $ack   = function (Envelope $envelope, ?\Throwable $e = null) use (&$acked) {
+                    $acked        = true;
                     $this->acks[] = ['rr', $envelope, $e];
                 };
 
                 try {
-                    $e = null;
+                    $e        = null;
                     $envelope = $eventBus->dispatch($envelope->with(new ReceivedStamp('rr'), new ConsumedByWorkerStamp(), new AckStamp($ack)));
                 } catch (\Throwable $e) {
                     Logger::error($e->getMessage());
                 }
 
-
-
-                // Handle and process task. Here we just print payload.
-
-                // Complete task.
                 $task->ack();
             } catch (\Throwable $e) {
                 $task->fail($e);

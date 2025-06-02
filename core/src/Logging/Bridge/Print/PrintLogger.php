@@ -61,6 +61,6 @@ class PrintLogger implements LoggerInterface
     public function log($level, $message, array $context = []): void
     {
         $output = \sprintf("%s [%s] %s", \date('Y-m-d H:i:s'), \strtoupper($level), (string) $message);
-        echo $output . ' ' . \json_encode($context) . PHP_EOL;
+        echo $output . ' ' . \json_encode($context, JSON_PRETTY_PRINT) . PHP_EOL;
     }
 }
