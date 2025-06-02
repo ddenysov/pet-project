@@ -13,7 +13,7 @@ RUN apk add --no-cache \
 
 # Установка PHP-расширений
 RUN --mount=type=bind,from=mlocati/php-extension-installer:2,source=/usr/bin/install-php-extensions,target=/usr/local/bin/install-php-extensions \
-     install-php-extensions @composer-2 opcache zip intl sockets protobuf
+     install-php-extensions @composer-2 opcache zip intl sockets protobuf pdo_sqlite sqlite3
 
 # Копируем конфигурации
 COPY ./docker/php/conf.d/opcache.ini /usr/local/etc/php/conf.d/opcache.ini

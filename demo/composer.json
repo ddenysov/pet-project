@@ -24,7 +24,8 @@
     "symfony/monolog-bundle": "^3.10",
     "symfony/runtime": "^7.2",
     "spiral/roadrunner-jobs": "^4.6",
-    "cloudevents/sdk-php": "^1.2"
+    "cloudevents/sdk-php": "^1.2",
+    "doctrine/migrations": "^3.9"
   },
   "autoload": {
     "psr-4": {
