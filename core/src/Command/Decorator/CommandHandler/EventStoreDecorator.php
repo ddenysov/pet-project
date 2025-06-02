@@ -42,7 +42,6 @@ class EventStoreDecorator implements CommandHandlerInterface
             Logger::info('Events saved');
         });
 
-
         return $result;
     }
 }
