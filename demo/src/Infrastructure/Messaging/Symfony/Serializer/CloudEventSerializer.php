@@ -5,11 +5,9 @@ namespace Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer;
 
 use CloudEvents\Serializers\JsonSerializer;
 use CloudEvents\V1\CloudEvent;
-use CloudEvents\V1\CloudEventImmutable;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface as MessengerSerializer;
 use Symfony\Component\Messenger\Exception\MessageDecodingFailedException;
-use Symfony\Component\Serializer\SerializerInterface as SymfonySerializer;
 use Ramsey\Uuid\Uuid;
 use DateTimeImmutable;
 
@@ -31,7 +29,7 @@ final class CloudEventSerializer implements MessengerSerializer
 
         $event = new CloudEvent(
             id: Uuid::uuid4()->toString(),
-            source: 'TBD', // Можно брать class name или custom type
+            source: 'TBD',
             type: $messageClass,
             data: json_decode(json_encode($message), true),
             time: (new DateTimeImmutable()),

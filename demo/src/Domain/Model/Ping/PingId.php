@@ -8,8 +8,5 @@ use Zinc\Core\Domain\Value\UuidInterface;
 
 class PingId extends Uuid implements UuidInterface
 {
-    #[\Override] public function toArray(): array
-    {
-        // TODO: Implement toArray() method.
-    }
+
 }

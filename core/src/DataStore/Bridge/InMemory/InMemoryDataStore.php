@@ -6,13 +6,14 @@ namespace Zinc\Core\DataStore\Bridge\InMemory;
 
 use Zinc\Core\DataStore\DataStore;
 use Zinc\Core\DataStore\Criteria;
+use Zinc\Core\DataStore\DataStoreInterface;
 use Zinc\Core\DataStore\QueryOptions;
 
 /**
  * Very simple in-memory implementation of the DataStore contract.
  * ⚠️ NOT thread-safe and intended only for tests or prototyping.
  */
-class InMemoryDataStore implements DataStore
+class InMemoryDataStore implements DataStoreInterface
 {
     /** @var array<string, array<int, array>> Collections indexed by name */
     private array $collections = [];
@@ -79,7 +80,7 @@ class InMemoryDataStore implements DataStore
     /**
      * @return iterable<array>
      */
-    public function find(string $collection, Criteria $criteria, ?QueryOptions $options = null): iterable
+    public function find(string $collection, ?Criteria $criteria = null, ?QueryOptions $options = null): iterable
     {
         $results = [];
 
@@ -146,8 +147,11 @@ class InMemoryDataStore implements DataStore
      * Checks whether a row satisfies the passed Criteria.
      * Falls back to naive equality if Criteria has no matcher.
      */
-    private function matches(Criteria $criteria, array $row): bool
+    private function matches(?Criteria $criteria, array $row): bool
     {
+        if (!$criteria) {
+            return true;
+        }
         // Preferred: delegated evaluation.
         if (\method_exists($criteria, 'matches')) {
             /** @phpstan-ignore-next-line */

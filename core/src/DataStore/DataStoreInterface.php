@@ -7,7 +7,7 @@ namespace Zinc\Core\DataStore;
 /**
  * Unified CRUD contract for any storage engine (SQL, NoSQL, KV, etc.).
  */
-interface DataStore
+interface DataStoreInterface
 {
     public function insert(string $collection, array $data): mixed;
 
@@ -20,7 +20,7 @@ interface DataStore
     /**
      * @return iterable<array>
      */
-    public function find(string $collection, Criteria $criteria, ?QueryOptions $options = null): iterable;
+    public function find(string $collection, ?Criteria $criteria = null, ?QueryOptions $options = null): iterable;
 
     public function findOne(string $collection, Criteria $criteria, ?QueryOptions $options = null): ?array;
 

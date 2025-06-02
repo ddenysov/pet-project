@@ -2,7 +2,7 @@
 
 namespace Zinc\Core\Domain\Value;
 
-interface UuidInterface extends ValueInterface
+interface UuidInterface extends StringInterface
 {
 
 }

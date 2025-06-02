@@ -6,4 +6,6 @@ namespace Zinc\Core\Domain\Value;
 
 use Zinc\Core\Support\Array\AsArray;
 
-interface ValueInterface {}
+interface StringInterface {
+    public function toString(): string;
+}

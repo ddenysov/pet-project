@@ -34,3 +34,6 @@ services:
 
   Zinc\Core\Event\EventBusInterface:
     class: Zinc\Core\Event\Bridge\Symfony\MessengerEventBus
+    
+  Zinc\Core\DataStore\DataStoreInterface:
+    class: Zinc\Core\DataStore\Bridge\InMemory\InMemoryDataStore

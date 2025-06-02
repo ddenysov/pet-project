@@ -12,6 +12,9 @@ use Psr\Log\LoggerInterface;
 use Spiral\RoadRunner\Environment\Mode;
 use Spiral\RoadRunner\EnvironmentInterface;
 use Spiral\RoadRunner\Jobs\Consumer;
+use Spiral\RoadRunner\Jobs\Exception\JobsException;
+use Spiral\RoadRunner\Jobs\Exception\ReceivedTaskException;
+use Spiral\RoadRunner\Jobs\Exception\SerializationException;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -47,6 +50,11 @@ class JobsWorker
         return $env->getMode() === Mode::MODE_JOBS;
     }
 
+    /**
+     * @throws SerializationException
+     * @throws JobsException
+     * @throws ReceivedTaskException
+     */
     public function serve(): void
     {
         $consumer = new Consumer();
@@ -58,7 +66,7 @@ class JobsWorker
                     'id'      => $task->getId(),
                     'payload' => $payload,
                 ]);
-                $class = $payload->getType();
+                $class    = $payload->getType();
                 $envelope = new Envelope(new $class(PingId::create()));
                 $eventBus = $this->container->get('messenger.default_bus');
 
@@ -66,22 +74,22 @@ class JobsWorker
                     'envelope' => $envelope,
                 ]);
 
-
                 $acked = false;
                 $ack   = function (Envelope $envelope, ?\Throwable $e = null) use (&$acked) {
                     $acked        = true;
                     $this->acks[] = ['rr', $envelope, $e];
                 };
 
-                try {
-                    $e        = null;
-                    $envelope = $eventBus->dispatch($envelope->with(new ReceivedStamp('rr'), new ConsumedByWorkerStamp(), new AckStamp($ack)));
-                } catch (\Throwable $e) {
-                    Logger::error($e->getMessage());
-                }
+                $eventBus->dispatch(
+                    $envelope->with(
+                        new ReceivedStamp('rr'),
+                        new ConsumedByWorkerStamp(),
+                        new AckStamp($ack))
+                );
 
                 $task->ack();
             } catch (\Throwable $e) {
+                Logger::error($e->getMessage());
                 $task->fail($e);
             }
         }

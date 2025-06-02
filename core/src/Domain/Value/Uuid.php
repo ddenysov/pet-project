@@ -25,9 +25,4 @@ class Uuid extends AbstractValue implements ValueInterface
     {
         return $this->value;
     }
-
-    #[\Override] public function toArray(): array
-    {
-        // TODO: Implement toArray() method.
-    }
 }

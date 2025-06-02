@@ -6,6 +6,7 @@ namespace Zinc\Core\Command\Bridge\Symfony;
 
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
 use Zinc\Core\Command\CommandBusInterface;
 use Zinc\Core\Command\CommandInterface;
 
@@ -23,6 +24,9 @@ final readonly class MessengerCommandBus implements CommandBusInterface
      */
     public function dispatch(CommandInterface $command): void
     {
-        $this->bus->dispatch($command);
+        $this->bus->dispatch(
+            $command,
+            [new TransportNamesStamp(['rr'])]
+        );
     }
 }
