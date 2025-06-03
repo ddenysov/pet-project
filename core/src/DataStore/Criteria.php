@@ -19,11 +19,13 @@ final class Criteria
     public const OP_LIKE = 'like';
     public const OP_REGEX = 'regex';
     public const OP_IS = 'is';
+    public const OP_NULL = 'is_null';
+    public const OP_NOT_NULL = 'is_not_null';
 
     public function __construct(
         public readonly string $field,
         public readonly string $operator,
-        public readonly mixed  $value,
+        public readonly mixed  $value = null,
     ) {}
 
     public static function eq(string $f, mixed $v): self

@@ -25,7 +25,7 @@ while (true) {
     try {
         $result = $store->find(
             'outbox',
-            new Criteria('published_at', 'is', 'NULL'),
+            new Criteria('published_at', Criteria::OP_NULL),
         );
 
         Logger::debug('Result', [

@@ -26,13 +26,14 @@ final class SqlCriteriaCompiler
     {
         if ($c instanceof Criteria) {
             $ph = ':p' . \count($params);
-            if ($c->operator !== Criteria::OP_IS) {
+            if ($c->operator !== Criteria::OP_NULL && $c->operator !== Criteria::OP_NOT_NULL) {
                 $params[$ph] = $c->value;
             }
 
             return match ($c->operator) {
                 Criteria::OP_IN   => \sprintf('%s IN (%s)', $d->quote($c->field), $ph),
-                Criteria::OP_IS   => \sprintf('%s IS NULL', $d->quote($c->field)),
+                Criteria::OP_NULL   => \sprintf('%s IS NULL', $d->quote($c->field)),
+                Criteria::OP_NOT_NULL   => \sprintf('%s IS NOT NULL', $d->quote($c->field)),
                 Criteria::OP_LIKE => \sprintf('%s LIKE %s', $d->quote($c->field), $ph),
                 Criteria::OP_REGEX => $this->compileRegex($d, $c->field, $ph),
                 default => \sprintf('%s %s %s', $d->quote($c->field), $c->operator, $ph),
