@@ -16,6 +16,18 @@ http:
   # middlewares:
   #  logger: true
 
+service:
+  outbox:
+    command: "php outbox.php"
+    process_num: 1
+    timeout_stop_sec: 10
+    exec_timeout: 0s
+    remain_after_exit: true
+    service_name_in_log: false
+    env:
+      - foo: "BAR"
+    restart_sec: 1
+
 #logs:
 #  mode: development
 #  level: debug

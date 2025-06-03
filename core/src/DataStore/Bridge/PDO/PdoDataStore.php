@@ -10,7 +10,8 @@ use Zinc\Core\DataStore\{Bridge\PDO\Dialect\SqliteDialect,
     Bridge\PDO\StatementCache,
     Criteria,
     DataStoreInterface,
-    QueryOptions};
+    QueryOptions
+};
 use Zinc\Core\DataStore\Bridge\PDO\Dialect\Dialect;
 use Zinc\Core\Logging\Logger;
 
@@ -28,7 +29,7 @@ final class PdoDataStore implements DataStoreInterface
     )
     {
         $this->pdo = new \PDO('sqlite:/app/var/demo.db', null, null, [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
         ]);
     }
@@ -79,7 +80,7 @@ final class PdoDataStore implements DataStoreInterface
         $sql .= $options?->select ? \implode(',', \array_map([$this, 'q'], $options->select)) : '*';
 
         if (is_null($criteria)) {
-            $p = [];
+            $p   = [];
             $sql .= ' FROM ' . $this->q($collection);
         } else {
             [$w, $p] = $this->compiler->compile($criteria, $this->dialect);
@@ -141,6 +142,10 @@ final class PdoDataStore implements DataStoreInterface
 
     public function exec(string $sql, array $params = []): \PDOStatement
     {
+        Logger::debug('Query', [
+            'sql'    => $sql,
+            'params' => $params,
+        ]);
         $stmt = $this->stmtCache->prepare($this->pdo, $sql);
         foreach ($params as $k => $v) {
             $stmt->bindValue(\is_int($k) ? $k + 1 : $k, $v);

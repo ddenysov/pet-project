@@ -1,0 +1,3 @@
+- move workers and services to separate folder
+- move docker file
+- не дублировать бутстрап симфони во всех воркерах

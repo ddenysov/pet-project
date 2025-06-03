@@ -31,7 +31,17 @@ class EventStoreDecorator implements CommandHandlerInterface
                 'event_type' => 'qwqwqw',
                 'payload' => 'qwqwqw',
                 'metadata' => 'wewewe',
-                //'recorded_at' => '',
+            ]);
+
+            $this->store->insert('outbox', [
+                'id' => Uuid::create()->toString(),
+                'aggregate_id' => Uuid::create()->toString(),
+                'aggregate_type' => 'aaaaa',
+                'message_type' => 'asas',
+                'payload' => '[]',
+                'metadata' => '[]',
+                'created_at' => date('Y-m-d H:i:s'),
+                'attempts' => '0',
             ]);
 
             Logger::info('Saving events to Event Store');

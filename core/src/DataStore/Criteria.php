@@ -18,6 +18,7 @@ final class Criteria
     public const OP_IN   = 'in';
     public const OP_LIKE = 'like';
     public const OP_REGEX = 'regex';
+    public const OP_IS = 'is';
 
     public function __construct(
         public readonly string $field,
