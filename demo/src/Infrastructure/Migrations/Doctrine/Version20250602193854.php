@@ -21,11 +21,11 @@ final class Version20250602193854 extends AbstractMigration
     {
         $table = $schema->createTable('event_store');
 
-        $table->addColumn('id',             'integer',  ['autoincrement' => true]);
-        $table->addColumn('aggregate_id',   'string',   ['length' => 36]);   // UUID ⟶ 36
-        $table->addColumn('aggregate_type', 'string',   ['length' => 64]);   // order | user | …
-        $table->addColumn('playhead',       'integer');                      // version inside aggregate
-        $table->addColumn('event_type',     'string',   ['length' => 255]);  // FQCN или короткий код
+        $table->addColumn('id', 'guid');                         // <-- был integer
+        $table->addColumn('aggregate_id', 'guid', ['length' => 36]);     // UUID ⟶ 36
+        $table->addColumn('aggregate_type', 'string', ['length' => 64]);   // order | user | …
+        $table->addColumn('playhead', 'integer');                          // version inside aggregate
+        $table->addColumn('event_type', 'string', ['length' => 255]);      // FQCN или короткий код
         $table->addColumn(
             'payload',
             'json',                        // → JSONB в Postgres, LONGTEXT в MySQL, TEXT в SQLite

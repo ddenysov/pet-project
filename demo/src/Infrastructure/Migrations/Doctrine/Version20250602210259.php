@@ -21,8 +21,8 @@ final class Version20250602210259 extends AbstractMigration
     {
         $table = $schema->createTable('outbox');
 
-        $table->addColumn('id',             'integer',  ['autoincrement' => true]);
-        $table->addColumn('aggregate_id',   'string',   ['length' => 36]);
+        $table->addColumn('id', 'guid');                         // <-- был integer
+        $table->addColumn('aggregate_id',   'guid',   ['length' => 36]);
         $table->addColumn('aggregate_type', 'string',   ['length' => 64]);
         $table->addColumn('message_type',   'string',   ['length' => 255]);
         $table->addColumn('payload',        'json',     ['notnull' => true]);

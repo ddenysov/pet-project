@@ -7,6 +7,7 @@ namespace Zinc\Core\Command\Decorator\CommandHandler;
 use Zinc\Core\Command\CommandHandlerInterface;
 use Zinc\Core\Command\CommandInterface;
 use Zinc\Core\DataStore\DataStoreInterface;
+use Zinc\Core\Domain\Value\Uuid;
 use Zinc\Core\Logging\Logger;
 
 class EventStoreDecorator implements CommandHandlerInterface
@@ -23,8 +24,8 @@ class EventStoreDecorator implements CommandHandlerInterface
 
         $this->store->transactional(function () {
             $this->store->insert('event_store', [
-                'id' => rand(1, 100),
-                'aggregate_id' => md5((string) rand(1, 10000)),
+                'id' => Uuid::create()->toString(),
+                'aggregate_id' => Uuid::create()->toString(),
                 'aggregate_type' => 'aaaaa',
                 'playhead' => '1',
                 'event_type' => 'qwqwqw',
