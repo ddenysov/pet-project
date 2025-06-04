@@ -1,15 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Container\Compiler;
+namespace Denysov\Demo\Infrastructure\Container\Symfony\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Zinc\Core\Command\CommandHandlerInterface;
-use Zinc\Core\Command\Decorator\CommandHandler\EventStoreDecorator;
-use Zinc\Core\Logging\Logger;
 
 class CommandHandlerDecoratorPass implements CompilerPassInterface
 {

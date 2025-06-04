@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Denysov\Demo\Infrastructure\Worker;
 
-use Denysov\Demo\Bootstrap\Kernel;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
 use Spiral\RoadRunner\Environment\Mode;
 use Spiral\RoadRunner\EnvironmentInterface;
 use Spiral\RoadRunner\Http\PSR7Worker;
 use Spiral\RoadRunner\Worker;
+use Zinc\Core\Kernel\Kernel;
+use Zinc\Core\Kernel\KernelConfig;
 
 class HttpWorker
 {
@@ -17,7 +18,11 @@ class HttpWorker
 
     public function __construct()
     {
-        $this->kernel = new Kernel();
+        $this->kernel = new Kernel(
+            new KernelConfig(
+                dirs: ['base_dir' => dirname(__DIR__, 3)]
+            )
+        );
     }
 
     public function canServe(EnvironmentInterface $env): bool

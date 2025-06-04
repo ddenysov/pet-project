@@ -4,10 +4,8 @@ declare(strict_types=1);
 namespace Denysov\Demo\Infrastructure\Worker;
 
 use CloudEvents\Serializers\JsonDeserializer;
-use CloudEvents\Serializers\JsonSerializer;
-use Denysov\Demo\Container\SymfonyHttpKernel;
-use Denysov\Demo\Domain\Model\Ping\Event\PingCreated;
 use Denysov\Demo\Domain\Model\Ping\PingId;
+use Denysov\Demo\Infrastructure\Container\Symfony\SymfonyHttpKernel;
 use Psr\Log\LoggerInterface;
 use Spiral\RoadRunner\Environment\Mode;
 use Spiral\RoadRunner\EnvironmentInterface;
@@ -16,33 +14,32 @@ use Spiral\RoadRunner\Jobs\Exception\JobsException;
 use Spiral\RoadRunner\Jobs\Exception\ReceivedTaskException;
 use Spiral\RoadRunner\Jobs\Exception\SerializationException;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\AckStamp;
 use Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
-use Zinc\Core\Domain\Value\Uuid;
-use Zinc\Core\Event\EventBusInterface;
+use Throwable;
+use Zinc\Core\Kernel\Kernel;
+use Zinc\Core\Kernel\KernelConfig;
 use Zinc\Core\Logging\Logger;
 
 class JobsWorker
 {
-    private SymfonyHttpKernel                                         $kernel;
-    private \Symfony\Component\DependencyInjection\ContainerInterface $container;
-    private HttpFoundationFactory                                     $httpFactory;
-    private SerializerInterface                                       $serializer;
-    private array                                                     $acks;
+    private ContainerInterface    $container;
+    private array                 $acks;
 
+
+    private Kernel $kernel;
 
     public function __construct()
     {
-        $this->kernel = new SymfonyHttpKernel('local', true);
-        $this->kernel->boot();
-        $this->container   = $this->kernel->getContainer();
-        $this->httpFactory = new HttpFoundationFactory();
-        $logger            = $this->container->get(LoggerInterface::class);
-        Logger::setLogger($logger);
+        $this->kernel = new Kernel(
+            new KernelConfig(
+                dirs: ['base_dir' => dirname(__DIR__, 3)]
+            )
+        );
     }
 
     public function canServe(EnvironmentInterface $env): bool
@@ -68,14 +65,14 @@ class JobsWorker
                 ]);
                 $class    = $payload->getType();
                 $envelope = new Envelope(new $class(PingId::create()));
-                $eventBus = $this->container->get('messenger.default_bus');
+                $eventBus = $this->kernel->getContainer()->get('messenger.default_bus');
 
                 Logger::debug('ENVELOPE', [
                     'envelope' => $envelope,
                 ]);
 
                 $acked = false;
-                $ack   = function (Envelope $envelope, ?\Throwable $e = null) use (&$acked) {
+                $ack   = function (Envelope $envelope, ?Throwable $e = null) use (&$acked) {
                     $acked        = true;
                     $this->acks[] = ['rr', $envelope, $e];
                 };
@@ -88,7 +85,7 @@ class JobsWorker
                 );
 
                 $task->ack();
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 Logger::error($e->getMessage());
                 $task->fail($e);
             }

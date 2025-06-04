@@ -3,13 +3,12 @@
 require __DIR__ . '/vendor/autoload.php';
 
 
-use Denysov\Demo\Container\SymfonyHttpKernel;
-use Nyholm\Psr7\Response;
+use Denysov\Demo\Infrastructure\Container\Symfony\SymfonyHttpKernel;
 use Nyholm\Psr7\Factory\Psr17Factory;
-
+use Nyholm\Psr7\Response;
 use Psr\Log\LoggerInterface;
-use Spiral\RoadRunner\Worker;
 use Spiral\RoadRunner\Http\PSR7Worker;
+use Spiral\RoadRunner\Worker;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\HttpClient\HttpClient;
 use Zinc\Core\Logging\Logger;

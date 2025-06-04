@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Container;
+namespace Denysov\Demo\Infrastructure\Container\Symfony;
 
-use Denysov\Demo\Container\Compiler\CommandHandlerDecoratorPass;
+use Denysov\Demo\Infrastructure\Container\Symfony\Compiler\CommandHandlerDecoratorPass;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\MonologBundle\MonologBundle;

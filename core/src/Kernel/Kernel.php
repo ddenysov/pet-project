@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Bootstrap;
+namespace Zinc\Core\Kernel;
 
-use Denysov\Demo\Infrastructure\Container\Symfony\SymfonyHttpKernel;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Zinc\Core\Container\Symfony\SymfonyHttpKernel;
 use Zinc\Core\Logging\Logger;
 
 class Kernel
@@ -19,9 +19,9 @@ class Kernel
     private ContainerInterface    $container;
     private HttpFoundationFactory $httpFactory;
 
-    public function __construct()
+    public function __construct(private KernelConfig $config)
     {
-        $this->kernel = new SymfonyHttpKernel('local', true);
+        $this->kernel = new SymfonyHttpKernel($this->config);
         $this->kernel->boot();
         $this->container   = $this->kernel->getContainer();
         $this->httpFactory = new HttpFoundationFactory();

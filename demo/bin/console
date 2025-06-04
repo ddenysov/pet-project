@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use Denysov\Demo\Container\SymfonyHttpKernel;
+use Denysov\Demo\Infrastructure\Container\Symfony\SymfonyHttpKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 if (!is_dir(dirname(__DIR__).'/vendor')) {

@@ -1,8 +1,5 @@
 <?php
 
-use Denysov\Demo\Container\SymfonyHttpKernel;
-use Psr\Log\LoggerInterface;
-use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Zinc\Core\DataStore\Criteria;
 use Zinc\Core\DataStore\DataStoreInterface;
 use Zinc\Core\Integration\Channel;
