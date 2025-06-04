@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Zinc\Core\Container\Symfony;
 
-use Denysov\Demo\Infrastructure\Container\Symfony\Compiler\CommandHandlerDecoratorPass;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\MonologBundle\MonologBundle;
@@ -12,6 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Zinc\Core\Container\Symfony\Compiler\CommandHandlerDecoratorPass;
 use Zinc\Core\Kernel\KernelConfig;
 
 class SymfonyHttpKernel extends BaseKernel
