@@ -14,17 +14,13 @@ require __DIR__ . '/vendor/autoload.php';
 
 $messagePublisher = null;
 try {
-    $kernel = new SymfonyHttpKernel('local', true);
-    $kernel->boot();
-    $container   = $kernel->getContainer();
-    $httpFactory = new HttpFoundationFactory();
-    $logger      = $container->get(LoggerInterface::class);
-    Logger::setLogger($logger);
-    $store = $container->get(DataStoreInterface::class);
+    $kernel = new \Denysov\Demo\Bootstrap\Kernel();
+
+    $store = $kernel->getContainer()->get(DataStoreInterface::class);
     /**
      * @var MessagePublisherInterface $messagePublisher
      */
-    $messagePublisher = $container->get(MessagePublisherInterface::class);
+    $messagePublisher = $kernel->getContainer()->get(MessagePublisherInterface::class);
 } catch (Throwable $e) {
     Logger::error($e->getMessage());
 }
