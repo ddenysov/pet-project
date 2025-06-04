@@ -38,3 +38,7 @@ services:
   Zinc\Core\DataStore\DataStoreInterface:
     class: Zinc\Core\DataStore\Bridge\PDO\PdoDataStore
     public: true
+
+  Zinc\Core\Integration\MessagePublisherInterface:
+    class: Zinc\Core\Integration\Bridge\InMemory\InMemoryMessagePublisher
+    public: true
