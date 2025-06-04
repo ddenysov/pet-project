@@ -31,6 +31,7 @@ class SymfonyHttpKernel extends BaseKernel
     {
         yield new FrameworkBundle();
         yield new MonologBundle();
+        yield new SymfonyCoreBundle();
     }
 
     protected function configureContainer(ContainerConfigurator $c, LoaderInterface $loader): void

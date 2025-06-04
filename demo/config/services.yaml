@@ -4,41 +4,9 @@ services:
     autoconfigure: true
     public: false
 
-  Denysov\Demo\Infrastructure\Messaging\Symfony\RoadRunner\RoadRunnerFactory:
-    tags: [ messenger.transport_factory ]
-
-  Symfony\Component\Messenger\Transport\Serialization\SerializerInterface:
-    public: true
-
-  Psr\Log\LoggerInterface:
-    alias: 'monolog.logger'
-    public: true
-
   Denysov\Demo\Delivery\Http\:
     resource: '../src/Delivery/Http/'
     tags: [ 'controller.service_arguments' ]
 
   Denysov\Demo\Application\:
     resource: '../src/Application/'
-
-  _instanceof:
-    Zinc\Core\Command\CommandHandlerInterface:
-      tags: ['messenger.message_handler']
-
-    Zinc\Core\Event\EventHandlerInterface:
-      tags: [ 'messenger.message_handler' ]
-
-
-  Zinc\Core\Command\CommandBusInterface:
-    class: Zinc\Core\Command\Bridge\Symfony\MessengerCommandBus
-
-  Zinc\Core\Event\EventBusInterface:
-    class: Zinc\Core\Event\Bridge\Symfony\MessengerEventBus
-    
-  Zinc\Core\DataStore\DataStoreInterface:
-    class: Zinc\Core\DataStore\Bridge\PDO\PdoDataStore
-    public: true
-
-  Zinc\Core\Integration\MessagePublisherInterface:
-    class: Zinc\Core\Integration\Bridge\InMemory\InMemoryMessagePublisher
-    public: true

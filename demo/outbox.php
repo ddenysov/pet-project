@@ -5,13 +5,15 @@ use Zinc\Core\DataStore\DataStoreInterface;
 use Zinc\Core\Integration\Channel;
 use Zinc\Core\Integration\Message;
 use Zinc\Core\Integration\MessagePublisherInterface;
+use Zinc\Core\Kernel\Kernel;
+use Zinc\Core\Kernel\KernelConfig;
 use Zinc\Core\Logging\Logger;
 
 require __DIR__ . '/vendor/autoload.php';
 
 $messagePublisher = null;
 try {
-    $kernel = new \Denysov\Demo\Bootstrap\Kernel();
+    $kernel = new Kernel(new KernelConfig(['base_dir' => __DIR__]));
 
     $store = $kernel->getContainer()->get(DataStoreInterface::class);
     /**

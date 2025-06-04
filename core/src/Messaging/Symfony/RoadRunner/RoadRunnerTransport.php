@@ -1,10 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Infrastructure\Messaging\Symfony\RoadRunner;
+namespace Zinc\Core\Messaging\Symfony\RoadRunner;
 
-use Denysov\Demo\Domain\Model\Ping\Event\PingCreated;
-use Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer\CloudEventSerializer;
 use Spiral\Goridge\RPC\RPC;
 use Spiral\RoadRunner\Jobs\Jobs;
 use Symfony\Component\Messenger\Envelope;
@@ -12,6 +10,7 @@ use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Uid\Uuid;
 use Zinc\Core\Logging\Logger;
+use Zinc\Core\Messaging\Symfony\Serializer\CloudEventSerializer;
 
 class RoadRunnerTransport implements TransportInterface
 {

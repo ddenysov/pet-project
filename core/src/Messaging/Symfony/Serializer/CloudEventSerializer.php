@@ -1,15 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer;
+namespace Zinc\Core\Messaging\Symfony\Serializer;
 
 use CloudEvents\Serializers\JsonSerializer;
 use CloudEvents\V1\CloudEvent;
-use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface as MessengerSerializer;
-use Symfony\Component\Messenger\Exception\MessageDecodingFailedException;
-use Ramsey\Uuid\Uuid;
 use DateTimeImmutable;
+use Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer\CorrelationIdStamp;
+use Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer\TraceparentStamp;
+use Ramsey\Uuid\Uuid;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Exception\MessageDecodingFailedException;
+use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface as MessengerSerializer;
 
 final class CloudEventSerializer implements MessengerSerializer
 {

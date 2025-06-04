@@ -1,25 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Infrastructure\Worker;
+namespace Zinc\Core\Worker\Roadrunner;
 
 use CloudEvents\Serializers\JsonDeserializer;
 use Denysov\Demo\Domain\Model\Ping\PingId;
 use Denysov\Demo\Infrastructure\Container\Symfony\SymfonyHttpKernel;
-use Psr\Log\LoggerInterface;
 use Spiral\RoadRunner\Environment\Mode;
 use Spiral\RoadRunner\EnvironmentInterface;
 use Spiral\RoadRunner\Jobs\Consumer;
 use Spiral\RoadRunner\Jobs\Exception\JobsException;
 use Spiral\RoadRunner\Jobs\Exception\ReceivedTaskException;
 use Spiral\RoadRunner\Jobs\Exception\SerializationException;
-use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Stamp\AckStamp;
 use Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
-use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 use Throwable;
 use Zinc\Core\Kernel\Kernel;
 use Zinc\Core\Kernel\KernelConfig;
@@ -33,11 +30,11 @@ class JobsWorker
 
     private Kernel $kernel;
 
-    public function __construct()
+    public function __construct(array $options = [])
     {
         $this->kernel = new Kernel(
             new KernelConfig(
-                dirs: ['base_dir' => dirname(__DIR__, 3)]
+                dirs: ['base_dir' => $options['base_dir']]
             )
         );
     }

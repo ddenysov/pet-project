@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Infrastructure\Worker;
+namespace Zinc\Core\Worker\Roadrunner;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
@@ -16,11 +16,11 @@ class HttpWorker
 {
     private Kernel $kernel;
 
-    public function __construct()
+    public function __construct(array $options = [])
     {
         $this->kernel = new Kernel(
             new KernelConfig(
-                dirs: ['base_dir' => dirname(__DIR__, 3)]
+                dirs: ['base_dir' => $options['base_dir']]
             )
         );
     }

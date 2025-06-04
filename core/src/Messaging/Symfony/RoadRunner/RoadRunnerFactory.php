@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Denysov\Demo\Infrastructure\Messaging\Symfony\RoadRunner;
+namespace Zinc\Core\Messaging\Symfony\RoadRunner;
 
-use Denysov\Demo\Infrastructure\Messaging\Symfony\Serializer\CloudEventSerializer;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 use Symfony\Component\Messenger\Transport\TransportFactoryInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 use Zinc\Core\Logging\Logger;
+use Zinc\Core\Messaging\Symfony\Serializer\CloudEventSerializer;
 
 class RoadRunnerFactory implements TransportFactoryInterface
 {
