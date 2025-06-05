@@ -4,7 +4,7 @@ rpc:
   listen: tcp://127.0.0.1:6001
 
 server:
-  command: "php worker.php"
+  command: "php workers/worker.php"
   relay: pipes
 
 http:
@@ -18,7 +18,7 @@ http:
 
 service:
   outbox:
-    command: "php outbox.php"
+    command: "php workers/outbox.php"
     process_num: 1
     timeout_stop_sec: 10
     exec_timeout: 0s

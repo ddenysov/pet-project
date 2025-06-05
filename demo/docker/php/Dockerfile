@@ -16,8 +16,8 @@ RUN --mount=type=bind,from=mlocati/php-extension-installer:2,source=/usr/bin/ins
      install-php-extensions @composer-2 opcache zip intl sockets protobuf pdo_sqlite sqlite3
 
 # Копируем конфигурации
-COPY ./docker/php/conf.d/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-COPY ./docker/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY ./conf.d/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY ./conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 

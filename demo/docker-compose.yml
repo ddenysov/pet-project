@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    build: ./docker/php
     restart: unless-stopped
     ports:
       - "8280:8080"

@@ -9,11 +9,11 @@ use Zinc\Core\Kernel\Kernel;
 use Zinc\Core\Kernel\KernelConfig;
 use Zinc\Core\Logging\Logger;
 
-require __DIR__ . '/vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 $messagePublisher = null;
 try {
-    $kernel = new Kernel(new KernelConfig(['base_dir' => __DIR__]));
+    $kernel = new Kernel(new KernelConfig(['base_dir' => dirname(__DIR__)]));
 
     $store = $kernel->getContainer()->get(DataStoreInterface::class);
     /**
