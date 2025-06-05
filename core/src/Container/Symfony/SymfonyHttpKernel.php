@@ -36,10 +36,7 @@ class SymfonyHttpKernel extends BaseKernel
 
     protected function configureContainer(ContainerConfigurator $c, LoaderInterface $loader): void
     {
-        // тянем DI-конфиги из YAML
         $c->import($this->config->getBaseDir() .'/config/{services}.yaml');
-        $loader->load($this->config->getBaseDir() .'/config/packages/monolog.yaml');
-        $loader->load($this->config->getBaseDir() .'/config/packages/messenger.yaml');
     }
 
     protected function configureRoutes(RoutingConfigurator $r): void

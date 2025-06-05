@@ -34,8 +34,6 @@ class SymfonyCoreBundle extends AbstractBundle
             ->addTag('messenger.transport_factory');
 
         $container->setDefinition(RoadRunnerFactory::class, $definition);
-
-
     }
 
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
@@ -55,4 +53,30 @@ class SymfonyCoreBundle extends AbstractBundle
 
         $container->services()->alias('Psr\Log\LoggerInterface', 'monolog.logger')->public();
     }
+
+    #[\Override] public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void
+    {
+        $container->extension('monolog', [
+            'handlers' => [
+                'file_log'       => [
+                    'type'  => 'stream',
+                    'path'  => '%kernel.logs_dir%/%kernel.environment%.log',
+                    'level' => 'debug',
+                ],
+                'syslog_handler' => [
+                    'type'  => 'syslog',
+                    'level' => 'error',
+                ],
+            ],
+        ]);
+        $container->extension('framework', [
+                'messenger' => [
+                    'transports' => [
+                        'rr' => 'rr://...',
+                    ],
+                ],
+        ]);
+    }
+
+
 }
